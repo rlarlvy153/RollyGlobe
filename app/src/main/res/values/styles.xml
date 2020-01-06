@@ -11,7 +11,23 @@
 
 
 
-    <style name="TabBarTheme" parent="Widget.AppCompat.ActionBar.TabBar">
+<!--    <style name="TabBarTheme" parent="Widget.AppCompat.ActionBar.TabBar">-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--        <item name="android:background">#f0f</item>-->
+
+
+<!--    </style>-->
+
+    <style name="tabTextAppearance" parent="TextAppearance.AppCompat.Button">
+
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">14dp</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:padding">0dp</item>
+
+    </style>
+
+    <style name="TabBarTheme" parent="Widget.Design.TabLayout">
         <!-- Customize your theme here. -->
         <item name="android:background">#fff</item>
 

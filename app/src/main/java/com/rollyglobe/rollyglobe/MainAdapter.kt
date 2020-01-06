@@ -20,7 +20,7 @@ class MainAdapter (fm : FragmentManager, resources: Resources) : FragmentStatePa
         }
     }
 
-    override fun getCount() = 4;
+    override fun getCount() = fragmentTitleList.size;
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         super.destroyItem(container, position, `object`)
@@ -29,6 +29,5 @@ class MainAdapter (fm : FragmentManager, resources: Resources) : FragmentStatePa
     override fun getPageTitle(position: Int): CharSequence? {
         return fragmentTitleList[position]
     }
-
 
 }
