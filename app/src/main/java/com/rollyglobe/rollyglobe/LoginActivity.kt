@@ -115,7 +115,7 @@ class LoginActivity : AppCompatActivity() {
 
         val lastDay = when(month){
             1-> 31
-            2-> if ((year%4 ==0) && (year % 100 != 0) || (year % 400 == 0)) 28 else 29
+            2-> if ((year%4 ==0) && (year % 100 != 0) || (year % 400 == 0)) 29 else 28
             3->31
             4->30
             5->31
