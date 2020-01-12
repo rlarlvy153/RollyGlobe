@@ -10,13 +10,11 @@ import com.rollyglobe.rollyglobe.response_model.NationCodeModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_login.*
-import java.time.LocalDate
-import java.time.LocalDateTime
+import kotlinx.android.synthetic.main.activity_signin.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class LoginActivity : AppCompatActivity() {
+class SigninActivity : AppCompatActivity() {
     lateinit var compositeDisposable: CompositeDisposable
     val TAG = "LoginActivity_kgp"
 
@@ -26,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_signin)
 
 
         compositeDisposable = CompositeDisposable()
@@ -54,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
     fun initView(){
 
         //nation code spinner
-        val nationCodeSpinnerAdapter = ArrayAdapter(this@LoginActivity, android.R.layout.simple_spinner_item,nationCodeStringList)
+        val nationCodeSpinnerAdapter = ArrayAdapter(this@SigninActivity, android.R.layout.simple_spinner_item,nationCodeStringList)
         nationCodeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         nation_code_spinner.adapter = nationCodeSpinnerAdapter
 
@@ -74,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
             yearList.add(y)
 
         }
-        val yearSpinnerAdapter = ArrayAdapter(this@LoginActivity, android.R.layout.simple_spinner_item,yearList)
+        val yearSpinnerAdapter = ArrayAdapter(this@SigninActivity, android.R.layout.simple_spinner_item,yearList)
         yearSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         year_spinner.adapter = yearSpinnerAdapter
         year_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -89,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
 
         //month spinner
         val monthList = listOf(1,2,3,4,5,6,7,8,9,10,11,12)
-        val monthSpinnerAdapter = ArrayAdapter(this@LoginActivity, android.R.layout.simple_spinner_item, monthList)
+        val monthSpinnerAdapter = ArrayAdapter(this@SigninActivity, android.R.layout.simple_spinner_item, monthList)
         monthSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         month_spinner.adapter = monthSpinnerAdapter
         month_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -131,7 +129,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         val days = Array(lastDay, {i -> i+1})
-        val dayAdapter = ArrayAdapter(this@LoginActivity, android.R.layout.simple_spinner_item, days)
+        val dayAdapter = ArrayAdapter(this@SigninActivity, android.R.layout.simple_spinner_item, days)
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         day_spinner.adapter = dayAdapter
 
