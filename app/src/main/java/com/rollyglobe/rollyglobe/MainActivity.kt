@@ -17,9 +17,7 @@ class MainActivity : AppCompatActivity() {
         contentViewPager.adapter = MainActivty@adapter
 
         main_tab.setupWithViewPager(contentViewPager)
-
         main_tab.getTabAt(0)?.setIcon(R.drawable.recommend_selected)
-
         contentViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {
             }
@@ -33,17 +31,12 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) {
-
                 main_tab.getTabAt(0)?.setIcon(R.drawable.recommend_icon)
-
                 when(position) {
 
                     0   ->    main_tab.getTabAt(0)?.setIcon(R.drawable.recommend_selected)
-
                 }
-
             }
-
         })
     }
 }

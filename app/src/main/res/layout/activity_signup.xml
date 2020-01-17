@@ -117,7 +117,7 @@
 
         <Spinner
             android:id="@+id/day_spinner"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>

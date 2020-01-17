@@ -22,7 +22,7 @@ class SignUpActivity : AppCompatActivity() {
     val nationCodeList = ArrayList<NationCodeModel>()
     val nationCodeStringList = ArrayList<String>()
 //    val days = Array(28, {i -> i+1})
-    val days = arrayOf(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28)
+    val days = MutableList(28,{i -> i+1})
     lateinit var dayAdapter : ArrayAdapter<Int>
     lateinit var retrofit: Retrofit
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,9 +119,6 @@ class SignUpActivity : AppCompatActivity() {
         val year = year_spinner.selectedItem as Int
         val month = month_spinner.selectedItem as Int
 
-        Log.i(TAG,"${year}")
-        Log.i(TAG,"${month}")
-
         val lastDay = when(month){
             1-> 31
             2-> if ((year%4 ==0) && (year % 100 != 0) || (year % 400 == 0)) 29 else 28
@@ -138,11 +135,15 @@ class SignUpActivity : AppCompatActivity() {
             else -> 0
         }
 
+        while(days.size < lastDay){
+            days.add(days.size + 1)
+        }
+        while(days.size >lastDay){
+            days.removeAt(days.size-1)
+        }
 
+        dayAdapter.notifyDataSetChanged()
 
-        val dayAdapter = ArrayAdapter(this@SignUpActivity, android.R.layout.simple_spinner_item, days)
-        dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        day_spinner.adapter = dayAdapter
     }
     fun onClicksignup(v : View){
         val temp_email = signup_email_edit.text.toString()
