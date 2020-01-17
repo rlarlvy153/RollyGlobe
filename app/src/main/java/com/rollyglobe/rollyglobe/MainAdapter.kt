@@ -4,19 +4,19 @@ import android.content.res.Resources
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 
-class MainAdapter (fm : FragmentManager, resources: Resources) : FragmentStatePagerAdapter(fm){
+class MainAdapter (fm : FragmentManager, resources: Resources) : FragmentPagerAdapter(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
 
     private val fragmentTitleList = resources.getStringArray(R.array.tab_items)
 
-    override fun getItem(position:Int) : Fragment?{
+    override fun getItem(position:Int) : Fragment{
         return when(position){
-            0->RecommendFragment()
             1->CommunityFragment()
             2->GoodsFragment()
             3->MyPageFragment()
-            else->null
+            else ->RecommendFragment()
         }
     }
 
