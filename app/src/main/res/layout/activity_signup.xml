@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SigninActivity"
+    tools:context=".SignUpActivity"
     >
 
     <ImageView
@@ -40,8 +40,8 @@
     >
         <EditText
 
-            android:id="@+id/register_email_edit"
-            android:hint="@string/register_email"
+            android:id="@+id/signup_email_edit"
+            android:hint="@string/signup_email"
             android:layout_width="match_parent"
             android:layout_height="16dp"
             android:layout_marginTop="0dp"
@@ -52,8 +52,8 @@
             />
 
         <EditText
-            android:id="@+id/register_nickname_edit"
-            android:hint="@string/register_nickname"
+            android:id="@+id/signup_nickname_edit"
+            android:hint="@string/signup_nickname"
             android:layout_width="match_parent"
             android:layout_height="16dp"
             android:layout_marginTop="53.55dp"
@@ -64,8 +64,8 @@
             />
 
         <EditText
-            android:id="@+id/register_password"
-            android:hint="@string/register_password"
+            android:id="@+id/signup_password"
+            android:hint="@string/signup_password"
             android:layout_width="match_parent"
             android:layout_height="16dp"
             android:layout_marginTop="106.67dp"
@@ -76,8 +76,8 @@
             />
 
         <EditText
-            android:id="@+id/register_password_again"
-            android:hint="@string/register_password_again"
+            android:id="@+id/signup_password_again"
+            android:hint="@string/signup_password_again"
             android:layout_width="match_parent"
             android:layout_height="16dp"
             android:layout_marginTop="160dp"
@@ -145,7 +145,7 @@
             />
         <EditText
             android:id="@+id/phone_number_edit"
-            android:hint="@string/register_phone_number"
+            android:hint="@string/signup_phone_number"
             android:layout_width="match_parent"
             android:layout_height="16dp"
             android:textSize="14dp"
@@ -159,7 +159,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:text="@string/register_with_email"
+        android:text="@string/signup_with_email"
         android:layout_width="313dp"
         android:layout_height="40dp"
         app:layout_constraintTop_toBottomOf="@id/phone_container"
@@ -169,7 +169,7 @@
         android:padding="0dp"
         android:background="#42ade2"
         android:textColor="#fff"
-        android:onClick="onClickRegister"
+        android:onClick="onClicksignup"
         />
 
 
