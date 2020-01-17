@@ -6,17 +6,18 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.rollyglobe.rollyglobe.response_model.NationCodeModel
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_signin.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 import java.util.*
 import kotlin.collections.ArrayList
 
 class SigninActivity : AppCompatActivity() {
-    lateinit var compositeDisposable: CompositeDisposable
+//    lateinit var compositeDisposable: CompositeDisposable
     val TAG = "LoginActivity_kgp"
 
     val nationCodeList = ArrayList<NationCodeModel>()
@@ -24,31 +25,34 @@ class SigninActivity : AppCompatActivity() {
 //    val days = Array(28, {i -> i+1})
     val days = arrayOf(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28)
     lateinit var dayAdapter : ArrayAdapter<Int>
+    lateinit var retrofit: Retrofit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
 
+        val restClient:RollyGlobeApiInterface  =
+            RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
 
-        compositeDisposable = CompositeDisposable()
+        val nationCode = restClient.getNationCodeInfoList()
+        nationCode.enqueue(object : Callback<List<NationCodeModel>> {
+                override fun onFailure(call: Call<List<NationCodeModel>>, t: Throwable) {
+                    Log.d(TAG, t.localizedMessage)
+                }
 
-
-        compositeDisposable.add(
-            RollyGlobeApi.getNationCodeInfoList()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
-                .subscribe({ response: List<NationCodeModel> ->
-
-                    nationCodeList.addAll(response)
-                    for(nation in nationCodeList){
-                        nationCodeStringList.add(nation.toString())
+                override fun onResponse(call: Call<List<NationCodeModel>>,response: Response<List<NationCodeModel>>) {
+                    Log.i(TAG, response.message().toString())
+                    Log.i(TAG, response.body()!!.size.toString())
+                    val body = response.body()
+                    if(body != null){
+                        for(code in body){
+                            nationCodeStringList.add(code.toString())
+                        }
                     }
-
                     initView()
+                }
+            }
+        )
 
-
-                }, { error: Throwable ->
-                    Log.d(TAG, error.localizedMessage)
-                }))
 
     }
     fun initView(){

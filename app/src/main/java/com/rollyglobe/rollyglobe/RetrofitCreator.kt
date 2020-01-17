@@ -1,41 +1,60 @@
 package com.rollyglobe.rollyglobe
 
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
+import java.util.concurrent.TimeUnit
 
-class RetrofitCreator {
-    companion object{
-        val API_BASE_URL = "https://m.rollyglobe.com/"
+object RetrofitCreator {
+    val API_BASE_URL = "https://m.rollyglobe.com/"
+    private val ALL_TIMEOUT = 10L
 
-        private fun defaultRetrofit(): Retrofit{
-            return Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(createOkHttpClient())
-                .build()
+    private var okHttpClient: OkHttpClient
+    private var retrofit: Retrofit
 
-        }
-        fun <T> create(service: Class<T>):T{
-            return defaultRetrofit().create(service)
-        }
+    init{
+        val httpLogging = HttpLoggingInterceptor()
+        httpLogging.level = HttpLoggingInterceptor.Level.BASIC
 
-        private fun createOkHttpClient(): OkHttpClient {
-            val interceptor = HttpLoggingInterceptor()
-            if(BuildConfig.DEBUG){
-                interceptor.level = HttpLoggingInterceptor.Level.BODY
-            }
-            else{
-                interceptor.level = HttpLoggingInterceptor.Level.NONE
-            }
-            return OkHttpClient.Builder()
-                .addNetworkInterceptor(interceptor)
-                .build()
+        okHttpClient = OkHttpClient().newBuilder().apply {
 
+            addInterceptor(httpLogging)
+            addInterceptor(HeaderSettingInterceptor())
+            connectTimeout(ALL_TIMEOUT, TimeUnit.SECONDS)
+            writeTimeout(ALL_TIMEOUT, TimeUnit.SECONDS)
+            readTimeout(ALL_TIMEOUT, TimeUnit.SECONDS)
 
+        }.build()
+
+        retrofit = Retrofit.Builder().apply{
+            baseUrl(API_BASE_URL)
+            client(okHttpClient)
+            addConverterFactory(GsonConverterFactory.create())
+        }.build()
+
+    }
+    private  class HeaderSettingInterceptor : Interceptor {
+
+        @Throws(IOException::class)
+        override fun intercept(chain: Interceptor.Chain): Response {
+
+            val chainRequest = chain.request()
+
+            val request = chainRequest.newBuilder().apply{
+                addHeader("Accept", "application/json")
+//                addHeader("appKey", SK_API_KEY)
+            }.build()
+
+            return chain.proceed(request)
         }
     }
+    internal fun <T> getRetrofitService(restClass: Class<T>): T {
+        return retrofit.create(restClass)
+    }
+
 }
