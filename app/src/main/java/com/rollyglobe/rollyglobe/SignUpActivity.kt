@@ -168,6 +168,12 @@ class SignUpActivity : AppCompatActivity() {
             Log.e(TAG,"성별 선택 안됨")
             return
         }
-
+        val params : HashMap<String,Any> = HashMap<String,Any>()
+        params["email_address"] = temp_email
+        params["nickname_input"] = temp_nickname
+        params["pw_input"] = temp_password
+        params["nation_num"] = temp_nation
+        params["phone_number"] = contact
+        params["user_sex"]
     }
 }
