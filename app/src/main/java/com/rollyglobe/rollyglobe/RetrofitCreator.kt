@@ -11,15 +11,15 @@ import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 object RetrofitCreator {
-    val API_BASE_URL = "https://m.rollyglobe.com/"
-    private val ALL_TIMEOUT = 10L
+    val API_BASE_URL = "https://test.rollyglobe.com/"
+    private val ALL_TIMEOUT = 1000L
 
     private var okHttpClient: OkHttpClient
     private var retrofit: Retrofit
 
     init{
         val httpLogging = HttpLoggingInterceptor()
-        httpLogging.level = HttpLoggingInterceptor.Level.BASIC
+        httpLogging.level = HttpLoggingInterceptor.Level.BODY
 
         okHttpClient = OkHttpClient().newBuilder().apply {
 

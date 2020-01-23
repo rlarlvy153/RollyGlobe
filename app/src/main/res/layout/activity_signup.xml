@@ -39,7 +39,7 @@
         android:id="@+id/edit_info_container"
     >
         <EditText
-
+            android:text="rlasfsf@naver.com"
             android:id="@+id/signup_email_edit"
             android:hint="@string/signup_email"
             android:layout_width="match_parent"
@@ -52,6 +52,7 @@
             />
 
         <EditText
+            android:text="kgp"
             android:id="@+id/signup_nickname_edit"
             android:hint="@string/signup_nickname"
             android:layout_width="match_parent"
@@ -64,6 +65,8 @@
             />
 
         <EditText
+            android:text="kgp"
+
             android:id="@+id/signup_password"
             android:hint="@string/signup_password"
             android:layout_width="match_parent"
@@ -76,6 +79,8 @@
             />
 
         <EditText
+            android:text="kgp"
+
             android:id="@+id/signup_password_again"
             android:hint="@string/signup_password_again"
             android:layout_width="match_parent"
@@ -144,6 +149,7 @@
             android:background="@drawable/spinner_background"
             />
         <EditText
+            android:text="01050502434"
             android:id="@+id/phone_number_edit"
             android:hint="@string/signup_phone_number"
             android:layout_width="match_parent"
