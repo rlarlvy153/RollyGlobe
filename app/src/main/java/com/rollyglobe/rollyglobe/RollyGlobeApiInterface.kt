@@ -1,11 +1,10 @@
 package com.rollyglobe.rollyglobe
 
+import com.rollyglobe.rollyglobe.request_model.SignUpRequestModel
 import com.rollyglobe.rollyglobe.response_model.NationCodeModel
 import com.rollyglobe.rollyglobe.response_model.SignUpModel
-import io.reactivex.Observable
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface RollyGlobeApiInterface {
 
@@ -13,5 +12,7 @@ interface RollyGlobeApiInterface {
         fun getNationCodeInfoList(): Call<List<NationCodeModel>>
 
         @POST("/ajax/user.php")
-        fun SignUp():Observable<SignUpModel>
+        fun SignUp(@Body param : SignUpRequestModel):Call<SignUpModel>
+
+
 }
