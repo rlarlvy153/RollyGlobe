@@ -8,4 +8,6 @@ class SignUpModel {
 
     @SerializedName("success")
     val success:Boolean = false
+
+
 }

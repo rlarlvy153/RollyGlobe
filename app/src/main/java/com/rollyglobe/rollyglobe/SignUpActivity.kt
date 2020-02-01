@@ -1,46 +1,47 @@
 package com.rollyglobe.rollyglobe
 
+import android.icu.util.GregorianCalendar
+import android.icu.util.TimeZone
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.rollyglobe.rollyglobe.request_model.Option
+import com.rollyglobe.rollyglobe.request_model.Request
+import com.rollyglobe.rollyglobe.request_model.SignUpRequestModel
 import com.rollyglobe.rollyglobe.response_model.NationCodeModel
+import com.rollyglobe.rollyglobe.response_model.SignUpModel
 import kotlinx.android.synthetic.main.activity_signup.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import java.util.*
 import kotlin.collections.ArrayList
 
 class SignUpActivity : AppCompatActivity() {
 //    lateinit var compositeDisposable: CompositeDisposable
-    val TAG = "LoginActivity_kgp"
+    val TAG = "SignUpActivity_kgp"
 
     val nationCodeList = ArrayList<NationCodeModel>()
     val nationCodeStringList = ArrayList<String>()
 //    val days = Array(28, {i -> i+1})
     val days = MutableList(28,{i -> i+1})
+    lateinit var restClient : RollyGlobeApiInterface
     lateinit var dayAdapter : ArrayAdapter<Int>
-    lateinit var retrofit: Retrofit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        val restClient:RollyGlobeApiInterface  =
-            RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
+        restClient  = RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
 
         val nationCode = restClient.getNationCodeInfoList()
         nationCode.enqueue(object : Callback<List<NationCodeModel>> {
                 override fun onFailure(call: Call<List<NationCodeModel>>, t: Throwable) {
-                    Log.d(TAG, t.localizedMessage)
+                    Log.e(TAG, t.localizedMessage)
                 }
 
                 override fun onResponse(call: Call<List<NationCodeModel>>,response: Response<List<NationCodeModel>>) {
-                    Log.i(TAG, response.message().toString())
-                    Log.i(TAG, response.body()!!.size.toString())
                     val body = response.body()
                     if(body != null){
                         for(code in body){
@@ -151,14 +152,15 @@ class SignUpActivity : AppCompatActivity() {
         val temp_password = signup_password.text.toString()
         val temp_password_again = signup_password_again.text.toString()
         val temp_gender_pos = gender_spinner.selectedItemPosition // 1남 2여
+        val temp_gender = if(temp_gender_pos == 1)  "male" else " female"
         val y = year_spinner.selectedItem.toString()
         val m = month_spinner.selectedItem.toString()
         val d = day_spinner.selectedItem.toString()
         val temp_nation = nation_code_spinner.selectedItem.toString()
+        val temp_trim_nation = temp_nation.substring(1,temp_nation.indexOf('('))
         val contact = phone_number_edit.text.toString()
 
-        Log.i(TAG,"$temp_email $temp_nickname $temp_password $temp_password_again")
-        Log.i(TAG,"$temp_gender_pos $y $m $d")
+
 
         if(temp_password != temp_password_again){
             Log.e(TAG,"비밀번호가 다름 $temp_password $temp_password_again")
@@ -168,6 +170,33 @@ class SignUpActivity : AppCompatActivity() {
             Log.e(TAG,"성별 선택 안됨")
             return
         }
+        Log.i(TAG,"메일 : $temp_email")
+        Log.i(TAG, "별명 : $temp_nickname")
+        Log.i(TAG, "비번 : $temp_password $temp_password_again")
+
+
+        Log.i(TAG,"국가번호 : $temp_trim_nation")
+        Log.i(TAG,"$temp_gender $y $m $d")
+
+
+        val option = Option(temp_email, temp_nickname, temp_password, temp_trim_nation,
+        contact,temp_gender,y,if(m.toInt()<10) "0$m" else m, if(d.toInt()<10) "0$d" else d )
+
+        val signUpRequestModel = SignUpRequestModel()
+        signUpRequestModel.request = Request("SignUp", option)
+
+        val signUpRequest = restClient.SignUp(signUpRequestModel)
+        signUpRequest.enqueue(object : Callback<SignUpModel> {
+            override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
+                Log.e(TAG, t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<SignUpModel>,response: Response<SignUpModel>) {
+                Log.i("kgp msg", response.message().toString())
+                Log.i("kgp body", response.body().toString())
+                Log.i("kgp raw", response.raw().toString())
+            }
+        })
 
     }
 }
