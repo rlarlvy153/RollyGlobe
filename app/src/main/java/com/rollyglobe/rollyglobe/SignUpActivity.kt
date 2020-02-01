@@ -1,22 +1,22 @@
 package com.rollyglobe.rollyglobe
 
+import android.icu.util.GregorianCalendar
+import android.icu.util.TimeZone
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.google.gson.JsonObject
+import com.rollyglobe.rollyglobe.request_model.Option
+import com.rollyglobe.rollyglobe.request_model.Request
+import com.rollyglobe.rollyglobe.request_model.SignUpRequestModel
 import com.rollyglobe.rollyglobe.response_model.NationCodeModel
 import com.rollyglobe.rollyglobe.response_model.SignUpModel
 import kotlinx.android.synthetic.main.activity_signup.*
-import okhttp3.MediaType
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import java.util.*
 import kotlin.collections.ArrayList
 
 class SignUpActivity : AppCompatActivity() {
@@ -179,57 +179,22 @@ class SignUpActivity : AppCompatActivity() {
         Log.i(TAG,"$temp_gender $y $m $d")
 
 
-        val params : HashMap<String,Any> = HashMap<String,Any>()
-        val inner_params: HashMap<String,Any> = HashMap<String,Any>()
-        val requestParam : HashMap<String,Any> = HashMap<String,Any>()
+        val option = Option(temp_email, temp_nickname, temp_password, temp_trim_nation,
+        contact,temp_gender,y,if(m.toInt()<10) "0$m" else m, if(d.toInt()<10) "0$d" else d )
 
-        var jsonObj = JsonObject()
-        jsonObj.addProperty("funcName","SignUp")
-        var nestedObj = JsonObject()
-        inner_params["email_address"] = temp_email
+        val signUpRequestModel = SignUpRequestModel()
+        signUpRequestModel.request = Request("SignUp", option)
 
-        nestedObj.addProperty("nickname_input",temp_nickname)
-        inner_params["nickname_input"] = temp_nickname
-
-        nestedObj.addProperty("pw_input",temp_password)
-        inner_params["pw_input"] = temp_password
-
-        nestedObj.addProperty("nation_num",temp_trim_nation)
-        inner_params["nation_num"] = temp_trim_nation.toInt()
-
-        nestedObj.addProperty("phone_num",contact)
-        inner_params["phone_number"] = contact
-
-        nestedObj.addProperty("user_sex",temp_gender)
-        inner_params["user_sex"] = temp_gender
-
-        nestedObj.addProperty("sign_up_birth_year",y)
-        inner_params["sign_up_birth_year"] = y
-
-        nestedObj.addProperty("sign_up_birth_month",if(m.toInt()<10) "0$m" else m)
-        inner_params["sign_up_birth_month"] = if(m.toInt()<10) "0$m" else m
-
-        nestedObj.addProperty("sign_up_birth_day",if(d.toInt()<10) "0$d" else d)
-        inner_params["sign_up_birth_day"] = if(d.toInt()<10) "0$d" else d
-
-        params["funcName"] = "SignUp"
-        jsonObj.addProperty("funcName","SignUp")
-        jsonObj.add("option",nestedObj)
-
-        params["option"] =inner_params
-        params["request"] = "set"
-        val reqBody = RequestBody.create(
-            MediaType.parse("application/json; charset=utf-8"), jsonObj.toString())
-        Log.i(TAG, params.toString())
-
-        val signUpRequest = restClient.SignUp(params)
+        val signUpRequest = restClient.SignUp(signUpRequestModel)
         signUpRequest.enqueue(object : Callback<SignUpModel> {
             override fun onFailure(call: Call<SignUpModel>, t: Throwable) {
                 Log.e(TAG, t.localizedMessage)
             }
 
             override fun onResponse(call: Call<SignUpModel>,response: Response<SignUpModel>) {
-                Log.i(TAG, response.message().toString())
+                Log.i("kgp msg", response.message().toString())
+                Log.i("kgp body", response.body().toString())
+                Log.i("kgp raw", response.raw().toString())
             }
         })
 

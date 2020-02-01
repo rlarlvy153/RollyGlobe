@@ -47,6 +47,7 @@ object RetrofitCreator {
 
             val request = chainRequest.newBuilder().apply{
                 addHeader("Accept", "application/json")
+                addHeader("User-Agent", "android-retrofit")
 //                addHeader("appKey", SK_API_KEY)
             }.build()
 
