@@ -40,8 +40,9 @@
 
         <EditText
 
-            android:id="@+id/signip_email_edit"
+            android:id="@+id/signin_email_edit"
             android:hint="@string/signin_email"
+            android:text="rlasfsf@naver.com"
             android:layout_width="match_parent"
             android:layout_height="16dp"
             android:layout_marginTop="0dp"
@@ -52,6 +53,7 @@
             />
 
         <EditText
+            android:text="kgp"
             android:id="@+id/signin_password_edit"
             android:hint="@string/signin_password"
             android:layout_width="match_parent"
@@ -88,6 +90,7 @@
             android:background="#42ade2"
             android:textColor="#fff"
             android:textSize="14dp"
+            android:onClick="onClickSignIn"
             />
         <TextView
             android:id="@+id/forget_password"

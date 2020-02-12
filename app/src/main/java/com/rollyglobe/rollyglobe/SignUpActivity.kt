@@ -8,9 +8,8 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.rollyglobe.rollyglobe.request_model.Option
-import com.rollyglobe.rollyglobe.request_model.Request
-import com.rollyglobe.rollyglobe.request_model.SignUpRequestModel
+import com.rollyglobe.rollyglobe.request_model.*
+
 import com.rollyglobe.rollyglobe.response_model.NationCodeModel
 import com.rollyglobe.rollyglobe.response_model.SignUpModel
 import kotlinx.android.synthetic.main.activity_signup.*
@@ -179,11 +178,11 @@ class SignUpActivity : AppCompatActivity() {
         Log.i(TAG,"$temp_gender $y $m $d")
 
 
-        val option = Option(temp_email, temp_nickname, temp_password, temp_trim_nation,
+        val option = SignUpOption(temp_email, temp_nickname, temp_password, temp_trim_nation,
         contact,temp_gender,y,if(m.toInt()<10) "0$m" else m, if(d.toInt()<10) "0$d" else d )
 
         val signUpRequestModel = SignUpRequestModel()
-        signUpRequestModel.request = Request("SignUp", option)
+        signUpRequestModel.request = SignUpRequest("SignUp", option)
 
         val signUpRequest = restClient.SignUp(signUpRequestModel)
         signUpRequest.enqueue(object : Callback<SignUpModel> {
