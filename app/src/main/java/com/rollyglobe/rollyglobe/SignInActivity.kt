@@ -16,7 +16,7 @@ import retrofit2.Response
 class SignInActivity : AppCompatActivity() {
 
     lateinit var restClient : RollyGlobeApiInterface
-    val TAG = "SignUpActivity_kgp"
+    val TAG = "SignInActivity_kgp"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

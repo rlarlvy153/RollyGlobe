@@ -11,7 +11,7 @@
         android:id="@+id/facebook_image"
         android:layout_width="9dp"
         android:layout_height="18dp"
-        android:background="#f0f"
+        android:background="@drawable/facebooklogo_signin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
