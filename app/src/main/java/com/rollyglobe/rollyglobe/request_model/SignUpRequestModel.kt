@@ -3,7 +3,7 @@ package com.rollyglobe.rollyglobe.request_model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import retrofit2.http.FormUrlEncoded
-class Option(
+class SignUpOption(
 
     @SerializedName("email_address")
     var emailAddress :String,
@@ -34,14 +34,14 @@ class Option(
 
 )
 
-class Request(
+class SignUpRequest(
     @SerializedName("funcName")
     var funcName:String = "",
 
     @SerializedName("option")
-    var option:Option
+    var option:SignUpOption
 )
 class SignUpRequestModel{
     @SerializedName("request")
-    lateinit var request:Request
+    lateinit var request:SignUpRequest
 }

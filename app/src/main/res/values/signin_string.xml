@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="signin_email">이메일</string>
+    <string name="signin_password">비밀번호</string>
+    <string name="signin_keep_login">로그인 유지</string>
+    <string name="signin_button">로그인</string>
+    <string name="forget_password">비밀번호를 잊어버리셨나요?</string>
+    <string name="signin_with_facebook">페이스북으로 로그인</string>
+    <string name="signin_first_time">혹시, 롤리글로브가 처음이신가요?</string>
+    <string name="move_to_signup"><u>회원가입</u></string>
+
+</resources>
