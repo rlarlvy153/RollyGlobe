@@ -2,7 +2,7 @@ package com.rollyglobe.rollyglobe.response_model
 
 import com.google.gson.annotations.SerializedName
 
-class SignUpModel {
+class SignUpResponseModel {
     @SerializedName("msg")
     val msg:String = ""
 

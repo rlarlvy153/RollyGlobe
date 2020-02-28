@@ -4,31 +4,24 @@ import android.icu.util.GregorianCalendar
 import android.icu.util.TimeZone
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.rollyglobe.rollyglobe.request_model.*
 
-import com.rollyglobe.rollyglobe.response_model.NationCodeModel
-import com.rollyglobe.rollyglobe.response_model.SignUpModel
-import io.reactivex.Scheduler
+import com.rollyglobe.rollyglobe.response_model.NationCodeResponseModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_signup.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import timber.log.Timber
 import kotlin.collections.ArrayList
 
 class SignUpActivity : AppCompatActivity() {
-    //    lateinit var compositeDisposable: CompositeDisposable
-    val TAG = "SignUpActivity_kgp"
 
-    val nationCodeList = ArrayList<NationCodeModel>()
+    val nationCodeList = ArrayList<NationCodeResponseModel>()
     val nationCodeStringList = ArrayList<String>()
-    //    val days = Array(28, {i -> i+1})
+
     private val disposable = CompositeDisposable()
     val days = MutableList(28, { i -> i + 1 })
 
@@ -51,7 +44,7 @@ class SignUpActivity : AppCompatActivity() {
 
                 initView()
             }, {
-                Log.e(TAG,"error")
+                Timber.d("error")
             }
 
             )
@@ -188,20 +181,21 @@ class SignUpActivity : AppCompatActivity() {
 
 
         if (temp_password != temp_password_again) {
-            Log.e(TAG, "비밀번호가 다름 $temp_password $temp_password_again")
+
+            Timber.d("비밀번호가 다름 $temp_password $temp_password_again")
             return
         }
         if (temp_gender_pos == 0) {
-            Log.e(TAG, "성별 선택 안됨")
+            Timber.e( "성별 선택 안됨")
             return
         }
-        Log.i(TAG, "메일 : $temp_email")
-        Log.i(TAG, "별명 : $temp_nickname")
-        Log.i(TAG, "비번 : $temp_password $temp_password_again")
+        Timber.i("메일 : $temp_email")
+        Timber.i("별명 : $temp_nickname")
+        Timber.i("비번 : $temp_password $temp_password_again")
 
 
-        Log.i(TAG, "국가번호 : $temp_trim_nation")
-        Log.i(TAG, "$temp_gender $y $m $d")
+        Timber.i("국가번호 : $temp_trim_nation")
+        Timber.i("$temp_gender $y $m $d")
 
 
         val option = SignUpOption(
@@ -223,8 +217,8 @@ class SignUpActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                Log.i(TAG, result.msg)
-                Log.i(TAG, "${result.success}")
+                Timber.i(result.msg)
+                Timber.i("${result.success}")
             },
                 {
 

@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_sign_in.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 class SignInActivity : AppCompatActivity() {
 
@@ -25,7 +26,7 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
-        
+
     }
     fun onClickSignIn(v : View){
         val email_address = signin_email_edit.text.toString()
@@ -40,8 +41,8 @@ class SignInActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result->
-                Log.i("kgp msg", result.toString())
-                Log.i("kgp","${result?.user_info?.user_birthday}")
+                Timber.d(result.toString())
+                Timber.d("${result?.user_info?.user_birthday}")
             },{
 
             })
