@@ -6,8 +6,8 @@ import android.util.Log
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_each_tab.view.*
-import java.util.*
 import kotlin.collections.ArrayList
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +20,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         titleArray = ArrayList<String>(resources.getStringArray(R.array.tab_items).toMutableList())
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+
 
         contentViewPager.adapter = MainActivty@adapter
         main_tab.setupWithViewPager(contentViewPager)

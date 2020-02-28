@@ -2,7 +2,7 @@ package com.rollyglobe.rollyglobe.response_model
 
 import com.google.gson.annotations.SerializedName
 
-class NationCodeModel{
+class NationCodeResponseModel{
     @SerializedName("nationNameKor")
     val nationNameKor:String = ""
 
