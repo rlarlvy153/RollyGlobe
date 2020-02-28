@@ -7,28 +7,26 @@
     tools:context=".SignUpActivity"
     >
 
-    <ImageView
+    <include layout="@layout/back_arrow"
         android:id="@+id/back_icon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="19dp"
-        android:layout_width="20dp"
-        android:layout_height="18dp"
-        android:background="#f0f"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         />
 
-    <ImageView
+
+    <include layout="@layout/rollyglobe_logo"
         android:id="@+id/banner_image"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="101dp"
         android:layout_marginTop="56dp"
-        android:layout_width="159dp"
-        android:layout_height="53dp"
-        android:background="#f0f"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="314dp"
         android:layout_height="184.55dp"

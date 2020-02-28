@@ -20,7 +20,7 @@ class MainAdapter (fm : FragmentManager, resources: Resources) : FragmentPagerAd
         }
     }
 
-    override fun getCount() = fragmentTitleList.size;
+    override fun getCount() = fragmentTitleList.size
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         super.destroyItem(container, position, `object`)
