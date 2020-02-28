@@ -13,10 +13,11 @@ class MainAdapter (fm : FragmentManager, resources: Resources) : FragmentPagerAd
 
     override fun getItem(position:Int) : Fragment{
         return when(position){
-            1->CommunityFragment()
-            2->GoodsFragment()
-            3->MyPageFragment()
-            else ->RecommendFragment()
+            1->RecommendFragment()
+            2->CommunityFragment()
+            3->GoodsFragment()
+            4->MyPageFragment()
+            else ->HomeFragment()
         }
     }
 
