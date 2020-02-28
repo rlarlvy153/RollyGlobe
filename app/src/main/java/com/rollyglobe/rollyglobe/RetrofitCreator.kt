@@ -35,6 +35,7 @@ object RetrofitCreator {
             baseUrl(API_BASE_URL)
             client(okHttpClient)
             addConverterFactory(GsonConverterFactory.create())
+            addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         }.build()
 
     }
