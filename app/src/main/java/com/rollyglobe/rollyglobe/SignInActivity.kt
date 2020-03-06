@@ -20,7 +20,6 @@ import timber.log.Timber
 class SignInActivity : AppCompatActivity() {
 
     var restClient  = RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
-    val TAG = "SignUpActivity_kgp"
     private val disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
