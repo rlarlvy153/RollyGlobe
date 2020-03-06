@@ -1,11 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
 
+
+    >
+
+    <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/spot_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="fitXY"
+
+        />
     <TextView
+
         android:id="@+id/spot_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/spot_intro"
+        app:layout_constraintLeft_toLeftOf="parent"
+        style="@style/recommendation_item_title"
+        />
 
-</LinearLayout>
+    <TextView
+
+        android:id="@+id/spot_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/spot_place"
+        app:layout_constraintLeft_toLeftOf="parent"
+        style="@style/recommendation_item_description"
+        />
+
+    <TextView
+
+        android:id="@+id/spot_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        style="@style/recommendation_item_description"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

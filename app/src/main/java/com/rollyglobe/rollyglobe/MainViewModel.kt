@@ -61,17 +61,17 @@ class MainViewModel : ViewModel(){
                     val spotSimpleIntro = resultJson.getString("spot_intro$cnt")
                     val recommendationReason = resultJson.getString("spot_recommenation_reason$cnt")
 
-                    Timber.d("spotNum : $spotNum")
-                    Timber.d("spotThumbnailNum : $spotThumbnailNum")
-                    Timber.d("spotThumbnailType : $spotThumbnailType")
-                    Timber.d("spotTitleKor : $spotTitleKor")
-
-                    Timber.d("continentNum : $continentName")
-                    Timber.d("nationNum : $nationName")
-                    Timber.d("cityNum : $cityName")
-                    Timber.d("spotSimpleIntro : $spotSimpleIntro")
-                    Timber.d("spotSimpleIntro : $spotSimpleIntro")
-                    Timber.d("recommendationReason : $recommendationReason")
+//                    Timber.d("spotNum : $spotNum")
+//                    Timber.d("spotThumbnailNum : $spotThumbnailNum")
+//                    Timber.d("spotThumbnailType : $spotThumbnailType")
+//                    Timber.d("spotTitleKor : $spotTitleKor")
+//
+//                    Timber.d("continentNum : $continentName")
+//                    Timber.d("nationNum : $nationName")
+//                    Timber.d("cityNum : $cityName")
+//                    Timber.d("spotSimpleIntro : $spotSimpleIntro")
+//                    Timber.d("spotSimpleIntro : $spotSimpleIntro")
+//                    Timber.d("recommendationReason : $recommendationReason")
 
                     val spot = SpotModel(spotNum, spotThumbnailNum, spotThumbnailType,spotTitleKor,continentName,nationName,cityName,spotSimpleIntro,recommendationReason)
                     spotList.add(spot)
