@@ -21,7 +21,12 @@ class MainViewModel : ViewModel(){
     var restClient  = RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
     var spotList = ArrayList<SpotModel>()
     var spotListLiveData = MutableLiveData<ArrayList<SpotModel>>()
+    var isLogin = MutableLiveData<Boolean>()
     private val disposable = CompositeDisposable()
+
+    init{
+        isLogin.value = false
+    }
 
     fun getSpotList(){
 
