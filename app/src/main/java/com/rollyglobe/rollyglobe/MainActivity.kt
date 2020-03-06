@@ -1,11 +1,17 @@
 package com.rollyglobe.rollyglobe
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TabHost
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,10 +37,26 @@ class MainActivity : AppCompatActivity() {
         R.drawable.product_ccolor,
         R.drawable.mypage_ccolor
     )
-
+    private var actionMenu : Menu? = null
+    lateinit private var viewModel : MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel.isLogin.observe(this,Observer{isLogin->
+            actionMenu?.let{
+                actionMenu!!.findItem(R.id.action_login).isVisible = !isLogin
+            }
+        })
+
+
+        supportActionBar?.run{
+            setIcon(R.drawable.logo_fullletter)
+            setDisplayUseLogoEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            title = ""
+        }
 
         titleArray = ArrayList<String>(resources.getStringArray(R.array.tab_items).toMutableList())
 
@@ -82,5 +104,22 @@ class MainActivity : AppCompatActivity() {
         })
 
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.actionbar_actions,menu)
+        actionMenu = menu
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        Timber.d("${item?.itemId}")
+        Timber.d("${R.id.action_login}")
+
+//        when(item?.itemId){
+//            R.id.action_login -> Intent(this,SignInActivity::class.java)
+//
+//        }
+        return super.onOptionsItemSelected(item)
     }
 }
