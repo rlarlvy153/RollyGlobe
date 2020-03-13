@@ -2,19 +2,14 @@ package com.rollyglobe.rollyglobe
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import com.rollyglobe.rollyglobe.request_model.SignInOption
-import com.rollyglobe.rollyglobe.request_model.SignInRequest
-import com.rollyglobe.rollyglobe.request_model.SignInRequestModel
-import com.rollyglobe.rollyglobe.response_model.SignInModel
+import com.rollyglobe.rollyglobe.Model.request_model.SignInOption
+import com.rollyglobe.rollyglobe.Model.request_model.SignInRequest
+import com.rollyglobe.rollyglobe.Model.request_model.SignInRequestModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_sign_in.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import timber.log.Timber
 
 class SignInActivity : AppCompatActivity() {

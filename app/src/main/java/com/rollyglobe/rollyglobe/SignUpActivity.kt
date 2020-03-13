@@ -7,9 +7,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.rollyglobe.rollyglobe.request_model.*
+import com.rollyglobe.rollyglobe.Model.request_model.*
 
-import com.rollyglobe.rollyglobe.response_model.NationCodeResponseModel
+import com.rollyglobe.rollyglobe.Model.response_model.NationCodeResponseModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

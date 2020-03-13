@@ -1,8 +1,7 @@
-package com.rollyglobe.rollyglobe.request_model
+package com.rollyglobe.rollyglobe.Model.request_model
 
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import retrofit2.http.FormUrlEncoded
+
 class SignUpOption(
 
     @SerializedName("email_address")
