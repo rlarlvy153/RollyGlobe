@@ -1,8 +1,10 @@
 package com.rollyglobe.rollyglobe
 
+import com.rollyglobe.rollyglobe.request_model.MyPageHomeRequestModel
 import com.rollyglobe.rollyglobe.request_model.RecommendRequestModel
 import com.rollyglobe.rollyglobe.request_model.SignInRequestModel
 import com.rollyglobe.rollyglobe.request_model.SignUpRequestModel
+import com.rollyglobe.rollyglobe.response_model.MyPageHomeInfoResponseModel
 import com.rollyglobe.rollyglobe.response_model.NationCodeResponseModel
 import com.rollyglobe.rollyglobe.response_model.SignInModel
 import com.rollyglobe.rollyglobe.response_model.SignUpResponseModel
@@ -23,6 +25,9 @@ interface RollyGlobeApiInterface {
 
         @POST("/ajax/spot.php")
         fun getRecommendList(@Body param: RecommendRequestModel): Single<ResponseBody>
+
+        @POST("ajax/mypage.php")
+        fun getMyPageHomeInfo(@Body param: MyPageHomeRequestModel): Single<MyPageHomeInfoResponseModel>
 
 
 }

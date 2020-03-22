@@ -1,5 +1,6 @@
 package com.rollyglobe.rollyglobe
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,7 +20,7 @@ import timber.log.Timber
 
 class SignInActivity : AppCompatActivity() {
 
-    var restClient  = RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
+    var restClient  = RestClient.restClient
     private val disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +43,9 @@ class SignInActivity : AppCompatActivity() {
             .subscribe({result->
                 Timber.d(result.toString())
                 Timber.d("${result?.user_info?.user_birthday}")
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
             },{
 
             })
