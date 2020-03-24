@@ -60,9 +60,7 @@ class MainActivity : AppCompatActivity() {
 
         titleArray = ArrayList<String>(resources.getStringArray(R.array.tab_items).toMutableList())
 
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
+
         contentViewPager.adapter = MainActivty@ adapter
         main_tab.setupWithViewPager(contentViewPager)
 

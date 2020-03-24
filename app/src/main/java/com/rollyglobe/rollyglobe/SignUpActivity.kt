@@ -219,6 +219,7 @@ class SignUpActivity : AppCompatActivity() {
             .subscribe({ result ->
                 Timber.i(result.msg)
                 Timber.i("${result.success}")
+                finish()
             },
                 {
 
