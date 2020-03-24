@@ -44,9 +44,9 @@ class MyPageHomeInfoResponseModel (
     var userSex : String,
 
     @SerializedName("msg")
-    var errorMsg:String,
+    var errorMsg:String
 
-    @SerializedName("reservationJSON")
-    var reservationInfoList : List<ReservationModel>
+//    @SerializedName("reservationJSON")
+//    var reservationInfoList : List<ReservationModel>
 
 )

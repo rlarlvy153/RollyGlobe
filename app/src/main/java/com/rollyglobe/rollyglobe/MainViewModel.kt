@@ -21,10 +21,12 @@ class MainViewModel : ViewModel() {
     var spotList = ArrayList<SpotModel>()
     var spotListLiveData = MutableLiveData<ArrayList<SpotModel>>()
     var isLogin = MutableLiveData<Boolean>()
+    var myInfoDummy = MutableLiveData<String>()
     private val disposable = CompositeDisposable()
 
     init {
         isLogin.value = false
+        myInfoDummy.value=""
     }
 
     fun getSpotList() {
@@ -132,6 +134,11 @@ class MainViewModel : ViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result->
+                myInfoDummy.value += "${result.success}\n"
+                myInfoDummy.value += "${result.userEmail}\n"
+                myInfoDummy.value += "${result.userNickname}\n"
+                myInfoDummy.value += "${result.userPhoneNum}\n"
+                myInfoDummy.value += "${result.userSex}\n"
 
 
             },{

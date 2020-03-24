@@ -25,6 +25,8 @@ class SignInActivity : AppCompatActivity() {
             Timber.plant(Timber.DebugTree())
         }
 
+
+
     }
     fun onClickSignIn(v : View){
         val email_address = signin_email_edit.text.toString()
