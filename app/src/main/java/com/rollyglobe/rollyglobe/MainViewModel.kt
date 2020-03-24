@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.rollyglobe.rollyglobe.Model.SpotModel
 import com.rollyglobe.rollyglobe.Model.request_model.*
+import com.rollyglobe.rollyglobe.request_model.MyPageHomeRequest
+import com.rollyglobe.rollyglobe.request_model.MyPageHomeRequestModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -13,7 +15,9 @@ import timber.log.Timber
 
 class MainViewModel : ViewModel() {
     val gson = Gson()
-    var restClient = RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
+
+//    var restClient  = RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
+    var restClient = RestClient.restClient
     var spotList = ArrayList<SpotModel>()
     var spotListLiveData = MutableLiveData<ArrayList<SpotModel>>()
     var isLogin = MutableLiveData<Boolean>()
@@ -117,6 +121,23 @@ class MainViewModel : ViewModel() {
 
                 })
         )
+    }
+    fun getMyPageHome(){
+        var myPageHomeRequest = MyPageHomeRequest("MypageHomeLoad","")
+        var myPageHomeRequestModel = MyPageHomeRequestModel(myPageHomeRequest)
 
+
+
+        disposable.add(restClient.getMyPageHomeInfo(myPageHomeRequestModel)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({result->
+
+
+            },{
+                Timber.d("err : ${it.toString()}")
+
+            })
+        )
     }
 }
