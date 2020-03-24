@@ -1,4 +1,4 @@
-package com.rollyglobe.rollyglobe.response_model
+package com.rollyglobe.rollyglobe.Model.response_model
 
 import com.google.gson.annotations.SerializedName
 

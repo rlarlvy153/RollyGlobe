@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="picture">사진</string>
+    <string name="map">지도</string>
+    <string name="contributors">기여자들</string>
+</resources>
