@@ -111,6 +111,7 @@
             <ImageView
                 style="@style/inner_contents_small_icon"
                 android:background="@drawable/posticon_innercontents"
+
                 android:scaleType="fitXY" />
 
             <TextView
@@ -184,23 +185,22 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="3dp"
-        android:layout_marginBottom="10dp"
         android:background="#88EBEBEB" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:paddingLeft="10dp">
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/scrap_image"
-                style="@style/inner_contents_small_icon"
+                style="@style/inner_contents_small_icon_button"
                 android:background="@drawable/scrapicon_innercontents"
                 android:scaleType="fitXY" />
 
@@ -208,19 +208,18 @@
                 style="@style/inner_contents_small_icon_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="@string/scrap" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/post_image"
-                style="@style/inner_contents_small_icon"
+                style="@style/inner_contents_small_icon_button"
                 android:background="@drawable/posticon_innercontents"
                 android:scaleType="fitXY" />
 
@@ -234,16 +233,17 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/comment_image"
-                style="@style/inner_contents_small_icon"
+                style="@style/inner_contents_small_icon_button"
                 android:background="@drawable/commenticon_innercontents"
                 android:scaleType="fitXY" />
 
             <TextView
+
                 style="@style/inner_contents_small_icon_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

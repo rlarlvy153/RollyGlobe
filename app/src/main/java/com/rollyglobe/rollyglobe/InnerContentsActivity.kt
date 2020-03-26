@@ -23,6 +23,8 @@ class InnerContentsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inner_contents)
 
+        supportActionBar?.hide()
+
         val spot : SpotModel = intent.getSerializableExtra("spotModel") as SpotModel
         Timber.d("${spot.spotCityName}")
 

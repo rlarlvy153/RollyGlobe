@@ -52,11 +52,18 @@
     </style>
 
     <style name="inner_contents_small_icon">
-        <item name="android:layout_height">25dp</item>
-        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">15dp</item>
+        <item name="android:layout_height">15dp</item>
+    </style>
+    <style name="inner_contents_small_icon_button">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">18dp</item>
+        <item name="android:layout_height">18dp</item>
     </style>
 
     <style name="inner_contents_small_icon_text">
+        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_width">30dp</item>
