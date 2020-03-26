@@ -24,14 +24,14 @@ class MainActivity : AppCompatActivity() {
     private val adapter by lazy { MainAdapter(supportFragmentManager, resources) }
     private lateinit var titleArray: ArrayList<String>
     private var iconArray = listOf(
-        R.drawable.recommendation,
+        R.drawable.home,
         R.drawable.recommendation,
         R.drawable.community,
         R.drawable.product,
         R.drawable.mypage
     )
     private var iconArraySelected = listOf(
-        R.drawable.recommendation,
+        R.drawable.home_ccolor,
         R.drawable.recommendation_ccolor,
         R.drawable.community_ccolor,
         R.drawable.product_ccolor,

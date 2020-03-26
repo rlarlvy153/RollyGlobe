@@ -125,8 +125,9 @@ class MainViewModel : ViewModel() {
         )
     }
     fun getMyPageHome(){
-        var myPageHomeRequest = MyPageHomeRequest("MypageHomeLoad","")
-        var myPageHomeRequestModel = MyPageHomeRequestModel(myPageHomeRequest)
+        myInfoDummy.value=""
+        val myPageHomeRequest = MyPageHomeRequest("MypageHomeLoad","")
+        val myPageHomeRequestModel = MyPageHomeRequestModel(myPageHomeRequest)
 
 
 

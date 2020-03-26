@@ -22,14 +22,20 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+
         >
 
         <com.google.android.material.tabs.TabLayout
+            app:tabPaddingBottom="-1dp"
+            app:tabPaddingEnd="-1dp"
+            app:tabPaddingStart="-1dp"
+            app:tabPaddingTop="-1dp"
             android:id="@+id/main_tab"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             app:tabTextAppearance="@style/tabTextAppearance"
             style="@style/TabBarTheme"
+
             />
     </com.google.android.material.appbar.AppBarLayout>
 
