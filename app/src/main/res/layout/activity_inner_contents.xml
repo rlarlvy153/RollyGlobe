@@ -18,28 +18,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textSize="15sp"
-        />
+        android:textColor="#606060"
+        android:textSize="15sp" />
 
 
     <TextView
         android:id="@+id/spot_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/spot_name_eng"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textColor="#606060" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        >
+        android:layout_marginBottom="10dp">
 
         <ImageView
             android:id="@+id/star_rate1"
@@ -75,31 +76,140 @@
 
     <LinearLayout
 
-        android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="10dp">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/scrap_image"
                 style="@style/inner_contents_small_icon"
                 android:background="@drawable/scrapicon"
                 android:scaleType="fitXY" />
 
             <TextView
                 android:id="@+id/scrap_txt"
+                style="@style/inner_contents_small_icon_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                style="@style/inner_contents_small_icon"
+                android:background="@drawable/posticon_innercontents"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/post_txt"
                 style="@style/inner_contents_small_icon_text"
-                />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/inner_contents_small_icon"
+                android:background="@drawable/commenticon"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/comment_txt"
+                style="@style/inner_contents_small_icon_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/average" />
+
+            <TextView
+                android:id="@+id/average"
+                style="@style/inner_contents_small_icon_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/expectation" />
+
+            <TextView
+                android:id="@+id/expectation"
+                style="@style/inner_contents_small_icon_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginBottom="10dp"
+        android:background="#88EBEBEB" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/scrap_image"
+                style="@style/inner_contents_small_icon"
+                android:background="@drawable/scrapicon_innercontents"
+                android:scaleType="fitXY" />
+
+            <TextView
+                style="@style/inner_contents_small_icon_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/scrap" />
         </LinearLayout>
 
         <LinearLayout
@@ -115,11 +225,10 @@
                 android:scaleType="fitXY" />
 
             <TextView
-                android:id="@+id/post_txt"
+                style="@style/inner_contents_small_icon_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/inner_contents_small_icon_text"
-                android:text="0" />
+                android:text="@string/post" />
         </LinearLayout>
 
         <LinearLayout
@@ -131,59 +240,23 @@
             <ImageView
                 android:id="@+id/comment_image"
                 style="@style/inner_contents_small_icon"
-                android:background="@drawable/commenticon"
+                android:background="@drawable/commenticon_innercontents"
                 android:scaleType="fitXY" />
 
             <TextView
-                android:id="@+id/comment_txt"
+                style="@style/inner_contents_small_icon_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/inner_contents_small_icon_text"
-                android:text="0" />
+                android:text="@string/comment" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1">
-            <TextView
-                android:text="@string/average"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:text="0"
-                android:id="@+id/average"
-                style="@style/inner_contents_small_icon_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1">
-            <TextView
-                android:text="@string/expectation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:text="0"
-                android:id="@+id/expectation"
-                style="@style/inner_contents_small_icon_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-
-
-
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#88EBEBEB" />
 
     <TextView
         android:id="@+id/spot_detail"

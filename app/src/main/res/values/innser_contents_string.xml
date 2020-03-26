@@ -5,4 +5,9 @@
     <string name="contributors">기여자들</string>
     <string name="average">평균</string>
     <string name="expectation">예상</string>
+
+    <string name="scrap">찜하기</string>
+    <string name="post">포스트 쓰기</string>
+    <string name="comment">여행기 쓰기</string>
+
 </resources>
