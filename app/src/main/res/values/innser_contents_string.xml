@@ -3,4 +3,6 @@
     <string name="picture">사진</string>
     <string name="map">지도</string>
     <string name="contributors">기여자들</string>
+    <string name="average">평균</string>
+    <string name="expectation">예상</string>
 </resources>

@@ -4,93 +4,221 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InnerContentsActivity"
     android:orientation="vertical"
-    >
+    tools:context=".InnerContentsActivity">
 
     <ImageView
         android:id="@+id/spot_image"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:scaleType="fitXY"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/spot_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="15sp"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btn_picture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/picture"
-            style="@style/inner_contents_button"
-            android:layout_margin="0dp"
-            android:background="#000000"
-            />
-        <Button
-            android:id="@+id/btn_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/map"
-            style="@style/inner_contents_button"
-            />
-        <Button
-            android:id="@+id/bt_contributors"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:text="@string/contributors"
-            style="@style/inner_contents_button"
-            />
+    <TextView
+        android:id="@+id/spot_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/spot_name_eng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/star_rate1"
+            style="@style/inner_contents_star"
+            android:background="@drawable/staricon_innercontents"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/star_rate2"
+            style="@style/inner_contents_star"
+            android:background="@drawable/staricon_innercontents"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/star_rate3"
+            style="@style/inner_contents_star"
+            android:background="@drawable/staricon_innercontents"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/star_rate4"
+            style="@style/inner_contents_star"
+            android:background="@drawable/staricon_innercontents"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/star_rate5"
+            style="@style/inner_contents_star"
+            android:background="@drawable/staricon_innercontents"
+            android:scaleType="fitXY" />
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            >
+
+            <ImageView
+                android:id="@+id/scrap_image"
+                style="@style/inner_contents_small_icon"
+                android:background="@drawable/scrapicon"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/scrap_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                style="@style/inner_contents_small_icon_text"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/post_image"
+                style="@style/inner_contents_small_icon"
+                android:background="@drawable/posticon_innercontents"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/post_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/inner_contents_small_icon_text"
+                android:text="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/comment_image"
+                style="@style/inner_contents_small_icon"
+                android:background="@drawable/commenticon"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/comment_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/inner_contents_small_icon_text"
+                android:text="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1">
+            <TextView
+                android:text="@string/average"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="0"
+                android:id="@+id/average"
+                style="@style/inner_contents_small_icon_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1">
+            <TextView
+                android:text="@string/expectation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="0"
+                android:id="@+id/expectation"
+                style="@style/inner_contents_small_icon_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+
+
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/spot_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/spot_name_eng"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/spot_position"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
         android:id="@+id/spot_detail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/spot_time"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/spot_cost"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/spot_address"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
+
     <TextView
         android:id="@+id/spot_traffic"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
+
     <TextView
         android:id="@+id/spot_contact"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
+
     <TextView
         android:id="@+id/spot_web"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

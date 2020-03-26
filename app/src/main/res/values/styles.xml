@@ -46,6 +46,21 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="inner_contents_star">
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_width">40dp</item>
+    </style>
+
+    <style name="inner_contents_small_icon">
+        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_width">25dp</item>
+    </style>
+
+    <style name="inner_contents_small_icon_text">
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_width">30dp</item>
+    </style>
 
     <style name="inner_contents_button" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@color/white</item>
