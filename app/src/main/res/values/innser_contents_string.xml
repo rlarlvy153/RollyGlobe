@@ -3,4 +3,23 @@
     <string name="picture">사진</string>
     <string name="map">지도</string>
     <string name="contributors">기여자들</string>
+    <string name="average">평균</string>
+    <string name="expectation">예상</string>
+
+    <string name="scrap">찜하기</string>
+    <string name="post">포스트 쓰기</string>
+    <string name="comment">여행기 쓰기</string>
+    <string name="lets_be_contributor">수정을 눌러 기여자가 되어보세요!</string>
+
+    <string name="details">상세설명</string>
+    <string name="time">시간</string>
+    <string name="cost">이용요금</string>
+    <string name="contact">연락처</string>
+    <string name="webpage">웹페이지</string>
+    <string name="route">가는방법</string>
+    <string name="address">주소</string>
+    <string name="relevant_goods">이 스팟과 관련된 상품</string>
+
+
 </resources>
+
