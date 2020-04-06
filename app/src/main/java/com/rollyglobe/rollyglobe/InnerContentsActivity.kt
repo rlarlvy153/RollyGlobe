@@ -132,5 +132,8 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
     }
+
+
+
 }
 
