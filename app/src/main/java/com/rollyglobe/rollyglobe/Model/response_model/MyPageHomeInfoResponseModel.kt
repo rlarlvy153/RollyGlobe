@@ -48,5 +48,4 @@ class MyPageHomeInfoResponseModel (
 
     @SerializedName("reservationJSON")
     var reservationInfoList : String
-
 )

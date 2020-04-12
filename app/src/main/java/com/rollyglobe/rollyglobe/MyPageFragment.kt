@@ -10,11 +10,16 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.rollyglobe.rollyglobe.MyPageFragments.MyPageAdapter
+import com.rollyglobe.rollyglobe.MyPageFragments.MyPageReservationAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_each_tab.view.*
+import kotlinx.android.synthetic.main.my_page_home_fragment.*
 import timber.log.Timber
 
 /**
