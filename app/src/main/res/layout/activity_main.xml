@@ -35,6 +35,9 @@
         app:tabPaddingStart="-1dp"
         app:tabPaddingTop="-1dp"
         app:tabTextAppearance="@style/tabTextAppearance"
+        app:tabIndicatorColor="#42ADE2"
+        app:tabTextColor="#C7C7C7"
+        app:tabSelectedTextColor="#42ADE2"
 
         />
     <!--    </com.google.android.material.appbar.AppBarLayout>-->
