@@ -14,28 +14,33 @@
             android:layout_height="wrap_content"
 
             >
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mypage_home"
-                    />
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mypage_schedule"
-                    />
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mypage_book"
-                    />
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mypage_activity"
-                    />
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/mypage_home"-->
+<!--                    />-->
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/mypage_schedule"-->
+<!--                    />-->
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/mypage_book"-->
+<!--                    />-->
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/mypage_activity"-->
+<!--                    />-->
         </com.google.android.material.tabs.TabLayout>
-
+        <androidx.viewpager.widget.ViewPager
+            app:layout_constraintTop_toBottomOf="@id/mypage_tab"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/mypage_content_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
