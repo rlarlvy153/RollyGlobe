@@ -14,10 +14,10 @@ class MyPageAdapter (fm : FragmentManager, resources: Resources) : FragmentPager
 
     override fun getItem(position:Int) : Fragment{
         return when(position){
-            1->MyPageScheduleFragment()
-            2->MyPageBookFragment()
-            3->MyPageActivityFragment()
-            else ->MyPageHomeFragment()
+            1->MyPageScheduleFragment.instance
+            2->MyPageBookFragment.instance
+            3->MyPageActivityFragment.instance
+            else ->MyPageHomeFragment.instance
         }
     }
 
