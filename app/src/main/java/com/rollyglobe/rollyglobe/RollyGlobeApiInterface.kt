@@ -7,8 +7,8 @@ import com.rollyglobe.rollyglobe.Model.request_model.SignUpRequestModel
 import com.rollyglobe.rollyglobe.Model.response_model.NationCodeResponseModel
 import com.rollyglobe.rollyglobe.Model.response_model.SignInModel
 import com.rollyglobe.rollyglobe.Model.response_model.SignUpResponseModel
-import com.rollyglobe.rollyglobe.request_model.MyPageHomeRequestModel
-import com.rollyglobe.rollyglobe.response_model.MyPageHomeInfoResponseModel
+import com.rollyglobe.rollyglobe.Model.request_model.MyPageHomeRequestModel
+import com.rollyglobe.rollyglobe.Model.response_model.MyPageHomeInfoResponseModel
 
 import io.reactivex.Single
 import okhttp3.ResponseBody

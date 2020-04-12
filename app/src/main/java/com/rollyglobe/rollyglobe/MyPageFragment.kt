@@ -24,10 +24,16 @@ class MyPageFragment : Fragment() {
     private val adapter by lazy { MyPageAdapter(childFragmentManager, resources) }
 
     lateinit var viewModel : MainViewModel
+    override fun onCreate(savedInstanceState: Bundle?) {
+        Timber.d("life onCreate")
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Timber.d("life onCreateView")
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_my_page, container, false)
         viewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
@@ -57,7 +63,7 @@ class MyPageFragment : Fragment() {
         })
 
 
-//        viewModel.getMyPageHome()
+        viewModel.getMyPageHome()
         return root
     }
 

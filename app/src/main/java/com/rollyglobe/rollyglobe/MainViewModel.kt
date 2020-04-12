@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.rollyglobe.rollyglobe.Model.SpotModel
 import com.rollyglobe.rollyglobe.Model.request_model.*
-import com.rollyglobe.rollyglobe.request_model.MyPageHomeRequest
-import com.rollyglobe.rollyglobe.request_model.MyPageHomeRequestModel
+import com.rollyglobe.rollyglobe.Model.request_model.MyPageHomeRequest
+import com.rollyglobe.rollyglobe.Model.request_model.MyPageHomeRequestModel
+import com.rollyglobe.rollyglobe.Model.response_model.ReservationModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import org.json.JSONArray
 import org.json.JSONObject
 import timber.log.Timber
 
@@ -22,11 +24,17 @@ class MainViewModel : ViewModel() {
     var spotListLiveData = MutableLiveData<ArrayList<SpotModel>>()
     var isLogin = MutableLiveData<Boolean>()
     var myInfoDummy = MutableLiveData<String>()
+    var userName = MutableLiveData<String>()
+    var userEmail = MutableLiveData<String>()
+    var userPhoneNumber = MutableLiveData<String>()
+    var userSex = MutableLiveData<String>()
+    var reservations = MutableLiveData<ArrayList<ReservationModel>>()
     private val disposable = CompositeDisposable()
 
     init {
         isLogin.value = false
         myInfoDummy.value=""
+        reservations.value = ArrayList<ReservationModel>()
     }
 
     fun getSpotList() {
@@ -126,8 +134,15 @@ class MainViewModel : ViewModel() {
     }
     fun getMyPageHome(){
         myInfoDummy.value=""
-        val myPageHomeRequest = MyPageHomeRequest("MypageHomeLoad","")
-        val myPageHomeRequestModel = MyPageHomeRequestModel(myPageHomeRequest)
+        val myPageHomeRequest =
+            MyPageHomeRequest(
+                "MypageHomeLoad",
+                ""
+            )
+        val myPageHomeRequestModel =
+            MyPageHomeRequestModel(
+                myPageHomeRequest
+            )
 
 
 
@@ -141,6 +156,26 @@ class MainViewModel : ViewModel() {
                 myInfoDummy.value += "${result.userPhoneNum}\n"
                 myInfoDummy.value += "${result.userSex}\n"
 
+                userName.value = result.userNickname
+                userEmail.value = result.userEmail
+                userPhoneNumber.value = result.userPhoneNum
+                userSex.value = result.userSex
+
+                val reservationJsonArray = JSONArray(result.reservationInfoList)
+                for( i in 0 until reservationJsonArray.length()){
+                    val eachObject = reservationJsonArray.getJSONObject(i)
+
+                    val reservationNum = eachObject.getString("reservationNum").toInt()
+                    val reservationName = eachObject.getString("reservationName")
+                    val reservationIntro = eachObject.getString("reservationIntro")
+                    val reservationProductNum = eachObject.getString("reservationProductNum").toInt()
+                    val reservationThumbnailNum = eachObject.getString("reservationThumbnailNum").toInt()
+                    val reservationThumbnailType = eachObject.getString("reservationThumbnailType")
+                    val tempReservation = ReservationModel(reservationNum, reservationProductNum, reservationName, reservationIntro, reservationThumbnailNum, reservationThumbnailType)
+                    reservations.value?.add(tempReservation)
+
+                }
+                reservations.value = reservations.value
 
             },{
                 Timber.d("err : ${it.toString()}")
