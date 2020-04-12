@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
 
 
         main_tab.getTabAt(0)?.customView?.icon?.setBackgroundResource(iconArraySelected[0])
-        main_tab.getTabAt(0)?.customView?.title.setTextColor(resources.getColor(R.color.tab_selected))
+        main_tab.getTabAt(0)?.customView?.title?.setTextColor(resources.getColor(R.color.tab_selected))
 
         contentViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
