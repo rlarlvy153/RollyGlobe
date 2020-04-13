@@ -4,4 +4,5 @@
     <string name="mypage_schedule">여행일정</string>
     <string name="mypage_book">예약내역</string>
     <string name="mypage_activity">활동</string>
+    <string name="mypage_home_reservation_list">예약 내역</string>
 </resources>

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.rollyglobe.rollyglobe.MyPageFragments.MyPageAdapter
+import com.rollyglobe.rollyglobe.MyPageFragments.MyPageBookFragment
 import com.rollyglobe.rollyglobe.MyPageFragments.MyPageReservationAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_each_tab.view.*
@@ -26,6 +27,11 @@ import timber.log.Timber
  * A simple [Fragment] subclass.
  */
 class MyPageFragment : Fragment() {
+
+    companion object {
+        val instance = MyPageFragment()
+    }
+
     private val adapter by lazy { MyPageAdapter(childFragmentManager, resources) }
 
     lateinit var viewModel : MainViewModel
@@ -68,7 +74,7 @@ class MyPageFragment : Fragment() {
         })
 
 
-        viewModel.getMyPageHome()
+
         return root
     }
 

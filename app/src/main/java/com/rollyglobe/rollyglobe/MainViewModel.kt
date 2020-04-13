@@ -161,7 +161,9 @@ class MainViewModel : ViewModel() {
                 userPhoneNumber.value = result.userPhoneNum
                 userSex.value = result.userSex
 
+
                 val reservationJsonArray = JSONArray(result.reservationInfoList)
+                reservations.value?.clear()
                 for( i in 0 until reservationJsonArray.length()){
                     val eachObject = reservationJsonArray.getJSONObject(i)
 

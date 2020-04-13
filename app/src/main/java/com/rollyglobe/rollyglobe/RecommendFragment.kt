@@ -17,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView
  * A simple [Fragment] subclass.
  */
 class RecommendFragment : Fragment() {
-
+    companion object{
+        val instance = RecommendFragment()
+    }
     lateinit var viewModel : MainViewModel
     lateinit var recyclerView : RecyclerView
 
