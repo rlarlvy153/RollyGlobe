@@ -185,4 +185,12 @@ class MainViewModel : ViewModel() {
             })
         )
     }
+    fun logout(){
+        userName.value = ""
+        userEmail.value = ""
+        userPhoneNumber.value = ""
+        userSex.value = ""
+        reservations.value?.clear()
+        isLogin.value = false
+    }
 }

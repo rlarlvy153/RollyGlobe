@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -33,7 +34,10 @@ class MyPageHomeFragment : Fragment() {
         Timber.d("life MyPageHomeFragment onCreateView")
         val root = inflater.inflate(R.layout.my_page_home_fragment, container, false)
         recyclerView = root.findViewById<RecyclerView>(R.id.mypage_reservation_recyclerview)
-
+        val logoutButton = root.findViewById<Button>(R.id.logout_button)
+        logoutButton.setOnClickListener { v ->
+            //viewModel.logout()
+        }
 
         return root
     }
