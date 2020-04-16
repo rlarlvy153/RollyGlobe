@@ -1,4 +1,4 @@
-package com.rollyglobe.rollyglobe
+package com.rollyglobe.rollyglobe.MyPageFragments
 
 import android.content.res.Resources
 import android.view.ViewGroup
@@ -6,19 +6,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.rollyglobe.rollyglobe.R
 
-class MainAdapter (fm : FragmentManager, resources: Resources) : FragmentPagerAdapter(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
+class MyPageAdapter (fm : FragmentManager, resources: Resources) : FragmentPagerAdapter(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
 
-    private val fragmentTitleList = resources.getStringArray(R.array.tab_items)
+    private val fragmentTitleList = resources.getStringArray(R.array.mypage_tab_items)
 
     override fun getItem(position:Int) : Fragment{
         return when(position){
-            1->RecommendFragment.instance
-            2->CommunityFragment.instance
-            3->GoodsFragment.instance
-            4->MyPageFragment.instance
-            else ->HomeFragment.instance
-
+            1->MyPageScheduleFragment.instance
+            2->MyPageBookFragment.instance
+            3->MyPageActivityFragment.instance
+            else ->MyPageHomeFragment.instance
         }
     }
 

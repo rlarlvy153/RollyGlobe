@@ -9,6 +9,12 @@
         <item>마이페이지</item>
     </string-array>
 
+    <string-array name="mypage_tab_items">
+        <item>홈</item>
+        <item>여행일정</item>
+        <item>예약내역</item>
+        <item>활동</item>
+    </string-array>
 
     <string-array name="gender">
         <item>성별</item>

@@ -11,7 +11,9 @@ import android.view.ViewGroup
  * A simple [Fragment] subclass.
  */
 class CommunityFragment : Fragment() {
-
+    companion object{
+        val instance = CommunityFragment()
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

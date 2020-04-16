@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mypage_home">홈</string>
+    <string name="mypage_schedule">여행일정</string>
+    <string name="mypage_book">예약내역</string>
+    <string name="mypage_activity">활동</string>
+    <string name="mypage_home_reservation_list">예약 내역</string>
+    <string name="mypage_logout">로그아웃</string>
+</resources>

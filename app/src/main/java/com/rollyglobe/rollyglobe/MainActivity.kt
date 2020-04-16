@@ -11,7 +11,6 @@ import android.widget.TabHost
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
@@ -61,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         titleArray = ArrayList<String>(resources.getStringArray(R.array.tab_items).toMutableList())
 
 
-        contentViewPager.adapter = MainActivty@ adapter
+        contentViewPager.adapter = adapter
         main_tab.setupWithViewPager(contentViewPager)
 
         for (i in iconArray.indices) {
@@ -75,6 +74,7 @@ class MainActivity : AppCompatActivity() {
 
 
         main_tab.getTabAt(0)?.customView?.icon?.setBackgroundResource(iconArraySelected[0])
+        main_tab.getTabAt(0)?.customView?.title?.setTextColor(resources.getColor(R.color.tab_selected))
 
         contentViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
@@ -94,10 +94,12 @@ class MainActivity : AppCompatActivity() {
                 contentViewPager.isVisible = true
                 for (i in iconArray.indices) {
                     main_tab.getTabAt(i)?.customView?.icon?.setBackgroundResource(iconArray[i])
+                    main_tab.getTabAt(i)?.customView?.title?.setTextColor(resources.getColor(R.color.tab_unselected))
                 }
-                main_tab.getTabAt(position)?.customView?.icon?.setBackgroundResource(
-                    iconArraySelected[position]
-                )
+                main_tab.getTabAt(position)?.customView?.let {
+                    it.icon.setBackgroundResource(iconArraySelected[position])
+                    it.title.setTextColor(resources.getColor(R.color.tab_selected))
+                }
             }
         })
 

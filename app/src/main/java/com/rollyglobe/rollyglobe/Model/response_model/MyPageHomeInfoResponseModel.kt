@@ -1,4 +1,4 @@
-package com.rollyglobe.rollyglobe.response_model
+package com.rollyglobe.rollyglobe.Model.response_model
 
 import android.provider.ContactsContract
 import com.google.gson.annotations.SerializedName
@@ -21,7 +21,7 @@ class ReservationModel(
     var reservationThumbnailNum:Int,
 
     @SerializedName("reservationThumbnailType")
-    var reservationThumbnailType:Int
+    var reservationThumbnailType:String
 )
 
 class MyPageHomeInfoResponseModel (
@@ -44,9 +44,8 @@ class MyPageHomeInfoResponseModel (
     var userSex : String,
 
     @SerializedName("msg")
-    var errorMsg:String
+    var errorMsg:String,
 
-//    @SerializedName("reservationJSON")
-//    var reservationInfoList : List<ReservationModel>
-
+    @SerializedName("reservationJSON")
+    var reservationInfoList : String
 )

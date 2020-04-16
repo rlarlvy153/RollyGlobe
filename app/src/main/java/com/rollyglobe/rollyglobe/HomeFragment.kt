@@ -10,7 +10,7 @@ import android.view.ViewGroup
 class HomeFragment : Fragment() {
 
     companion object {
-        fun newInstance() = HomeFragment()
+        val instance = HomeFragment()
     }
 
     override fun onCreateView(

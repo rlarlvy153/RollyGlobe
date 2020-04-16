@@ -11,7 +11,9 @@ import android.view.ViewGroup
  * A simple [Fragment] subclass.
  */
 class GoodsFragment : Fragment() {
-
+    companion object{
+        val instance = GoodsFragment()
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
