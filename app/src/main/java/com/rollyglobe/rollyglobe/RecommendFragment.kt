@@ -28,7 +28,7 @@ class RecommendFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val root = inflater.inflate(R.layout.fragment_recommend, container, false)
+        val root = inflater.inflate(R.layout.recommend_fragment, container, false)
         recyclerView = root.findViewById(R.id.spot_list)
         recyclerView.run{
             addItemDecoration(DividerItemDecoration(context,LinearLayoutManager.VERTICAL))
