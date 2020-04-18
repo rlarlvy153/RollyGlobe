@@ -94,4 +94,11 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="edit_profile_attribute_head">
+        <item name="android:textSize">14dp</item>
+        <item name="layout_constraintLeft_toLeftOf">parent</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+    </style>
+
 </resources>
