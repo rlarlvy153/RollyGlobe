@@ -13,9 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="${googleMapApiKey}"/>
+        <activity android:name=".MyPageFragments.ProfileEditActivity"></activity>
 
-        <activity android:name=".InnerContentsActivity"></activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${googleMapApiKey}" />
+
+        <activity android:name=".InnerContentsActivity" />
         <activity android:name=".SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,12 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity"></activity>
-        <activity android:name=".MainActivity">
-
-
-
-        </activity>
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
