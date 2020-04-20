@@ -1,14 +1,13 @@
-package com.rollyglobe.rollyglobe.MyPageFragments
+package com.rollyglobe.rollyglobe.MyPage
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.LinearLayout
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,6 +37,17 @@ class MyPageHomeFragment : Fragment() {
         logoutButton.setOnClickListener { v ->
             //viewModel.logout()
         }
+        val profileEditButton = root.findViewById<Button>(R.id.mypage_profile_edit_button)
+        profileEditButton.setOnClickListener { v->
+            val intent = Intent(activity!!,ProfileEditActivity::class.java)
+            intent.putExtra(ProfileEditActivity.EDIT_NAME, viewModel.userName.value)
+            intent.putExtra(ProfileEditActivity.EDIT_PHONENUMBER, viewModel.userPhoneNumber.value)
+            intent.putExtra(ProfileEditActivity.EDIT_EMAIL,viewModel.userEmail.value)
+            intent.putExtra(ProfileEditActivity.EDIT_BIRTHDAY, viewModel.userBirtday.value)
+            intent.putExtra(ProfileEditActivity.EDIT_GENDER, viewModel.userSex.value)
+
+            startActivity(intent)
+         }
 
         return root
     }

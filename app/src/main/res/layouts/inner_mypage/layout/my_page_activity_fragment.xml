@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyPageFragments.MyPageScheduleFragment">
+    tools:context=".MyPage.MyPageActivityFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="schedule" />
+        android:text="act" />
 
 </FrameLayout>

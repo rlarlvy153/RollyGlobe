@@ -84,9 +84,8 @@
             app:layout_constraintTop_toBottomOf="@id/keep_login_checkbox"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="18.35dp"
-            android:padding="0dp"
-            android:background="#42ade2"
-            android:textColor="#fff"
+            style="@style/rollyglobe_default_button"
+
             android:textSize="14dp"
             android:onClick="onClickSignIn"
             />

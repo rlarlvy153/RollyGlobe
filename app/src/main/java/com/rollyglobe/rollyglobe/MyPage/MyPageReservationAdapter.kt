@@ -1,4 +1,4 @@
-package com.rollyglobe.rollyglobe.MyPageFragments
+package com.rollyglobe.rollyglobe.MyPage
 
 import android.content.Context
 import android.view.LayoutInflater

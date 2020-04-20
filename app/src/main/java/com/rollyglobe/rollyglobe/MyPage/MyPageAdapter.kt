@@ -1,11 +1,10 @@
-package com.rollyglobe.rollyglobe.MyPageFragments
+package com.rollyglobe.rollyglobe.MyPage
 
 import android.content.res.Resources
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
 import com.rollyglobe.rollyglobe.R
 
 class MyPageAdapter (fm : FragmentManager, resources: Resources) : FragmentPagerAdapter(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
