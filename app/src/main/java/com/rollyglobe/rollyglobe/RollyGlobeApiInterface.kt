@@ -1,14 +1,7 @@
 package com.rollyglobe.rollyglobe
 
-import com.rollyglobe.rollyglobe.Model.request_model.InnerContentsRequestModel
-import com.rollyglobe.rollyglobe.Model.request_model.RecommendRequestModel
-import com.rollyglobe.rollyglobe.Model.request_model.SignInRequestModel
-import com.rollyglobe.rollyglobe.Model.request_model.SignUpRequestModel
-import com.rollyglobe.rollyglobe.Model.response_model.NationCodeResponseModel
-import com.rollyglobe.rollyglobe.Model.response_model.SignInModel
-import com.rollyglobe.rollyglobe.Model.response_model.SignUpResponseModel
-import com.rollyglobe.rollyglobe.Model.request_model.MyPageHomeRequestModel
-import com.rollyglobe.rollyglobe.Model.response_model.MyPageHomeInfoResponseModel
+import com.rollyglobe.rollyglobe.Model.request_model.*
+import com.rollyglobe.rollyglobe.Model.response_model.*
 
 import io.reactivex.Single
 import okhttp3.ResponseBody
@@ -34,5 +27,7 @@ interface RollyGlobeApiInterface {
         @POST("ajax/mypage.php")
         fun getMyPageHomeInfo(@Body param: MyPageHomeRequestModel): Single<MyPageHomeInfoResponseModel>
 
+        @POST("ajax/user.php")
+        fun EditUserName(@Body param: EditUserNameRequestModel) : Single<EditUserNameResponseModel>
 
 }

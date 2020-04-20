@@ -28,7 +28,7 @@ class ProfileEditActivity : AppCompatActivity() {
         val RESULT_CODE_BIRTHDAY = 1004
         val RESULT_CODE_GENDER = 1005
         val RESULT_CODE_PASSWARD = 1006
-        val RESULT_CODE_FAILE = 1000
+        val RESULT_CODE_FAIL = 1000
     }
 
     lateinit var name: String
