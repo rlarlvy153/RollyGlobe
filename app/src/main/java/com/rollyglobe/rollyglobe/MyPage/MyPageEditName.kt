@@ -39,7 +39,6 @@ class MyPageEditName : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result->
-                Timber.d("result ${result.success}")
                 if(result.success){
                     val intent = Intent()
                     intent.putExtra(ProfileEditActivity.EDIT_NAME, newName)

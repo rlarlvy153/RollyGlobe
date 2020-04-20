@@ -17,6 +17,17 @@ if (propFile.canRead()) {
 }
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
+afterEvaluate {
+    assembleDebug.dependsOn publishDebug
+}
+task publishDebug(){
+    copy{
+        from 'build/outputs/apk/debug'
+        into '../apk'
+    }
+}
+
+
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
