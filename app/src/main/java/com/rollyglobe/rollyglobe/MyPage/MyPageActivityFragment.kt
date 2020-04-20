@@ -1,4 +1,4 @@
-package com.rollyglobe.rollyglobe.MyPageFragments
+package com.rollyglobe.rollyglobe.MyPage
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

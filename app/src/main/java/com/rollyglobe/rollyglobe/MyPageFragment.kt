@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import com.rollyglobe.rollyglobe.MyPageFragments.MyPageAdapter
+import com.rollyglobe.rollyglobe.MyPage.MyPageAdapter
 import timber.log.Timber
 
 /**

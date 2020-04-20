@@ -1,4 +1,4 @@
-package com.rollyglobe.rollyglobe.MyPageFragments
+package com.rollyglobe.rollyglobe.MyPage
 
 import android.content.Intent
 import android.os.Bundle
@@ -40,9 +40,12 @@ class MyPageHomeFragment : Fragment() {
         val profileEditButton = root.findViewById<Button>(R.id.mypage_profile_edit_button)
         profileEditButton.setOnClickListener { v->
             val intent = Intent(activity!!,ProfileEditActivity::class.java)
-            intent.putExtra("name", viewModel.userName.value)
-            intent.putExtra("phone_number", viewModel.userPhoneNumber.value)
-            intent.putExtra("email",viewModel.userEmail.value)
+            intent.putExtra(ProfileEditActivity.EDIT_NAME, viewModel.userName.value)
+            intent.putExtra(ProfileEditActivity.EDIT_PHONENUMBER, viewModel.userPhoneNumber.value)
+            intent.putExtra(ProfileEditActivity.EDIT_EMAIL,viewModel.userEmail.value)
+            intent.putExtra(ProfileEditActivity.EDIT_BIRTHDAY, viewModel.userBirtday.value)
+            intent.putExtra(ProfileEditActivity.EDIT_GENDER, viewModel.userSex.value)
+
             startActivity(intent)
          }
 

@@ -1,4 +1,4 @@
-package com.rollyglobe.rollyglobe.MyPageFragments
+package com.rollyglobe.rollyglobe.MyPage
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,17 +8,17 @@ import android.view.ViewGroup
 
 import com.rollyglobe.rollyglobe.R
 
-class MyPageBookFragment : Fragment() {
+class MyPageScheduleFragment : Fragment() {
 
     companion object {
-        val instance = MyPageBookFragment()
+        val instance = MyPageScheduleFragment()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.my_page_book_fragment, container, false)
+        return inflater.inflate(R.layout.my_page_schedule_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

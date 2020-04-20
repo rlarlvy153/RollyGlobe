@@ -38,7 +38,7 @@ class MyPageHomeInfoResponseModel (
     var userPhoneNum : String,
 
     @SerializedName("user_birthday")
-    var user_Birthday:String,
+    var userBirthday:String,
 
     @SerializedName("user_sex")
     var userSex : String,
