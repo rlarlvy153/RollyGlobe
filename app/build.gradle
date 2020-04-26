@@ -20,8 +20,8 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 afterEvaluate {
     assembleDebug.dependsOn publishDebug
 }
-task publishDebug(){
-    copy{
+task publishDebug() {
+    copy {
         from 'build/outputs/apk/debug'
         into '../apk'
     }
