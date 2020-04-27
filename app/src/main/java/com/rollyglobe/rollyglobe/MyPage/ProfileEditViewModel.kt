@@ -16,7 +16,7 @@ class ProfileEditViewModel : ViewModel(){
     var userEmail = MutableLiveData<String>()
     var userBirthday = MutableLiveData<String>()
     var userGender = MutableLiveData<String>()
-
+    var userNationCode = 0
     fun setName(name:String){
         userName.value = name
     }

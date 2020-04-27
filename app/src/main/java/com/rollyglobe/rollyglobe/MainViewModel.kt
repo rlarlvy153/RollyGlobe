@@ -29,6 +29,7 @@ class MainViewModel : ViewModel() {
     var userPhoneNumber = MutableLiveData<String>()
     var userSex = MutableLiveData<String>()
     var userBirtday = MutableLiveData<String>()
+    var userNationCode = 0
     var reservations = MutableLiveData<ArrayList<ReservationModel>>()
     private val disposable = CompositeDisposable()
 
@@ -162,7 +163,7 @@ class MainViewModel : ViewModel() {
                 userPhoneNumber.value = result.userPhoneNum
                 userSex.value = result.userSex
                 userBirtday.value = result.userBirthday
-
+                userNationCode = result.userNationCode.toInt()
 
                 val reservationJsonArray = JSONArray(result.reservationInfoList)
                 reservations.value?.clear()

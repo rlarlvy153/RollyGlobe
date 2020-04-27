@@ -21,6 +21,8 @@ class MyPageEditPhoneNumberActivity : AppCompatActivity() {
     val nationCodeStringList = ArrayList<String>()
 
     lateinit var userPhoneNumber:String
+    var userNationCode :Int = -1
+    var userNationCodeIndex = 0;
     var restClient = RestClient.restClient
     private val disposable = CompositeDisposable()
 
@@ -29,6 +31,8 @@ class MyPageEditPhoneNumberActivity : AppCompatActivity() {
         setContentView(R.layout.activity_my_page_edit_phone_number)
 
         userPhoneNumber = intent.getStringExtra(ProfileEditActivity.EDIT_PHONENUMBER)
+        userNationCode = intent.getIntExtra(ProfileEditActivity.EDIT_NATIONCODE, -1)
+        Timber.d("nationcode $userNationCode")
         edit_text_phone_number.setText(userPhoneNumber)
 
         disposable.add(restClient.getNationCodeInfoList()
@@ -38,6 +42,9 @@ class MyPageEditPhoneNumberActivity : AppCompatActivity() {
 
                 for (code in result) {
                     nationCodeStringList.add(code.toString())
+                    if(code.nationNum.toInt() == userNationCode){
+                        userNationCodeIndex = result.indexOf(code)
+                    }
                 }
 
                 initView()
@@ -86,6 +93,9 @@ class MyPageEditPhoneNumberActivity : AppCompatActivity() {
         )
         nationCodeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         mypage_nation_code_spinner.adapter = nationCodeSpinnerAdapter
+        mypage_nation_code_spinner.setSelection(userNationCodeIndex)
+
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

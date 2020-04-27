@@ -16,6 +16,7 @@ class ProfileEditActivity : AppCompatActivity() {
     companion object {
         val EDIT_NAME = "name"
         val EDIT_PHONENUMBER = "phone_number"
+        val EDIT_NATIONCODE = "nation_code"
         val EDIT_EMAIL = "email"
         val EDIT_BIRTHDAY = "birthday"
         val EDIT_GENDER = "gender"
@@ -45,6 +46,7 @@ class ProfileEditActivity : AppCompatActivity() {
         viewModel.setEmail(intent.getStringExtra(EDIT_EMAIL))
         viewModel.setBirthday(intent.getStringExtra(EDIT_BIRTHDAY))
         viewModel.setGender(intent.getStringExtra(EDIT_GENDER))
+        viewModel.userNationCode = intent.getIntExtra(EDIT_NATIONCODE, -1)
 
         viewModel.userName.observe(this, Observer { name ->
             change_name.text = name
@@ -73,6 +75,7 @@ class ProfileEditActivity : AppCompatActivity() {
             }
             R.id.change_phone_number ->{
                 intent = Intent(this, MyPageEditPhoneNumberActivity::class.java)
+                intent.putExtra(EDIT_NATIONCODE,viewModel.userNationCode)
                 intent.putExtra(EDIT_PHONENUMBER, viewModel.userPhoneNumber.value)
             }
             R.id.change_email -> {

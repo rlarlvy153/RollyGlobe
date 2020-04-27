@@ -40,6 +40,12 @@ class MyPageHomeInfoResponseModel (
     @SerializedName("user_birthday")
     var userBirthday:String,
 
+    @SerializedName("user_nation_num")
+    var userNationCode:String,
+
+    @SerializedName("user_nation_set_num")
+    var userNationSetNum:String,
+
     @SerializedName("user_sex")
     var userSex : String,
 

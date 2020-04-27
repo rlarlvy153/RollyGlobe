@@ -41,6 +41,7 @@ class MyPageHomeFragment : Fragment() {
         profileEditButton.setOnClickListener { v->
             val intent = Intent(activity!!,ProfileEditActivity::class.java)
             intent.putExtra(ProfileEditActivity.EDIT_NAME, viewModel.userName.value)
+            intent.putExtra(ProfileEditActivity.EDIT_NATIONCODE, viewModel.userNationCode)
             intent.putExtra(ProfileEditActivity.EDIT_PHONENUMBER, viewModel.userPhoneNumber.value)
             intent.putExtra(ProfileEditActivity.EDIT_EMAIL,viewModel.userEmail.value)
             intent.putExtra(ProfileEditActivity.EDIT_BIRTHDAY, viewModel.userBirtday.value)
