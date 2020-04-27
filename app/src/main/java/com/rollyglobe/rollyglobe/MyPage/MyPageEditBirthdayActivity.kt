@@ -5,6 +5,7 @@ import android.icu.util.GregorianCalendar
 import android.icu.util.TimeZone
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -15,6 +16,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_my_page_edit_birthday.*
+import kotlinx.android.synthetic.main.activity_signup.*
 import timber.log.Timber
 
 
@@ -24,9 +26,16 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
     private val disposable = CompositeDisposable()
     lateinit var dayAdapter: ArrayAdapter<Int>
 
+    var userBirthYear = -1
+    var userBirthMonth = -1
+    var userBirthDay = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_page_edit_birthday)
+
+
+
+
         //year spinner
         val timeZone = TimeZone.getTimeZone("Asia/Seoul")
         val gregorianCalendar = GregorianCalendar(timeZone)
@@ -35,8 +44,8 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
         val yearList = ArrayList<Int>()
         for (y in year downTo year - 100) {
             yearList.add(y)
-
         }
+
         val yearSpinnerAdapter =
             ArrayAdapter(this@MyPageEditBirthdayActivity, android.R.layout.simple_spinner_item, yearList)
         yearSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -82,6 +91,16 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         }
+
+        val userBirthdayString = intent.getStringExtra(ProfileEditActivity.EDIT_BIRTHDAY)
+        userBirthYear = userBirthdayString.substring(0,4).toInt()
+
+        userBirthMonth = userBirthdayString.substring(4,6).toInt()
+        userBirthDay = userBirthdayString.substring(6,8).toInt()
+
+        edit_year_spinner.setSelection(yearList.indexOf(userBirthYear))
+        edit_month_spinner.setSelection(monthList.indexOf(userBirthMonth))
+        edit_day_spinner.setSelection(monthList.indexOf(userBirthDay))
 
     }
     fun updateLastDay() {
