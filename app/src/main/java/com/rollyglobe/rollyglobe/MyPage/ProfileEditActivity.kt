@@ -92,7 +92,8 @@ class ProfileEditActivity : AppCompatActivity() {
             }
             R.id.change_gender -> {
                 intent = Intent(this, MyPageEditGenderActivity::class.java)
-                intent.putExtra(EDIT_GENDER,viewModel.userGender::class.java)
+                intent.putExtra(EDIT_GENDER,viewModel.userGender.value)
+
             }
         }
         startActivityForResult(intent, EDIT_EACH_PROFILE_REQUEST_CODE)

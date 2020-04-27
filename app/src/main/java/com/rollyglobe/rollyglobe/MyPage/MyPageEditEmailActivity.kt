@@ -22,6 +22,9 @@ class MyPageEditEmailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_page_edit_email)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.backwardarrow_ccolor)
+        supportActionBar?.setTitle(R.string.title_edit_email)
 
         userEmail = intent.getStringExtra(ProfileEditActivity.EDIT_EMAIL)
         edit_text_email.setText(userEmail)

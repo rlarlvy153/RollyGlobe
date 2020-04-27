@@ -27,7 +27,9 @@ class MyPageEditNameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_my_page_edit_name)
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.backwardarrow_ccolor)
+        supportActionBar?.setTitle(R.string.title_edit_name)
         userName = intent.getStringExtra(ProfileEditActivity.EDIT_NAME)
         edit_text_name.setText(userName)
     }

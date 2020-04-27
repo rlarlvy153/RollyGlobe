@@ -30,6 +30,10 @@ class MyPageEditPhoneNumberActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_page_edit_phone_number)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.backwardarrow_ccolor)
+        supportActionBar?.setTitle(R.string.title_edit_phone_number)
+
         userPhoneNumber = intent.getStringExtra(ProfileEditActivity.EDIT_PHONENUMBER)
         userNationCode = intent.getIntExtra(ProfileEditActivity.EDIT_NATIONCODE, -1)
         Timber.d("nationcode $userNationCode")
