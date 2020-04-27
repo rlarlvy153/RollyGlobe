@@ -13,7 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyPage.MyPageEditName"></activity>
+        <activity android:name=".MyPage.MyPageEditPasswordActivity"></activity>
+        <activity android:name=".MyPage.MyPageEditBirthdayActivity" />
+        <activity android:name=".MyPage.MyPageEditGenderActivity" />
+        <activity android:name=".MyPage.MyPageEditEmailActivity" />
+        <activity android:name=".MyPage.MyPageEditPhoneNumberActivity" />
+        <activity android:name=".MyPage.MyPageEditNameActivity" />
         <activity android:name=".MyPage.ProfileEditActivity" />
 
         <meta-data

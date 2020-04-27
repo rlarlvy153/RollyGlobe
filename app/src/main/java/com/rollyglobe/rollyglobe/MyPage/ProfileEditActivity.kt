@@ -8,7 +8,6 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.rollyglobe.rollyglobe.R
-import kotlinx.android.synthetic.main.activity_my_page_edit_name.*
 import kotlinx.android.synthetic.main.activity_profile_edit.*
 import timber.log.Timber
 
@@ -17,6 +16,7 @@ class ProfileEditActivity : AppCompatActivity() {
     companion object {
         val EDIT_NAME = "name"
         val EDIT_PHONENUMBER = "phone_number"
+        val EDIT_NATIONCODE = "nation_code"
         val EDIT_EMAIL = "email"
         val EDIT_BIRTHDAY = "birthday"
         val EDIT_GENDER = "gender"
@@ -46,6 +46,7 @@ class ProfileEditActivity : AppCompatActivity() {
         viewModel.setEmail(intent.getStringExtra(EDIT_EMAIL))
         viewModel.setBirthday(intent.getStringExtra(EDIT_BIRTHDAY))
         viewModel.setGender(intent.getStringExtra(EDIT_GENDER))
+        viewModel.userNationCode = intent.getIntExtra(EDIT_NATIONCODE, -1)
 
         viewModel.userName.observe(this, Observer { name ->
             change_name.text = name
@@ -69,14 +70,31 @@ class ProfileEditActivity : AppCompatActivity() {
         lateinit var intent: Intent
         when (v.id) {
             R.id.change_name -> {
-                intent = Intent(this, MyPageEditName::class.java)
+                intent = Intent(this, MyPageEditNameActivity::class.java)
                 intent.putExtra(EDIT_NAME, viewModel.userName.value)
             }
-            R.id.change_phone_number -> null
-            R.id.change_email -> null
-            R.id.change_password -> null
-            R.id.change_birthday -> null
-            R.id.change_gender -> null
+            R.id.change_phone_number ->{
+                intent = Intent(this, MyPageEditPhoneNumberActivity::class.java)
+                intent.putExtra(EDIT_NATIONCODE,viewModel.userNationCode)
+                intent.putExtra(EDIT_PHONENUMBER, viewModel.userPhoneNumber.value)
+            }
+            R.id.change_email -> {
+                intent = Intent(this, MyPageEditEmailActivity::class.java)
+                intent.putExtra(EDIT_EMAIL, viewModel.userEmail.value)
+            }
+            R.id.change_password -> {
+                intent = Intent(this, MyPageEditPasswordActivity::class.java)
+
+            }
+            R.id.change_birthday -> {
+                intent = Intent(this, MyPageEditBirthdayActivity::class.java)
+                intent.putExtra(EDIT_BIRTHDAY,viewModel.userBirthday.value)
+            }
+            R.id.change_gender -> {
+                intent = Intent(this, MyPageEditGenderActivity::class.java)
+                intent.putExtra(EDIT_GENDER,viewModel.userGender.value)
+
+            }
         }
         startActivityForResult(intent, EDIT_EACH_PROFILE_REQUEST_CODE)
     }
@@ -93,10 +111,31 @@ class ProfileEditActivity : AppCompatActivity() {
 
                     }
                 }
-                RESULT_CODE_EMAIL -> null
+                RESULT_CODE_PHONENUMBER ->{
+                    val resultPhoneNumber = data?.getStringExtra(EDIT_PHONENUMBER)
+                    resultPhoneNumber?.let{
+                        viewModel.setPhoneNumber(resultPhoneNumber)
+                    }
+                }
+                RESULT_CODE_EMAIL -> {
+                    val resultEmail = data?.getStringExtra(EDIT_EMAIL)
+                    resultEmail?.let{
+                        viewModel.setEmail(resultEmail)
+                    }
+                }
                 RESULT_CODE_PASSWARD -> null
-                RESULT_CODE_BIRTHDAY -> null
-                RESULT_CODE_GENDER -> null
+                RESULT_CODE_BIRTHDAY -> {
+                    val resultBirthday = data?.getStringExtra(EDIT_BIRTHDAY)
+                    resultBirthday?.let{
+                        viewModel.setBirthday(resultBirthday)
+                    }
+                }
+                RESULT_CODE_GENDER -> {
+                    val resultGender = data?.getStringExtra(EDIT_GENDER)
+                    resultGender?.let{
+                        viewModel.setGender(resultGender)
+                    }
+                }
 
             }
         }

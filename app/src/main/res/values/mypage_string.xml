@@ -20,6 +20,20 @@
     <string name="sign_out">회원 탈퇴</string>
     <string name="apply">적 용</string>
 
+    <string name="nation_number">국가번호</string>
 
+    <string name="title_edit_name">이름 수정</string>
+    <string name="title_edit_phone_number">전화번호 수정</string>
+    <string name="title_edit_email">이메일 수정</string>
+    <string name="title_edit_password">비밀번호 수정</string>
+    <string name="title_edit_birthday">생일 수정</string>
+    <string name="title_edit_gender">성별 수정</string>
+
+    <string name="previous_password">이전 비밀번호</string>
+    <string name="previous_password_edit_hint">현재 비밀번호를 입력해주세요.</string>
+    <string name="new_password">새 비밀번호</string>
+    <string name="new_password_edit_hint">새 비밀번호를 입력해주세요.</string>
+    <string name="new_password_again">비밀번호 확인</string>
+    <string name="new_password_again_edit_hint">새 비밀번호를 한번 더 입력해주세요.</string>
 
 </resources>

@@ -30,4 +30,18 @@ interface RollyGlobeApiInterface {
         @POST("ajax/user.php")
         fun EditUserName(@Body param: EditUserNameRequestModel) : Single<EditUserNameResponseModel>
 
+        @POST("ajax/user.php")
+        fun EditUserPhoneNumber(@Body param: EditUserPhoneNumberRequestModel) : Single<EditUserPhoneNumberResponseModel>
+
+        @POST("ajax/user.php")
+        fun EditUserEmail(@Body param: EditUserEmailRequestModel) : Single<EditUserEmailResponseModel>
+
+        @POST("ajax/user.php")
+        fun EditUserGender(@Body param: EditUserGenderRequestModel) : Single<EditUserGenderResponseModel>
+
+        @POST("ajax/user.php")
+        fun EditUserBirthday(@Body param: EditUserBirthdayRequestModel) : Single<EditUserBirthdayResponseModel>
+
+        @POST("ajax/user.php")
+        fun EditUserPassword(@Body param: EditUserPasswordRequestModel) : Single<EditUserPasswordResponseModel>
 }
