@@ -23,7 +23,7 @@ class MainViewModel : ViewModel() {
     var spotList = ArrayList<SpotModel>()
     var spotListLiveData = MutableLiveData<ArrayList<SpotModel>>()
     var isLogin = MutableLiveData<Boolean>()
-    var myInfoDummy = MutableLiveData<String>()
+//    var myInfoDummy = MutableLiveData<String>()
     var userName = MutableLiveData<String>()
     var userEmail = MutableLiveData<String>()
     var userPhoneNumber = MutableLiveData<String>()
@@ -35,7 +35,7 @@ class MainViewModel : ViewModel() {
 
     init {
         isLogin.value = false
-        myInfoDummy.value=""
+//        myInfoDummy.value=""
         reservations.value = ArrayList<ReservationModel>()
     }
 
@@ -135,7 +135,7 @@ class MainViewModel : ViewModel() {
         )
     }
     fun getMyPageHome(){
-        myInfoDummy.value=""
+//        myInfoDummy.value=""
         val myPageHomeRequest =
             MyPageHomeRequest(
                 "MypageHomeLoad",
@@ -152,11 +152,11 @@ class MainViewModel : ViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result->
-                myInfoDummy.value += "${result.success}\n"
-                myInfoDummy.value += "${result.userEmail}\n"
-                myInfoDummy.value += "${result.userNickname}\n"
-                myInfoDummy.value += "${result.userPhoneNum}\n"
-                myInfoDummy.value += "${result.userSex}\n"
+//                myInfoDummy.value += "${result.success}\n"
+//                myInfoDummy.value += "${result.userEmail}\n"
+//                myInfoDummy.value += "${result.userNickname}\n"
+//                myInfoDummy.value += "${result.userPhoneNum}\n"
+//                myInfoDummy.value += "${result.userSex}\n"
 
                 userName.value = result.userNickname
                 userEmail.value = result.userEmail
