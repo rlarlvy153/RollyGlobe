@@ -10,7 +10,7 @@ import com.rollyglobe.rollyglobe.Model.request_model.SignInRequestModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_sign_in.*
+import kotlinx.android.synthetic.main.activity_signin.*
 import timber.log.Timber
 
 class SignInActivity : AppCompatActivity() {
@@ -20,7 +20,7 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
+        setContentView(R.layout.activity_signin)
 //        if (BuildConfig.DEBUG) {
 //            Timber.plant(Timber.DebugTree())
 //        }
