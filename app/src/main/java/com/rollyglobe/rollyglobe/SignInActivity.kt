@@ -24,7 +24,7 @@ class SignInActivity : AppCompatActivity() {
 //        if (BuildConfig.DEBUG) {
 //            Timber.plant(Timber.DebugTree())
 //        }
-
+        supportActionBar?.hide()
 
 
     }

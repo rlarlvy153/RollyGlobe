@@ -12,6 +12,8 @@
         android:layout_width="9dp"
         android:layout_height="18dp"
         android:background="@drawable/facebooklogo_signin"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
@@ -21,7 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14dp"
-        android:layout_marginStart="9.96dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/facebook_image"
         />
