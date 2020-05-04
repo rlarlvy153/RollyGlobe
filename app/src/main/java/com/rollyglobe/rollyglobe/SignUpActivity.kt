@@ -1,5 +1,6 @@
 package com.rollyglobe.rollyglobe
 
+import android.graphics.Color
 import android.icu.util.GregorianCalendar
 import android.icu.util.TimeZone
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
+import androidx.core.content.ContextCompat
 import com.rollyglobe.rollyglobe.Model.request_model.*
 
 import com.rollyglobe.rollyglobe.Model.response_model.NationCodeResponseModel
@@ -24,13 +27,16 @@ class SignUpActivity : AppCompatActivity() {
 
     private val disposable = CompositeDisposable()
     val days = MutableList(28, { i -> i + 1 })
+    var genderIndex = 1
 
-    var restClient: RollyGlobeApiInterface = RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
+    var restClient: RollyGlobeApiInterface =
+        RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
 
     lateinit var dayAdapter: ArrayAdapter<Int>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
+        supportActionBar?.hide()
 
 
         disposable.add(restClient.getNationCodeInfoList()
@@ -64,13 +70,13 @@ class SignUpActivity : AppCompatActivity() {
         nation_code_spinner.adapter = nationCodeSpinnerAdapter
 
         //gender spinner
-        val genderSpinnerAdapter = ArrayAdapter.createFromResource(
-            this,
-            R.array.gender,
-            android.R.layout.simple_spinner_item
-        )
-        genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        gender_spinner.adapter = genderSpinnerAdapter
+//        val genderSpinnerAdapter = ArrayAdapter.createFromResource(
+//            this,
+//            R.array.gender,
+//            android.R.layout.simple_spinner_item
+//        )
+//        genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//        gender_spinner.adapter = genderSpinnerAdapter
 
 
         //year spinner
@@ -164,12 +170,37 @@ class SignUpActivity : AppCompatActivity() {
 
     }
 
+    fun onClickGenderButton(v: View) {
+        when (v.id) {
+            R.id.gender_male_button -> {
+                genderIndex = 1
+                v.setBackgroundColor(
+                    ContextCompat.getColor(this, R.color.button_selected))
+                (v as Button).setTextColor(Color.WHITE)
+
+                gender_female_button.setTextColor(Color.BLACK)
+                gender_female_button.setBackground(resources.getDrawable(R.drawable.button_background))
+            }
+            R.id.gender_female_button -> {
+                genderIndex = 2
+                v.setBackgroundColor(
+                    ContextCompat.getColor(this, R.color.button_selected))
+                (v as Button).setTextColor(Color.WHITE)
+
+                gender_male_button.setTextColor(Color.BLACK)
+                gender_male_button.setBackground(resources.getDrawable(R.drawable.button_background))
+
+            }
+        }
+    }
+
     fun onClicksignup(v: View) {
         val temp_email = signup_email_edit.text.toString()
         val temp_nickname = signup_nickname_edit.text.toString()
         val temp_password = signup_password.text.toString()
         val temp_password_again = signup_password_again.text.toString()
-        val temp_gender_pos = gender_spinner.selectedItemPosition // 1남 2여
+//        val temp_gender_pos = gender_spinner.selectedItemPosition // 1남 2여
+        val temp_gender_pos = genderIndex
         val temp_gender = if (temp_gender_pos == 1) "male" else " female"
         val y = year_spinner.selectedItem.toString()
         val m = month_spinner.selectedItem.toString()
@@ -186,7 +217,7 @@ class SignUpActivity : AppCompatActivity() {
             return
         }
         if (temp_gender_pos == 0) {
-            Timber.e( "성별 선택 안됨")
+            Timber.e("성별 선택 안됨")
             return
         }
         Timber.i("메일 : $temp_email")

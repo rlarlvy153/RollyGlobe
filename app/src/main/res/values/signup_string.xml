@@ -7,5 +7,7 @@
     <string name="signup_password_again">비밀번호를 한 번 더 입력해주세요 (필수)</string>
     <string name="signup_phone_number">전화번호를 - 없이 입력해 주세요</string>
     <string name="signup_with_email">이메일 회원가입</string>
+    <string name="gender_male">남성</string>
+    <string name="gender_female">여성</string>
 
 </resources>
