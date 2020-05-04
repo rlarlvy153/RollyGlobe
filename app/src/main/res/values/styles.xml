@@ -14,6 +14,8 @@
     <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar">
         <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
         <item name="titleTextStyle">@style/MyActionBarTitleText</item>
+        <item name="displayOptions">useLogo|showHome</item>
+        <item name="logo">@drawable/logo_fullletter</item>
     </style>
 
     <!-- ActionBar title text -->

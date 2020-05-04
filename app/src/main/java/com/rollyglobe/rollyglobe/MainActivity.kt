@@ -45,12 +45,12 @@ class MainActivity : AppCompatActivity() {
         })
 
 
-        supportActionBar?.run{
-            setIcon(R.drawable.logo_fullletter)
-            setDisplayUseLogoEnabled(true)
-            setDisplayShowHomeEnabled(true)
-            title = ""
-        }
+//        supportActionBar?.run{
+//            setIcon(R.drawable.logo_fullletter)
+//            setDisplayUseLogoEnabled(true)
+//            setDisplayShowHomeEnabled(true)
+//            title = ""
+//        }
 
         titleArray = ArrayList<String>(resources.getStringArray(R.array.tab_items).toMutableList())
 
