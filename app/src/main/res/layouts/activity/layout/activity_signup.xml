@@ -120,46 +120,78 @@
     <LinearLayout
         android:id="@+id/gender_birth_container"
         android:layout_width="314dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/signup_datapicker_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_info_container">
 
-        <Spinner
-            android:id="@+id/year_spinner"
+        <TextView
+            android:text="1234    /  11    /  22"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:textSize="14dp"
+            />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="15dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/calendaricon"
 
-        <Spinner
-            android:id="@+id/month_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Spinner
-            android:id="@+id/day_spinner"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content" />
-
+            />
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/phone_container"
         android:layout_width="314dp"
-        android:layout_height="80.67dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="29dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/gender_birth_container"
+        android:orientation="vertical"
         >
 
-        <Spinner
-            android:id="@+id/nation_code_spinner"
+        <LinearLayout
+            android:id="@+id/phone_nation_code_container"
             android:layout_width="314dp"
             android:layout_height="35dp"
-            android:background="@drawable/spinner_background"
-            android:gravity="center_horizontal"
+            android:background="@drawable/signup_datapicker_background"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/edit_info_container">
+
+            <Spinner
+                android:id="@+id/nation_code_spinner"
+                android:layout_marginStart="2dp"
+                android:layout_width="312dp"
+                android:layout_height="35dp"
+                android:gravity="center_horizontal"
+                android:textSize="11dp"
+                />
+<!--            <View-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_weight="1" />-->
+<!--            <ImageView-->
+<!--                android:layout_width="20dp"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:layout_marginEnd="15dp"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:src="@drawable/calendaricon"-->
+
+<!--                />-->
+        </LinearLayout>
+
+
 
         <EditText
             android:id="@+id/phone_number_edit"
@@ -169,12 +201,9 @@
             android:hint="@string/signup_phone_number"
             android:padding="0dp"
             android:textSize="14dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nation_code_spinner"
-
             />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <Button
         android:layout_width="314dp"
