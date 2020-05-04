@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitCreator {
     val API_BASE_URL = "https://test.rollyglobe.com/"
-    private val ALL_TIMEOUT = 1000L
+    private val ALL_TIMEOUT = 3L
 
     private var okHttpClient: OkHttpClient
     private var retrofit: Retrofit

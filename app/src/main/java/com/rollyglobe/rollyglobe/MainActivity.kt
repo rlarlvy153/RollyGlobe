@@ -1,17 +1,21 @@
 package com.rollyglobe.rollyglobe
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_each_tab.view.*
-import kotlin.collections.ArrayList
 import timber.log.Timber
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,13 +48,20 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        val toolbar = findViewById(R.id.toolbar) as Toolbar
+        setSupportActionBar(toolbar)
 
-//        supportActionBar?.run{
+        supportActionBar?.run{
 //            setIcon(R.drawable.logo_fullletter)
-//            setDisplayUseLogoEnabled(true)
-//            setDisplayShowHomeEnabled(true)
-//            title = ""
-//        }
+            setDisplayUseLogoEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            title = ""
+            val logoImage = findViewById< ImageView>(R.id.img_logo)
+            logoImage.setImageDrawable(resources.getDrawable(R.drawable.logo_fullletter))
+
+            val titleText = findViewById<TextView>(R.id.title_text)
+            titleText.setText("")
+        }
 
         titleArray = ArrayList<String>(resources.getStringArray(R.array.tab_items).toMutableList())
 
@@ -94,6 +105,28 @@ class MainActivity : AppCompatActivity() {
                 main_tab.getTabAt(position)?.customView?.let {
                     it.icon.setBackgroundResource(iconArraySelected[position])
                     it.title.setTextColor(resources.getColor(R.color.tab_selected))
+                }
+                if(position == 0) {
+                    supportActionBar?.let {
+                        val logoImage = findViewById< ImageView>(R.id.img_logo)
+                        logoImage.setImageDrawable(resources.getDrawable(R.drawable.logo_fullletter))
+
+                        val titleText = findViewById<TextView>(R.id.title_text)
+                        titleText.setText("")
+
+                    }
+                    supportActionBar?.setTitle("")
+                }else {
+                    supportActionBar?.let {
+                        val logoImage = findViewById< ImageView>(R.id.img_logo)
+                        logoImage.setImageDrawable(resources.getDrawable(R.drawable.logo_icon))
+
+
+
+                        val titleText = findViewById<TextView>(R.id.title_text)
+                        titleText.setText(titleArray[position])
+                    }
+
                 }
             }
         })
