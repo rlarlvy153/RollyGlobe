@@ -9,5 +9,5 @@
     <string name="signup_with_email">이메일 회원가입</string>
     <string name="gender_male">남성</string>
     <string name="gender_female">여성</string>
-
+    <string name="signup_date_text_string">%d    / %02d    /  %02d</string>
 </resources>

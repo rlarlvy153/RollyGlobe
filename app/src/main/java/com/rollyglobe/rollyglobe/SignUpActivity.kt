@@ -1,24 +1,28 @@
 package com.rollyglobe.rollyglobe
 
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.graphics.Color
-import android.icu.util.GregorianCalendar
-import android.icu.util.TimeZone
-import androidx.appcompat.app.AppCompatActivity
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.rollyglobe.rollyglobe.Model.request_model.*
-
+import com.rollyglobe.rollyglobe.Model.request_model.SignUpOption
+import com.rollyglobe.rollyglobe.Model.request_model.SignUpRequest
+import com.rollyglobe.rollyglobe.Model.request_model.SignUpRequestModel
 import com.rollyglobe.rollyglobe.Model.response_model.NationCodeResponseModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_signup.*
 import timber.log.Timber
+import java.util.*
 import kotlin.collections.ArrayList
+
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -26,8 +30,10 @@ class SignUpActivity : AppCompatActivity() {
     val nationCodeStringList = ArrayList<String>()
 
     private val disposable = CompositeDisposable()
-    val days = MutableList(28, { i -> i + 1 })
     var genderIndex = 1
+    var selectedYear = 1997
+    var selectedMonth = 11
+    var selectedDay = 27
 
     var restClient: RollyGlobeApiInterface =
         RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
@@ -39,8 +45,30 @@ class SignUpActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         gender_birth_container.setOnClickListener {
-            Timber.d("clicked")
+
+            val dialog = DatePickerDialog(
+                this,
+                OnDateSetListener { datePicker, year, month, date ->
+                    val msg =
+                        String.format("%d 년 %d 월 %d 일", year, month + 1, date)
+                        Timber.d(msg)
+
+//                    signup_date_text.text="$selectedYear    / $selectedMonth    /  $selectedDay"
+                    selectedYear = year
+                    selectedMonth = month+1
+                    selectedDay = date
+                    signup_date_text.text=getString(R.string.signup_date_text_string, selectedYear,selectedMonth,selectedDay)
+                },
+                selectedYear,
+                selectedMonth,
+                selectedDay
+            )
+
+            dialog.datePicker.maxDate = Date().getTime() //입력한 날짜 이후로 클릭 안되게 옵션
+            dialog.show()
         }
+
+        signup_date_text.text=getString(R.string.signup_date_text_string, selectedYear,selectedMonth,selectedDay)
 
         disposable.add(restClient.getNationCodeInfoList()
             .subscribeOn(Schedulers.io())
@@ -205,12 +233,9 @@ class SignUpActivity : AppCompatActivity() {
 //        val temp_gender_pos = gender_spinner.selectedItemPosition // 1남 2여
         val temp_gender_pos = genderIndex
         val temp_gender = if (temp_gender_pos == 1) "male" else " female"
-//        val y = year_spinner.selectedItem.toString()
-        val y = 1234.toString()
-//        val m = month_spinner.selectedItem.toString()
-        val m = 12.toString()
-//        val d = day_spinner.selectedItem.toString()
-        val d = 22.toString()
+        val y = selectedYear.toString()
+        val m = selectedMonth.toString()
+        val d = selectedDay.toString()
         val temp_nation = nation_code_spinner.selectedItem.toString()
         val temp_trim_nation = temp_nation.substring(1, temp_nation.indexOf('('))
         val contact = phone_number_edit.text.toString()
