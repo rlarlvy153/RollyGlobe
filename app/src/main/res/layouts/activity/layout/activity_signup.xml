@@ -98,6 +98,7 @@
                 android:onClick="onClickGenderButton"
                 android:background="#42ade2"
                 android:textColor="#fff"
+                android:textSize="14dp"
 
                 />
 
@@ -109,6 +110,7 @@
                 android:layout_height="match_parent"
                 android:onClick="onClickGenderButton"
                 android:background="@drawable/button_background"
+                android:textSize="14dp"
 
                 />
 
