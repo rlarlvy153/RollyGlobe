@@ -8,6 +8,8 @@
     <color name="tab_selected">#42ADE2</color>
 
     <color name="button_selected">#42ADE2</color>
+    <color name="rg_blue">#42ADE2</color>
+    <color name="rg_gray">#B6B6B6</color>
 
 
 </resources>

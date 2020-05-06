@@ -17,15 +17,27 @@ class SignInActivity : AppCompatActivity() {
 
     var restClient  = RestClient.restClient
     private val disposable = CompositeDisposable()
+    val focusListesner = View.OnFocusChangeListener{v, hasFocus ->
+        when(v.id){
+            signin_email_edit.id -> {
+                signin_email_edit_underline.setBackgroundColor(resources.getColor(R.color.rg_blue))
+                signin_password_edit_underline.setBackgroundColor(resources.getColor(R.color.rg_gray))
+
+            }
+            signin_password_edit.id->{
+                signin_password_edit_underline.setBackgroundColor(resources.getColor(R.color.rg_blue))
+                signin_email_edit_underline.setBackgroundColor(resources.getColor(R.color.rg_gray))
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
-//        if (BuildConfig.DEBUG) {
-//            Timber.plant(Timber.DebugTree())
-//        }
         supportActionBar?.hide()
 
+        signin_email_edit.onFocusChangeListener = focusListesner
+        signin_password_edit.onFocusChangeListener = focusListesner
 
     }
     fun onClickSignIn(v : View){
