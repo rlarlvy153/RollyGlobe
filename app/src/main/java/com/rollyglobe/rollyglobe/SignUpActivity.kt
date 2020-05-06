@@ -39,10 +39,46 @@ class SignUpActivity : AppCompatActivity() {
         RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
 
     lateinit var dayAdapter: ArrayAdapter<Int>
+
+
+    val focusListesner = object : View.OnFocusChangeListener{
+        override fun onFocusChange(v: View?, hasFocus: Boolean) {
+            setAllUnderlineToGray()
+            val blue = ContextCompat.getColor(this@SignUpActivity,R.color.rg_blue)
+            when(v?.id){
+                signup_email_edit.id -> {
+                    signup_email_edit_underline.setBackgroundColor(blue)
+                }
+                signup_nickname_edit.id->{
+                    signup_nickname_edit_underline.setBackgroundColor(blue)
+                }
+                signup_password.id->{
+                    signup_password_edit_underline.setBackgroundColor(blue)
+                }
+                signup_password_again.id->{
+                    signup_password_again_edit_underline.setBackgroundColor(blue)
+                }
+            }
+        }
+        private fun setAllUnderlineToGray(){
+            val gray = ContextCompat.getColor(this@SignUpActivity,R.color.rg_gray)
+
+            signup_email_edit_underline.setBackgroundColor(gray)
+            signup_nickname_edit_underline.setBackgroundColor(gray)
+            signup_password_edit_underline.setBackgroundColor(gray)
+            signup_password_again_edit_underline.setBackgroundColor(gray)
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
         supportActionBar?.hide()
+        signup_email_edit.onFocusChangeListener = focusListesner
+        signup_nickname_edit.onFocusChangeListener = focusListesner
+        signup_password.onFocusChangeListener = focusListesner
+        signup_password_again.onFocusChangeListener = focusListesner
 
         gender_birth_container.setOnClickListener {
 

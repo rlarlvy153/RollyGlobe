@@ -69,7 +69,7 @@
             android:textSize="14dp"
             android:background="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/signin_email_edit_underline" />
 
         <View
             android:layout_marginTop="5dp"

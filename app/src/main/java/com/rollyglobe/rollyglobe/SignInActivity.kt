@@ -1,9 +1,11 @@
 package com.rollyglobe.rollyglobe
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.rollyglobe.rollyglobe.Model.request_model.SignInOption
 import com.rollyglobe.rollyglobe.Model.request_model.SignInRequest
 import com.rollyglobe.rollyglobe.Model.request_model.SignInRequestModel
@@ -12,21 +14,25 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_signin.*
 import timber.log.Timber
+import kotlin.math.absoluteValue
 
 class SignInActivity : AppCompatActivity() {
 
     var restClient  = RestClient.restClient
     private val disposable = CompositeDisposable()
+
+
     val focusListesner = View.OnFocusChangeListener{v, hasFocus ->
+
         when(v.id){
             signin_email_edit.id -> {
-                signin_email_edit_underline.setBackgroundColor(resources.getColor(R.color.rg_blue))
-                signin_password_edit_underline.setBackgroundColor(resources.getColor(R.color.rg_gray))
+                signin_email_edit_underline.setBackgroundColor(ContextCompat.getColor(this,R.color.rg_blue))
+                signin_password_edit_underline.setBackgroundColor(ContextCompat.getColor(this,R.color.rg_gray))
 
             }
             signin_password_edit.id->{
-                signin_password_edit_underline.setBackgroundColor(resources.getColor(R.color.rg_blue))
-                signin_email_edit_underline.setBackgroundColor(resources.getColor(R.color.rg_gray))
+                signin_password_edit_underline.setBackgroundColor(ContextCompat.getColor(this,R.color.rg_blue))
+                signin_email_edit_underline.setBackgroundColor(ContextCompat.getColor(this,R.color.rg_gray))
             }
         }
     }
