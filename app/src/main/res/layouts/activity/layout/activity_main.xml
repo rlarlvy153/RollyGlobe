@@ -59,15 +59,37 @@
     <!--        app:layout_constraintLeft_toLeftOf="parent"-->
 
     <!--        >-->
-
-    <FrameLayout
-        android:id="@+id/main_tab_container"
-        app:layout_constraintLeft_toLeftOf="parent"
+    <View
+        android:id="@+id/upper_shadow"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="10dp"
 
-    </FrameLayout>
+        android:background="@drawable/upper_shadow">
+    </View>
+    <LinearLayout
+        android:id="@+id/main_contents_container"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/upper_shadow"
+        app:layout_constraintBottom_toTopOf="@id/lower_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        >
+
+    </LinearLayout>
+    <View
+        android:id="@+id/lower_shadow"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/lower_shadow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/main_tab"
+        >
+    </View>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/main_tab"

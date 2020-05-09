@@ -195,11 +195,11 @@ class MainActivity : AppCompatActivity() {
         if(position == null) return
 
         when(position){
-            0->transaction.replace(R.id.main_tab_container, HomeFragment.instance)
-            1->transaction.replace(R.id.main_tab_container, RecommendFragment.instance)
-            2->transaction.replace(R.id.main_tab_container, CommunityFragment.instance)
-            3->transaction.replace(R.id.main_tab_container, GoodsFragment.instance)
-            4->transaction.replace(R.id.main_tab_container, MyPageFragment.instance)
+            0->transaction.replace(R.id.main_contents_container, HomeFragment.instance)
+            1->transaction.replace(R.id.main_contents_container, RecommendFragment.instance)
+            2->transaction.replace(R.id.main_contents_container, CommunityFragment.instance)
+            3->transaction.replace(R.id.main_contents_container, GoodsFragment.instance)
+            4->transaction.replace(R.id.main_contents_container, MyPageFragment.instance)
         }
         transaction.commitNow()
 
