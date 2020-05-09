@@ -3,6 +3,8 @@ package com.rollyglobe.rollyglobe
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -68,6 +70,12 @@ class MainActivity : AppCompatActivity() {
 
         contentViewPager.adapter = adapter
         main_tab.setupWithViewPager(contentViewPager)
+        main_tab.setOnTouchListener(object : View.OnTouchListener{
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                return false
+            }
+        })
+
 
         for (i in iconArray.indices) {
             val icon = iconArray[i]

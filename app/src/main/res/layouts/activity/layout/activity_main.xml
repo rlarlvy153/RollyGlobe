@@ -76,7 +76,7 @@
         app:tabSelectedTextColor="#42ADE2"
         app:tabTextAppearance="@style/tabTextAppearance"
         app:tabTextColor="#C7C7C7"
-
+        android:background="@color/white"
         />
     <!--    </com.google.android.material.appbar.AppBarLayout>-->
 
