@@ -40,7 +40,7 @@ class MyPageFragment : Fragment() {
 
         val tabLayout = root.findViewById<TabLayout>(R.id.mypage_tab)
         val viewPager = root.findViewById<ViewPager>(R.id.mypage_content_viewpager)
-        viewPager.adapter = adapter
+        viewPager.adapter = MyPageAdapter(childFragmentManager, resources)
         tabLayout.setupWithViewPager(viewPager)
 
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
