@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity() {
             val v = layoutInflater.inflate(R.layout.main_each_tab, null)
             v.icon.setBackgroundResource(icon)
             v.title.setText(title)
+            main_tab.addTab(main_tab.newTab())
             main_tab.getTabAt(i)?.customView = v
         }
 
