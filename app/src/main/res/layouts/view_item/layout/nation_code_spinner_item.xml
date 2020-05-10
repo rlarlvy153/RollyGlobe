@@ -7,4 +7,5 @@
     android:textSize="11dp"
     android:gravity="left"
     android:padding="5dip"
+    android:textColor="#000"
     />

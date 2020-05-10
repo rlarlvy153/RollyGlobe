@@ -13,7 +13,7 @@
     <string name="signup_with_facebook">페이스북으로 로그인</string>
 
     <string name="signup_terms1">소셜 계정을 이용해 바로 가입 할 수 있습니다.</string>
-    <string name="signup_terms2">회원가입함으로써 롤리글로브의 </string>
+    <string name="signup_terms2">회원가입함으로써 롤리글로브의 &#160;</string>
     <string name="signup_terms3">서비스 이용약관</string>
     <string name="signup_terms4">개인정보 처리방침</string>
     <string name="signup_terms5">에 동의함으로 간주합니다.</string>

@@ -3,23 +3,20 @@ package com.rollyglobe.rollyglobe
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.graphics.Color
-import android.icu.util.Calendar
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
-import android.text.TextPaint
 import android.text.TextUtils
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.text.toSpannable
+import androidx.core.content.res.ResourcesCompat
 import com.rollyglobe.rollyglobe.Model.request_model.SignUpOption
 import com.rollyglobe.rollyglobe.Model.request_model.SignUpRequest
 import com.rollyglobe.rollyglobe.Model.request_model.SignUpRequestModel
@@ -90,11 +87,15 @@ class SignUpActivity : AppCompatActivity() {
         signup_password.onFocusChangeListener = focusListesner
         signup_password_again.onFocusChangeListener = focusListesner
 
+        val regularFont = ResourcesCompat.getFont(this,R.font.nanum_square_r)
+        val boldFont = ResourcesCompat.getFont(this,R.font.nanum_square_b)
 
         val term2 = SpannableString(resources.getString(R.string.signup_terms2))
         val term3 = SpannableString(resources.getString(R.string.signup_terms3))
+
         val commaSpan  = SpannableString(", ")
         val term4 = SpannableString(resources.getString(R.string.signup_terms4))
+
         val term5 = SpannableString(resources.getString(R.string.signup_terms5))
         val blue = ContextCompat.getColor(this@SignUpActivity, R.color.rg_blue)
         val gray = ContextCompat.getColor(this@SignUpActivity, R.color.rg_gray)
@@ -104,18 +105,18 @@ class SignUpActivity : AppCompatActivity() {
                 Timber.d("clicked 333")
             }
         }
-
         term3.setSpan(clickableSpan3, 0, term3.length,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         term3.setSpan(ForegroundColorSpan(blue), 0,term3.length,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        term3.setSpan(CustomTypefaceSpan("", boldFont!!),0,term3.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         val clickableSpan4= object : ClickableSpan(){
             override fun onClick(widget: View) {
                 Timber.d("clicked 444")
             }
         }
-
         term4.setSpan(clickableSpan4, 0, term4.length,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         term4.setSpan(ForegroundColorSpan(blue), 0,term4.length,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        term4.setSpan(CustomTypefaceSpan("", boldFont!!),0,term4.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         val result = TextUtils.concat(term2, term3, commaSpan,term4, term5)
         signup_terms2.setText(result)

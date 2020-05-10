@@ -44,6 +44,7 @@
             android:padding="0dp"
             android:text="rlasfsf@naver.com"
             android:textSize="14dp"
+            android:fontFamily="@font/nanum_square_r"
             android:background="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -64,6 +65,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="33dp"
             android:hint="@string/signin_password"
+
             android:padding="0dp"
             android:text="kgp"
             android:textSize="14dp"
@@ -102,6 +104,8 @@
             android:onClick="onClickSignIn"
             android:text="@string/signin_button"
             android:textSize="14dp"
+            android:fontFamily="@font/nanum_square_b"
+
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/keep_login_checkbox" />
@@ -150,6 +154,7 @@
                 android:layout_marginStart="5dp"
                 android:textAppearance="@style/Widget.AppCompat.Spinner.Underlined"
                 android:textColor="#42ADE2"
+                android:fontFamily="@font/nanum_square_b"
                 android:textSize="11dp" />
 
         </LinearLayout>

@@ -44,6 +44,8 @@
             android:hint="@string/signup_email"
             android:padding="0dp"
             android:textSize="14dp"
+            android:fontFamily="@font/nanum_square_r"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <View
@@ -57,6 +59,8 @@
             />
 
         <EditText
+            android:fontFamily="@font/nanum_square_r"
+
             android:id="@+id/signup_nickname_edit"
             android:layout_width="match_parent"
             android:layout_height="16dp"
@@ -78,6 +82,8 @@
             />
 
         <EditText
+            android:fontFamily="@font/nanum_square_r"
+
             android:id="@+id/signup_password"
             android:layout_width="match_parent"
             android:layout_height="16dp"
@@ -99,6 +105,8 @@
             />
 
         <EditText
+            android:fontFamily="@font/nanum_square_r"
+
             android:id="@+id/signup_password_again"
             android:layout_width="match_parent"
             android:layout_height="16dp"
@@ -136,6 +144,7 @@
                 android:background="#42ade2"
                 android:textColor="#fff"
                 android:textSize="14dp"
+                android:fontFamily="@font/nanum_square_b"
 
                 />
 
@@ -148,6 +157,7 @@
                 android:onClick="onClickGenderButton"
                 android:background="@drawable/button_background"
                 android:textSize="14dp"
+                android:fontFamily="@font/nanum_square_b"
 
                 />
 
@@ -167,12 +177,15 @@
         app:layout_constraintTop_toBottomOf="@id/edit_info_container">
 
         <TextView
+            android:fontFamily="@font/nanum_square_r"
+
             android:id="@+id/signup_date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="15dp"
             android:textSize="14dp"
+            android:textColor="#000"
             />
         <View
             android:layout_width="0dp"
@@ -215,6 +228,7 @@
                 android:layout_height="35dp"
                 android:gravity="center_horizontal"
                 android:textSize="11dp"
+                android:fontFamily="@font/nanum_square_b"
                 />
 <!--            <View-->
 <!--                android:layout_width="0dp"-->
@@ -240,6 +254,8 @@
             android:hint="@string/signup_phone_number"
             android:padding="0dp"
             android:textSize="14dp"
+            android:fontFamily="@font/nanum_square_r"
+
             />
 
     </LinearLayout>
@@ -262,6 +278,7 @@
             android:text="@string/signup_with_email"
             android:textColor="#fff"
             android:textSize="14dp"
+            android:fontFamily="@font/nanum_square_b"
         />
         <TextView
             android:layout_marginTop="8dp"
@@ -270,6 +287,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/signup_terms_gray"
+            android:fontFamily="@font/nanum_square_r"
+
             />
         <TextView
             android:id="@+id/signup_terms2"
