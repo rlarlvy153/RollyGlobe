@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -55,10 +56,12 @@ class MyPageFragment : Fragment() {
             val v = layoutInflater.inflate(R.layout.mypage_each_tab, tabLayout, false)
             val title = titleArray[i]
             val titleView = v.findViewById<TextView>(R.id.mypage_tab_title)
+            v.layoutParams.height = 60
             titleView.setText(title)
             tabLayout.getTabAt(i)?.customView = v
 
         }
+        
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
