@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity() {
             setDisplayUseLogoEnabled(true)
             setDisplayShowHomeEnabled(true)
             title = ""
+            elevation = 0f
             val logoImage = findViewById< ImageView>(R.id.img_logo)
             logoImage.setImageDrawable(resources.getDrawable(R.drawable.logo_fullletter))
 
@@ -107,7 +108,11 @@ class MainActivity : AppCompatActivity() {
             override fun onTabSelected(p0: TabLayout.Tab?) {
                 callFragment(p0?.position)
                 val position : Int = p0!!.position
-
+                if(position == 4) {
+                    upper_shadow.visibility = View.GONE
+                }else {
+                    upper_shadow.visibility = View.VISIBLE
+                }
                 for (i in iconArray.indices) {
                     main_tab.getTabAt(i)?.customView?.icon?.setBackgroundResource(iconArray[i])
                     main_tab.getTabAt(i)?.customView?.title?.setTextColor(resources.getColor(R.color.tab_unselected))

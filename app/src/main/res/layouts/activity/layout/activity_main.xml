@@ -26,6 +26,8 @@
         android:contentInsetEnd="0dp"
         app:contentInsetRight="0dp"
         app:contentInsetEnd="0dp"
+
+
         >
         <ImageView
             android:id="@+id/img_logo"
