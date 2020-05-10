@@ -48,21 +48,20 @@ class MyPageFragment : Fragment() {
 //        viewPager.adapter = adapter
 
         titleArray = ArrayList<String>(resources.getStringArray(R.array.mypage_tab_items).toMutableList())
-
+        viewPager.adapter = MyPageAdapter(childFragmentManager, resources)
+        tabLayout.setupWithViewPager(viewPager)
         for (i in 0 until titleArray.size) {
 
             val v = layoutInflater.inflate(R.layout.mypage_each_tab, tabLayout, false)
             val title = titleArray[i]
             val titleView = v.findViewById<TextView>(R.id.mypage_tab_title)
             titleView.setText(title)
-            tabLayout.addTab(tabLayout.newTab().setCustomView(v))
-//            tabLayout.getTabAt(i)?.customView = v
+            tabLayout.getTabAt(i)?.customView = v
+
         }
-        viewPager.adapter = MyPageAdapter(childFragmentManager, resources)
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
-                viewPager.setCurrentItem(p0!!.position)
             }
 
             override fun onTabUnselected(p0: TabLayout.Tab?) {
@@ -75,6 +74,8 @@ class MyPageFragment : Fragment() {
 
                 val title = p0?.customView?.findViewById<TextView>(R.id.mypage_tab_title)
                 title!!.setTextColor(ContextCompat.getColor(activity!!, R.color.rg_blue))
+                viewPager.setCurrentItem(p0!!.position)
+
 
             }
         })
