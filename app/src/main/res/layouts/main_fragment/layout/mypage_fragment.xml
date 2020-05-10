@@ -7,36 +7,38 @@
     android:orientation="vertical"
     tools:context=".MyPageFragment">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/mypage_tab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicator="@drawable/mypage_tab_indicator"
-        android:paddingBottom="6dp"
-        >
-        <!--                <com.google.android.material.tabs.TabItem-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:text="@string/mypage_home"-->
-        <!--                    />-->
-        <!--                <com.google.android.material.tabs.TabItem-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:text="@string/mypage_schedule"-->
-        <!--                    />-->
-        <!--                <com.google.android.material.tabs.TabItem-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:text="@string/mypage_book"-->
-        <!--                    />-->
-        <!--                <com.google.android.material.tabs.TabItem-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:text="@string/mypage_activity"-->
-        <!--                    />-->
-    </com.google.android.material.tabs.TabLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/mypage_tab"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabTextColor="@color/rg_gray"
+            app:tabSelectedTextColor="@color/rg_blue"
+            app:tabIndicatorColor="@color/rg_blue"
+            app:tabTextAppearance="@style/MypageTabTextAppearance"
+            >
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/mypage_home"-->
+<!--                />-->
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/mypage_schedule"-->
+<!--                />-->
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/mypage_book"-->
+<!--                />-->
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/mypage_activity"-->
+<!--                />-->
+        </com.google.android.material.tabs.TabLayout>
 
     <View
         android:id="@+id/mypage_upper_shadow"

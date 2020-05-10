@@ -51,16 +51,16 @@ class MyPageFragment : Fragment() {
         titleArray = ArrayList<String>(resources.getStringArray(R.array.mypage_tab_items).toMutableList())
         viewPager.adapter = MyPageAdapter(childFragmentManager, resources)
         tabLayout.setupWithViewPager(viewPager)
-        for (i in 0 until titleArray.size) {
-
-            val v = layoutInflater.inflate(R.layout.mypage_each_tab, tabLayout, false)
-            val title = titleArray[i]
-            val titleView = v.findViewById<TextView>(R.id.mypage_tab_title)
-            v.layoutParams.height = 60
-            titleView.setText(title)
-            tabLayout.getTabAt(i)?.customView = v
-
-        }
+//        for (i in 0 until titleArray.size) {
+//
+//            val v = layoutInflater.inflate(R.layout.mypage_each_tab, tabLayout, false)
+//            val title = titleArray[i]
+//            val titleView = v.findViewById<TextView>(R.id.mypage_tab_title)
+//            v.layoutParams.height = 60
+//            titleView.setText(title)
+//            tabLayout.getTabAt(i)?.customView = v
+//
+//        }
         
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -69,20 +69,20 @@ class MyPageFragment : Fragment() {
 
             override fun onTabUnselected(p0: TabLayout.Tab?) {
 
-                val title = p0?.customView?.findViewById<TextView>(R.id.mypage_tab_title)
-                title!!.setTextColor(ContextCompat.getColor(activity!!, R.color.rg_gray))
+
+//                title!!.setTextColor(ContextCompat.getColor(activity!!, R.color.rg_gray))
             }
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
 
-                val title = p0?.customView?.findViewById<TextView>(R.id.mypage_tab_title)
-                title!!.setTextColor(ContextCompat.getColor(activity!!, R.color.rg_blue))
-                viewPager.setCurrentItem(p0!!.position)
+//                val title = p0?.customView?.findViewById<TextView>(R.id.mypage_tab_title)
+//                title!!.setTextColor(ContextCompat.getColor(activity!!, R.color.rg_blue))
+//                viewPager.setCurrentItem(p0!!.position)
 
 
             }
         })
-        tabLayout.getTabAt(0)?.customView?.findViewById<TextView>(R.id.mypage_tab_title)?.setTextColor(ContextCompat.getColor(activity!!, R.color.rg_blue))
+//        tabLayout.getTabAt(0)?.customView?.findViewById<TextView>(R.id.mypage_tab_title)?.setTextColor(ContextCompat.getColor(activity!!, R.color.rg_blue))
 
         return root
     }

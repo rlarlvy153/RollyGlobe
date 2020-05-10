@@ -26,5 +26,9 @@ class MyPageAdapter (fm : FragmentManager, resources: Resources) : FragmentPager
         super.destroyItem(container, position, `object`)
     }
 
+    override fun getPageTitle(position: Int): CharSequence? {
+        return fragmentTitleList[position]
+//        return super.getPageTitle(position)
+    }
 
 }
