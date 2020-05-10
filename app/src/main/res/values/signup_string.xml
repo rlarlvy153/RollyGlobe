@@ -7,5 +7,14 @@
     <string name="signup_password_again">비밀번호를 한 번 더 입력해주세요 (필수)</string>
     <string name="signup_phone_number">전화번호를 - 없이 입력해 주세요</string>
     <string name="signup_with_email">이메일 회원가입</string>
+    <string name="gender_male">남성</string>
+    <string name="gender_female">여성</string>
+    <string name="signup_date_text_string">%d    / %02d    /  %02d</string>
+    <string name="signup_with_facebook">페이스북으로 로그인</string>
 
+    <string name="signup_terms1">소셜 계정을 이용해 바로 가입 할 수 있습니다.</string>
+    <string name="signup_terms2">회원가입함으로써 롤리글로브의 &#160;</string>
+    <string name="signup_terms3">서비스 이용약관</string>
+    <string name="signup_terms4">개인정보 처리방침</string>
+    <string name="signup_terms5">에 동의함으로 간주합니다.</string>
 </resources>
