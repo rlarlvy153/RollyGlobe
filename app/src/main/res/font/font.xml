@@ -14,4 +14,9 @@
         android:fontStyle = "normal"
         android:fontWeight = "400"
         android:font = "@font/nanum_square_r"/>
+
+    <font
+        android:fontStyle = "normal"
+        android:fontWeight = "400"
+        android:font = "@font/nanum_square_eb"/>
 </font-family>

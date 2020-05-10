@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.rollyglobe.rollyglobe.MyPage.MyPageAdapter
+import kotlinx.android.synthetic.main.mypage_each_tab.view.*
+import kotlinx.android.synthetic.main.mypage_fragment.*
 import timber.log.Timber
 
 /**
@@ -22,8 +26,9 @@ class MyPageFragment : Fragment() {
     }
 
     private val adapter by lazy { MyPageAdapter(childFragmentManager, resources) }
+    private lateinit var titleArray: ArrayList<String>
 
-    lateinit var viewModel : MainViewModel
+    lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.d("life onCreate")
         super.onCreate(savedInstanceState)
@@ -40,29 +45,40 @@ class MyPageFragment : Fragment() {
 
         val tabLayout = root.findViewById<TabLayout>(R.id.mypage_tab)
         val viewPager = root.findViewById<ViewPager>(R.id.mypage_content_viewpager)
+//        viewPager.adapter = adapter
+
+        titleArray = ArrayList<String>(resources.getStringArray(R.array.mypage_tab_items).toMutableList())
+
+        for (i in 0 until titleArray.size) {
+
+            val v = layoutInflater.inflate(R.layout.mypage_each_tab, tabLayout, false)
+            val title = titleArray[i]
+            val titleView = v.findViewById<TextView>(R.id.mypage_tab_title)
+            titleView.setText(title)
+            tabLayout.addTab(tabLayout.newTab().setCustomView(v))
+//            tabLayout.getTabAt(i)?.customView = v
+        }
         viewPager.adapter = MyPageAdapter(childFragmentManager, resources)
-        tabLayout.setupWithViewPager(viewPager)
 
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
-                Timber.d("onPageScrollStateChanged $state")
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+                viewPager.setCurrentItem(p0!!.position)
             }
 
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
 
+                val title = p0?.customView?.findViewById<TextView>(R.id.mypage_tab_title)
+                title!!.setTextColor(ContextCompat.getColor(activity!!, R.color.rg_gray))
             }
 
-            override fun onPageSelected(position: Int) {
-                Timber.d("page $position")
+            override fun onTabSelected(p0: TabLayout.Tab?) {
+
+                val title = p0?.customView?.findViewById<TextView>(R.id.mypage_tab_title)
+                title!!.setTextColor(ContextCompat.getColor(activity!!, R.color.rg_blue))
 
             }
         })
-
-
+        tabLayout.getTabAt(0)?.customView?.findViewById<TextView>(R.id.mypage_tab_title)?.setTextColor(ContextCompat.getColor(activity!!, R.color.rg_blue))
 
         return root
     }
