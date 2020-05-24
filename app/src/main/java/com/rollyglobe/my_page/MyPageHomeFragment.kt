@@ -71,6 +71,14 @@ class MyPageHomeFragment : Fragment() {
                 notifyDataSetChanged()
             }
         })
+        viewModel.following.observe(activity!!, Observer {
+            val followingString = String.format(resources.getString(R.string.following),it)
+            following.setText(followingString)
+        })
+        viewModel.follower.observe(activity!!, Observer {
+            val followerString = String.format(resources.getString(R.string.follower),it)
+            follower.setText(followerString)
+        })
     }
 
     override fun onResume() {

@@ -12,18 +12,56 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
+        <ImageView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/mypage_profile_picture"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_width="45dp"
+            android:layout_height="44dp"
+            android:background="#FF7373"
+            />
         <TextView
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/mypage_profile_picture"
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/nickname"
-            android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="31dp"
+            android:textSize="16dp"
+            android:layout_width="104dp"
+            android:layout_height="18dp"
+            />
+        <TextView
+            app:layout_constraintLeft_toRightOf="@id/mypage_profile_picture"
+            app:layout_constraintTop_toBottomOf="@id/nickname"
+            android:id="@+id/following"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            android:textSize="10dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            app:layout_constraintLeft_toRightOf="@id/following"
+            app:layout_constraintTop_toBottomOf="@id/nickname"
+            android:id="@+id/follower"
+            android:textSize="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
 
         <Button
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/edit_profile_background"
+            android:textColor="#8F8D8D"
             android:padding="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="30dp"
             android:textSize="12dp"
             android:id="@+id/mypage_profile_edit_button"
             android:text="@string/profile_edit"
@@ -34,14 +72,33 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    <FrameLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/mypage_home_reservation_list"
+            android:textColor="#000000"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:textSize="18dp"
+            />
+        <Button
+            android:text="@string/mypage_more"
+            android:layout_gravity="end"
+            android:textSize="14dp"
+            android:textColor="#42ADE2"
+            android:background="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            style="?android:attr/borderlessButtonStyle"/>
+    </FrameLayout>
 
-    <TextView
-        android:text="@string/mypage_home_reservation_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
-
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="13dp"
         android:id="@+id/mypage_reservation_recyclerview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,7 +110,11 @@
         android:text="@string/mypage_logout"
         android:layout_width="324dp"
         android:layout_height="25dp"
+        android:layout_marginTop="10dp"
         android:padding="0dp"
         android:textSize="12dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#888888"
+        android:background="@drawable/logout_buton_background"
         />
 </LinearLayout>

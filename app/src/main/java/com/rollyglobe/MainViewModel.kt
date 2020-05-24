@@ -32,10 +32,13 @@ class MainViewModel : ViewModel() {
     var userBirtday = MutableLiveData<String>()
     var userNationCode = 0
     var reservations = MutableLiveData<ArrayList<ReservationModel>>()
+    var follower = MutableLiveData<Int>()
+    var following = MutableLiveData<Int>()
     private val disposable = CompositeDisposable()
 
     init {
         isLogin.value = false
+
 //        myInfoDummy.value=""
         reservations.value = ArrayList<ReservationModel>()
     }
@@ -158,7 +161,8 @@ class MainViewModel : ViewModel() {
 //                myInfoDummy.value += "${result.userNickname}\n"
 //                myInfoDummy.value += "${result.userPhoneNum}\n"
 //                myInfoDummy.value += "${result.userSex}\n"
-
+                follower.value = 0
+                following.value = 0
                 userName.value = result.userNickname
                 userEmail.value = result.userEmail
                 userPhoneNumber.value = result.userPhoneNum
