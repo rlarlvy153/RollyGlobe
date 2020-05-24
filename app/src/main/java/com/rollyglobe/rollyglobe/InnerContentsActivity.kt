@@ -28,7 +28,7 @@ import timber.log.Timber
 class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
     var restClient = RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
     private val disposable = CompositeDisposable()
-    lateinit var mapFragment:SupportMapFragment
+    lateinit var mapFragment:WorkaroundMapFragment
     lateinit var googleMap:GoogleMap
     lateinit var resultSpot : SpotInnderContentsModel
     override fun onMapReady(map : GoogleMap) {
@@ -48,10 +48,13 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(R.layout.activity_inner_contents)
 
         supportActionBar?.hide()
-        mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment = supportFragmentManager.findFragmentById(R.id.fragment_map) as WorkaroundMapFragment
         mapFragment.getMapAsync(this)
-
-
+        mapFragment.setListener(object : WorkaroundMapFragment.OnTouchListener {
+            override fun onTouch() {
+                inner_contents_scroll_view.requestDisallowInterceptTouchEvent(true)
+            }
+        })
         val spot : SpotModel = intent.getSerializableExtra("spotModel") as SpotModel
         Timber.d("${spot.spotCityName}")
 
