@@ -9,7 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.rollyglobe.rollyglobe.Model.SpotModel
+import com.rollyglobe.rollyglobe.model.SpotModel
+import com.rollyglobe.rollyglobe.inner_contents.InnerContentsActivity
 import timber.log.Timber
 
 class RecommendationAdapter (val context: Context) : RecyclerView.Adapter<RecommendationAdapter.ViewHolder>(){

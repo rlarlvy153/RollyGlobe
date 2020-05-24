@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import com.rollyglobe.rollyglobe.Model.request_model.EditUserEmailRequestModel
+import com.rollyglobe.rollyglobe.model.request_model.EditUserEmailRequestModel
 import com.rollyglobe.rollyglobe.R
 import com.rollyglobe.rollyglobe.RestClient
 import io.reactivex.android.schedulers.AndroidSchedulers

@@ -1,12 +1,9 @@
-package com.rollyglobe.rollyglobe.Model
+package com.rollyglobe.rollyglobe.model
 
 import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.google.gson.annotations.SerializedName
 import org.json.JSONArray
 import org.json.JSONObject
 import timber.log.Timber
-import kotlin.reflect.typeOf
 
 data class SpotProduct(
     val productNum : Int,

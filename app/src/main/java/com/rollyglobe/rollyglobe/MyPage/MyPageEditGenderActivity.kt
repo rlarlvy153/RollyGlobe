@@ -6,14 +6,13 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
-import com.rollyglobe.rollyglobe.Model.request_model.EditUserGenderRequestModel
+import com.rollyglobe.rollyglobe.model.request_model.EditUserGenderRequestModel
 import com.rollyglobe.rollyglobe.R
 import com.rollyglobe.rollyglobe.RestClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_my_page_edit_gender.*
-import timber.log.Timber
 
 class MyPageEditGenderActivity : AppCompatActivity() {
     var restClient = RestClient.restClient

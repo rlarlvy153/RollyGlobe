@@ -1,7 +1,7 @@
 package com.rollyglobe.rollyglobe
 
-import com.rollyglobe.rollyglobe.Model.request_model.*
-import com.rollyglobe.rollyglobe.Model.response_model.*
+import com.rollyglobe.rollyglobe.model.request_model.*
+import com.rollyglobe.rollyglobe.model.response_model.*
 
 import io.reactivex.Single
 import okhttp3.ResponseBody
@@ -44,4 +44,8 @@ interface RollyGlobeApiInterface {
 
         @POST("ajax/user.php")
         fun EditUserPassword(@Body param: EditUserPasswordRequestModel) : Single<EditUserPasswordResponseModel>
+
+        @POST("ajax/comment.php")
+        fun LoadCommentList(@Body param: LoadCommentListRequestModel) : Single<List<LoadCommentListResponseModel>>
+
 }

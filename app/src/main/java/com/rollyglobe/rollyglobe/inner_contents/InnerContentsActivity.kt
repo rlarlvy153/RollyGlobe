@@ -1,4 +1,4 @@
-package com.rollyglobe.rollyglobe
+package com.rollyglobe.rollyglobe.inner_contents
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -10,14 +10,15 @@ import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.rollyglobe.rollyglobe.Model.SpotInnderContentsModel
-import com.rollyglobe.rollyglobe.Model.SpotModel
-import com.rollyglobe.rollyglobe.Model.request_model.InnerContentsOption
-import com.rollyglobe.rollyglobe.Model.request_model.InnerContentsRequest
-import com.rollyglobe.rollyglobe.Model.request_model.InnerContentsRequestModel
+import com.rollyglobe.rollyglobe.model.SpotModel
+import com.rollyglobe.rollyglobe.R
+import com.rollyglobe.rollyglobe.RetrofitCreator
+import com.rollyglobe.rollyglobe.RollyGlobeApiInterface
+import com.rollyglobe.rollyglobe.WorkaroundMapFragment
+import com.rollyglobe.rollyglobe.model.SpotInnderContentsModel
+import com.rollyglobe.rollyglobe.model.request_model.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -28,7 +29,7 @@ import timber.log.Timber
 class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
     var restClient = RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
     private val disposable = CompositeDisposable()
-    lateinit var mapFragment:WorkaroundMapFragment
+    lateinit var mapFragment: WorkaroundMapFragment
     lateinit var googleMap:GoogleMap
     lateinit var resultSpot : SpotInnderContentsModel
     override fun onMapReady(map : GoogleMap) {
@@ -76,6 +77,21 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 }, {
 
+                })
+        )
+
+        val loadCommentListOption = LoadCommentListOption(spot.spotNum,"spot")
+        val loadCommentListRequest = LoadCommentListRequest(loadCommentListOption)
+        val loadCommentListRequestModel = LoadCommentListRequestModel(loadCommentListRequest)
+        disposable.add(
+            restClient.LoadCommentList(loadCommentListRequestModel)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ result ->
+                    Timber.d(result.toString())
+
+                }, {
+                    it.printStackTrace()
                 })
         )
 

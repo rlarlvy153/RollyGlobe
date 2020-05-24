@@ -3,7 +3,6 @@ package com.rollyglobe.rollyglobe
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -18,10 +17,10 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import com.rollyglobe.rollyglobe.Model.request_model.SignUpOption
-import com.rollyglobe.rollyglobe.Model.request_model.SignUpRequest
-import com.rollyglobe.rollyglobe.Model.request_model.SignUpRequestModel
-import com.rollyglobe.rollyglobe.Model.response_model.NationCodeResponseModel
+import com.rollyglobe.rollyglobe.model.request_model.SignUpOption
+import com.rollyglobe.rollyglobe.model.request_model.SignUpRequest
+import com.rollyglobe.rollyglobe.model.request_model.SignUpRequestModel
+import com.rollyglobe.rollyglobe.model.response_model.NationCodeResponseModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
