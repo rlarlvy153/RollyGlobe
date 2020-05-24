@@ -5,20 +5,17 @@ import android.icu.util.GregorianCalendar
 import android.icu.util.TimeZone
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.rollyglobe.rollyglobe.Model.request_model.EditUserBirthdayRequestModel
+import com.rollyglobe.rollyglobe.model.request_model.EditUserBirthdayRequestModel
 import com.rollyglobe.rollyglobe.R
 import com.rollyglobe.rollyglobe.RestClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_my_page_edit_birthday.*
-import kotlinx.android.synthetic.main.activity_signup.*
-import timber.log.Timber
 
 
 class MyPageEditBirthdayActivity : AppCompatActivity() {

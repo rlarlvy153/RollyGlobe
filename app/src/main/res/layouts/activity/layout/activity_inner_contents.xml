@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/inner_contents_scroll_view"
-    tools:context=".InnerContentsActivity">
+    tools:context=".inner_contents.InnerContentsActivity">
 
     <LinearLayout
         android:orientation="vertical"

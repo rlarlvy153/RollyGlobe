@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.rollyglobe.rollyglobe.Model.response_model.ReservationModel
+import com.rollyglobe.rollyglobe.model.response_model.ReservationModel
 import com.rollyglobe.rollyglobe.R
 import timber.log.Timber
 

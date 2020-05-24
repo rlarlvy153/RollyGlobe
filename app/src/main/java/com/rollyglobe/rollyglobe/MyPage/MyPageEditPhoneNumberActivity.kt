@@ -6,8 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
-import com.rollyglobe.rollyglobe.Model.request_model.EditUserNameRequestModel
-import com.rollyglobe.rollyglobe.Model.request_model.EditUserPhoneNumberRequestModel
+import com.rollyglobe.rollyglobe.model.request_model.EditUserPhoneNumberRequestModel
 import com.rollyglobe.rollyglobe.R
 import com.rollyglobe.rollyglobe.RestClient
 import io.reactivex.android.schedulers.AndroidSchedulers

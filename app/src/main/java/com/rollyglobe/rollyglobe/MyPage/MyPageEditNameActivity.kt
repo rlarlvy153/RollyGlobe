@@ -3,19 +3,15 @@ package com.rollyglobe.rollyglobe.MyPage
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.MenuItem
 import android.view.View
-import com.rollyglobe.rollyglobe.MainActivity
-import com.rollyglobe.rollyglobe.Model.request_model.EditUserNameRequestModel
-import com.rollyglobe.rollyglobe.Model.response_model.EditUserNameResponseModel
+import com.rollyglobe.rollyglobe.model.request_model.EditUserNameRequestModel
 import com.rollyglobe.rollyglobe.R
 import com.rollyglobe.rollyglobe.RestClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_my_page_edit_name.*
-import timber.log.Timber
 
 class MyPageEditNameActivity : AppCompatActivity() {
 

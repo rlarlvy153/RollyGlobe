@@ -1,4 +1,4 @@
-package com.rollyglobe.rollyglobe.Model
+package com.rollyglobe.rollyglobe.model
 
 import java.io.Serializable
 

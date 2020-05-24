@@ -1,15 +1,11 @@
-package com.rollyglobe.rollyglobe.Model.response_model
+package com.rollyglobe.rollyglobe.model.response_model
 
 import com.google.gson.annotations.SerializedName
 
-class EditUserEmailResponseModel (
+class EditUserPasswordResponseModel (
     @SerializedName("msg")
     val msg:String,
 
-    @SerializedName("email")
-    val email:String,
-
     @SerializedName("success")
     val success:Boolean
-
 )

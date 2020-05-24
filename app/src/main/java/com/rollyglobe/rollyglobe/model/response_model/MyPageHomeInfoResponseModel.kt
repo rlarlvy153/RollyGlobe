@@ -1,6 +1,5 @@
-package com.rollyglobe.rollyglobe.Model.response_model
+package com.rollyglobe.rollyglobe.model.response_model
 
-import android.provider.ContactsContract
 import com.google.gson.annotations.SerializedName
 
 

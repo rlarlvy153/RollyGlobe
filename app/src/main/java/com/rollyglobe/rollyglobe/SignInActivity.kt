@@ -1,20 +1,18 @@
 package com.rollyglobe.rollyglobe
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.rollyglobe.rollyglobe.Model.request_model.SignInOption
-import com.rollyglobe.rollyglobe.Model.request_model.SignInRequest
-import com.rollyglobe.rollyglobe.Model.request_model.SignInRequestModel
+import com.rollyglobe.rollyglobe.model.request_model.SignInOption
+import com.rollyglobe.rollyglobe.model.request_model.SignInRequest
+import com.rollyglobe.rollyglobe.model.request_model.SignInRequestModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_signin.*
 import timber.log.Timber
-import kotlin.math.absoluteValue
 
 class SignInActivity : AppCompatActivity() {
 

@@ -25,7 +25,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="${googleMapApiKey}" />
 
-        <activity android:name=".InnerContentsActivity" />
+        <activity android:name=".inner_contents.InnerContentsActivity" />
         <activity android:name=".SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
