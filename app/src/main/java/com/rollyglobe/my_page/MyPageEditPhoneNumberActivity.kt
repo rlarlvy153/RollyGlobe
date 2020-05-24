@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
-import com.rollyglobe.model.request_model.EditUserPhoneNumberRequestModel
+import com.rollyglobe.network.model.request_model.EditUserPhoneNumberRequestModel
 import com.rollyglobe.R
-import com.rollyglobe.RestClient
+import com.rollyglobe.network.RestClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

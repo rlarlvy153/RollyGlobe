@@ -1,4 +1,4 @@
-package com.rollyglobe.model
+package com.rollyglobe.network.model
 
 import com.google.gson.Gson
 import org.json.JSONArray

@@ -1,6 +1,7 @@
-package com.rollyglobe
+package com.rollyglobe.network
 
 
+import com.rollyglobe.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response

@@ -9,9 +9,9 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.rollyglobe.model.request_model.EditUserBirthdayRequestModel
+import com.rollyglobe.network.model.request_model.EditUserBirthdayRequestModel
 import com.rollyglobe.R
-import com.rollyglobe.RestClient
+import com.rollyglobe.network.RestClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

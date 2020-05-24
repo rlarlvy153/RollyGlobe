@@ -1,7 +1,7 @@
-package com.rollyglobe
+package com.rollyglobe.network
 
-import com.rollyglobe.model.request_model.*
-import com.rollyglobe.model.response_model.*
+import com.rollyglobe.network.model.request_model.*
+import com.rollyglobe.network.model.response_model.*
 
 import io.reactivex.Single
 import okhttp3.ResponseBody

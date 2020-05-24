@@ -3,11 +3,12 @@ package com.rollyglobe
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
-import com.rollyglobe.model.SpotModel
-import com.rollyglobe.model.request_model.*
-import com.rollyglobe.model.request_model.MyPageHomeRequest
-import com.rollyglobe.model.request_model.MyPageHomeRequestModel
-import com.rollyglobe.model.response_model.ReservationModel
+import com.rollyglobe.network.model.SpotModel
+import com.rollyglobe.network.model.request_model.*
+import com.rollyglobe.network.model.request_model.MyPageHomeRequest
+import com.rollyglobe.network.model.request_model.MyPageHomeRequestModel
+import com.rollyglobe.network.model.response_model.ReservationModel
+import com.rollyglobe.network.RestClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

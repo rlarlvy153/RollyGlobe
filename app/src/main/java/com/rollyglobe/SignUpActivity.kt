@@ -17,10 +17,12 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import com.rollyglobe.model.request_model.SignUpOption
-import com.rollyglobe.model.request_model.SignUpRequest
-import com.rollyglobe.model.request_model.SignUpRequestModel
-import com.rollyglobe.model.response_model.NationCodeResponseModel
+import com.rollyglobe.network.model.request_model.SignUpOption
+import com.rollyglobe.network.model.request_model.SignUpRequest
+import com.rollyglobe.network.model.request_model.SignUpRequestModel
+import com.rollyglobe.network.model.response_model.NationCodeResponseModel
+import com.rollyglobe.network.RetrofitCreator
+import com.rollyglobe.network.RollyGlobeApiInterface
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

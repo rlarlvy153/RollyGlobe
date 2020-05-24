@@ -13,12 +13,12 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.rollyglobe.R
-import com.rollyglobe.model.SpotModel
-import com.rollyglobe.RetrofitCreator
-import com.rollyglobe.RollyGlobeApiInterface
+import com.rollyglobe.network.model.SpotModel
+import com.rollyglobe.network.RetrofitCreator
+import com.rollyglobe.network.RollyGlobeApiInterface
 import com.rollyglobe.WorkaroundMapFragment
-import com.rollyglobe.model.SpotInnderContentsModel
-import com.rollyglobe.model.request_model.*
+import com.rollyglobe.network.model.SpotInnderContentsModel
+import com.rollyglobe.network.model.request_model.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

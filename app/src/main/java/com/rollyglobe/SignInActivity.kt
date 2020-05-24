@@ -5,9 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.rollyglobe.model.request_model.SignInOption
-import com.rollyglobe.model.request_model.SignInRequest
-import com.rollyglobe.model.request_model.SignInRequestModel
+import com.rollyglobe.network.model.request_model.SignInOption
+import com.rollyglobe.network.model.request_model.SignInRequest
+import com.rollyglobe.network.model.request_model.SignInRequestModel
+import com.rollyglobe.network.RestClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.rollyglobe.model.SpotModel
+import com.rollyglobe.network.model.SpotModel
 import com.rollyglobe.inner_contents.InnerContentsActivity
 import timber.log.Timber
 
