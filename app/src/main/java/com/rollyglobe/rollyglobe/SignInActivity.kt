@@ -5,6 +5,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.rollyglobe.rollyglobe.Model.request_model.SignInOption
 import com.rollyglobe.rollyglobe.Model.request_model.SignInRequest
@@ -20,15 +21,11 @@ class SignInActivity : AppCompatActivity() {
 
     var restClient  = RestClient.restClient
     private val disposable = CompositeDisposable()
-
-
     val focusListesner = View.OnFocusChangeListener{v, hasFocus ->
-
         when(v.id){
             signin_email_edit.id -> {
                 signin_email_edit_underline.setBackgroundColor(ContextCompat.getColor(this,R.color.rg_blue))
                 signin_password_edit_underline.setBackgroundColor(ContextCompat.getColor(this,R.color.rg_gray))
-
             }
             signin_password_edit.id->{
                 signin_password_edit_underline.setBackgroundColor(ContextCompat.getColor(this,R.color.rg_blue))
@@ -59,8 +56,11 @@ class SignInActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result->
-                Timber.d(result.toString())
-                Timber.d("${result?.user_info?.user_birthday}")
+                if(!result.success){
+                    Toast.makeText(this@SignInActivity,result.msg,Toast.LENGTH_SHORT).show()
+                    return@subscribe
+                }
+
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
