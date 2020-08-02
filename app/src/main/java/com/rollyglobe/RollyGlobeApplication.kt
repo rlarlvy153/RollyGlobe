@@ -6,5 +6,7 @@ class RollyGlobeApplication : Application(){
 
     override fun onCreate() {
         super.onCreate()
+
+        AppComponent.init(this)
     }
 }

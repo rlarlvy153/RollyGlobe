@@ -16,7 +16,6 @@ import com.rollyglobe.R
 import com.rollyglobe.network.model.SpotModel
 import com.rollyglobe.network.RetrofitCreator
 import com.rollyglobe.network.RollyGlobeApiInterface
-import com.rollyglobe.WorkaroundMapFragment
 import com.rollyglobe.network.model.SpotInnderContentsModel
 import com.rollyglobe.network.model.request_model.*
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -57,7 +56,7 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
         val spot : SpotModel = intent.getSerializableExtra("spotModel") as SpotModel
-        Timber.d("${spot.spotCityName}")
+//        Timber.d("${spot.spotCityName}")
 
         val option = InnerContentsOption(spot.spotNum)
         val request = InnerContentsRequest("GetSpotInnerContents", option)

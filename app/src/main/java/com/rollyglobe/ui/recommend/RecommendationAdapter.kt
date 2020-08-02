@@ -54,14 +54,14 @@ class RecommendationAdapter (val context: Context) : RecyclerView.Adapter<Recomm
         fun bind(spot : SpotModel){
             spotTitle.text = spot.spotTitleKor
             spotIntro.text = spot.spotIntro
-            spotPlace.text = "${spot.spotNationName} - ${spot.spotCityName}"
+//            spotPlace.text = "${spot.spotNationName} - ${spot.spotCityName}"
 
-            if(spot.spotThumbnailType !="null"){
+//            if(spot.spotThumbnailType !="null"){
 //                val spotThumbnailPath = "$spotThumbnailHeader${spot.spotThumbnailNum}.${spot.spotThumbnailType}"
 
                 Timber.d(spot.spotThumbnailPath)
-                Glide.with(context).load(spot.spotThumbnailPath).into(spotThumbnail)
-            }
+                Glide.with(context).load("https://m.rollyglobe.com/post/pic/originial/" + spot.spotThumbnailPath).into(spotThumbnail)
+//            }
         }
     }
 }

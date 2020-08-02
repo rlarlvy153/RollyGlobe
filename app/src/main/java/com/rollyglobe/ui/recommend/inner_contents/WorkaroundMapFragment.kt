@@ -1,4 +1,4 @@
-package com.rollyglobe
+package com.rollyglobe.ui.recommend.inner_contents
 
 import android.R
 import android.content.Context

@@ -392,7 +392,7 @@
             android:id="@+id/fragment_map"
             android:layout_width="match_parent"
             android:layout_height="201dp"
-            class="com.rollyglobe.WorkaroundMapFragment"/>
+            class="com.rollyglobe.ui.recommend.inner_contents.WorkaroundMapFragment"/>
 
         <View
             android:layout_width="match_parent"

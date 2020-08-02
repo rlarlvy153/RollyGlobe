@@ -1,5 +1,6 @@
 package com.rollyglobe.network
 
+import com.rollyglobe.network.model.RecommendListResponseModel
 import com.rollyglobe.network.model.request_model.*
 import com.rollyglobe.network.model.response_model.*
 
@@ -19,7 +20,7 @@ interface RollyGlobeApiInterface {
         fun SignIn(@Body param: SignInRequestModel):Single<SignInModel>
 
         @POST("/ajax/spot.php")
-        fun getRecommendList(@Body param: RecommendRequestModel): Single<ResponseBody>
+        fun getRecommendList(@Body param: RecommendRequestModel): Single<RecommendListResponseModel>
 
         @POST("/ajax/spot.php")
         fun getSpotInnerContents(@Body param: InnerContentsRequestModel): Single<ResponseBody>
