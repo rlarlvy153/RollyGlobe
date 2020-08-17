@@ -104,8 +104,11 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     fun initView(spot: SpotInnderContentsModel) {
         //TODO 이미지 viewpager
-        Glide.with(this).load("https://m.rollyglobe.com/post/pics/small/" + spot.spotPicList[0])
-            .into(spot_image)
+        if(spot.spotPicList.size >0){
+            Glide.with(this).load("https://m.rollyglobe.com/post/pics/small/" + spot.spotPicList[0])
+                .into(spot_image)
+
+        }
         spot_name.text = spot.spotTitleKor
         spot_name_eng.text = spot.spotTitleEng
         val concat = "${spot.spotContinent} - ${spot.spotNation} - ${spot.spotCity}"
