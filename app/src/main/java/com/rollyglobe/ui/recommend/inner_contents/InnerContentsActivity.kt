@@ -29,12 +29,12 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
     var restClient = RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
     private val disposable = CompositeDisposable()
     lateinit var mapFragment: WorkaroundMapFragment
-    lateinit var googleMap:GoogleMap
-    lateinit var resultSpot : SpotInnderContentsModel
-    override fun onMapReady(map : GoogleMap) {
+    lateinit var googleMap: GoogleMap
+    lateinit var resultSpot: SpotInnderContentsModel
+    override fun onMapReady(map: GoogleMap) {
 
         googleMap = map
-        googleMap.run{
+        googleMap.run {
             uiSettings.isZoomControlsEnabled = true
 //            setOnMarkerClickListener(this@MainActivity)
             //googleMap.setPadding(left, top, right, bottom);
@@ -43,19 +43,21 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inner_contents)
 
         supportActionBar?.hide()
-        mapFragment = supportFragmentManager.findFragmentById(R.id.fragment_map) as WorkaroundMapFragment
+        mapFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_map) as WorkaroundMapFragment
         mapFragment.getMapAsync(this)
         mapFragment.setListener(object : WorkaroundMapFragment.OnTouchListener {
             override fun onTouch() {
                 inner_contents_scroll_view.requestDisallowInterceptTouchEvent(true)
             }
         })
-        val spot : SpotModel = intent.getSerializableExtra("spotModel") as SpotModel
+        val spot: SpotModel = intent.getSerializableExtra("spotModel") as SpotModel
 //        Timber.d("${spot.spotCityName}")
 
         val option = InnerContentsOption(spot.spotNum)
@@ -69,9 +71,12 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
                 .subscribe({ result ->
                     val str = result.string()
                     val resultJson = JSONObject(str)
-                    Timber.d(str.substring(0,str.length/2))
-                    Timber.d(str.substring(str.length/2))
-                    resultSpot = SpotInnderContentsModel(resultJson, resources.getString(R.string.lets_be_contributor))
+                    Timber.d(str.substring(0, str.length / 2))
+                    Timber.d(str.substring(str.length / 2))
+                    resultSpot = SpotInnderContentsModel(
+                        resultJson,
+                        resources.getString(R.string.lets_be_contributor)
+                    )
                     initView(resultSpot)
 
                 }, {
@@ -79,7 +84,7 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
                 })
         )
 
-        val loadCommentListOption = LoadCommentListOption(spot.spotNum,"spot")
+        val loadCommentListOption = LoadCommentListOption(spot.spotNum, "spot")
         val loadCommentListRequest = LoadCommentListRequest(loadCommentListOption)
         val loadCommentListRequestModel = LoadCommentListRequestModel(loadCommentListRequest)
         disposable.add(
@@ -94,16 +99,13 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
                 })
         )
 
-
-        Glide.with(this).load(spot.spotThumbnailPath).into(spot_image)
         spot_name.text = spot.spotTitleKor
-
-
-
-
     }
 
-    fun initView(spot:SpotInnderContentsModel){
+    fun initView(spot: SpotInnderContentsModel) {
+        //TODO 이미지 viewpager
+        Glide.with(this).load("https://m.rollyglobe.com/post/pics/small/" + spot.spotPicList[0])
+            .into(spot_image)
         spot_name.text = spot.spotTitleKor
         spot_name_eng.text = spot.spotTitleEng
         val concat = "${spot.spotContinent} - ${spot.spotNation} - ${spot.spotCity}"
@@ -117,7 +119,7 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
         spot_web.text = spot.spotWeb
         major_tag.text = "#${spot.spotMajorTag}"
         val tagListBuilder = StringBuilder()
-        for(tag in spot.tagList){
+        for (tag in spot.tagList) {
             tagListBuilder.append("  #$tag")
         }
         tag_list.text = tagListBuilder.toString()
@@ -130,15 +132,17 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val container = spot_product_container
 
-        for( obj in  spot.spotProductJSONArrayList){
+        for (obj in spot.spotProductJSONArrayList) {
             Timber.d(obj.productName)
-            val view = layoutInflater.inflate(R.layout.spot_product_item,null)
-            val imageURL = "https://rollyglobe.com/_product/_thumbnail/${obj.productThumbnailNum}.${obj.productThumbType}"
+            val view = layoutInflater.inflate(R.layout.spot_product_item, null)
+            val imageURL =
+                "m.rollyglobe.com/post/pic/${obj.productThumbnailNum}.${obj.productThumbType}"
             Timber.d("res " + imageURL)
             val imageView = view.findViewById<ImageView>(R.id.image)
 
             Glide.with(this).load(imageURL).placeholder(
-                ColorDrawable(Color.RED)).into(imageView)
+                ColorDrawable(Color.RED)
+            ).into(imageView)
 
             view.findViewById<TextView>(R.id.title).setText(obj.productName)
             view.findViewById<TextView>(R.id.intro).setText(obj.productIntro)
@@ -147,7 +151,6 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
     }
-
 
 
 }

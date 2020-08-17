@@ -1,6 +1,7 @@
 package com.rollyglobe.network.model
 
 import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import org.json.JSONArray
 import org.json.JSONObject
 import timber.log.Timber
@@ -40,6 +41,7 @@ class SpotInnderContentsModel(resultJson: JSONObject,defaultString:String) {
 
     var tagList = ArrayList<String>()
     var spotProductJSONArrayList = ArrayList<SpotProduct>()
+    var spotPicList = ArrayList<String>()
 
 
     init{
@@ -109,6 +111,14 @@ class SpotInnderContentsModel(resultJson: JSONObject,defaultString:String) {
             spotProductJSONArrayList.add(obj)
 
         }
+
+        val spotPicListJSONArray = resultJson.getJSONArray("spot_pic_list")
+
+        for( i in 0 until spotPicListJSONArray.length()){
+            Timber.d(spotPicListJSONArray.getString(i))
+            spotPicList.add(spotPicListJSONArray.getString(i))
+        }
+
 
 
     }
