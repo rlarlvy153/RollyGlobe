@@ -60,7 +60,7 @@ class RecommendationAdapter (val context: Context) : RecyclerView.Adapter<Recomm
 //                val spotThumbnailPath = "$spotThumbnailHeader${spot.spotThumbnailNum}.${spot.spotThumbnailType}"
 
                 Timber.d(spot.spotThumbnailPath)
-                Glide.with(context).load("https://m.rollyglobe.com/post/pics/original/" + spot.spotThumbnailPath).into(spotThumbnail)
+                Glide.with(context).load("https://m.rollyglobe.com/post/pics/small/" + spot.spotThumbnailPath).into(spotThumbnail)
 //            }
         }
     }
