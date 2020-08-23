@@ -174,22 +174,22 @@ class MainViewModel : ViewModel() {
                 userBirtday.value = result.userBirthday
                 userNationCode = result.userNationCode.toInt()
 
-                val reservationJsonArray = JSONArray(result.reservationInfoList)
-                reservations.value?.clear()
-                for( i in 0 until reservationJsonArray.length()){
-                    val eachObject = reservationJsonArray.getJSONObject(i)
-
-                    val reservationNum = eachObject.getString("reservationNum").toInt()
-                    val reservationName = eachObject.getString("reservationName")
-                    val reservationIntro = eachObject.getString("reservationIntro")
-                    val reservationProductNum = eachObject.getString("reservationProductNum").toInt()
-                    val reservationThumbnailNum = eachObject.getString("reservationThumbnailNum").toInt()
-                    val reservationThumbnailType = eachObject.getString("reservationThumbnailType")
-                    val tempReservation = ReservationModel(reservationNum, reservationProductNum, reservationName, reservationIntro, reservationThumbnailNum, reservationThumbnailType)
-                    reservations.value?.add(tempReservation)
-
-                }
-                reservations.value = reservations.value
+//                val reservationJsonArray = JSONArray(result.reservationInfoList)
+//                reservations.value?.clear()
+//                for( i in 0 until reservationJsonArray.length()){
+//                    val eachObject = reservationJsonArray.getJSONObject(i)
+//
+//                    val reservationNum = eachObject.getString("reservationNum").toInt()
+//                    val reservationName = eachObject.getString("reservationName")
+//                    val reservationIntro = eachObject.getString("reservationIntro")
+//                    val reservationProductNum = eachObject.getString("reservationProductNum").toInt()
+//                    val reservationThumbnailNum = eachObject.getString("reservationThumbnailNum").toInt()
+//                    val reservationThumbnailType = eachObject.getString("reservationThumbnailType")
+//                    val tempReservation = ReservationModel(reservationNum, reservationProductNum, reservationName, reservationIntro, reservationThumbnailNum, reservationThumbnailType)
+//                    reservations.value?.add(tempReservation)
+//
+//                }
+//                reservations.value = reservations.value
 
             },{
                 Timber.d("err : ${it.toString()}")
