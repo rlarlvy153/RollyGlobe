@@ -6,21 +6,23 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.rollyglobe.R
+import com.rollyglobe.network.RollyGlobeApiClient
 import com.rollyglobe.ui.signup.SignUpActivity
 import com.rollyglobe.network.model.request_model.SignInOption
 import com.rollyglobe.network.model.request_model.SignInRequest
 import com.rollyglobe.network.model.request_model.SignInRequestModel
-import com.rollyglobe.network.RestClient
 import com.rollyglobe.ui.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_signin.*
+import org.koin.android.ext.android.inject
+import org.koin.core.inject
 import timber.log.Timber
 
 class SignInActivity : AppCompatActivity() {
 
-    var restClient  = RestClient.restClient
+    val restClient: RollyGlobeApiClient by inject()
     private val disposable = CompositeDisposable()
 
 
@@ -66,8 +68,6 @@ class SignInActivity : AppCompatActivity() {
         val signInRequestModel = SignInRequestModel(signInRequest)
 
         disposable.add(restClient.SignIn(signInRequestModel)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result->
                 Timber.d(result.toString())
                 Timber.d("${result?.user_info?.user_birthday}")

@@ -7,16 +7,18 @@ import android.view.MenuItem
 import android.view.View
 import com.rollyglobe.network.model.request_model.EditUserEmailRequestModel
 import com.rollyglobe.R
-import com.rollyglobe.network.RestClient
+import com.rollyglobe.network.RollyGlobeApiClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_my_page_edit_email.*
+import org.koin.android.ext.android.inject
+import org.koin.core.inject
 
 class MyPageEditEmailActivity : AppCompatActivity() {
 
     lateinit var userEmail:String
-    var restClient = RestClient.restClient
+    val restClient: RollyGlobeApiClient by inject()
     private val disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {

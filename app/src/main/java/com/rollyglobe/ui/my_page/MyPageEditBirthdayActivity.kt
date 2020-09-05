@@ -3,24 +3,26 @@ package com.rollyglobe.ui.my_page
 import android.content.Intent
 import android.icu.util.GregorianCalendar
 import android.icu.util.TimeZone
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.rollyglobe.network.model.request_model.EditUserBirthdayRequestModel
+import androidx.appcompat.app.AppCompatActivity
 import com.rollyglobe.R
-import com.rollyglobe.network.RestClient
+import com.rollyglobe.network.RollyGlobeApiClient
+import com.rollyglobe.network.model.request_model.EditUserBirthdayRequestModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_my_page_edit_birthday.*
+import org.koin.android.ext.android.inject
 
 
 class MyPageEditBirthdayActivity : AppCompatActivity() {
     val days = MutableList(28, { i -> i + 1 })
-    var restClient = RestClient.restClient
+    val restClient: RollyGlobeApiClient by inject()
+
     private val disposable = CompositeDisposable()
     lateinit var dayAdapter: ArrayAdapter<Int>
 
@@ -35,7 +37,6 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
         supportActionBar?.setTitle(R.string.title_edit_birthday)
 
 
-
         //year spinner
         val timeZone = TimeZone.getTimeZone("Asia/Seoul")
         val gregorianCalendar = GregorianCalendar(timeZone)
@@ -47,7 +48,11 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
         }
 
         val yearSpinnerAdapter =
-            ArrayAdapter(this@MyPageEditBirthdayActivity, android.R.layout.simple_spinner_item, yearList)
+            ArrayAdapter(
+                this@MyPageEditBirthdayActivity,
+                android.R.layout.simple_spinner_item,
+                yearList
+            )
         yearSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         edit_year_spinner.adapter = yearSpinnerAdapter
         edit_year_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -66,14 +71,22 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
         }
 
         //day spinner
-        dayAdapter = ArrayAdapter(this@MyPageEditBirthdayActivity, android.R.layout.simple_spinner_item, days)
+        dayAdapter = ArrayAdapter(
+            this@MyPageEditBirthdayActivity,
+            android.R.layout.simple_spinner_item,
+            days
+        )
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         edit_day_spinner.adapter = dayAdapter
 
         //month spinner
         val monthList = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
         val monthSpinnerAdapter =
-            ArrayAdapter(this@MyPageEditBirthdayActivity, android.R.layout.simple_spinner_item, monthList)
+            ArrayAdapter(
+                this@MyPageEditBirthdayActivity,
+                android.R.layout.simple_spinner_item,
+                monthList
+            )
         monthSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         edit_month_spinner.adapter = monthSpinnerAdapter
 
@@ -93,16 +106,17 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
         }
 
         val userBirthdayString = intent.getStringExtra(ProfileEditActivity.EDIT_BIRTHDAY)
-        userBirthYear = userBirthdayString.substring(0,4).toInt()
+        userBirthYear = userBirthdayString.substring(0, 4).toInt()
 
-        userBirthMonth = userBirthdayString.substring(4,6).toInt()
-        userBirthDay = userBirthdayString.substring(6,8).toInt()
+        userBirthMonth = userBirthdayString.substring(4, 6).toInt()
+        userBirthDay = userBirthdayString.substring(6, 8).toInt()
 
         edit_year_spinner.setSelection(yearList.indexOf(userBirthYear))
         edit_month_spinner.setSelection(monthList.indexOf(userBirthMonth))
         edit_day_spinner.setSelection(monthList.indexOf(userBirthDay))
 
     }
+
     fun updateLastDay() {
 
         val year = edit_year_spinner.selectedItem as Int
@@ -134,39 +148,40 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
         dayAdapter.notifyDataSetChanged()
 
     }
-    fun onClickApplyBtn(v: View){
+
+    fun onClickApplyBtn(v: View) {
         val y = edit_year_spinner.selectedItem.toString()
         var m = edit_month_spinner.selectedItem.toString()
-        if (m.length ==1)
+        if (m.length == 1)
             m = "0$m"
         var d = edit_day_spinner.selectedItem.toString()
-        if(d.length == 1){
+        if (d.length == 1) {
             d = "0$d"
         }
 
-        val requestModel = EditUserBirthdayRequestModel(y,m,d)
+        val requestModel = EditUserBirthdayRequestModel(y, m, d)
 
-        disposable.add(restClient.EditUserBirthday(requestModel)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({result->
-                if(result.success){
-                    val intent = Intent()
-                    intent.putExtra(ProfileEditActivity.EDIT_BIRTHDAY, "$y$m$d")
-                    setResult(ProfileEditActivity.RESULT_CODE_BIRTHDAY, intent)
-                    finish()
-                }
-                else{
-                    val intent = Intent()
+        disposable.add(
+            restClient.EditUserBirthday(requestModel)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ result ->
+                    if (result.success) {
+                        val intent = Intent()
+                        intent.putExtra(ProfileEditActivity.EDIT_BIRTHDAY, "$y$m$d")
+                        setResult(ProfileEditActivity.RESULT_CODE_BIRTHDAY, intent)
+                        finish()
+                    } else {
+                        val intent = Intent()
 
-                    setResult(ProfileEditActivity.RESULT_CODE_FAIL, intent)
-                    finish()
-                }
+                        setResult(ProfileEditActivity.RESULT_CODE_FAIL, intent)
+                        finish()
+                    }
 
 
-            },{
+                }, {
 
-            })
+                })
         )
     }
 

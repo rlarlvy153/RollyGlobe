@@ -8,14 +8,16 @@ import android.view.View
 import android.widget.ArrayAdapter
 import com.rollyglobe.network.model.request_model.EditUserGenderRequestModel
 import com.rollyglobe.R
-import com.rollyglobe.network.RestClient
+import com.rollyglobe.network.RollyGlobeApiClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_my_page_edit_gender.*
+import org.koin.android.ext.android.inject
+import org.koin.core.inject
 
 class MyPageEditGenderActivity : AppCompatActivity() {
-    var restClient = RestClient.restClient
+    val restClient: RollyGlobeApiClient by inject()
     private val disposable = CompositeDisposable()
 
     val genderList = ArrayList<String>()

@@ -2,10 +2,10 @@ package com.rollyglobe.ui.recommend.inner_contents
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -13,20 +13,18 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.rollyglobe.R
-import com.rollyglobe.network.model.SpotModel
-import com.rollyglobe.network.RetrofitCreator
-import com.rollyglobe.network.RollyGlobeApiInterface
+import com.rollyglobe.network.RollyGlobeApiClient
 import com.rollyglobe.network.model.SpotInnderContentsModel
+import com.rollyglobe.network.model.SpotModel
 import com.rollyglobe.network.model.request_model.*
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_inner_contents.*
 import org.json.JSONObject
+import org.koin.android.ext.android.inject
 import timber.log.Timber
 
 class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
-    var restClient = RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
+    val restClient: RollyGlobeApiClient by inject()
     private val disposable = CompositeDisposable()
     lateinit var mapFragment: WorkaroundMapFragment
     lateinit var googleMap: GoogleMap
@@ -66,8 +64,6 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         disposable.add(
             restClient.getSpotInnerContents(requestModel)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
                     val str = result.string()
                     val resultJson = JSONObject(str)
@@ -89,8 +85,6 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
         val loadCommentListRequestModel = LoadCommentListRequestModel(loadCommentListRequest)
         disposable.add(
             restClient.LoadCommentList(loadCommentListRequestModel)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
                     Timber.d(result.toString())
 
@@ -104,7 +98,7 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     fun initView(spot: SpotInnderContentsModel) {
         //TODO 이미지 viewpager
-        if(spot.spotPicList.size >0){
+        if (spot.spotPicList.size > 0) {
             Glide.with(this).load("https://m.rollyglobe.com/post/pics/small/" + spot.spotPicList[0])
                 .into(spot_image)
 

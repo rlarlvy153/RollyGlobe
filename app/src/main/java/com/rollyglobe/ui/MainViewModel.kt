@@ -3,28 +3,25 @@ package com.rollyglobe.ui
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
+import com.rollyglobe.network.RollyGlobeApiClient
 import com.rollyglobe.network.model.SpotModel
 import com.rollyglobe.network.model.request_model.*
-import com.rollyglobe.network.model.request_model.MyPageHomeRequest
-import com.rollyglobe.network.model.request_model.MyPageHomeRequestModel
 import com.rollyglobe.network.model.response_model.ReservationModel
-import com.rollyglobe.network.RestClient
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import org.json.JSONArray
-import org.json.JSONObject
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 
-class MainViewModel : ViewModel() {
+class MainViewModel : ViewModel(), KoinComponent {
     val gson = Gson()
 
-//    var restClient  = RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
-    var restClient = RestClient.restClient
+    //    var restClient  = RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
+    val restClient: RollyGlobeApiClient by inject()
     var spotList = ArrayList<SpotModel>()
     var spotListLiveData = MutableLiveData<ArrayList<SpotModel>>()
     var isLogin = MutableLiveData<Boolean>()
-//    var myInfoDummy = MutableLiveData<String>()
+
+    //    var myInfoDummy = MutableLiveData<String>()
     var userName = MutableLiveData<String>()
     var userEmail = MutableLiveData<String>()
     var userPhoneNumber = MutableLiveData<String>()
@@ -55,8 +52,6 @@ class MainViewModel : ViewModel() {
 
         disposable.add(
             restClient.getRecommendList(recommendRequestModel)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
 
 
@@ -133,8 +128,6 @@ class MainViewModel : ViewModel() {
 
         disposable.add(
             restClient.getSpotInnerContents(requestModel)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
 
                 }, {
@@ -142,7 +135,8 @@ class MainViewModel : ViewModel() {
                 })
         )
     }
-    fun getMyPageHome(){
+
+    fun getMyPageHome() {
 //        myInfoDummy.value=""
         val myPageHomeRequest =
             MyPageHomeRequest(
@@ -156,23 +150,23 @@ class MainViewModel : ViewModel() {
 
 
 
-        disposable.add(restClient.getMyPageHomeInfo(myPageHomeRequestModel)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({result->
+        disposable.add(
+            restClient.getMyPageHomeInfo(myPageHomeRequestModel)
+                .subscribe({ result ->
 //                myInfoDummy.value += "${result.success}\n"
 //                myInfoDummy.value += "${result.userEmail}\n"
 //                myInfoDummy.value += "${result.userNickname}\n"
 //                myInfoDummy.value += "${result.userPhoneNum}\n"
 //                myInfoDummy.value += "${result.userSex}\n"
-                follower.value = 0
-                following.value = 0
-                userName.value = result.userNickname
-                userEmail.value = result.userEmail
-                userPhoneNumber.value = result.userPhoneNum
-                userSex.value = result.userSex
-                userBirtday.value = result.userBirthday
-                userNationCode = result.userNationCode.toInt()
+
+                    follower.value = 0
+                    following.value = 0
+                    userName.value = result.user.userNickname
+                    userEmail.value = result.user.userEmail
+                    userPhoneNumber.value = result.user.userPhoneNum
+                    userSex.value = result.user.userSex
+                    userBirtday.value = result.user.userBirthday
+                    userNationCode = result.user.userNationCode.toInt()
 
 //                val reservationJsonArray = JSONArray(result.reservationInfoList)
 //                reservations.value?.clear()
@@ -191,18 +185,19 @@ class MainViewModel : ViewModel() {
 //                }
 //                reservations.value = reservations.value
 
-            },{
-                Timber.d("err : ${it.toString()}")
+                }, {
+                    Timber.d("err : ${it.toString()}")
 
-            })
+                })
         )
     }
-    fun logout(){
+
+    fun logout() {
         userName.value = ""
         userEmail.value = ""
         userPhoneNumber.value = ""
         userSex.value = ""
-        userBirtday.value=""
+        userBirtday.value = ""
         reservations.value?.clear()
         isLogin.value = false
     }

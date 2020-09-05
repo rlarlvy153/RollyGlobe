@@ -18,16 +18,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.rollyglobe.R
+import com.rollyglobe.network.RollyGlobeApiClient
 import com.rollyglobe.network.model.request_model.SignUpOption
 import com.rollyglobe.network.model.request_model.SignUpRequest
 import com.rollyglobe.network.model.request_model.SignUpRequestModel
 import com.rollyglobe.network.model.response_model.NationCodeResponseModel
-import com.rollyglobe.network.RetrofitCreator
-import com.rollyglobe.network.RollyGlobeApiInterface
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_signup.*
+import org.koin.android.ext.android.inject
 import timber.log.Timber
 import java.util.*
 import kotlin.collections.ArrayList
@@ -44,8 +44,8 @@ class SignUpActivity : AppCompatActivity() {
     var selectedMonth = 11
     var selectedDay = 27
 
-    var restClient: RollyGlobeApiInterface =
-        RetrofitCreator.getRetrofitService(RollyGlobeApiInterface::class.java)
+    val restClient: RollyGlobeApiClient by inject()
+
 
     lateinit var dayAdapter: ArrayAdapter<Int>
 
@@ -53,7 +53,8 @@ class SignUpActivity : AppCompatActivity() {
     val focusListesner = object : View.OnFocusChangeListener {
         override fun onFocusChange(v: View?, hasFocus: Boolean) {
             setAllUnderlineToGray()
-            val blue = ContextCompat.getColor(this@SignUpActivity,
+            val blue = ContextCompat.getColor(
+                this@SignUpActivity,
                 R.color.rg_blue
             )
             when (v?.id) {
@@ -73,7 +74,8 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         private fun setAllUnderlineToGray() {
-            val gray = ContextCompat.getColor(this@SignUpActivity,
+            val gray = ContextCompat.getColor(
+                this@SignUpActivity,
                 R.color.rg_gray
             )
 
@@ -94,43 +96,56 @@ class SignUpActivity : AppCompatActivity() {
         signup_password.onFocusChangeListener = focusListesner
         signup_password_again.onFocusChangeListener = focusListesner
 
-        val boldFont = ResourcesCompat.getFont(this,
+        val boldFont = ResourcesCompat.getFont(
+            this,
             R.font.nanum_square_b
         )
 
         val term2 = SpannableString(resources.getString(R.string.signup_terms2))
         val term3 = SpannableString(resources.getString(R.string.signup_terms3))
 
-        val commaSpan  = SpannableString(", ")
+        val commaSpan = SpannableString(", ")
         val term4 = SpannableString(resources.getString(R.string.signup_terms4))
 
         val term5 = SpannableString(resources.getString(R.string.signup_terms5))
-        val blue = ContextCompat.getColor(this@SignUpActivity,
+        val blue = ContextCompat.getColor(
+            this@SignUpActivity,
             R.color.rg_blue
         )
-        val gray = ContextCompat.getColor(this@SignUpActivity,
+        val gray = ContextCompat.getColor(
+            this@SignUpActivity,
             R.color.rg_gray
         )
 
-        val clickableSpan3 = object : ClickableSpan(){
+        val clickableSpan3 = object : ClickableSpan() {
             override fun onClick(widget: View) {
                 Timber.d("clicked 333")
             }
         }
-        term3.setSpan(clickableSpan3, 0, term3.length,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        term3.setSpan(ForegroundColorSpan(blue), 0,term3.length,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        term3.setSpan(StyleSpan(boldFont!!.style),0,term3.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        term3.setSpan(clickableSpan3, 0, term3.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        term3.setSpan(ForegroundColorSpan(blue), 0, term3.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        term3.setSpan(
+            StyleSpan(boldFont!!.style),
+            0,
+            term3.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
 
-        val clickableSpan4= object : ClickableSpan(){
+        val clickableSpan4 = object : ClickableSpan() {
             override fun onClick(widget: View) {
                 Timber.d("clicked 444")
             }
         }
-        term4.setSpan(clickableSpan4, 0, term4.length,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        term4.setSpan(ForegroundColorSpan(blue), 0,term4.length,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        term4.setSpan(StyleSpan(boldFont!!.style),0,term4.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        term4.setSpan(clickableSpan4, 0, term4.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        term4.setSpan(ForegroundColorSpan(blue), 0, term4.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        term4.setSpan(
+            StyleSpan(boldFont!!.style),
+            0,
+            term4.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
 
-        val result = TextUtils.concat(term2, term3, commaSpan,term4, term5)
+        val result = TextUtils.concat(term2, term3, commaSpan, term4, term5)
         signup_terms2.setText(result)
         signup_terms2.movementMethod = LinkMovementMethod.getInstance()
         signup_terms2.highlightColor = Color.TRANSPARENT
@@ -309,7 +324,8 @@ class SignUpActivity : AppCompatActivity() {
             R.id.gender_male_button -> {
                 genderIndex = 1
                 v.setBackgroundColor(
-                    ContextCompat.getColor(this,
+                    ContextCompat.getColor(
+                        this,
                         R.color.button_selected
                     )
                 )
@@ -321,7 +337,8 @@ class SignUpActivity : AppCompatActivity() {
             R.id.gender_female_button -> {
                 genderIndex = 2
                 v.setBackgroundColor(
-                    ContextCompat.getColor(this,
+                    ContextCompat.getColor(
+                        this,
                         R.color.button_selected
                     )
                 )

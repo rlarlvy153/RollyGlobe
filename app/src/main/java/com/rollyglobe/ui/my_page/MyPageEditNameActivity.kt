@@ -7,16 +7,18 @@ import android.view.MenuItem
 import android.view.View
 import com.rollyglobe.network.model.request_model.EditUserNameRequestModel
 import com.rollyglobe.R
-import com.rollyglobe.network.RestClient
+import com.rollyglobe.network.RollyGlobeApiClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_my_page_edit_name.*
+import org.koin.android.ext.android.inject
+import org.koin.core.inject
 
 class MyPageEditNameActivity : AppCompatActivity() {
 
     lateinit var userName:String
-    var restClient = RestClient.restClient
+    val restClient: RollyGlobeApiClient by inject()
     private val disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +36,6 @@ class MyPageEditNameActivity : AppCompatActivity() {
         val newName = edit_text_name.text.toString()
         val requestModel = EditUserNameRequestModel(newName)
         disposable.add(restClient.EditUserName(requestModel)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result->
                 if(result.success){
                     val intent = Intent()

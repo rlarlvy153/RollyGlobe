@@ -2,6 +2,8 @@ package com.rollyglobe.network
 
 
 import com.rollyglobe.BuildConfig
+import com.rollyglobe.network.NetworkConfig.ALL_TIMEOUT
+import com.rollyglobe.network.NetworkConfig.API_BASE_URL
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -13,13 +15,39 @@ import timber.log.Timber
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
-object RetrofitCreator {
-    val API_BASE_URL = "https://test.rollyglobe.com/"
-    private val ALL_TIMEOUT = 3L
+class AppRetrofitBuilder(private val baseUrl: String, private val interceptor: Interceptor? = null) {
+
 
     private var okHttpClient: OkHttpClient
     private var retrofit: Retrofit
     val cookies = HashSet<String>()
+
+    fun build() : Retrofit{
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(createClient())
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+    }
+
+    private fun createClient(): OkHttpClient {
+
+        val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(HeaderSettingInterceptor())
+//            .addNetworkInterceptor(StethoInterceptor())
+            .addInterceptor(AddCookiesInterceptor())
+            .addInterceptor(ReceivedCookiesInterceptor())
+            .connectTimeout(NetworkConfig.ALL_TIMEOUT, TimeUnit.SECONDS)
+            .writeTimeout(NetworkConfig.ALL_TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(NetworkConfig.ALL_TIMEOUT, TimeUnit.SECONDS)
+
+        interceptor?.let {
+            okHttpClient.addInterceptor(it)
+        }
+
+        return okHttpClient.build()
+    }
 
     init{
         if (BuildConfig.DEBUG) {
@@ -49,7 +77,7 @@ object RetrofitCreator {
         }.build()
 
     }
-    private  class HeaderSettingInterceptor : Interceptor {
+    inner class HeaderSettingInterceptor : Interceptor {
 
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
@@ -67,7 +95,7 @@ object RetrofitCreator {
             return chain.proceed(request)
         }
     }
-    private class AddCookiesInterceptor : Interceptor{
+    inner class AddCookiesInterceptor : Interceptor{
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
             val builder = chain.request().newBuilder()
@@ -79,7 +107,7 @@ object RetrofitCreator {
         }
     }
 
-    private class ReceivedCookiesInterceptor  : Interceptor{
+    inner class ReceivedCookiesInterceptor  : Interceptor{
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
             val builder = chain.request().newBuilder()
@@ -93,10 +121,4 @@ object RetrofitCreator {
             return originalResponse
         }
     }
-
-
-    internal fun <T> getRetrofitService(restClass: Class<T>): T {
-        return retrofit.create(restClass)
-    }
-
 }

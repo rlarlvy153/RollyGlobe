@@ -231,7 +231,6 @@ class MainActivity : AppCompatActivity() {
             )
         }
         transaction.commitNow()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

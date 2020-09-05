@@ -23,7 +23,7 @@ class ReservationModel(
     var reservationThumbnailType:String
 )
 
-class MyPageHomeInfoResponseModel (
+class MyPageHomeInfoUserModel (
     @SerializedName("success")
     var success : Boolean,
 
@@ -53,4 +53,8 @@ class MyPageHomeInfoResponseModel (
 
     @SerializedName("reservationJSON")
     var reservationInfoList : String
+)
+class MyPageHomeInfoResponseModel(
+    @SerializedName("user")
+    var user : MyPageHomeInfoUserModel
 )
