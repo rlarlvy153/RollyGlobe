@@ -1,8 +1,8 @@
-package com.rollyglobe.network.model.response_model
+package com.rollyglobe.network.model.geocode
 
 import com.google.gson.annotations.SerializedName
 
-class GeocodeByGpuResponseModel (
+class GeocodeByGpsResponseModel (
     @SerializedName("msg")
     val msg:String,
 

@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         selectTab(0)
 
 
-        viewModel.getGeocodeByGps()
+        viewModel.getGeocodeByPlaceId()
 
     }
 

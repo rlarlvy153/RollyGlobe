@@ -2,6 +2,10 @@ package com.rollyglobe.network
 
 import com.rollyglobe.network.model.RecommendListResponseModel
 import com.rollyglobe.network.model.request_model.*
+import com.rollyglobe.network.model.geocode.GeocodeByGpsRequestModel
+import com.rollyglobe.network.model.geocode.GeocodeByGpsResponseModel
+import com.rollyglobe.network.model.geocode.GeocodeByPlaceIdRequestModel
+import com.rollyglobe.network.model.geocode.GeocodeByPlaceIdResponseModel
 import com.rollyglobe.network.model.response_model.*
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -29,8 +33,14 @@ class RollyGlobeApiClient(private val rollyGlobeApiInterface: RollyGlobeApiInter
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getGeocodeByGps(param:GeocodeByGpsRequestModel): Observable<GeocodeByGpuResponseModel> {
+    fun getGeocodeByGps(param: GeocodeByGpsRequestModel): Observable<GeocodeByGpsResponseModel> {
         return rollyGlobeApiInterface.getGeocodeByGps(param)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getGeocodeByPlaceId(param:GeocodeByPlaceIdRequestModel):Observable<GeocodeByPlaceIdResponseModel>{
+        return rollyGlobeApiInterface.getGeocodeByPlaceId(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

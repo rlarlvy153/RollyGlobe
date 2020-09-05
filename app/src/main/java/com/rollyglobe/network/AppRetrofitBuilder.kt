@@ -5,6 +5,7 @@ import com.rollyglobe.network.NetworkConfig.ALL_TIMEOUT
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,8 +27,12 @@ class AppRetrofitBuilder(private val baseUrl: String, private val interceptor: I
 
     private fun createClient(): OkHttpClient {
 
+        val httpLogging = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(HeaderSettingInterceptor())
+            .addInterceptor(httpLogging)
 //            .addNetworkInterceptor(StethoInterceptor())
             .addInterceptor(AddCookiesInterceptor())
             .addInterceptor(ReceivedCookiesInterceptor())

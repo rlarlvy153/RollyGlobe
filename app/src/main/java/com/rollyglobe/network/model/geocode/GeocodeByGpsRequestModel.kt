@@ -1,4 +1,4 @@
-package com.rollyglobe.network.model.request_model
+package com.rollyglobe.network.model.geocode
 
 import com.google.gson.annotations.SerializedName
 
@@ -17,9 +17,9 @@ class GeocodeByGpsRequest(
     var funcName:String = "",
 
     @SerializedName("option")
-    var option:GpsOption
+    var option: GpsOption
 )
 class GeocodeByGpsRequestModel{
     @SerializedName("request")
-    lateinit var request:GeocodeByGpsRequest
+    lateinit var request: GeocodeByGpsRequest
 }

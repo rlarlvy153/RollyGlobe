@@ -2,6 +2,10 @@ package com.rollyglobe.network
 
 import com.rollyglobe.network.model.RecommendListResponseModel
 import com.rollyglobe.network.model.request_model.*
+import com.rollyglobe.network.model.geocode.GeocodeByGpsRequestModel
+import com.rollyglobe.network.model.geocode.GeocodeByGpsResponseModel
+import com.rollyglobe.network.model.geocode.GeocodeByPlaceIdRequestModel
+import com.rollyglobe.network.model.geocode.GeocodeByPlaceIdResponseModel
 import com.rollyglobe.network.model.response_model.*
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -28,7 +32,10 @@ interface RollyGlobeApiInterface {
     fun getSpotInnerContents(@Body param: InnerContentsRequestModel): Single<ResponseBody>
 
     @POST("/ajax/spot.php")
-    fun getGeocodeByGps(@Body param: GeocodeByGpsRequestModel): Observable<GeocodeByGpuResponseModel>
+    fun getGeocodeByGps(@Body param: GeocodeByGpsRequestModel): Observable<GeocodeByGpsResponseModel>
+
+    @POST("/ajax/spot.php")
+    fun getGeocodeByPlaceId(@Body param: GeocodeByPlaceIdRequestModel): Observable<GeocodeByPlaceIdResponseModel>
 
     @POST("ajax/mypage.php")
     fun getMyPageHomeInfo(@Body param: MyPageHomeRequestModel): Single<MyPageHomeInfoResponseModel>
