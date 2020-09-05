@@ -44,6 +44,10 @@ class MainActivity : AppCompatActivity() {
         initTab()
 
         selectTab(0)
+
+
+        viewModel.getGeocodeByGps()
+
     }
 
     private fun initTabListener(){

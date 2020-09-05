@@ -3,6 +3,7 @@ package com.rollyglobe.network
 import com.rollyglobe.network.model.RecommendListResponseModel
 import com.rollyglobe.network.model.request_model.*
 import com.rollyglobe.network.model.response_model.*
+import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.http.Body
@@ -25,6 +26,9 @@ interface RollyGlobeApiInterface {
 
     @POST("/ajax/spot.php")
     fun getSpotInnerContents(@Body param: InnerContentsRequestModel): Single<ResponseBody>
+
+    @POST("/ajax/spot.php")
+    fun getGeocodeByGps(@Body param: GeocodeByGpsRequestModel): Observable<GeocodeByGpuResponseModel>
 
     @POST("ajax/mypage.php")
     fun getMyPageHomeInfo(@Body param: MyPageHomeRequestModel): Single<MyPageHomeInfoResponseModel>

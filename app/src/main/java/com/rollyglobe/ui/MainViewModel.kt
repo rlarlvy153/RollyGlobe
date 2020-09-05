@@ -201,4 +201,18 @@ class MainViewModel : ViewModel(), KoinComponent {
         reservations.value?.clear()
         isLogin.value = false
     }
+
+    fun getGeocodeByGps() {
+        Timber.d("call gps")
+        val req = GeocodeByGpsRequestModel()
+        req.request = GeocodeByGpsRequest("GetGeocodeByGps",GpsOption(37.5038022f, 127.0242523f))
+//        req.request.funcName = "GetGeocodeByGps"
+//        req.request.option = GpsOption(37.5038022f, 127.0242523f)
+        disposable.add(restClient.getGeocodeByGps(req).subscribe( {
+            Timber.d("ggggggggggg" + it.geocode)
+        }))
+
+
+    }
+
 }

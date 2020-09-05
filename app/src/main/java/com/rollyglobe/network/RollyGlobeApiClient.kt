@@ -3,6 +3,7 @@ package com.rollyglobe.network
 import com.rollyglobe.network.model.RecommendListResponseModel
 import com.rollyglobe.network.model.request_model.*
 import com.rollyglobe.network.model.response_model.*
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -24,6 +25,12 @@ class RollyGlobeApiClient(private val rollyGlobeApiInterface: RollyGlobeApiInter
 
     fun signIn(param: SignInRequestModel): Single<SignInModel> {
         return rollyGlobeApiInterface.signIn(param)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getGeocodeByGps(param:GeocodeByGpsRequestModel): Observable<GeocodeByGpuResponseModel> {
+        return rollyGlobeApiInterface.getGeocodeByGps(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
