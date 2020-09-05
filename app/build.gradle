@@ -51,11 +51,11 @@ android {
         main {
             res.srcDirs =
                     [
+                            'src/main/res',
                             'src/main/res/layouts/main_fragment',
                             'src/main/res/layouts/inner_mypage',
                             'src/main/res/layouts/view_item',
-                            'src/main/res/layouts/activity',
-                            'src/main/res'
+                            'src/main/res/layouts/activity'
                     ]
         }
     }
@@ -92,4 +92,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 }
