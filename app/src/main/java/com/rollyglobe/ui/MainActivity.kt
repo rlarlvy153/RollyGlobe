@@ -45,9 +45,6 @@ class MainActivity : AppCompatActivity() {
 
         selectTab(0)
 
-
-        viewModel.getGeocodeByPlaceId()
-
     }
 
     private fun initTabListener(){
