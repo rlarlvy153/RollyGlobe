@@ -1,12 +1,18 @@
 <resources>
     <string name="app_name">RollyGlobe</string>
 
+    <string name="tab_title_home">홈</string>
+    <string name="tab_title_recommendation">추천여행지</string>
+    <string name="tab_title_community">커뮤니티</string>
+    <string name="tab_title_product">상품</string>
+    <string name="tab_title_mypage">마이페이지</string>
+
     <string-array name="tab_items">
-        <item>홈</item>
-        <item>추천여행지</item>
-        <item>커뮤니티</item>
-        <item>상품</item>
-        <item>마이페이지</item>
+        <item>@string/tab_title_home</item>
+        <item>@string/tab_title_recommendation</item>
+        <item>@string/tab_title_community</item>
+        <item>@string/tab_title_product</item>
+        <item>@string/tab_title_mypage</item>
     </string-array>
 
     <string-array name="mypage_tab_items">

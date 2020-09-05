@@ -8,12 +8,9 @@ import android.view.View
 import com.rollyglobe.network.model.request_model.EditUserNameRequestModel
 import com.rollyglobe.R
 import com.rollyglobe.network.RollyGlobeApiClient
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_my_page_edit_name.*
 import org.koin.android.ext.android.inject
-import org.koin.core.inject
 
 class MyPageEditNameActivity : AppCompatActivity() {
 
@@ -35,7 +32,7 @@ class MyPageEditNameActivity : AppCompatActivity() {
     fun onClickApplyBtn(v : View){
         val newName = edit_text_name.text.toString()
         val requestModel = EditUserNameRequestModel(newName)
-        disposable.add(restClient.EditUserName(requestModel)
+        disposable.add(restClient.editUserName(requestModel)
             .subscribe({result->
                 if(result.success){
                     val intent = Intent()

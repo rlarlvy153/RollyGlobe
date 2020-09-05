@@ -401,7 +401,7 @@ class SignUpActivity : AppCompatActivity() {
         val signUpRequestModel = SignUpRequestModel()
         signUpRequestModel.request = SignUpRequest("SignUp", option)
 
-        disposable.add(restClient.SignUp(signUpRequestModel)
+        disposable.add(restClient.signUp(signUpRequestModel)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->

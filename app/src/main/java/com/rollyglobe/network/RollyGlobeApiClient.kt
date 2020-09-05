@@ -3,93 +3,87 @@ package com.rollyglobe.network
 import com.rollyglobe.network.model.RecommendListResponseModel
 import com.rollyglobe.network.model.request_model.*
 import com.rollyglobe.network.model.response_model.*
-import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.ResponseBody
-import retrofit2.HttpException
-import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
 
-class RollyGlobeApiClient (private val apiInterface:RollyGlobeApiInterface){
+class RollyGlobeApiClient(private val rollyGlobeApiInterface: RollyGlobeApiInterface) {
 
-    fun getNationCodeInfoList(): Single<List<NationCodeResponseModel>>{
-        return apiInterface.getNationCodeInfoList()
+    fun getNationCodeInfoList(): Single<List<NationCodeResponseModel>> {
+        return rollyGlobeApiInterface.getNationCodeInfoList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun SignUp(param : SignUpRequestModel): Single<SignUpResponseModel>{
-        return apiInterface.SignUp(param)
+    fun signUp(param: SignUpRequestModel): Single<SignUpResponseModel> {
+        return rollyGlobeApiInterface.signUp(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun SignIn(param: SignInRequestModel): Single<SignInModel>{
-        return apiInterface.SignIn(param)
+    fun signIn(param: SignInRequestModel): Single<SignInModel> {
+        return rollyGlobeApiInterface.signIn(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getRecommendList(param: RecommendRequestModel): Single<RecommendListResponseModel>{
-        return apiInterface.getRecommendList(param)
+    fun getRecommendList(param: RecommendRequestModel): Single<RecommendListResponseModel> {
+        return rollyGlobeApiInterface.getRecommendList(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getSpotInnerContents(param: InnerContentsRequestModel): Single<ResponseBody>{
-        return apiInterface.getSpotInnerContents(param)
+    fun getSpotInnerContents(param: InnerContentsRequestModel): Single<ResponseBody> {
+        return rollyGlobeApiInterface.getSpotInnerContents(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getMyPageHomeInfo(param: MyPageHomeRequestModel): Single<MyPageHomeInfoResponseModel>{
-        return apiInterface.getMyPageHomeInfo(param)
+    fun getMyPageHomeInfo(param: MyPageHomeRequestModel): Single<MyPageHomeInfoResponseModel> {
+        return rollyGlobeApiInterface.getMyPageHomeInfo(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun EditUserName(param: EditUserNameRequestModel) : Single<EditUserNameResponseModel>{
-        return apiInterface.EditUserName(param)
+    fun editUserName(param: EditUserNameRequestModel): Single<EditUserNameResponseModel> {
+        return rollyGlobeApiInterface.editUserName(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun EditUserPhoneNumber(param: EditUserPhoneNumberRequestModel) : Single<EditUserPhoneNumberResponseModel>{
-        return apiInterface.EditUserPhoneNumber(param)
+    fun editUserPhoneNumber(param: EditUserPhoneNumberRequestModel): Single<EditUserPhoneNumberResponseModel> {
+        return rollyGlobeApiInterface.editUserPhoneNumber(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun EditUserEmail(param: EditUserEmailRequestModel) : Single<EditUserEmailResponseModel>{
-        return apiInterface.EditUserEmail(param)
+    fun editUserEmail(param: EditUserEmailRequestModel): Single<EditUserEmailResponseModel> {
+        return rollyGlobeApiInterface.editUserEmail(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun EditUserGender(param: EditUserGenderRequestModel) : Single<EditUserGenderResponseModel>{
-        return apiInterface.EditUserGender(param)
+    fun editUserGender(param: EditUserGenderRequestModel): Single<EditUserGenderResponseModel> {
+        return rollyGlobeApiInterface.editUserGender(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun EditUserBirthday(param: EditUserBirthdayRequestModel) : Single<EditUserBirthdayResponseModel>{
-        return apiInterface.EditUserBirthday(param)
+    fun editUserBirthday(param: EditUserBirthdayRequestModel): Single<EditUserBirthdayResponseModel> {
+        return rollyGlobeApiInterface.editUserBirthday(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun EditUserPassword(param: EditUserPasswordRequestModel) : Single<EditUserPasswordResponseModel>{
-        return apiInterface.EditUserPassword(param)
+    fun editUserPassword(param: EditUserPasswordRequestModel): Single<EditUserPasswordResponseModel> {
+        return rollyGlobeApiInterface.editUserPassword(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun LoadCommentList(param: LoadCommentListRequestModel) : Single<List<LoadCommentListResponseModel>>{
-        return apiInterface.LoadCommentList(param)
+    fun loadCommentList(param: LoadCommentListRequestModel): Single<List<LoadCommentListResponseModel>> {
+        return rollyGlobeApiInterface.loadCommentList(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

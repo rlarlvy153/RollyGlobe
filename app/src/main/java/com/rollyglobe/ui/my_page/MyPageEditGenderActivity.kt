@@ -14,7 +14,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_my_page_edit_gender.*
 import org.koin.android.ext.android.inject
-import org.koin.core.inject
 
 class MyPageEditGenderActivity : AppCompatActivity() {
     val restClient: RollyGlobeApiClient by inject()
@@ -50,7 +49,7 @@ class MyPageEditGenderActivity : AppCompatActivity() {
         val requestModel = EditUserGenderRequestModel(edit_gender_spinner.selectedItem.toString().toLowerCase())
 //        Timber.d("${edit_gender_spinner.selectedItem.toString().toLowerCase()}")
 
-        disposable.add(restClient.EditUserGender(requestModel)
+        disposable.add(restClient.editUserGender(requestModel)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result->

@@ -13,7 +13,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_my_page_edit_email.*
 import org.koin.android.ext.android.inject
-import org.koin.core.inject
 
 class MyPageEditEmailActivity : AppCompatActivity() {
 
@@ -35,7 +34,7 @@ class MyPageEditEmailActivity : AppCompatActivity() {
     fun onClickApplyBtn(v : View){
         val newEmail = edit_text_email.text.toString()
         val requestModel = EditUserEmailRequestModel(newEmail)
-        disposable.add(restClient.EditUserEmail(requestModel)
+        disposable.add(restClient.editUserEmail(requestModel)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result->

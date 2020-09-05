@@ -35,7 +35,7 @@ class MyPageEditPasswordActivity : AppCompatActivity() {
             edit_text_new_password.text.toString()
         )
         disposable.add(
-            restClient.EditUserPassword(requestModel)
+            restClient.editUserPassword(requestModel)
                 .subscribe({ result ->
                     if (result.success) {
                         val intent = Intent()

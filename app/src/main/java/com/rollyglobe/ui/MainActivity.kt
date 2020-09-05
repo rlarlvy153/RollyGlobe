@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
-import com.rollyglobe.*
+import com.rollyglobe.AppComponent
+import com.rollyglobe.R
 import com.rollyglobe.ui.community.CommunityFragment
 import com.rollyglobe.ui.goods.GoodsFragment
 import com.rollyglobe.ui.home.HomeFragment
@@ -19,213 +17,160 @@ import com.rollyglobe.ui.my_page.MyPageFragment
 import com.rollyglobe.ui.recommend.RecommendFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_each_tab.view.*
+import org.koin.android.ext.android.inject
 import timber.log.Timber
 
 
 class MainActivity : AppCompatActivity() {
 
-    private val adapter by lazy {
-        MainAdapter(
-            supportFragmentManager,
-            resources
-        )
-    }
-    private lateinit var titleArray: ArrayList<String>
-    private var iconArray = listOf(
-        R.drawable.home,
-        R.drawable.recommendation,
-        R.drawable.community,
-        R.drawable.product,
-        R.drawable.mypage
-    )
-    private var iconArraySelected = listOf(
-        R.drawable.home_ccolor,
-        R.drawable.recommendation_ccolor,
-        R.drawable.community_ccolor,
-        R.drawable.product_ccolor,
-        R.drawable.mypage_ccolor
-    )
-    private var actionMenu : Menu? = null
-    lateinit private var viewModel : MainViewModel
+    private var actionMenu: Menu? = null
 
-
+    private val viewModel: MainViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.isLogin.observe(this,Observer{isLogin->
-            actionMenu?.let{
+        viewModel.isLogin.observe(this, Observer { isLogin ->
+            actionMenu?.let {
                 actionMenu!!.findItem(R.id.action_login).isVisible = !isLogin
             }
         })
 
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
-        supportActionBar?.run{
-//            setIcon(R.drawable.logo_fullletter)
-            setDisplayUseLogoEnabled(true)
-            setDisplayShowHomeEnabled(true)
-            title = ""
-            elevation = 0f
-            val logoImage = findViewById< ImageView>(R.id.img_logo)
-            logoImage.setImageDrawable(resources.getDrawable(R.drawable.logo_fullletter))
+        initActionBar()
 
-            val titleText = findViewById<TextView>(R.id.title_text)
-            titleText.setText("")
-        }
+        initTab()
 
-        titleArray = ArrayList<String>(resources.getStringArray(R.array.tab_items).toMutableList())
+        selectTab(0)
+    }
 
+    private fun initTabListener(){
+        mainTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
-//        contentViewPager.adapter = adapter
-//        main_tab.setupWithViewPager(contentViewPager)
-//        main_tab.setOnTouchListener(object : View.OnTouchListener{
-//            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-//                return false
-//            }
-//        })
+            fun shadowToggle(tab: TabLayout.Tab) {
+                val position: Int = tab.position
+                if (position == 4) {
+                    upper_shadow.visibility = View.GONE
+                } else {
+                    upper_shadow.visibility = View.VISIBLE
+                }
+            }
 
+            fun changeTitle(tab: TabLayout.Tab) {
+                val tabRes = tab.tag as MainTabIconEnum
+                val position: Int = tab.position
 
-        for (i in iconArray.indices) {
-            val icon = iconArray[i]
-            val title = titleArray[i]
-            val v = layoutInflater.inflate(R.layout.main_each_tab, null)
-            v.icon.setBackgroundResource(icon)
-            v.title.setText(title)
-            main_tab.addTab(main_tab.newTab())
-            main_tab.getTabAt(i)?.customView = v
-        }
+                if (position == 0) {
+                    supportActionBar?.let {
+                        img_logo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_fullletter))
+                        title_text.text = ""
+                    }
+                    supportActionBar?.title = ""
+                } else {
+                    supportActionBar?.let {
+                        img_logo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_icon))
+                        title_text.text = AppComponent.applicationContext.getString(tabRes.title)
+                    }
+                }
+            }
 
-
-        main_tab.getTabAt(0)?.customView?.icon?.setBackgroundResource(iconArraySelected[0])
-        main_tab.getTabAt(0)?.customView?.title?.setTextColor(resources.getColor(R.color.tab_selected))
-        callFragment(0)
-        main_tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabReselected(p0: TabLayout.Tab?) {
 
             }
 
             override fun onTabUnselected(p0: TabLayout.Tab?) {
-
+                p0?.let {
+                    unselectTab(p0)
+                }
             }
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
-                callFragment(p0?.position)
-                val position : Int = p0!!.position
-                if(position == 4) {
-                    upper_shadow.visibility = View.GONE
-                }else {
-                    upper_shadow.visibility = View.VISIBLE
-                }
-                for (i in iconArray.indices) {
-                    main_tab.getTabAt(i)?.customView?.icon?.setBackgroundResource(iconArray[i])
-                    main_tab.getTabAt(i)?.customView?.title?.setTextColor(resources.getColor(
-                        R.color.tab_unselected
-                    ))
-                }
-                main_tab.getTabAt(position)?.customView?.let {
-                    it.icon.setBackgroundResource(iconArraySelected[position])
-                    it.title.setTextColor(resources.getColor(R.color.tab_selected))
-                }
-                if(position == 0) {
-                    supportActionBar?.let {
-                        val logoImage = findViewById< ImageView>(R.id.img_logo)
-                        logoImage.setImageDrawable(resources.getDrawable(R.drawable.logo_fullletter))
+                if (p0 == null) return
 
-                        val titleText = findViewById<TextView>(R.id.title_text)
-                        titleText.setText("")
+                selectTab(p0)
 
-                    }
-                    supportActionBar?.setTitle("")
-                }else {
-                    supportActionBar?.let {
-                        val logoImage = findViewById< ImageView>(R.id.img_logo)
-                        logoImage.setImageDrawable(resources.getDrawable(R.drawable.logo_icon))
+                shadowToggle(p0)
 
-                        val titleText = findViewById<TextView>(R.id.title_text)
-                        titleText.setText(titleArray[position])
-                    }
-
-                }
+                changeTitle(p0)
             }
         })
-
-//        contentViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-//            override fun onPageScrollStateChanged(state: Int) {
-//                Timber.d("onPageScrollStateChanged $state")
-//            }
-//
-//            override fun onPageScrolled(
-//                position: Int,
-//                positionOffset: Float,
-//                positionOffsetPixels: Int
-//            ) {
-//
-//            }
-//
-//            override fun onPageSelected(position: Int) {
-//                Timber.d("page $position")
-//                callFragment(position)
-//                for (i in iconArray.indices) {
-//                    main_tab.getTabAt(i)?.customView?.icon?.setBackgroundResource(iconArray[i])
-//                    main_tab.getTabAt(i)?.customView?.title?.setTextColor(resources.getColor(R.color.tab_unselected))
-//                }
-//                main_tab.getTabAt(position)?.customView?.let {
-//                    it.icon.setBackgroundResource(iconArraySelected[position])
-//                    it.title.setTextColor(resources.getColor(R.color.tab_selected))
-//                }
-//                if(position == 0) {
-//                    supportActionBar?.let {
-//                        val logoImage = findViewById< ImageView>(R.id.img_logo)
-//                        logoImage.setImageDrawable(resources.getDrawable(R.drawable.logo_fullletter))
-//
-//                        val titleText = findViewById<TextView>(R.id.title_text)
-//                        titleText.setText("")
-//
-//                    }
-//                    supportActionBar?.setTitle("")
-//                }else {
-//                    supportActionBar?.let {
-//                        val logoImage = findViewById< ImageView>(R.id.img_logo)
-//                        logoImage.setImageDrawable(resources.getDrawable(R.drawable.logo_icon))
-//
-//
-//
-//                        val titleText = findViewById<TextView>(R.id.title_text)
-//                        titleText.setText(titleArray[position])
-//                    }
-//
-//                }
-//            }
-//        })
-
-
     }
-    fun callFragment(position:Int?){
-        val transaction = supportFragmentManager.beginTransaction()
-        if(position == null) return
 
-        when(position){
-            0->transaction.replace(
+    fun unselectTab(tab: TabLayout.Tab) {
+        val tabRes = tab.tag as MainTabIconEnum
+        tab.customView?.icon?.setBackgroundResource(tabRes.unselected)
+        tab.customView?.title?.setTextColor(ContextCompat.getColor(this@MainActivity, R.color.tab_unselected))
+    }
+
+    fun selectTab(tab: TabLayout.Tab) {
+        val tabRes = tab.tag as MainTabIconEnum
+        tab.customView?.icon?.setBackgroundResource(tabRes.selected)
+        tab.customView?.title?.setTextColor(ContextCompat.getColor(this@MainActivity, R.color.tab_selected))
+
+        callFragment(tab.position)
+    }
+
+    private fun selectTab(position: Int) {
+        val selectedTab = mainTab.getTabAt(position) as TabLayout.Tab
+        selectTab(selectedTab)
+    }
+
+    private fun initActionBar() {
+        supportActionBar?.run {
+//            setIcon(R.drawable.logo_fullletter)
+            setDisplayUseLogoEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            title = ""
+            elevation = 0f
+            img_logo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_fullletter))
+            title_text.text = ""
+        }
+    }
+
+    private fun setTabRes(){
+        for (tab in MainTabIconEnum.values()) {
+            val icon = tab.unselected
+            val title = tab.title
+            val v = layoutInflater.inflate(R.layout.main_each_tab, null)
+            v.icon.setBackgroundResource(icon)
+            v.title.setText(title)
+            val newTab = mainTab.newTab()
+            newTab.customView = v
+            newTab.tag = tab
+            mainTab.addTab(newTab)
+        }
+    }
+
+    private fun initTab() {
+        setTabRes()
+
+        initTabListener()
+    }
+
+    private fun callFragment(position: Int?) {
+        val transaction = supportFragmentManager.beginTransaction()
+        if (position == null) return
+
+        when (position) {
+            0 -> transaction.replace(
                 R.id.main_contents_container,
                 HomeFragment.instance
             )
-            1->transaction.replace(
+            1 -> transaction.replace(
                 R.id.main_contents_container,
                 RecommendFragment.instance
             )
-            2->transaction.replace(
+            2 -> transaction.replace(
                 R.id.main_contents_container,
                 CommunityFragment.instance
             )
-            3->transaction.replace(
+            3 -> transaction.replace(
                 R.id.main_contents_container,
                 GoodsFragment.instance
             )
-            4->transaction.replace(
+            4 -> transaction.replace(
                 R.id.main_contents_container,
                 MyPageFragment.instance
             )
@@ -234,19 +179,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.actionbar_actions,menu)
+        menuInflater.inflate(R.menu.actionbar_actions, menu)
         actionMenu = menu
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        //TODO logout
         Timber.d("${item?.itemId}")
         Timber.d("${R.id.action_login}")
 
-//        when(item?.itemId){
-//            R.id.action_login -> Intent(this,SignInActivity::class.java)
-//
-//        }
         return super.onOptionsItemSelected(item)
     }
 }

@@ -63,7 +63,7 @@ class MyPageEditPhoneNumberActivity : AppCompatActivity() {
 
         val requestModel = EditUserPhoneNumberRequestModel(newPhoneNumber, temp_trim_nation)
         disposable.add(
-            restClient.EditUserPhoneNumber(requestModel)
+            restClient.editUserPhoneNumber(requestModel)
                 .subscribe({ result ->
                     if (result.success) {
                         val intent = Intent()

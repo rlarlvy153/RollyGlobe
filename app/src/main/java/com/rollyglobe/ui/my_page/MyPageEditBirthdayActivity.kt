@@ -162,7 +162,7 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
         val requestModel = EditUserBirthdayRequestModel(y, m, d)
 
         disposable.add(
-            restClient.EditUserBirthday(requestModel)
+            restClient.editUserBirthday(requestModel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->

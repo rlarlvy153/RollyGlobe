@@ -84,7 +84,7 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
         val loadCommentListRequest = LoadCommentListRequest(loadCommentListOption)
         val loadCommentListRequestModel = LoadCommentListRequestModel(loadCommentListRequest)
         disposable.add(
-            restClient.LoadCommentList(loadCommentListRequestModel)
+            restClient.loadCommentList(loadCommentListRequestModel)
                 .subscribe({ result ->
                     Timber.d(result.toString())
 

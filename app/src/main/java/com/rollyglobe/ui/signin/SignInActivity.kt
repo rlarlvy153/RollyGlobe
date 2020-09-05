@@ -12,12 +12,9 @@ import com.rollyglobe.network.model.request_model.SignInOption
 import com.rollyglobe.network.model.request_model.SignInRequest
 import com.rollyglobe.network.model.request_model.SignInRequestModel
 import com.rollyglobe.ui.MainActivity
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_signin.*
 import org.koin.android.ext.android.inject
-import org.koin.core.inject
 import timber.log.Timber
 
 class SignInActivity : AppCompatActivity() {
@@ -67,7 +64,7 @@ class SignInActivity : AppCompatActivity() {
         val signInRequest = SignInRequest("SignIn",option)
         val signInRequestModel = SignInRequestModel(signInRequest)
 
-        disposable.add(restClient.SignIn(signInRequestModel)
+        disposable.add(restClient.signIn(signInRequestModel)
             .subscribe({result->
                 Timber.d(result.toString())
                 Timber.d("${result?.user_info?.user_birthday}")
