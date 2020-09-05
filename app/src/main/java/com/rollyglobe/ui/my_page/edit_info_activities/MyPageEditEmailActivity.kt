@@ -1,62 +1,48 @@
-package com.rollyglobe.ui.my_page
+package com.rollyglobe.ui.my_page.edit_info_activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.ArrayAdapter
-import com.rollyglobe.network.model.request_model.EditUserGenderRequestModel
+import com.rollyglobe.network.model.edit_user_info.email.EditUserEmailRequestModel
 import com.rollyglobe.R
 import com.rollyglobe.network.RollyGlobeApiClient
+import com.rollyglobe.ui.my_page.ProfileEditActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_my_page_edit_gender.*
+import kotlinx.android.synthetic.main.activity_my_page_edit_email.*
 import org.koin.android.ext.android.inject
 
-class MyPageEditGenderActivity : AppCompatActivity() {
+class MyPageEditEmailActivity : AppCompatActivity() {
+
+    lateinit var userEmail:String
     val restClient: RollyGlobeApiClient by inject()
     private val disposable = CompositeDisposable()
 
-    val genderList = ArrayList<String>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_page_edit_gender)
-
+        setContentView(R.layout.activity_my_page_edit_email)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.backwardarrow_ccolor)
-        supportActionBar?.setTitle(R.string.title_edit_gender)
+        supportActionBar?.setTitle(R.string.title_edit_email)
 
-        genderList.add("Female")
-        genderList.add("Male")
-
-
-
-        val genderSpinnerAdapter =
-            ArrayAdapter(this@MyPageEditGenderActivity, android.R.layout.simple_spinner_item, genderList)
-        genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        edit_gender_spinner.adapter = genderSpinnerAdapter
-
-        val userGender = intent.getStringExtra(ProfileEditActivity.EDIT_GENDER)
-        if(userGender.equals("male")){
-            edit_gender_spinner.setSelection(1)
-        }
-
+        userEmail = intent.getStringExtra(ProfileEditActivity.EDIT_EMAIL)
+        edit_text_email.setText(userEmail)
     }
-    fun onClickApplyBtn(v : View){
-        val requestModel = EditUserGenderRequestModel(edit_gender_spinner.selectedItem.toString().toLowerCase())
-//        Timber.d("${edit_gender_spinner.selectedItem.toString().toLowerCase()}")
 
-        disposable.add(restClient.editUserGender(requestModel)
+    fun onClickApplyBtn(v : View){
+        val newEmail = edit_text_email.text.toString()
+        val requestModel = EditUserEmailRequestModel(newEmail)
+        disposable.add(restClient.editUserEmail(requestModel)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result->
                 if(result.success){
                     val intent = Intent()
-                    intent.putExtra(ProfileEditActivity.EDIT_GENDER, edit_gender_spinner.selectedItem.toString().toLowerCase())
-                    setResult(ProfileEditActivity.RESULT_CODE_GENDER, intent)
+                    intent.putExtra(ProfileEditActivity.EDIT_EMAIL, newEmail)
+                    setResult(ProfileEditActivity.RESULT_CODE_EMAIL, intent)
                     finish()
                 }
                 else{
@@ -71,9 +57,7 @@ class MyPageEditGenderActivity : AppCompatActivity() {
 
             })
         )
-
     }
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item?.itemId
 
@@ -82,7 +66,6 @@ class MyPageEditGenderActivity : AppCompatActivity() {
                 finish()
             }
         }
-
         return super.onOptionsItemSelected(item)
     }
 }

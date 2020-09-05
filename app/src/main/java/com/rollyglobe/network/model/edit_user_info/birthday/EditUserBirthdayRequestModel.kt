@@ -1,4 +1,4 @@
-package com.rollyglobe.network.model.request_model
+package com.rollyglobe.network.model.edit_user_info.birthday
 
 import com.google.gson.annotations.SerializedName
 
@@ -21,14 +21,14 @@ class EditUserBirthdayRequest(
     var funcName:String = "",
 
     @SerializedName("option")
-    var option:EditUserBirthdayOption
+    var option: EditUserBirthdayOption
 )
 class EditUserBirthdayRequestModel{
     @SerializedName("request")
-    var request :EditUserBirthdayRequest
+    var request : EditUserBirthdayRequest
 
     constructor(year:String, month:String, day:String){
-        val option = EditUserBirthdayOption("birthday", year,month,day)
+        val option = EditUserBirthdayOption("birthday", year, month, day)
         request = EditUserBirthdayRequest("EditUserInfo", option)
 
     }

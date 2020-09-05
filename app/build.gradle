@@ -54,6 +54,7 @@ android {
                             'src/main/res',
                             'src/main/res/layouts/main_fragment',
                             'src/main/res/layouts/inner_mypage',
+                            'src/main/res/layouts/inner_mypage/edit_activities',
                             'src/main/res/layouts/view_item',
                             'src/main/res/layouts/activity'
                     ]

@@ -1,47 +1,44 @@
-package com.rollyglobe.ui.my_page
+package com.rollyglobe.ui.my_page.edit_info_activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import com.rollyglobe.network.model.request_model.EditUserEmailRequestModel
+import com.rollyglobe.network.model.edit_user_info.name.EditUserNameRequestModel
 import com.rollyglobe.R
 import com.rollyglobe.network.RollyGlobeApiClient
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.rollyglobe.ui.my_page.ProfileEditActivity
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_my_page_edit_email.*
+import kotlinx.android.synthetic.main.activity_my_page_edit_name.*
 import org.koin.android.ext.android.inject
 
-class MyPageEditEmailActivity : AppCompatActivity() {
+class MyPageEditNameActivity : AppCompatActivity() {
 
-    lateinit var userEmail:String
+    lateinit var userName:String
     val restClient: RollyGlobeApiClient by inject()
     private val disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_page_edit_email)
+
+        setContentView(R.layout.activity_my_page_edit_name)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.backwardarrow_ccolor)
-        supportActionBar?.setTitle(R.string.title_edit_email)
-
-        userEmail = intent.getStringExtra(ProfileEditActivity.EDIT_EMAIL)
-        edit_text_email.setText(userEmail)
+        supportActionBar?.setTitle(R.string.title_edit_name)
+        userName = intent.getStringExtra(ProfileEditActivity.EDIT_NAME)
+        edit_text_name.setText(userName)
     }
 
     fun onClickApplyBtn(v : View){
-        val newEmail = edit_text_email.text.toString()
-        val requestModel = EditUserEmailRequestModel(newEmail)
-        disposable.add(restClient.editUserEmail(requestModel)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        val newName = edit_text_name.text.toString()
+        val requestModel = EditUserNameRequestModel(newName)
+        disposable.add(restClient.editUserName(requestModel)
             .subscribe({result->
                 if(result.success){
                     val intent = Intent()
-                    intent.putExtra(ProfileEditActivity.EDIT_EMAIL, newEmail)
-                    setResult(ProfileEditActivity.RESULT_CODE_EMAIL, intent)
+                    intent.putExtra(ProfileEditActivity.EDIT_NAME, newName)
+                    setResult(ProfileEditActivity.RESULT_CODE_NAME, intent)
                     finish()
                 }
                 else{
@@ -57,6 +54,7 @@ class MyPageEditEmailActivity : AppCompatActivity() {
             })
         )
     }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item?.itemId
 
@@ -65,6 +63,7 @@ class MyPageEditEmailActivity : AppCompatActivity() {
                 finish()
             }
         }
+
         return super.onOptionsItemSelected(item)
     }
 }

@@ -1,4 +1,4 @@
-package com.rollyglobe.ui.my_page
+package com.rollyglobe.ui.my_page.edit_info_activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.rollyglobe.R
 import com.rollyglobe.network.RollyGlobeApiClient
-import com.rollyglobe.network.model.request_model.EditUserPasswordRequestModel
+import com.rollyglobe.network.model.edit_user_info.password.EditUserPasswordRequestModel
+import com.rollyglobe.ui.my_page.ProfileEditActivity
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_my_page_edit_password.*
 import org.koin.android.ext.android.inject

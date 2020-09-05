@@ -1,4 +1,4 @@
-package com.rollyglobe.ui.my_page
+package com.rollyglobe.ui.my_page.edit_info_activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,8 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.rollyglobe.R
 import com.rollyglobe.network.RollyGlobeApiClient
-import com.rollyglobe.network.model.request_model.EditUserPhoneNumberRequestModel
+import com.rollyglobe.network.model.edit_user_info.phonenumber.EditUserPhoneNumberRequestModel
+import com.rollyglobe.ui.my_page.ProfileEditActivity
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_my_page_edit_phone_number.*
 import org.koin.android.ext.android.inject
@@ -61,7 +62,8 @@ class MyPageEditPhoneNumberActivity : AppCompatActivity() {
         val temp_nation = mypage_nation_code_spinner.selectedItem.toString()
         val temp_trim_nation = temp_nation.substring(1, temp_nation.indexOf('(')).toInt()
 
-        val requestModel = EditUserPhoneNumberRequestModel(newPhoneNumber, temp_trim_nation)
+        val requestModel =
+            EditUserPhoneNumberRequestModel(newPhoneNumber, temp_trim_nation)
         disposable.add(
             restClient.editUserPhoneNumber(requestModel)
                 .subscribe({ result ->

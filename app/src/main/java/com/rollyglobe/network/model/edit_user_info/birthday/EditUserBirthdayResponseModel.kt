@@ -1,13 +1,13 @@
-package com.rollyglobe.network.model.response_model
+package com.rollyglobe.network.model.edit_user_info.birthday
 
 import com.google.gson.annotations.SerializedName
 
-class EditUserEmailResponseModel (
+class EditUserBirthdayResponseModel (
     @SerializedName("msg")
     val msg:String,
 
-    @SerializedName("email")
-    val email:String,
+    @SerializedName("birthday")
+    val birthday:String,
 
     @SerializedName("success")
     val success:Boolean

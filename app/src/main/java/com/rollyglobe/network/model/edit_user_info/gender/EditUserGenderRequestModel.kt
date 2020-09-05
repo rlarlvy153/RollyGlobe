@@ -1,4 +1,4 @@
-package com.rollyglobe.network.model.request_model
+package com.rollyglobe.network.model.edit_user_info.gender
 
 import com.google.gson.annotations.SerializedName
 
@@ -17,11 +17,11 @@ class EditUserGendereRequest(
     var funcName:String = "",
 
     @SerializedName("option")
-    var option:EditUserGenderOption
+    var option: EditUserGenderOption
 )
 class EditUserGenderRequestModel{
     @SerializedName("request")
-    var request :EditUserGendereRequest
+    var request : EditUserGendereRequest
 
     constructor(gender:String){
         val option = EditUserGenderOption("sex", gender)

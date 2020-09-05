@@ -14,12 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.rollyglobe.ui.my_page.MyPageEditPasswordActivity"></activity>
-        <activity android:name="com.rollyglobe.ui.my_page.MyPageEditBirthdayActivity" />
-        <activity android:name="com.rollyglobe.ui.my_page.MyPageEditGenderActivity" />
-        <activity android:name="com.rollyglobe.ui.my_page.MyPageEditEmailActivity" />
-        <activity android:name="com.rollyglobe.ui.my_page.MyPageEditPhoneNumberActivity" />
-        <activity android:name="com.rollyglobe.ui.my_page.MyPageEditNameActivity" />
+        <activity android:name="com.rollyglobe.ui.my_page.edit_info_activities.MyPageEditPasswordActivity"></activity>
+        <activity android:name="com.rollyglobe.ui.my_page.edit_info_activities.MyPageEditBirthdayActivity" />
+        <activity android:name="com.rollyglobe.ui.my_page.edit_info_activities.MyPageEditGenderActivity" />
+        <activity android:name="com.rollyglobe.ui.my_page.edit_info_activities.MyPageEditEmailActivity" />
+        <activity android:name="com.rollyglobe.ui.my_page.edit_info_activities.MyPageEditPhoneNumberActivity" />
+        <activity android:name="com.rollyglobe.ui.my_page.edit_info_activities.MyPageEditNameActivity" />
         <activity android:name="com.rollyglobe.ui.my_page.ProfileEditActivity" />
 
         <meta-data

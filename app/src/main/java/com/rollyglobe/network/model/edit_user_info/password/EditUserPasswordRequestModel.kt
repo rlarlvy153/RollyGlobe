@@ -1,4 +1,4 @@
-package com.rollyglobe.network.model.request_model
+package com.rollyglobe.network.model.edit_user_info.password
 
 import com.google.gson.annotations.SerializedName
 
@@ -19,11 +19,11 @@ class EditUserPasswordRequest(
     var funcName:String = "",
 
     @SerializedName("option")
-    var option:EditUserPasswordOption
+    var option: EditUserPasswordOption
 )
 class EditUserPasswordRequestModel{
     @SerializedName("request")
-    var request :EditUserPasswordRequest
+    var request : EditUserPasswordRequest
 
     constructor(oldPassword:String, newPassword:String){
         val option = EditUserPasswordOption("password", oldPassword, newPassword)

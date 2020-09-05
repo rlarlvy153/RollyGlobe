@@ -1,4 +1,4 @@
-package com.rollyglobe.network.model.request_model
+package com.rollyglobe.network.model.edit_user_info.phonenumber
 
 import com.google.gson.annotations.SerializedName
 
@@ -19,14 +19,15 @@ class EditUserPhoneNumbeRequest(
     var funcName:String = "",
 
     @SerializedName("option")
-    var option:EditUserPhoneNumberOption
+    var option: EditUserPhoneNumberOption
 )
 class EditUserPhoneNumberRequestModel{
     @SerializedName("request")
-    var request :EditUserPhoneNumbeRequest
+    var request : EditUserPhoneNumbeRequest
 
     constructor(phoneNumber:String, nationCode:Int){
-        val option = EditUserPhoneNumberOption("phone_num", phoneNumber,nationCode)
+        val option =
+            EditUserPhoneNumberOption("phone_num", phoneNumber, nationCode)
         request = EditUserPhoneNumbeRequest("EditUserInfo", option)
 
     }

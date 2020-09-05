@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".ui.my_page.edit_info_activities.MyPageEditNameActivity"
     android:orientation="vertical"
-    tools:context=".ui.my_page.MyPageEditGenderActivity">
+    android:background="#88EBEBEB"
+    >
+
     <TextView
-        android:text="@string/gender"
+        android:text="@string/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -16,16 +19,17 @@
         android:layout_height="wrap_content"
         >
 
-        <Spinner
-            android:id="@+id/edit_gender_spinner"
+        <EditText
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/edit_text_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_gender_spinner"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_name"
             android:text="@string/apply"
             android:onClick="onClickApplyBtn"
             android:layout_width="300dp"
@@ -36,4 +40,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </LinearLayout>

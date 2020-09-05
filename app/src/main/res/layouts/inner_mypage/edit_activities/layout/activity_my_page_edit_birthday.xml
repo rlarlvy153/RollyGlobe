@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.my_page.MyPageEditEmailActivity">
+    tools:context=".ui.my_page.edit_info_activities.MyPageEditBirthdayActivity">
     <TextView
-        android:text="@string/email"
+        android:text="@string/birthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -15,18 +15,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-
-        <EditText
+        <Spinner
+            android:id="@+id/edit_year_spinner"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="10dp"
-            android:id="@+id/edit_text_email"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:id="@+id/edit_month_spinner"
+            app:layout_constraintLeft_toRightOf="@id/edit_year_spinner"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:id="@+id/edit_day_spinner"
+            app:layout_constraintLeft_toRightOf="@id/edit_month_spinner"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"/>
+
         <Button
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_text_email"
+            app:layout_constraintTop_toBottomOf="@id/edit_year_spinner"
             android:text="@string/apply"
             android:onClick="onClickApplyBtn"
             android:layout_width="300dp"

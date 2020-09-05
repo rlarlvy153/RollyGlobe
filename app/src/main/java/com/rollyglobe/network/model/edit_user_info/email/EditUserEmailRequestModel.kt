@@ -1,4 +1,4 @@
-package com.rollyglobe.network.model.request_model
+package com.rollyglobe.network.model.edit_user_info.email
 
 import com.google.gson.annotations.SerializedName
 
@@ -17,11 +17,11 @@ class EditUserEmailRequest(
     var funcName:String = "",
 
     @SerializedName("option")
-    var option:EditUserEmailOption
+    var option: EditUserEmailOption
 )
 class EditUserEmailRequestModel{
     @SerializedName("request")
-    var request :EditUserEmailRequest
+    var request : EditUserEmailRequest
 
     constructor(email:String){
         val option = EditUserEmailOption("email", email)

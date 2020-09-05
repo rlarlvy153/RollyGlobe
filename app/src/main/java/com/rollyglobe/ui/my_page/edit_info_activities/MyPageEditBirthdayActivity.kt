@@ -1,4 +1,4 @@
-package com.rollyglobe.ui.my_page
+package com.rollyglobe.ui.my_page.edit_info_activities
 
 import android.content.Intent
 import android.icu.util.GregorianCalendar
@@ -11,7 +11,8 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.rollyglobe.R
 import com.rollyglobe.network.RollyGlobeApiClient
-import com.rollyglobe.network.model.request_model.EditUserBirthdayRequestModel
+import com.rollyglobe.network.model.edit_user_info.birthday.EditUserBirthdayRequestModel
+import com.rollyglobe.ui.my_page.ProfileEditActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
