@@ -8,6 +8,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.rollyglobe.R
+import com.rollyglobe.ui.my_page.edit_info_activities.*
 import kotlinx.android.synthetic.main.activity_profile_edit.*
 import timber.log.Timber
 

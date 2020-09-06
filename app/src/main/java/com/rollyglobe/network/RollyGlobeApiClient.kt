@@ -2,7 +2,28 @@ package com.rollyglobe.network
 
 import com.rollyglobe.network.model.RecommendListResponseModel
 import com.rollyglobe.network.model.request_model.*
+import com.rollyglobe.network.model.spot.geocode.GeocodeByGpsRequestModel
+import com.rollyglobe.network.model.spot.geocode.GeocodeByGpsResponseModel
+import com.rollyglobe.network.model.spot.geocode.GeocodeByPlaceIdRequestModel
+import com.rollyglobe.network.model.spot.geocode.GeocodeByPlaceIdResponseModel
+import com.rollyglobe.network.model.edit_user_info.birthday.EditUserBirthdayRequestModel
+import com.rollyglobe.network.model.edit_user_info.birthday.EditUserBirthdayResponseModel
+import com.rollyglobe.network.model.edit_user_info.email.EditUserEmailRequestModel
+import com.rollyglobe.network.model.edit_user_info.email.EditUserEmailResponseModel
+import com.rollyglobe.network.model.edit_user_info.gender.EditUserGenderRequestModel
+import com.rollyglobe.network.model.edit_user_info.gender.EditUserGenderResponseModel
+import com.rollyglobe.network.model.edit_user_info.name.EditUserNameRequestModel
+import com.rollyglobe.network.model.edit_user_info.name.EditUserNameResponseModel
+import com.rollyglobe.network.model.edit_user_info.password.EditUserPasswordRequestModel
+import com.rollyglobe.network.model.edit_user_info.password.EditUserPasswordResponseModel
+import com.rollyglobe.network.model.edit_user_info.phonenumber.EditUserPhoneNumberRequestModel
+import com.rollyglobe.network.model.edit_user_info.phonenumber.EditUserPhoneNumberResponseModel
 import com.rollyglobe.network.model.response_model.*
+import com.rollyglobe.network.model.user.signin.SignInModel
+import com.rollyglobe.network.model.user.signin.SignInRequestModel
+import com.rollyglobe.network.model.user.signup.SignUpRequestModel
+import com.rollyglobe.network.model.user.signup.SignUpResponseModel
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -24,6 +45,18 @@ class RollyGlobeApiClient(private val rollyGlobeApiInterface: RollyGlobeApiInter
 
     fun signIn(param: SignInRequestModel): Single<SignInModel> {
         return rollyGlobeApiInterface.signIn(param)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getGeocodeByGps(param: GeocodeByGpsRequestModel): Observable<GeocodeByGpsResponseModel> {
+        return rollyGlobeApiInterface.getGeocodeByGps(param)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun getGeocodeByPlaceId(param:GeocodeByPlaceIdRequestModel):Observable<GeocodeByPlaceIdResponseModel>{
+        return rollyGlobeApiInterface.getGeocodeByPlaceId(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

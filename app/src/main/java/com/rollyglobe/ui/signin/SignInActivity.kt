@@ -8,9 +8,9 @@ import androidx.core.content.ContextCompat
 import com.rollyglobe.R
 import com.rollyglobe.network.RollyGlobeApiClient
 import com.rollyglobe.ui.signup.SignUpActivity
-import com.rollyglobe.network.model.request_model.SignInOption
-import com.rollyglobe.network.model.request_model.SignInRequest
-import com.rollyglobe.network.model.request_model.SignInRequestModel
+import com.rollyglobe.network.model.user.signin.SignInOption
+import com.rollyglobe.network.model.user.signin.SignInRequest
+import com.rollyglobe.network.model.user.signin.SignInRequestModel
 import com.rollyglobe.ui.MainActivity
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_signin.*
@@ -26,20 +26,20 @@ class SignInActivity : AppCompatActivity() {
     val focusListesner = View.OnFocusChangeListener{v, hasFocus ->
 
         when(v.id){
-            signin_email_edit.id -> {
-                signin_email_edit_underline.setBackgroundColor(ContextCompat.getColor(this,
+            signinEmailEdit.id -> {
+                signinEmailEditUnderline.setBackgroundColor(ContextCompat.getColor(this,
                     R.color.rg_blue
                 ))
-                signin_password_edit_underline.setBackgroundColor(ContextCompat.getColor(this,
+                signinPasswordEditUnderline.setBackgroundColor(ContextCompat.getColor(this,
                     R.color.rg_gray
                 ))
 
             }
-            signin_password_edit.id->{
-                signin_password_edit_underline.setBackgroundColor(ContextCompat.getColor(this,
+            signinPasswordEdit.id->{
+                signinPasswordEditUnderline.setBackgroundColor(ContextCompat.getColor(this,
                     R.color.rg_blue
                 ))
-                signin_email_edit_underline.setBackgroundColor(ContextCompat.getColor(this,
+                signinEmailEditUnderline.setBackgroundColor(ContextCompat.getColor(this,
                     R.color.rg_gray
                 ))
             }
@@ -51,17 +51,17 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signin)
         supportActionBar?.hide()
 
-        signin_email_edit.onFocusChangeListener = focusListesner
-        signin_password_edit.onFocusChangeListener = focusListesner
+        signinEmailEdit.onFocusChangeListener = focusListesner
+        signinPasswordEdit.onFocusChangeListener = focusListesner
 
     }
     fun onClickSignIn(v : View){
-        val email_address = signin_email_edit.text.toString()
-        val pw = signin_password_edit.text.toString()
-        val auto = keep_login_checkbox.isChecked
+        val email_address = signinEmailEdit.text.toString()
+        val pw = signinPasswordEdit.text.toString()
+        val auto = keepLoginCheckbox.isChecked
 
-        val option  = SignInOption("email",email_address, pw,auto)
-        val signInRequest = SignInRequest("SignIn",option)
+        val option  = SignInOption("email", email_address, pw, auto)
+        val signInRequest = SignInRequest("SignIn", option)
         val signInRequestModel = SignInRequestModel(signInRequest)
 
         disposable.add(restClient.signIn(signInRequestModel)

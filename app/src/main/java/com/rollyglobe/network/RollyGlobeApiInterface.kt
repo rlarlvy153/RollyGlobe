@@ -2,7 +2,28 @@ package com.rollyglobe.network
 
 import com.rollyglobe.network.model.RecommendListResponseModel
 import com.rollyglobe.network.model.request_model.*
+import com.rollyglobe.network.model.spot.geocode.GeocodeByGpsRequestModel
+import com.rollyglobe.network.model.spot.geocode.GeocodeByGpsResponseModel
+import com.rollyglobe.network.model.spot.geocode.GeocodeByPlaceIdRequestModel
+import com.rollyglobe.network.model.spot.geocode.GeocodeByPlaceIdResponseModel
+import com.rollyglobe.network.model.edit_user_info.birthday.EditUserBirthdayRequestModel
+import com.rollyglobe.network.model.edit_user_info.birthday.EditUserBirthdayResponseModel
+import com.rollyglobe.network.model.edit_user_info.email.EditUserEmailRequestModel
+import com.rollyglobe.network.model.edit_user_info.email.EditUserEmailResponseModel
+import com.rollyglobe.network.model.edit_user_info.gender.EditUserGenderRequestModel
+import com.rollyglobe.network.model.edit_user_info.gender.EditUserGenderResponseModel
+import com.rollyglobe.network.model.edit_user_info.name.EditUserNameRequestModel
+import com.rollyglobe.network.model.edit_user_info.name.EditUserNameResponseModel
+import com.rollyglobe.network.model.edit_user_info.password.EditUserPasswordRequestModel
+import com.rollyglobe.network.model.edit_user_info.password.EditUserPasswordResponseModel
+import com.rollyglobe.network.model.edit_user_info.phonenumber.EditUserPhoneNumberRequestModel
+import com.rollyglobe.network.model.edit_user_info.phonenumber.EditUserPhoneNumberResponseModel
 import com.rollyglobe.network.model.response_model.*
+import com.rollyglobe.network.model.user.signin.SignInModel
+import com.rollyglobe.network.model.user.signin.SignInRequestModel
+import com.rollyglobe.network.model.user.signup.SignUpRequestModel
+import com.rollyglobe.network.model.user.signup.SignUpResponseModel
+import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.http.Body
@@ -25,6 +46,12 @@ interface RollyGlobeApiInterface {
 
     @POST("/ajax/spot.php")
     fun getSpotInnerContents(@Body param: InnerContentsRequestModel): Single<ResponseBody>
+
+    @POST("/ajax/spot.php")
+    fun getGeocodeByGps(@Body param: GeocodeByGpsRequestModel): Observable<GeocodeByGpsResponseModel>
+
+    @POST("/ajax/spot.php")
+    fun getGeocodeByPlaceId(@Body param: GeocodeByPlaceIdRequestModel): Observable<GeocodeByPlaceIdResponseModel>
 
     @POST("ajax/mypage.php")
     fun getMyPageHomeInfo(@Body param: MyPageHomeRequestModel): Single<MyPageHomeInfoResponseModel>

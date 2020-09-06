@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.rollyglobe.network.RollyGlobeApiClient
 import com.rollyglobe.network.model.SpotModel
+import com.rollyglobe.network.model.spot.geocode.*
 import com.rollyglobe.network.model.request_model.*
 import com.rollyglobe.network.model.response_model.ReservationModel
 import io.reactivex.disposables.CompositeDisposable
@@ -201,4 +202,30 @@ class MainViewModel : ViewModel(), KoinComponent {
         reservations.value?.clear()
         isLogin.value = false
     }
+
+    fun getGeocodeByGps() {
+        Timber.d("call gps")
+        val req = GeocodeByGpsRequestModel()
+        req.request = GeocodeByGpsRequest(
+            "GetGeocodeByGps",
+            GpsOption(37.5038022f, 127.0242523f)
+        )
+//        req.request.funcName = "GetGeocodeByGps"
+//        req.request.option = GpsOption(37.5038022f, 127.0242523f)
+        disposable.add(restClient.getGeocodeByGps(req).subscribe( {
+            Timber.d("ggggggggggg" + it.geocode)
+        }))
+
+
+    }
+    fun getGeocodeByPlaceId(){
+        val req = GeocodeByPlaceIdRequestModel()
+        req.request = GeocodeByPlaceIdRequest("GetGeocodeByPlaceId", PlaceIdOption("ChIJNwUpIdSjfDURprYWgSEWUgs"))
+        disposable.add(restClient.getGeocodeByPlaceId(req).subscribe {
+            Timber.d("aaaaaaaaaa" + it.success)
+            Timber.d("aaaaaaaaaa" + it.msg)
+            Timber.d("aaaaaaaaaa" + it.geocode)
+        })
+    }
+
 }
