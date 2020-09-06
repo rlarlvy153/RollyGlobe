@@ -13,13 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
-            android:id="@+id/spot_image"
+            android:id="@+id/spotImage"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:scaleType="fitXY" />
 
         <TextView
-            android:id="@+id/spot_position"
+            android:id="@+id/spotPosition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -28,14 +28,14 @@
 
 
         <TextView
-            android:id="@+id/spot_name"
+            android:id="@+id/spotName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/spot_name_eng"
+            android:id="@+id/spotNameEng"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -48,31 +48,31 @@
             android:layout_marginBottom="10dp">
 
             <ImageView
-                android:id="@+id/star_rate1"
+                android:id="@+id/starRate1"
                 style="@style/inner_contents_star"
                 android:background="@drawable/staricon_innercontents"
                 android:scaleType="fitXY" />
 
             <ImageView
-                android:id="@+id/star_rate2"
+                android:id="@+id/starRate2"
                 style="@style/inner_contents_star"
                 android:background="@drawable/staricon_innercontents"
                 android:scaleType="fitXY" />
 
             <ImageView
-                android:id="@+id/star_rate3"
+                android:id="@+id/starRate3"
                 style="@style/inner_contents_star"
                 android:background="@drawable/staricon_innercontents"
                 android:scaleType="fitXY" />
 
             <ImageView
-                android:id="@+id/star_rate4"
+                android:id="@+id/starRate4"
                 style="@style/inner_contents_star"
                 android:background="@drawable/staricon_innercontents"
                 android:scaleType="fitXY" />
 
             <ImageView
-                android:id="@+id/star_rate5"
+                android:id="@+id/starRate5"
                 style="@style/inner_contents_star"
                 android:background="@drawable/staricon_innercontents"
                 android:scaleType="fitXY" />
@@ -99,7 +99,7 @@
                     android:scaleType="fitXY" />
 
                 <TextView
-                    android:id="@+id/scrap_txt"
+                    android:id="@+id/scrapTxt"
                     style="@style/inner_contents_small_icon_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
                     android:scaleType="fitXY" />
 
                 <TextView
-                    android:id="@+id/post_txt"
+                    android:id="@+id/postTxt"
                     style="@style/inner_contents_small_icon_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
                     android:scaleType="fitXY" />
 
                 <TextView
-                    android:id="@+id/comment_txt"
+                    android:id="@+id/commentTxt"
                     style="@style/inner_contents_small_icon_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/scrap_image"
+                    android:id="@+id/scrapImage"
                     style="@style/inner_contents_small_icon_button"
                     android:background="@drawable/scrapicon_innercontents"
                     android:scaleType="fitXY" />
@@ -223,7 +223,7 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/post_image"
+                    android:id="@+id/postImage"
                     style="@style/inner_contents_small_icon_button"
                     android:background="@drawable/posticon_innercontents"
                     android:scaleType="fitXY" />
@@ -242,7 +242,7 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/comment_image"
+                    android:id="@+id/commentImage"
                     style="@style/inner_contents_small_icon_button"
                     android:background="@drawable/commenticon_innercontents"
                     android:scaleType="fitXY" />
@@ -269,13 +269,13 @@
             android:layout_marginBottom="10dp">
 
             <TextView
-                android:id="@+id/major_tag"
+                android:id="@+id/majorTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#42ADE2" />
 
             <TextView
-                android:id="@+id/tag_list"
+                android:id="@+id/tagList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -299,7 +299,7 @@
                 android:text="@string/details" />
 
             <TextView
-                android:id="@+id/spot_detail"
+                android:id="@+id/spotDetail"
                 style="@style/inner_contents_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -312,7 +312,7 @@
                 android:text="@string/time" />
 
             <TextView
-                android:id="@+id/spot_time"
+                android:id="@+id/spotTime"
                 style="@style/inner_contents_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -325,7 +325,7 @@
                 android:text="@string/cost" />
 
             <TextView
-                android:id="@+id/spot_cost"
+                android:id="@+id/spotCost"
                 style="@style/inner_contents_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -337,7 +337,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/contact" />
             <TextView
-                android:id="@+id/spot_contact"
+                android:id="@+id/spotContact"
                 style="@style/inner_contents_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -350,7 +350,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/webpage" />
             <TextView
-                android:id="@+id/spot_web"
+                android:id="@+id/spotWeb"
                 style="@style/inner_contents_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -362,15 +362,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/route" />
             <TextView
-                android:id="@+id/spot_route"
+                android:id="@+id/spotRoute"
                 style="@style/inner_contents_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
-
-
-
-
 
             <TextView
                 style="@style/inner_contents_description_header"
@@ -378,18 +373,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/address" />
             <TextView
-                android:id="@+id/spot_address"
+                android:id="@+id/spotAddress"
                 style="@style/inner_contents_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
-
 
         </LinearLayout>
 
         <fragment
             android:tag="fragment_map"
-            android:id="@+id/fragment_map"
+            android:id="@+id/fragmentMap"
             android:layout_width="match_parent"
             android:layout_height="201dp"
             class="com.rollyglobe.ui.recommend.inner_contents.WorkaroundMapFragment"/>
@@ -400,9 +393,8 @@
             android:layout_marginBottom="10dp"
             android:background="#88EBEBEB" />
 
-
         <TextView
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
             android:textSize="20dp"
@@ -413,15 +405,11 @@
 
             />
         <LinearLayout
-            android:id="@+id/spot_product_container"
+            android:id="@+id/spotProductContainer"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
-
         </LinearLayout>
     </LinearLayout>
-
-
 </ScrollView>

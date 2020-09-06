@@ -41,7 +41,7 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun initMapFragment() {
 
-        mapFragment = (supportFragmentManager.findFragmentById(R.id.fragment_map) as WorkaroundMapFragment)
+        mapFragment = (supportFragmentManager.findFragmentById(R.id.fragmentMap) as WorkaroundMapFragment)
 
         mapFragment.getMapAsync(this)
 
@@ -80,7 +80,7 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setSpotProduct(spot: SpotInnerContentsModel) {
-        val container = spot_product_container
+        val container = spotProductContainer
 
         for (obj in spot.spotProductJSONArrayList) {
             val view = layoutInflater.inflate(R.layout.spot_product_item, container, false)
@@ -103,26 +103,26 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
         //TODO 이미지 viewpager
         if (spot.spotPicList.size > 0) {
             Glide.with(this).load("https://m.rollyglobe.com/post/pics/small/" + spot.spotPicList[0])
-                .into(spot_image)
+                .into(spotImage)
         }
 
-        spot_name.text = spot.spotTitleKor
-        spot_name_eng.text = spot.spotTitleEng
+        spotName.text = spot.spotTitleKor
+        spotNameEng.text = spot.spotTitleEng
         val concat = "${spot.spotContinent} - ${spot.spotNation} - ${spot.spotCity}"
-        spot_position.text = concat
-        spot_detail.text = spot.spotDetail
-        spot_time.text = spot.spotTime
-        spot_cost.text = spot.spotCost
-        spot_address.text = spot.spotAddress
-        spot_route.text = spot.spotTraffic
-        spot_contact.text = spot.spotContact
-        spot_web.text = spot.spotWeb
-        major_tag.text = "#${spot.spotMajorTag}"
+        spotPosition.text = concat
+        spotDetail.text = spot.spotDetail
+        spotTime.text = spot.spotTime
+        spotCost.text = spot.spotCost
+        spotAddress.text = spot.spotAddress
+        spotRoute.text = spot.spotTraffic
+        spotContact.text = spot.spotContact
+        spotWeb.text = spot.spotWeb
+        majorTag.text = "#${spot.spotMajorTag}"
         val tagListBuilder = StringBuilder()
         for (tag in spot.tagList) {
             tagListBuilder.append("  #$tag")
         }
-        tag_list.text = tagListBuilder.toString()
+        tagList.text = tagListBuilder.toString()
     }
 
     private fun initView(spot: SpotInnerContentsModel) {
