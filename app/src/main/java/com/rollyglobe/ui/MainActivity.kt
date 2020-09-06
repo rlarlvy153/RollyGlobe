@@ -53,9 +53,9 @@ class MainActivity : AppCompatActivity() {
             fun shadowToggle(tab: TabLayout.Tab) {
                 val position: Int = tab.position
                 if (position == 4) {
-                    upper_shadow.visibility = View.GONE
+                    headerShadow.visibility = View.GONE
                 } else {
-                    upper_shadow.visibility = View.VISIBLE
+                    headerShadow.visibility = View.VISIBLE
                 }
             }
 
@@ -65,14 +65,14 @@ class MainActivity : AppCompatActivity() {
 
                 if (position == 0) {
                     supportActionBar?.let {
-                        img_logo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_fullletter))
-                        title_text.text = ""
+                        imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_fullletter))
+                        titleText.text = ""
                     }
                     supportActionBar?.title = ""
                 } else {
                     supportActionBar?.let {
-                        img_logo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_icon))
-                        title_text.text = AppComponent.applicationContext.getString(tabRes.title)
+                        imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_icon))
+                        titleText.text = AppComponent.applicationContext.getString(tabRes.title)
                     }
                 }
             }
@@ -125,8 +125,8 @@ class MainActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
             title = ""
             elevation = 0f
-            img_logo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_fullletter))
-            title_text.text = ""
+            imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_fullletter))
+            titleText.text = ""
         }
     }
 
@@ -156,23 +156,23 @@ class MainActivity : AppCompatActivity() {
 
         when (position) {
             0 -> transaction.replace(
-                R.id.main_contents_container,
+                R.id.mainContentsContainer,
                 HomeFragment.instance
             )
             1 -> transaction.replace(
-                R.id.main_contents_container,
+                R.id.mainContentsContainer,
                 RecommendFragment.instance
             )
             2 -> transaction.replace(
-                R.id.main_contents_container,
+                R.id.mainContentsContainer,
                 CommunityFragment.instance
             )
             3 -> transaction.replace(
-                R.id.main_contents_container,
+                R.id.mainContentsContainer,
                 GoodsFragment.instance
             )
             4 -> transaction.replace(
-                R.id.main_contents_container,
+                R.id.mainContentsContainer,
                 MyPageFragment.instance
             )
         }
