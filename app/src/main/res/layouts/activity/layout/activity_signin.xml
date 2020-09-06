@@ -7,17 +7,17 @@
     tools:context=".ui.signin.SignInActivity">
 
     <include
-        android:id="@+id/back_icon"
+        android:id="@+id/backIcon"
         layout="@layout/back_arrow"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="18dp"
-        android:layout_marginLeft="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/banner_image"
+        android:id="@+id/bannerImage"
         layout="@layout/rollyglobe_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,116 +27,112 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/signin_container"
+        android:id="@+id/signinContainer"
         android:layout_width="286dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/banner_image">
+        app:layout_constraintTop_toBottomOf="@id/bannerImage">
 
         <EditText
-            android:id="@+id/signin_email_edit"
+            android:id="@+id/signinEmailEdit"
             android:layout_width="match_parent"
             android:layout_height="16dp"
             android:layout_marginTop="0dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/nanum_square_r"
             android:hint="@string/signin_email"
             android:padding="0dp"
             android:text="rlasfsf@naver.com"
             android:textSize="14dp"
-            android:fontFamily="@font/nanum_square_r"
-            android:background="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:layout_marginTop="5dp"
-            android:id="@+id/signin_email_edit_underline"
+            android:id="@+id/signinEmailEditUnderline"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signin_email_edit"
+            android:layout_marginTop="5dp"
             android:background="#B6B6B6"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signinEmailEdit" />
 
         <EditText
-            android:id="@+id/signin_password_edit"
+            android:id="@+id/signinPasswordEdit"
             android:layout_width="match_parent"
             android:layout_height="16dp"
             android:layout_marginTop="33dp"
-            android:hint="@string/signin_password"
+            android:background="@android:color/transparent"
 
+            android:hint="@string/signin_password"
             android:padding="0dp"
             android:text="kgp"
             android:textSize="14dp"
-            android:background="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signin_email_edit_underline" />
+            app:layout_constraintTop_toBottomOf="@id/signinEmailEditUnderline" />
 
         <View
-            android:layout_marginTop="5dp"
-            android:id="@+id/signin_password_edit_underline"
+            android:id="@+id/signinPasswordEditUnderline"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signin_password_edit"
+            android:layout_marginTop="5dp"
             android:background="#B6B6B6"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signinPasswordEdit" />
 
         <CheckBox
-            android:id="@+id/keep_login_checkbox"
+            android:id="@+id/keepLoginCheckbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/signin_keep_login"
             android:textSize="11dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signin_password_edit"
+            app:layout_constraintTop_toBottomOf="@id/signinPasswordEdit"
 
             />
 
         <Button
-            android:id="@+id/signin_button"
+            android:id="@+id/signinButton"
             style="@style/rollyglobe_default_button"
             android:layout_width="286dp"
             android:layout_height="40dp"
             android:layout_marginTop="18dp"
+            android:fontFamily="@font/nanum_square_b"
             android:onClick="onClickSignIn"
             android:text="@string/signin_button"
             android:textSize="14dp"
-            android:fontFamily="@font/nanum_square_b"
-
-
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/keep_login_checkbox" />
+            app:layout_constraintTop_toBottomOf="@id/keepLoginCheckbox" />
 
         <TextView
-            android:id="@+id/forget_password"
+            android:id="@+id/forgetPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:text="@string/forget_password"
             android:textSize="11dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signin_button" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signinButton" />
 
         <include
-            android:id="@+id/signin_with_facebook_container"
+            android:id="@+id/signinWithFacebookContainer"
             layout="@layout/signin_with_facebook"
             android:layout_width="286dp"
             android:layout_height="38dp"
             android:layout_marginTop="216dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/forget_password" />
+            app:layout_constraintTop_toBottomOf="@id/forgetPassword" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signin_with_facebook_container">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signinWithFacebookContainer">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -147,14 +143,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:fontFamily="@font/nanum_square_b"
                 android:onClick="onClickSignUpText"
                 android:text="@string/move_to_signup"
-                android:layout_marginStart="5dp"
                 android:textAppearance="@style/Widget.AppCompat.Spinner.Underlined"
                 android:textColor="#42ADE2"
-                android:fontFamily="@font/nanum_square_b"
                 android:textSize="11dp" />
 
         </LinearLayout>
