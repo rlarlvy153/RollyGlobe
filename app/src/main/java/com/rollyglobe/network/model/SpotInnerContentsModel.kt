@@ -16,7 +16,7 @@ data class SpotProduct(
 
 )
 
-class SpotInnderContentsModel(resultJson: JSONObject,defaultString:String) {
+class SpotInnerContentsModel(resultJson: JSONObject, defaultString:String) {
     val gson : Gson = Gson()
     var spotNum : Int
     var spotTitleKor : String

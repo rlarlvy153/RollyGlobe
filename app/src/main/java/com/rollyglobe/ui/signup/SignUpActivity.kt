@@ -19,9 +19,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.rollyglobe.R
 import com.rollyglobe.network.RollyGlobeApiClient
-import com.rollyglobe.network.model.request_model.SignUpOption
-import com.rollyglobe.network.model.request_model.SignUpRequest
-import com.rollyglobe.network.model.request_model.SignUpRequestModel
+import com.rollyglobe.network.model.user.signup.SignUpOption
+import com.rollyglobe.network.model.user.signup.SignUpRequest
+import com.rollyglobe.network.model.user.signup.SignUpRequestModel
 import com.rollyglobe.network.model.response_model.NationCodeResponseModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

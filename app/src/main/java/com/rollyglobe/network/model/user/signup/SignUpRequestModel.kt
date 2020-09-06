@@ -1,4 +1,4 @@
-package com.rollyglobe.network.model.request_model
+package com.rollyglobe.network.model.user.signup
 
 import com.google.gson.annotations.SerializedName
 
@@ -38,9 +38,9 @@ class SignUpRequest(
     var funcName:String = "",
 
     @SerializedName("option")
-    var option:SignUpOption
+    var option: SignUpOption
 )
 class SignUpRequestModel{
     @SerializedName("request")
-    lateinit var request:SignUpRequest
+    lateinit var request: SignUpRequest
 }

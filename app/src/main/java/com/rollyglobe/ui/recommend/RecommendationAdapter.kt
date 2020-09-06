@@ -1,25 +1,26 @@
 package com.rollyglobe.ui.recommend
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rollyglobe.R
 import com.rollyglobe.network.model.SpotModel
-import com.rollyglobe.ui.recommend.inner_contents.InnerContentsActivity
+import kotlinx.android.synthetic.main.recommendation_item.view.*
 import timber.log.Timber
 
-class RecommendationAdapter (val context: Context) : RecyclerView.Adapter<RecommendationAdapter.ViewHolder>(){
+class RecommendationAdapter(val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<RecommendationAdapter.ViewHolder>() {
 
     var spotList = ArrayList<SpotModel>()
+        set(spots) {
+            field = spots
+
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.recommendation_item, parent, false))
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.recommendation_item, parent, false))
     }
 
     override fun getItemCount() = spotList.size
@@ -29,38 +30,29 @@ class RecommendationAdapter (val context: Context) : RecyclerView.Adapter<Recomm
         holder.itemView.tag = spotList[position]
     }
 
-    fun addItem(list : ArrayList<SpotModel>){
-        spotList.clear()
-        spotList.addAll(list)
+    interface OnItemClickListener {
+        fun onItemClick(spot: SpotModel)
     }
 
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    inner class ViewHolder(itemView : View):RecyclerView.ViewHolder(itemView){
-
-        val spotTitle = itemView.findViewById<TextView>(R.id.spot_title)
-        val spotThumbnail = itemView.findViewById<ImageView>(R.id.spot_thumbnail)
-        val spotIntro = itemView.findViewById<TextView>(R.id.spot_intro)
-        val spotPlace = itemView.findViewById<TextView>(R.id.spot_place)
-
-        init{
+        init {
             itemView.setOnClickListener {
-                val position = adapterPosition
-                val intent = Intent(this@RecommendationAdapter.context, InnerContentsActivity::class.java)
-                intent.putExtra("spotModel", spotList[position])
-                this@RecommendationAdapter.context.startActivity(intent)
+
+                itemClickListener.onItemClick(spotList[adapterPosition])
             }
         }
 
-        fun bind(spot : SpotModel){
-            spotTitle.text = spot.spotTitleKor
-            spotIntro.text = spot.spotIntro
+        fun bind(spot: SpotModel) {
+            itemView.spot_title.text = spot.spotTitleKor
+            itemView.spot_intro.text = spot.spotIntro
 //            spotPlace.text = "${spot.spotNationName} - ${spot.spotCityName}"
 
 //            if(spot.spotThumbnailType !="null"){
 //                val spotThumbnailPath = "$spotThumbnailHeader${spot.spotThumbnailNum}.${spot.spotThumbnailType}"
 
-                Timber.d(spot.spotThumbnailPath)
-                Glide.with(context).load("https://m.rollyglobe.com/post/pics/small/" + spot.spotThumbnailPath).into(spotThumbnail)
+            Timber.d(spot.spotThumbnailPath)
+            Glide.with(itemView.context).load("https://m.rollyglobe.com/post/pics/small/" + spot.spotThumbnailPath).into(itemView.spot_thumbnail)
 //            }
         }
     }

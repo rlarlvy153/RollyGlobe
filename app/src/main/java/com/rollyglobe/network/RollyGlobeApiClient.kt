@@ -2,10 +2,10 @@ package com.rollyglobe.network
 
 import com.rollyglobe.network.model.RecommendListResponseModel
 import com.rollyglobe.network.model.request_model.*
-import com.rollyglobe.network.model.geocode.GeocodeByGpsRequestModel
-import com.rollyglobe.network.model.geocode.GeocodeByGpsResponseModel
-import com.rollyglobe.network.model.geocode.GeocodeByPlaceIdRequestModel
-import com.rollyglobe.network.model.geocode.GeocodeByPlaceIdResponseModel
+import com.rollyglobe.network.model.spot.geocode.GeocodeByGpsRequestModel
+import com.rollyglobe.network.model.spot.geocode.GeocodeByGpsResponseModel
+import com.rollyglobe.network.model.spot.geocode.GeocodeByPlaceIdRequestModel
+import com.rollyglobe.network.model.spot.geocode.GeocodeByPlaceIdResponseModel
 import com.rollyglobe.network.model.edit_user_info.birthday.EditUserBirthdayRequestModel
 import com.rollyglobe.network.model.edit_user_info.birthday.EditUserBirthdayResponseModel
 import com.rollyglobe.network.model.edit_user_info.email.EditUserEmailRequestModel
@@ -19,6 +19,10 @@ import com.rollyglobe.network.model.edit_user_info.password.EditUserPasswordResp
 import com.rollyglobe.network.model.edit_user_info.phonenumber.EditUserPhoneNumberRequestModel
 import com.rollyglobe.network.model.edit_user_info.phonenumber.EditUserPhoneNumberResponseModel
 import com.rollyglobe.network.model.response_model.*
+import com.rollyglobe.network.model.user.signin.SignInModel
+import com.rollyglobe.network.model.user.signin.SignInRequestModel
+import com.rollyglobe.network.model.user.signup.SignUpRequestModel
+import com.rollyglobe.network.model.user.signup.SignUpResponseModel
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers

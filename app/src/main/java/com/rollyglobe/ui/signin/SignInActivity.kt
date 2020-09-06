@@ -8,9 +8,9 @@ import androidx.core.content.ContextCompat
 import com.rollyglobe.R
 import com.rollyglobe.network.RollyGlobeApiClient
 import com.rollyglobe.ui.signup.SignUpActivity
-import com.rollyglobe.network.model.request_model.SignInOption
-import com.rollyglobe.network.model.request_model.SignInRequest
-import com.rollyglobe.network.model.request_model.SignInRequestModel
+import com.rollyglobe.network.model.user.signin.SignInOption
+import com.rollyglobe.network.model.user.signin.SignInRequest
+import com.rollyglobe.network.model.user.signin.SignInRequestModel
 import com.rollyglobe.ui.MainActivity
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_signin.*
@@ -60,8 +60,8 @@ class SignInActivity : AppCompatActivity() {
         val pw = signin_password_edit.text.toString()
         val auto = keep_login_checkbox.isChecked
 
-        val option  = SignInOption("email",email_address, pw,auto)
-        val signInRequest = SignInRequest("SignIn",option)
+        val option  = SignInOption("email", email_address, pw, auto)
+        val signInRequest = SignInRequest("SignIn", option)
         val signInRequestModel = SignInRequestModel(signInRequest)
 
         disposable.add(restClient.signIn(signInRequestModel)

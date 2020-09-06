@@ -1,4 +1,4 @@
-package com.rollyglobe.network.model.response_model
+package com.rollyglobe.network.model.user.signin
 
 import com.google.gson.annotations.SerializedName
 
@@ -56,6 +56,6 @@ class SignInModel {
     @SerializedName("success")
     val success:Boolean = false
 
-    @SerializedName("user_info")
+    @SerializedName("result")
     lateinit var user_info : UserInfo
 }

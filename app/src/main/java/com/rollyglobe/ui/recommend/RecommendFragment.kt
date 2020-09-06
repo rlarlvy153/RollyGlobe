@@ -1,55 +1,63 @@
 package com.rollyglobe.ui.recommend
 
-
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-
-import androidx.recyclerview.widget.RecyclerView
 import com.rollyglobe.R
+import com.rollyglobe.network.model.SpotModel
 import com.rollyglobe.ui.MainViewModel
+import com.rollyglobe.ui.recommend.inner_contents.InnerContentsActivity
+import kotlinx.android.synthetic.main.recommend_fragment.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-/**
- * A simple [Fragment] subclass.
- */
 class RecommendFragment : Fragment() {
-    companion object{
+    companion object {
         val instance = RecommendFragment()
     }
-    lateinit var viewModel : MainViewModel
-    lateinit var recyclerView : RecyclerView
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val root = inflater.inflate(R.layout.recommend_fragment, container, false)
-        recyclerView = root.findViewById(R.id.spot_list)
-        recyclerView.run{
-            addItemDecoration(DividerItemDecoration(context,LinearLayoutManager.VERTICAL))
-            layoutManager = LinearLayoutManager(context)
-            adapter = RecommendationAdapter(context)
-        }
-        viewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+    private val viewModel: MainViewModel by sharedViewModel()
 
-        viewModel.spotListLiveData.observe(activity!!, Observer{
-            (recyclerView.adapter as RecommendationAdapter).run{
-                addItem(it)
-                notifyDataSetChanged()
-            }
-        })
-
-        viewModel.getSpotList()
-
-        return root
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.recommend_fragment, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        initRecommendRecyclerView()
+
+        observeEvent()
+
+        viewModel.getSpotList()
+    }
+
+    private fun observeEvent() {
+        viewModel.spotListLiveData.observe(viewLifecycleOwner, Observer {
+            (recommendSpotList.adapter as RecommendationAdapter).run {
+                spotList = it
+            }
+        })
+    }
+
+    private fun initRecommendRecyclerView() {
+        val listener = object : RecommendationAdapter.OnItemClickListener {
+            override fun onItemClick(spot: SpotModel) {
+                val intent = Intent(context, InnerContentsActivity::class.java)
+                intent.putExtra("spotModel", spot)
+                context?.startActivity(intent)
+            }
+        }
+
+        recommendSpotList.run {
+            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+            layoutManager = LinearLayoutManager(context)
+            adapter = RecommendationAdapter(listener)
+        }
+    }
 }

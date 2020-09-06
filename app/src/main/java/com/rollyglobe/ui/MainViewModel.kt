@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.rollyglobe.network.RollyGlobeApiClient
 import com.rollyglobe.network.model.SpotModel
-import com.rollyglobe.network.model.geocode.*
+import com.rollyglobe.network.model.spot.geocode.*
 import com.rollyglobe.network.model.request_model.*
 import com.rollyglobe.network.model.response_model.ReservationModel
 import io.reactivex.disposables.CompositeDisposable

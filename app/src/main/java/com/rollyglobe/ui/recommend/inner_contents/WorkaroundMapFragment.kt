@@ -1,6 +1,5 @@
 package com.rollyglobe.ui.recommend.inner_contents
 
-import android.R
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,20 +7,25 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.SupportMapFragment
+import com.rollyglobe.R
 
 
 class WorkaroundMapFragment : SupportMapFragment() {
+
     var mListener: OnTouchListener? = null
-    override fun onCreateView(layoutInflater: LayoutInflater, viewGroup: ViewGroup?, savedInstance: Bundle?): View? {
-        val layout: View? = super.onCreateView(layoutInflater, viewGroup, savedInstance)
-        val frameLayout = TouchableWrapper(activity)
-        frameLayout.setBackgroundColor(resources.getColor(R.color.transparent))
-        (layout as ViewGroup).addView(
-            frameLayout,
-            ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        )
-        return layout
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (view is ViewGroup) {
+            val frameLayout = TouchableWrapper(requireContext()).apply {
+                setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
+            }
+
+            view.addView(frameLayout, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
+        }
     }
 
     fun setListener(listener: OnTouchListener) {
@@ -32,7 +36,7 @@ class WorkaroundMapFragment : SupportMapFragment() {
         fun onTouch()
     }
 
-    inner class TouchableWrapper(context: Context?) : FrameLayout(context) {
+    inner class TouchableWrapper(context: Context) : FrameLayout(context) {
         override fun dispatchTouchEvent(event: MotionEvent): Boolean {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> mListener?.onTouch()

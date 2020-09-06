@@ -1,4 +1,4 @@
-package com.rollyglobe.network.model.geocode
+package com.rollyglobe.network.model.spot.geocode
 
 import com.google.gson.annotations.SerializedName
 
