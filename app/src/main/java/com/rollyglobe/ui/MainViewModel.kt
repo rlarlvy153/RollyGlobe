@@ -4,14 +4,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.rollyglobe.network.RollyGlobeApiClient
+import com.rollyglobe.network.TestModel
 import com.rollyglobe.network.model.SpotModel
 import com.rollyglobe.network.model.spot.geocode.*
 import com.rollyglobe.network.model.request_model.*
 import com.rollyglobe.network.model.response_model.ReservationModel
 import io.reactivex.disposables.CompositeDisposable
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
+import java.io.File
 
 class MainViewModel : ViewModel(), KoinComponent {
     val gson = Gson()
@@ -39,6 +44,29 @@ class MainViewModel : ViewModel(), KoinComponent {
 
 //        myInfoDummy.value=""
         reservations.value = ArrayList<ReservationModel>()
+    }
+    fun callTest(){
+
+        val id = RequestBody.create(MediaType.parse(""), "my_id")
+        val text = RequestBody.create(MediaType.parse(""),"my_text")
+        val arr = ArrayList<MultipartBody.Part>()
+
+        val file1 = File("/sdcard/test_image.png")
+        val surveyBody = RequestBody.create(MediaType.parse("image/*"),  file1)
+        arr.add(MultipartBody.Part.createFormData("upload_files[]", file1.name, surveyBody))
+
+        val file2 = File("/sdcard/test_image2.png")
+        val surveyBody2 = RequestBody.create(MediaType.parse("image/*"),  file2)
+        arr.add(MultipartBody.Part.createFormData("upload_files[]", file2.name, surveyBody2))
+
+        disposable.add(
+            restClient.testImage(id,text,arr).subscribe { res->
+//                Timber.d(res.id)
+//                Timber.d(res.text)
+//                Timber.d(res.fileInfo[0].name)
+//                Timber.d(res.fileInfo[0].path)
+             }
+        )
     }
 
     fun getSpotList() {

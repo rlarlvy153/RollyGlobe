@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_each_tab.view.*
 import org.koin.android.ext.android.inject
 import timber.log.Timber
+import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,6 +45,9 @@ class MainActivity : AppCompatActivity() {
         initTab()
 
         selectTab(0)
+
+
+//        viewModel.callTest()
 
     }
 

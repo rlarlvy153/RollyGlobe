@@ -27,6 +27,8 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 
 class RollyGlobeApiClient(private val rollyGlobeApiInterface: RollyGlobeApiInterface) {
@@ -117,6 +119,12 @@ class RollyGlobeApiClient(private val rollyGlobeApiInterface: RollyGlobeApiInter
 
     fun loadCommentList(param: LoadCommentListRequestModel): Single<List<LoadCommentListResponseModel>> {
         return rollyGlobeApiInterface.loadCommentList(param)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun testImage(id: RequestBody, text:RequestBody, images : List<MultipartBody.Part>): Single<TestResponse> {
+        return rollyGlobeApiInterface.testImage(id,text,images)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

@@ -1,6 +1,7 @@
 package com.rollyglobe
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 import org.koin.android.ext.koin.androidContext
 import timber.log.Timber
 
@@ -14,6 +15,9 @@ class RollyGlobeApplication : Application() {
         initTimber()
 
         startKoin()
+
+        Stetho.initializeWithDefaults(this);
+
     }
 
     private fun initTimber() {

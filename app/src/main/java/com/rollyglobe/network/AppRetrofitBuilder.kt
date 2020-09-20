@@ -1,6 +1,7 @@
 package com.rollyglobe.network
 
 
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.rollyglobe.network.NetworkConfig.ALL_TIMEOUT
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -33,7 +34,7 @@ class AppRetrofitBuilder(private val baseUrl: String, private val interceptor: I
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(HeaderSettingInterceptor())
             .addInterceptor(httpLogging)
-//            .addNetworkInterceptor(StethoInterceptor())
+            .addNetworkInterceptor(StethoInterceptor())
             .addInterceptor(AddCookiesInterceptor())
             .addInterceptor(ReceivedCookiesInterceptor())
             .connectTimeout(ALL_TIMEOUT, TimeUnit.SECONDS)

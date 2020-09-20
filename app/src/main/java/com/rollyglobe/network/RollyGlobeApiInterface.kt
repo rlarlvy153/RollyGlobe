@@ -25,10 +25,10 @@ import com.rollyglobe.network.model.user.signup.SignUpRequestModel
 import com.rollyglobe.network.model.user.signup.SignUpResponseModel
 import io.reactivex.Observable
 import io.reactivex.Single
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface RollyGlobeApiInterface {
 
@@ -76,5 +76,9 @@ interface RollyGlobeApiInterface {
 
     @POST("ajax/comment.php")
     fun loadCommentList(@Body param: LoadCommentListRequestModel): Single<List<LoadCommentListResponseModel>>
+
+    @Multipart
+    @POST("test/test_ajax.php")
+    fun testImage(@Part("id") id : RequestBody, @Part("textarea") text:RequestBody, @Part images : List<MultipartBody.Part>): Single<TestResponse>
 
 }
