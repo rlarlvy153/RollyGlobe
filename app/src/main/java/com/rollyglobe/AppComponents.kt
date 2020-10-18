@@ -2,7 +2,7 @@ package com.rollyglobe
 
 import android.content.Context
 
-object AppComponent {
+object AppComponents {
     lateinit var applicationContext: Context
 
     fun init(context: Context) {

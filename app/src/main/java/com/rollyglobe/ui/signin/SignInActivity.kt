@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import com.rollyglobe.R
 import com.rollyglobe.network.RollyGlobeApiClient
 import com.rollyglobe.ui.signup.SignUpActivity
 import com.rollyglobe.network.model.user.signin.SignInOption
 import com.rollyglobe.network.model.user.signin.SignInRequest
 import com.rollyglobe.network.model.user.signin.SignInRequestModel
+import com.rollyglobe.support.Utils
 import com.rollyglobe.ui.MainActivity
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_signin.*
@@ -19,29 +21,39 @@ import timber.log.Timber
 
 class SignInActivity : AppCompatActivity() {
 
-    val restClient: RollyGlobeApiClient by inject()
-    private val disposable = CompositeDisposable()
+    private val signInViewModel: SignInViewModel by inject()
 
+    val focusListesner = View.OnFocusChangeListener { v, hasFocus ->
 
-    val focusListesner = View.OnFocusChangeListener{v, hasFocus ->
-
-        when(v.id){
+        when (v.id) {
             signinEmailEdit.id -> {
-                signinEmailEditUnderline.setBackgroundColor(ContextCompat.getColor(this,
-                    R.color.rg_blue
-                ))
-                signinPasswordEditUnderline.setBackgroundColor(ContextCompat.getColor(this,
-                    R.color.rg_gray
-                ))
+                signinEmailEditUnderline.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.rg_blue
+                    )
+                )
+                signinPasswordEditUnderline.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.rg_gray
+                    )
+                )
 
             }
-            signinPasswordEdit.id->{
-                signinPasswordEditUnderline.setBackgroundColor(ContextCompat.getColor(this,
-                    R.color.rg_blue
-                ))
-                signinEmailEditUnderline.setBackgroundColor(ContextCompat.getColor(this,
-                    R.color.rg_gray
-                ))
+            signinPasswordEdit.id -> {
+                signinPasswordEditUnderline.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.rg_blue
+                    )
+                )
+                signinEmailEditUnderline.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.rg_gray
+                    )
+                )
             }
         }
     }
@@ -54,29 +66,35 @@ class SignInActivity : AppCompatActivity() {
         signinEmailEdit.onFocusChangeListener = focusListesner
         signinPasswordEdit.onFocusChangeListener = focusListesner
 
+        observeEvents()
+
     }
-    fun onClickSignIn(v : View){
-        val email_address = signinEmailEdit.text.toString()
+
+    private fun observeEvents() {
+        signInViewModel.successSignIn.observe(this, Observer {
+            if(it){
+                val intent = Intent(this@SignInActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
+        })
+
+        signInViewModel.showErrorMsg.observe(this, Observer{msg ->
+            if(msg.isNotEmpty() && msg.isNotBlank()){
+                Utils.showToast(msg)
+            }
+        })
+
+    }
+
+    fun onClickSignIn(v: View) {
+        val emailAddress = signinEmailEdit.text.toString()
         val pw = signinPasswordEdit.text.toString()
         val auto = keepLoginCheckbox.isChecked
 
-        val option  = SignInOption("email", email_address, pw, auto)
-        val signInRequest = SignInRequest("SignIn", option)
-        val signInRequestModel = SignInRequestModel(signInRequest)
-
-        disposable.add(restClient.signIn(signInRequestModel)
-            .subscribe({result->
-                Timber.d(result.toString())
-                Timber.d("${result?.user_info?.user_birthday}")
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            },{
-
-            })
-        )
+        signInViewModel.signIn(emailAddress, pw, auto)
     }
-    fun onClickSignUpText(v : View){
+
+    fun onClickSignUpText(v: View) {
         val intent = Intent(this, SignUpActivity::class.java)
         startActivity(intent)
     }

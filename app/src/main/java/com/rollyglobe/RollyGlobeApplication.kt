@@ -9,7 +9,7 @@ class RollyGlobeApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        AppComponent.init(this)
+        AppComponents.init(this)
 
         initTimber()
 

@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayout
-import com.rollyglobe.AppComponent
+import com.rollyglobe.AppComponents
 import com.rollyglobe.R
 import com.rollyglobe.ui.community.CommunityFragment
 import com.rollyglobe.ui.goods.GoodsFragment
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     supportActionBar?.let {
                         imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_icon))
-                        titleText.text = AppComponent.applicationContext.getString(tabRes.title)
+                        titleText.text = AppComponents.applicationContext.getString(tabRes.title)
                     }
                 }
             }

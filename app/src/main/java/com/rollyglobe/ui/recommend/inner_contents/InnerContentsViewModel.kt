@@ -1,7 +1,7 @@
 package com.rollyglobe.ui.recommend.inner_contents
 
 import androidx.lifecycle.MutableLiveData
-import com.rollyglobe.AppComponent
+import com.rollyglobe.AppComponents
 import com.rollyglobe.R
 import com.rollyglobe.network.RollyGlobeApiClient
 import com.rollyglobe.network.model.SpotInnerContentsModel
@@ -31,7 +31,7 @@ class InnerContentsViewModel : BaseViewModel() {
 
             spotDetail.value = SpotInnerContentsModel(
                 resultJson,
-                AppComponent.applicationContext.getString(R.string.lets_be_contributor)
+                AppComponents.applicationContext.getString(R.string.lets_be_contributor)
             )
         })
     }
