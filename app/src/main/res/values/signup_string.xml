@@ -17,4 +17,13 @@
     <string name="signup_terms3">서비스 이용약관</string>
     <string name="signup_terms4">개인정보 처리방침</string>
     <string name="signup_terms5">에 동의함으로 간주합니다.</string>
+
+    <string name="signup_empty_email">이메일을 입력해주세요</string>
+    <string name="signup_empty_nickname">닉네임을 입력해주세요</string>
+    <string name="signup_empty_password">비밀번호를 입력해주세요</string>
+    <string name="signup_different_password">비밀번호가 다릅니다</string>
+    <string name="signup_empty_contact">전화번호를 입력해주세요</string>
+
+    <string name="signup_success_signup">회원가입 되었습니다</string>
+
 </resources>
