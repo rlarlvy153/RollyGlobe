@@ -28,17 +28,17 @@
 
         <activity android:name="com.rollyglobe.ui.recommend.inner_contents.InnerContentsActivity" />
         <activity android:name=".ui.signin.SignInActivity">
+
+
+        </activity>
+        <activity android:name=".ui.signup.SignUpActivity" />
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity>
-        <activity android:name=".ui.signup.SignUpActivity" />
-        <activity android:name=".ui.MainActivity">
-
         </activity>
     </application>
 

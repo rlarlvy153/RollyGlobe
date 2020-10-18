@@ -14,7 +14,6 @@ import android.text.style.StyleSpan
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
-import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat

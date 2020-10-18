@@ -20,7 +20,7 @@ class MainViewModel : ViewModel(), KoinComponent {
     val restClient: RollyGlobeApiClient by inject()
     var spotList = ArrayList<SpotModel>()
     var spotListLiveData = MutableLiveData<ArrayList<SpotModel>>()
-    var isLogin = MutableLiveData<Boolean>()
+    val logouted = MutableLiveData<Boolean>()
 
     //    var myInfoDummy = MutableLiveData<String>()
     var userName = MutableLiveData<String>()
@@ -35,9 +35,8 @@ class MainViewModel : ViewModel(), KoinComponent {
     private val disposable = CompositeDisposable()
 
     init {
-        isLogin.value = false
-
-//        myInfoDummy.value=""
+        Timber.d("mainViewModel init")
+        logouted.value = false
         reservations.value = ArrayList<ReservationModel>()
     }
 
@@ -200,7 +199,7 @@ class MainViewModel : ViewModel(), KoinComponent {
         userSex.value = ""
         userBirtday.value = ""
         reservations.value?.clear()
-        isLogin.value = false
+        logouted.value = true
     }
 
     fun getGeocodeByGps() {

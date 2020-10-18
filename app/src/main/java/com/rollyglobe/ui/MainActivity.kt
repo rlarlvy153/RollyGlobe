@@ -1,5 +1,6 @@
 package com.rollyglobe.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,25 +16,37 @@ import com.rollyglobe.ui.goods.GoodsFragment
 import com.rollyglobe.ui.home.HomeFragment
 import com.rollyglobe.ui.my_page.MyPageFragment
 import com.rollyglobe.ui.recommend.RecommendFragment
+import com.rollyglobe.ui.signin.SignInActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_each_tab.view.*
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 
 class MainActivity : AppCompatActivity() {
 
+    companion object{
+        val IS_SIGN_IN_KEY = "isSignIn"
+    }
     private var actionMenu: Menu? = null
 
-    private val viewModel: MainViewModel by inject()
+    private val mainViewModel: MainViewModel by viewModel()
+
+    private var isSignIn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Timber.d("viewmodel id " +mainViewModel.hashCode())
 
-        viewModel.isLogin.observe(this, Observer { isLogin ->
-            actionMenu?.let {
-                actionMenu!!.findItem(R.id.action_login).isVisible = !isLogin
+        mainViewModel.logouted.observe(this, Observer { logouted ->
+            Timber.d("main acitivtiy observe")
+            Timber.d("viewmodel id " +mainViewModel.hashCode())
+            if(logouted){
+                val intent = Intent(this@MainActivity, SignInActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         })
 
@@ -47,7 +60,20 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun initTabListener(){
+    override fun onResume() {
+        super.onResume()
+
+        Timber.d("kgp onresume")
+        isSignIn = intent.extras?.getBoolean(IS_SIGN_IN_KEY, false) ?: false
+
+        if(isSignIn){
+            Timber.d("sign in $isSignIn")
+            actionMenu?.findItem(R.id.action_login)?.isVisible = false
+        }
+
+    }
+
+    private fun initTabListener() {
         mainTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
             fun shadowToggle(tab: TabLayout.Tab) {
@@ -130,7 +156,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setTabRes(){
+    private fun setTabRes() {
         for (tab in MainTabIconEnum.values()) {
             val icon = tab.unselected
             val title = tab.title
@@ -155,41 +181,46 @@ class MainActivity : AppCompatActivity() {
         if (position == null) return
 
         when (position) {
-            0 -> transaction.replace(
-                R.id.mainContentsContainer,
-                HomeFragment.instance
-            )
-            1 -> transaction.replace(
-                R.id.mainContentsContainer,
-                RecommendFragment.instance
-            )
-            2 -> transaction.replace(
-                R.id.mainContentsContainer,
-                CommunityFragment.instance
-            )
-            3 -> transaction.replace(
-                R.id.mainContentsContainer,
-                GoodsFragment.instance
-            )
-            4 -> transaction.replace(
-                R.id.mainContentsContainer,
-                MyPageFragment.instance
-            )
+            0 -> transaction.replace(R.id.mainContentsContainer, HomeFragment.instance)
+
+            1 -> transaction.replace(R.id.mainContentsContainer, RecommendFragment.instance)
+
+            2 -> transaction.replace(R.id.mainContentsContainer, CommunityFragment.instance)
+
+            3 -> transaction.replace(R.id.mainContentsContainer, GoodsFragment.instance)
+
+            4 -> transaction.replace(R.id.mainContentsContainer, MyPageFragment.instance)
         }
         transaction.commitNow()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        Timber.d("kgp onCreateOptionMenu")
+        if(isSignIn){
+            return super.onCreateOptionsMenu(menu)
+
+        }
         menuInflater.inflate(R.menu.actionbar_actions, menu)
         actionMenu = menu
+
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        //TODO logout
         Timber.d("${item?.itemId}")
         Timber.d("${R.id.action_login}")
 
+        if (item?.itemId == R.id.action_login) {
+            val intent = Intent(this, SignInActivity::class.java)
+
+            startActivity(intent)
+        }
+
         return super.onOptionsItemSelected(item)
+    }
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+
     }
 }

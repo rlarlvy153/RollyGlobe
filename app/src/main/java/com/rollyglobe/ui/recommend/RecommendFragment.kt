@@ -13,6 +13,7 @@ import com.rollyglobe.R
 import com.rollyglobe.network.model.SpotModel
 import com.rollyglobe.ui.MainViewModel
 import com.rollyglobe.ui.recommend.inner_contents.InnerContentsActivity
+import com.rollyglobe.ui.signin.SignInActivity
 import kotlinx.android.synthetic.main.recommend_fragment.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -21,7 +22,7 @@ class RecommendFragment : Fragment() {
         val instance = RecommendFragment()
     }
 
-    private val viewModel: MainViewModel by sharedViewModel()
+    private val mainViewModel: MainViewModel by sharedViewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.recommend_fragment, container, false)
@@ -32,13 +33,13 @@ class RecommendFragment : Fragment() {
 
         initRecommendRecyclerView()
 
-        observeEvent()
+        observeEvents()
 
-        viewModel.getSpotList()
+        mainViewModel.getSpotList()
     }
 
-    private fun observeEvent() {
-        viewModel.spotListLiveData.observe(viewLifecycleOwner, Observer {
+    private fun observeEvents() {
+        mainViewModel.spotListLiveData.observe(viewLifecycleOwner, Observer {
             (recommendSpotList.adapter as RecommendationAdapter).run {
                 spotList = it
             }

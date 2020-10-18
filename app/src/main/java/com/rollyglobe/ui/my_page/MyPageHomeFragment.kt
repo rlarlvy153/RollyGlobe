@@ -16,12 +16,15 @@ import com.rollyglobe.ui.MainViewModel
 
 import com.rollyglobe.R
 import kotlinx.android.synthetic.main.my_page_home_fragment.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
 class MyPageHomeFragment : Fragment() {
 
-    lateinit var viewModel : MainViewModel
-    lateinit var recyclerView : RecyclerView
+//    val mainViewModel: MainViewModel by sharedViewModel()
+    lateinit var mainViewModel: MainViewModel
+    lateinit var recyclerView: RecyclerView
+
     companion object {
         val instance = MyPageHomeFragment()
     }
@@ -33,64 +36,68 @@ class MyPageHomeFragment : Fragment() {
         Timber.d("life MyPageHomeFragment onCreateView")
         val root = inflater.inflate(R.layout.my_page_home_fragment, container, false)
         recyclerView = root.findViewById<RecyclerView>(R.id.mypage_reservation_recyclerview)
-        val logoutButton = root.findViewById<Button>(R.id.logout_button)
-        logoutButton.setOnClickListener { v ->
-            //viewModel.logout()
-        }
+
         val profileEditButton = root.findViewById<Button>(R.id.mypage_profile_edit_button)
-        profileEditButton.setOnClickListener { v->
-            val intent = Intent(activity!!,ProfileEditActivity::class.java)
-            intent.putExtra(ProfileEditActivity.EDIT_NAME, viewModel.userName.value)
-            intent.putExtra(ProfileEditActivity.EDIT_NATIONCODE, viewModel.userNationCode)
-            intent.putExtra(ProfileEditActivity.EDIT_PHONENUMBER, viewModel.userPhoneNumber.value)
-            intent.putExtra(ProfileEditActivity.EDIT_EMAIL,viewModel.userEmail.value)
-            intent.putExtra(ProfileEditActivity.EDIT_BIRTHDAY, viewModel.userBirtday.value)
-            intent.putExtra(ProfileEditActivity.EDIT_GENDER, viewModel.userSex.value)
+        profileEditButton.setOnClickListener { v ->
+            val intent = Intent(activity!!, ProfileEditActivity::class.java)
+            intent.putExtra(ProfileEditActivity.EDIT_NAME, mainViewModel.userName.value)
+            intent.putExtra(ProfileEditActivity.EDIT_NATIONCODE, mainViewModel.userNationCode)
+            intent.putExtra(ProfileEditActivity.EDIT_PHONENUMBER, mainViewModel.userPhoneNumber.value)
+            intent.putExtra(ProfileEditActivity.EDIT_EMAIL, mainViewModel.userEmail.value)
+            intent.putExtra(ProfileEditActivity.EDIT_BIRTHDAY, mainViewModel.userBirtday.value)
+            intent.putExtra(ProfileEditActivity.EDIT_GENDER, mainViewModel.userSex.value)
 
             startActivity(intent)
-         }
+        }
 
         return root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
-        recyclerView.run{
+
+        mainViewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
+
+        recyclerView.run {
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.HORIZONTAL))
-            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL,false)
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             adapter = MyPageReservationAdapter(context)
         }
 
-        viewModel.userName.observe(activity!!, Observer {
+        mainViewModel.userName.observe(activity!!, Observer {
             nickname.text = it
         })
-        viewModel.reservations.observe(activity!!, Observer {
+        mainViewModel.reservations.observe(activity!!, Observer {
             (recyclerView.adapter as MyPageReservationAdapter).run {
                 addItem(it)
                 notifyDataSetChanged()
             }
         })
-        viewModel.following.observe(activity!!, Observer {
-            val followingString = String.format(resources.getString(R.string.following),it)
+        mainViewModel.following.observe(activity!!, Observer {
+            val followingString = String.format(resources.getString(R.string.following), it)
             following.setText(followingString)
         })
-        viewModel.follower.observe(activity!!, Observer {
-            val followerString = String.format(resources.getString(R.string.follower),it)
+        mainViewModel.follower.observe(activity!!, Observer {
+            val followerString = String.format(resources.getString(R.string.follower), it)
             follower.setText(followerString)
         })
     }
 
-    override fun onResume() {
-        Timber.d("life MyPageHomeFragment onResume")
-        viewModel.getMyPageHome()
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        logoutBtn.setOnClickListener {
+            Timber.d("frag viewmodel id " +mainViewModel.hashCode())
+
+            mainViewModel.logout()
+        }
+
     }
 
-    override fun onPause() {
-        Timber.d("life MyPageHomeFragment onPause")
-
-        super.onPause()
+    override fun onResume() {
+        Timber.d("life MyPageHomeFragment onResume")
+        mainViewModel.getMyPageHome()
+        super.onResume()
     }
 
 }

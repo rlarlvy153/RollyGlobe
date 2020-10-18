@@ -66,6 +66,10 @@ class SignInActivity : AppCompatActivity() {
         signinEmailEdit.onFocusChangeListener = focusListesner
         signinPasswordEdit.onFocusChangeListener = focusListesner
 
+        backIcon.setOnClickListener {
+            finish()
+         }
+
         observeEvents()
 
     }
@@ -74,7 +78,12 @@ class SignInActivity : AppCompatActivity() {
         signInViewModel.successSignIn.observe(this, Observer {
             if(it){
                 val intent = Intent(this@SignInActivity, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                intent.putExtra(MainActivity.IS_SIGN_IN_KEY, true)
+
                 startActivity(intent)
+
+                finish()
             }
         })
 

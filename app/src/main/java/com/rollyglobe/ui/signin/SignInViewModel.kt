@@ -38,6 +38,7 @@ class SignInViewModel : BaseViewModel(){
                 Timber.d(result.toString())
                 Timber.d("${result?.user_info?.user_birthday}")
 
+                successSignIn.value = true
             },{
 
             })
