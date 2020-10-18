@@ -34,6 +34,8 @@ class MainViewModel : ViewModel(), KoinComponent {
     var following = MutableLiveData<Int>()
     private val disposable = CompositeDisposable()
 
+    val showErrorMsg = MutableLiveData<String>()
+
     init {
         Timber.d("mainViewModel init")
         logouted.value = false
@@ -148,11 +150,15 @@ class MainViewModel : ViewModel(), KoinComponent {
                 myPageHomeRequest
             )
 
-
-
         disposable.add(
             restClient.getMyPageHomeInfo(myPageHomeRequestModel)
                 .subscribe({ result ->
+                    if(!result.success){
+                        showErrorMsg.value = result.msg
+                        showErrorMsg.value = ""
+
+                        return@subscribe
+                    }
 //                myInfoDummy.value += "${result.success}\n"
 //                myInfoDummy.value += "${result.userEmail}\n"
 //                myInfoDummy.value += "${result.userNickname}\n"

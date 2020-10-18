@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayout
 import com.rollyglobe.AppComponents
 import com.rollyglobe.R
+import com.rollyglobe.support.Utils
 import com.rollyglobe.ui.community.CommunityFragment
 import com.rollyglobe.ui.goods.GoodsFragment
 import com.rollyglobe.ui.home.HomeFragment
@@ -47,6 +48,16 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity, SignInActivity::class.java)
                 startActivity(intent)
                 finish()
+            }
+        })
+        mainViewModel.showErrorMsg.observe(this,Observer{
+            if(it.isNotEmpty() && it.isNotBlank()){
+                Utils.showToast(Utils.getString(R.string.signin_require_login))
+
+                val intent = Intent(this@MainActivity, SignInActivity::class.java)
+                startActivity(intent)
+
+//                finish()
             }
         })
 

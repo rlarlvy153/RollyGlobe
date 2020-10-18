@@ -56,5 +56,11 @@ class MyPageHomeInfoUserModel (
 )
 class MyPageHomeInfoResponseModel(
     @SerializedName("user")
-    var user : MyPageHomeInfoUserModel
+    var user : MyPageHomeInfoUserModel,
+
+    @SerializedName("success")
+    val success:Boolean,
+
+    @SerializedName("msg")
+    val msg:String
 )
