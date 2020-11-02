@@ -18,6 +18,7 @@ import com.globe.rolly.ui.home.HomeFragment
 import com.globe.rolly.ui.my_page.MyPageFragment
 import com.globe.rolly.ui.recommend.RecommendFragment
 import com.globe.rolly.ui.signin.SignInActivity
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_each_tab.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,6 +40,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Timber.d("viewmodel id " +mainViewModel.hashCode())
+        FirebaseMessaging.getInstance().subscribeToTopic("1")
+
 
         mainViewModel.logouted.observe(this, Observer { logouted ->
             Timber.d("main acitivtiy observe")
