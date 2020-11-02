@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/inner_contents_scroll_view"
-    tools:context=".ui.recommend.inner_contents.InnerContentsActivity">
+    tools:context=".rolly.ui.recommend.inner_contents.InnerContentsActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -385,7 +385,7 @@
             android:id="@+id/fragmentMap"
             android:layout_width="match_parent"
             android:layout_height="201dp"
-            class="com.rollyglobe.ui.recommend.inner_contents.WorkaroundMapFragment"/>
+            class="com.globe.rolly.ui.recommend.inner_contents.WorkaroundMapFragment"/>
 
         <View
             android:layout_width="match_parent"
