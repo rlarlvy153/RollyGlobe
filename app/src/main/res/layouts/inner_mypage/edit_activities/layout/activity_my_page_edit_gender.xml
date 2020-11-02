@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.my_page.edit_info_activities.MyPageEditGenderActivity">
+    tools:context=".rolly.ui.my_page.edit_info_activities.MyPageEditGenderActivity">
     <TextView
         android:text="@string/gender"
         android:layout_width="match_parent"
