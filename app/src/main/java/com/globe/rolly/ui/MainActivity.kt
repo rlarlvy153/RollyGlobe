@@ -38,11 +38,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Timber.d("viewmodel id " +mainViewModel.hashCode())
 
         mainViewModel.logouted.observe(this, Observer { logouted ->
-            Timber.d("main acitivtiy observe")
-            Timber.d("viewmodel id " +mainViewModel.hashCode())
             if(logouted){
                 val intent = Intent(this@MainActivity, SignInActivity::class.java)
                 startActivity(intent)
@@ -51,12 +48,10 @@ class MainActivity : AppCompatActivity() {
         })
         mainViewModel.showErrorMsg.observe(this,Observer{
             if(it.isNotEmpty() && it.isNotBlank()){
-                Utils.showToast(Utils.getString(R.string.signin_require_login))
+                Utils.showToast(it)
 
                 val intent = Intent(this@MainActivity, SignInActivity::class.java)
                 startActivity(intent)
-
-//                finish()
             }
         })
 
@@ -67,20 +62,16 @@ class MainActivity : AppCompatActivity() {
         initTab()
 
         selectTab(0)
-
     }
 
     override fun onResume() {
         super.onResume()
 
-        Timber.d("kgp onresume")
         isSignIn = intent.extras?.getBoolean(IS_SIGN_IN_KEY, false) ?: false
 
         if(isSignIn){
-            Timber.d("sign in $isSignIn")
             actionMenu?.findItem(R.id.action_login)?.isVisible = false
         }
-
     }
 
     private fun initTabListener() {
@@ -125,6 +116,14 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
                 if (p0 == null) return
+
+                if(p0.position == 4 && !isSignIn){
+                    val intent = Intent(this@MainActivity, SignInActivity::class.java)
+                    Utils.showToast(getString(R.string.signin_require_login))
+                    startActivity(intent)
+                    mainTab.getTabAt(0)!!.select()
+                    return
+                }
 
                 selectTab(p0)
 

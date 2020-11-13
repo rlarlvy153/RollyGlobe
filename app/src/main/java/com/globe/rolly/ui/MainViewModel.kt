@@ -139,21 +139,14 @@ class MainViewModel : ViewModel(), KoinComponent {
     }
 
     fun getMyPageHome() {
-//        myInfoDummy.value=""
-        val myPageHomeRequest =
-            MyPageHomeRequest(
-                "MypageHomeLoad",
-                ""
-            )
-        val myPageHomeRequestModel =
-            MyPageHomeRequestModel(
-                myPageHomeRequest
-            )
+
+        val myPageHomeRequest = MyPageHomeRequest("MypageHomeLoad", "")
+        val myPageHomeRequestModel = MyPageHomeRequestModel(myPageHomeRequest)
 
         disposable.add(
             restClient.getMyPageHomeInfo(myPageHomeRequestModel)
                 .subscribe({ result ->
-                    if(!result.success){
+                    if (!result.success) {
                         showErrorMsg.value = result.msg
                         showErrorMsg.value = ""
 
@@ -217,13 +210,14 @@ class MainViewModel : ViewModel(), KoinComponent {
         )
 //        req.request.funcName = "GetGeocodeByGps"
 //        req.request.option = GpsOption(37.5038022f, 127.0242523f)
-        disposable.add(restClient.getGeocodeByGps(req).subscribe( {
+        disposable.add(restClient.getGeocodeByGps(req).subscribe({
             Timber.d("ggggggggggg" + it.geocode)
         }))
 
 
     }
-    fun getGeocodeByPlaceId(){
+
+    fun getGeocodeByPlaceId() {
         val req = GeocodeByPlaceIdRequestModel()
         req.request = GeocodeByPlaceIdRequest("GetGeocodeByPlaceId", PlaceIdOption("ChIJNwUpIdSjfDURprYWgSEWUgs"))
         disposable.add(restClient.getGeocodeByPlaceId(req).subscribe {

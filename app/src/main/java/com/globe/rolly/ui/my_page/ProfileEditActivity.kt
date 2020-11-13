@@ -15,25 +15,26 @@ import timber.log.Timber
 class ProfileEditActivity : AppCompatActivity() {
 
     companion object {
-        val EDIT_NAME = "name"
-        val EDIT_PHONENUMBER = "phone_number"
-        val EDIT_NATIONCODE = "nation_code"
-        val EDIT_EMAIL = "email"
-        val EDIT_BIRTHDAY = "birthday"
-        val EDIT_GENDER = "gender"
+        const val EDIT_NAME = "name"
+        const val EDIT_PHONENUMBER = "phone_number"
+        const val EDIT_NATIONCODE = "nation_code"
+        const val EDIT_EMAIL = "email"
+        const val EDIT_BIRTHDAY = "birthday"
+        const val EDIT_GENDER = "gender"
 
-        val EDIT_EACH_PROFILE_REQUEST_CODE = 1
-        val RESULT_CODE_NAME = 1001
-        val RESULT_CODE_PHONENUMBER = 1002
-        val RESULT_CODE_EMAIL = 1003
-        val RESULT_CODE_BIRTHDAY = 1004
-        val RESULT_CODE_GENDER = 1005
-        val RESULT_CODE_PASSWARD = 1006
-        val RESULT_CODE_FAIL = 1000
+        const val EDIT_EACH_PROFILE_REQUEST_CODE = 1
+        const val RESULT_CODE_NAME = 1001
+        const val RESULT_CODE_PHONENUMBER = 1002
+        const val RESULT_CODE_EMAIL = 1003
+        const val RESULT_CODE_BIRTHDAY = 1004
+        const val RESULT_CODE_GENDER = 1005
+        const val RESULT_CODE_PASSWARD = 1006
+        const val RESULT_CODE_FAIL = 1000
     }
 
     lateinit var name: String
     lateinit var viewModel: ProfileEditViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_edit)

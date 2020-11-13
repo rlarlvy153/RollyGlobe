@@ -21,21 +21,13 @@ class MyPageHomeFragment : Fragment() {
 
     //    val mainViewModel: MainViewModel by sharedViewModel()
     lateinit var mainViewModel: MainViewModel
-    lateinit var recyclerView: RecyclerView
 
     companion object {
         val instance = MyPageHomeFragment()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        Timber.d("life MyPageHomeFragment onCreateView")
-        val root = inflater.inflate(R.layout.my_page_home_fragment, container, false)
-
-
-        return root
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.my_page_home_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,8 +40,6 @@ class MyPageHomeFragment : Fragment() {
         initRecyclerView()
 
         observeEvents()
-
-
     }
 
     private fun addClickListener() {
@@ -88,7 +78,7 @@ class MyPageHomeFragment : Fragment() {
             nickname.text = it
         })
         mainViewModel.reservations.observe(viewLifecycleOwner, Observer {
-            (recyclerView.adapter as MyPageReservationAdapter).run {
+            (mypageReservationList.adapter as MyPageReservationAdapter).run {
                 addItem(it)
                 notifyDataSetChanged()
             }
