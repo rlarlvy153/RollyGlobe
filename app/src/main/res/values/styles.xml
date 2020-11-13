@@ -38,6 +38,7 @@
         <item name="android:textSize">13dp</item>
 
     </style>
+
     <style name="TabBarTheme" parent="Widget.Design.TabLayout">
         <!-- Customize your theme here. -->
         <item name="android:background">#fff</item>
@@ -74,6 +75,7 @@
         <item name="android:layout_width">15dp</item>
         <item name="android:layout_height">15dp</item>
     </style>
+
     <style name="inner_contents_small_icon_button">
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_width">18dp</item>
@@ -114,12 +116,17 @@
 
     <style name="edit_profile_attribute_head">
         <item name="android:textSize">14dp</item>
-        <item name="layout_constraintLeft_toLeftOf">parent</item>
-        <item name="layout_constraintTop_toTopOf">parent</item>
-        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="android:fontFamily">@font/nanum_square_b</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
+    <style name="edit_profile_attribute_value">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">#A1A1A1</item>
+        <item name="android:fontFamily">@font/nanum_square_b</item>
 
+        <item name="android:layout_marginEnd">11dp</item>
+    </style>
 
     <style name="rollyglobe_default_button">
         <item name="android:padding">0dp</item>
@@ -127,7 +134,7 @@
         <item name="android:textColor">#fff</item>
     </style>
 
-    <style name="mypage_tab_text_style"  parent="@android:style/TextAppearance.Widget.TabWidget">
+    <style name="mypage_tab_text_style" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="android:background">#000000ff</item>
         <item name="android:textColor">#C7C7C7</item>
     </style>

@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".rolly.ui.my_page.ProfileEditActivity"
-
-    >
+    android:background="#88EBEBEB"
+    tools:context=".rolly.ui.my_page.ProfileEditActivity">
 
     <View
         android:id="@+id/vacant_view"
@@ -42,200 +41,333 @@
         app:layout_constraintTop_toBottomOf="@id/vacant_view">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/change_name"
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:layout_marginBottom="1dp"
             android:background="#fff"
+            android:onClick="onClickEditEachAttribute"
             android:orientation="horizontal"
+            android:paddingStart="13dp"
+            android:paddingEnd="17dp"
             app:layout_constraintLeft_toLeftOf="parent"
+
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                style="@style/edit_profile_attribute_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name"
-                style="@style/edit_profile_attribute_head" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/change_name"
+            <TextView
+                android:id="@+id/user_name"
+                style="@style/edit_profile_attribute_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:onClick="onClickEditEachAttribute"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/name_ic_right"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/name_ic_right"
+                android:layout_width="9dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_right_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/change_phone_number"
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:layout_marginBottom="1dp"
             android:background="#fff"
+            android:onClick="onClickEditEachAttribute"
             android:orientation="horizontal"
+
+            android:paddingStart="13dp"
+            android:paddingEnd="17dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                style="@style/edit_profile_attribute_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/phone_number"
-                style="@style/edit_profile_attribute_head" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/change_phone_number"
+            <TextView
+                android:id="@+id/user_phone_number"
+                style="@style/edit_profile_attribute_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onClickEditEachAttribute"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/phone_number_ic_right"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/phone_number_ic_right"
+                android:layout_width="9dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_right_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/change_email"
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:layout_marginBottom="1dp"
+
             android:background="#fff"
+            android:onClick="onClickEditEachAttribute"
             android:orientation="horizontal"
+            android:paddingStart="13dp"
+            android:paddingEnd="17dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                style="@style/edit_profile_attribute_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
-                style="@style/edit_profile_attribute_head" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/change_email"
-                android:onClick="onClickEditEachAttribute"
+            <TextView
+                android:id="@+id/user_email"
+                style="@style/edit_profile_attribute_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/email_ic_right"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/email_ic_right"
+                android:layout_width="9dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_right_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/change_password"
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:layout_marginBottom="1dp"
             android:background="#fff"
+            android:onClick="onClickEditEachAttribute"
             android:orientation="horizontal"
+            android:paddingStart="13dp"
+
+            android:paddingEnd="17dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                style="@style/edit_profile_attribute_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/passward_change"
-                style="@style/edit_profile_attribute_head"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/change_password"
-                android:onClick="onClickEditEachAttribute"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="parent"
+            <ImageView
+                android:id="@+id/password_ic_right"
+                android:layout_width="9dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_right_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/change_birthday"
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:layout_marginBottom="1dp"
             android:background="#fff"
+            android:onClick="onClickEditEachAttribute"
             android:orientation="horizontal"
+            android:paddingStart="13dp"
+
+            android:paddingEnd="17dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                style="@style/edit_profile_attribute_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/birthday"
-                style="@style/edit_profile_attribute_head"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/change_birthday"
-                android:onClick="onClickEditEachAttribute"
+            <TextView
+
+                android:id="@+id/user_birthday"
+                style="@style/edit_profile_attribute_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/birthday_ic_right"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/birthday_ic_right"
+                android:layout_width="9dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_right_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/change_gender"
             android:layout_width="match_parent"
+
             android:layout_height="47dp"
             android:layout_marginBottom="1dp"
             android:background="#fff"
+            android:onClick="onClickEditEachAttribute"
             android:orientation="horizontal"
+            android:paddingStart="13dp"
+            android:paddingEnd="17dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                style="@style/edit_profile_attribute_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/gender"
-                style="@style/edit_profile_attribute_head"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/change_gender"
-                android:onClick="onClickEditEachAttribute"
+            <TextView
+                android:id="@+id/user_gender"
+                style="@style/edit_profile_attribute_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/gender_ic_right"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/gender_ic_right"
+                android:layout_width="9dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_right_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/change_title"
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:layout_marginBottom="1dp"
             android:background="#fff"
             android:orientation="horizontal"
+            android:paddingStart="13dp"
+            android:paddingEnd="17dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                style="@style/edit_profile_attribute_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title"
-                style="@style/edit_profile_attribute_head"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/change_title"
+            <TextView
+                android:id="@+id/user_title"
+                style="@style/edit_profile_attribute_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/title_ic_right"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/title_ic_right"
+                android:layout_width="9dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_right_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/change_point"
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:layout_marginBottom="15dp"
             android:background="#fff"
             android:orientation="horizontal"
+            android:paddingStart="13dp"
+            android:paddingEnd="17dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                style="@style/edit_profile_attribute_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/point"
-                style="@style/edit_profile_attribute_head"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/change_point"
+            <TextView
+                android:id="@+id/user_point"
+                style="@style/edit_profile_attribute_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/point_ic_right"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/point_ic_right"
+                android:layout_width="9dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_right_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -246,14 +378,19 @@
             android:layout_marginBottom="25dp"
             android:background="#fff"
             android:orientation="horizontal"
+            android:paddingStart="13dp"
+            android:paddingEnd="17dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                style="@style/edit_profile_attribute_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/edit_profile_attribute_head"
-                android:text="@string/set_alarm" />
+                android:text="@string/set_alarm"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -262,14 +399,19 @@
             android:layout_height="47dp"
             android:background="#fff"
             android:orientation="horizontal"
+            android:paddingStart="13dp"
+            android:paddingEnd="17dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                style="@style/edit_profile_attribute_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/edit_profile_attribute_head"
-                android:text="@string/sign_out" />
+                android:text="@string/sign_out"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

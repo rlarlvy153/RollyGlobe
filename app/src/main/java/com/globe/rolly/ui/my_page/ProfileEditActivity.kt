@@ -38,33 +38,45 @@ class ProfileEditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_edit)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.backwardarrow_ccolor)
-        supportActionBar?.setTitle(R.string.profile_edit)
+
+        supportActionBar?.run{
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.backwardarrow_ccolor)
+            setTitle(R.string.profile_edit)
+        }
 
         viewModel = ViewModelProvider(this).get(ProfileEditViewModel::class.java)
+
+        setUserData()
+
+        observeEvents()
+    }
+
+    private fun setUserData(){
         viewModel.setName(intent.getStringExtra(EDIT_NAME))
         viewModel.setPhoneNumber(intent.getStringExtra(EDIT_PHONENUMBER))
         viewModel.setEmail(intent.getStringExtra(EDIT_EMAIL))
         viewModel.setBirthday(intent.getStringExtra(EDIT_BIRTHDAY))
         viewModel.setGender(intent.getStringExtra(EDIT_GENDER))
         viewModel.userNationCode = intent.getIntExtra(EDIT_NATIONCODE, -1)
+    }
 
+    private fun observeEvents(){
         viewModel.userName.observe(this, Observer { name ->
-            change_name.text = name
+            user_name.text = name
         })
         viewModel.userPhoneNumber.observe(this, Observer { phoneNumber ->
-            change_phone_number.text = phoneNumber
+            user_phone_number.text = phoneNumber
         })
         viewModel.userEmail.observe(this, Observer { email ->
-            change_email.text = email
+            user_email.text = email
 
         })
         viewModel.userBirthday.observe(this, Observer { birthday ->
-            change_birthday.text = birthday
+            user_birthday.text = birthday
         })
         viewModel.userGender.observe(this, Observer { gender ->
-            change_gender.text = gender
+            user_gender.text = gender
         })
     }
 
@@ -103,7 +115,6 @@ class ProfileEditActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Timber.d("return activity $requestCode $resultCode")
         if (requestCode == EDIT_EACH_PROFILE_REQUEST_CODE) {
             when (resultCode) {
                 RESULT_CODE_NAME -> {
