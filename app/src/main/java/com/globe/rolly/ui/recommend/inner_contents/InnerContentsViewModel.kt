@@ -7,7 +7,7 @@ import com.globe.rolly.network.RollyGlobeApiClient
 import com.globe.rolly.network.model.SpotInnerContentsModel
 import com.globe.rolly.network.model.request_model.*
 import com.globe.rolly.network.model.response_model.LoadCommentListResponseModel
-import com.globe.rolly.support.basemodel.BaseViewModel
+import com.globe.rolly.support.baseclass.BaseViewModel
 import org.json.JSONObject
 import org.koin.core.inject
 
@@ -25,7 +25,7 @@ class InnerContentsViewModel : BaseViewModel() {
         val request = InnerContentsRequest("GetSpotInnerContents", option)
         val requestModel = InnerContentsRequestModel(request)
 
-        disposable.add(restClient.getSpotInnerContents(requestModel).subscribe { result ->
+        compositeDisposable.add(restClient.getSpotInnerContents(requestModel).subscribe { result ->
             val str = result.string()
             val resultJson = JSONObject(str)
 
@@ -42,7 +42,7 @@ class InnerContentsViewModel : BaseViewModel() {
         val loadCommentListRequest = LoadCommentListRequest(loadCommentListOption)
         val loadCommentListRequestModel = LoadCommentListRequestModel(loadCommentListRequest)
 
-        disposable.add(
+        compositeDisposable.add(
             restClient.loadCommentList(loadCommentListRequestModel).subscribe({
                 spotComments.value = it
             }, {

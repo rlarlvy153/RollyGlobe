@@ -5,10 +5,10 @@
     android:layout_height="wrap_content"
     tools:context=".rolly.ui.community.CommunityFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/postListRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="community" />
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>

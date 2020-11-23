@@ -5,7 +5,7 @@ import com.globe.rolly.network.RollyGlobeApiClient
 import com.globe.rolly.network.model.user.signup.SignUpOption
 import com.globe.rolly.network.model.user.signup.SignUpRequest
 import com.globe.rolly.network.model.user.signup.SignUpRequestModel
-import com.globe.rolly.support.basemodel.BaseViewModel
+import com.globe.rolly.support.baseclass.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.koin.core.inject
@@ -22,7 +22,7 @@ class SignUpViewModel : BaseViewModel() {
     val signUpErrorMsg = MutableLiveData<String>()
 
     fun callNationCode() {
-        disposable.add(restClient.getNationCodeInfoList()
+        compositeDisposable.add(restClient.getNationCodeInfoList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
@@ -62,7 +62,7 @@ class SignUpViewModel : BaseViewModel() {
         val signUpRequestModel = SignUpRequestModel()
         signUpRequestModel.request = SignUpRequest("SignUp", option)
 
-        disposable.add(restClient.signUp(signUpRequestModel)
+        compositeDisposable.add(restClient.signUp(signUpRequestModel)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->

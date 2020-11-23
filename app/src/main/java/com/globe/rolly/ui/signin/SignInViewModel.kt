@@ -5,7 +5,7 @@ import com.globe.rolly.network.RollyGlobeApiClient
 import com.globe.rolly.network.model.user.signin.SignInOption
 import com.globe.rolly.network.model.user.signin.SignInRequest
 import com.globe.rolly.network.model.user.signin.SignInRequestModel
-import com.globe.rolly.support.basemodel.BaseViewModel
+import com.globe.rolly.support.baseclass.BaseViewModel
 import org.koin.core.inject
 import timber.log.Timber
 
@@ -22,7 +22,7 @@ class SignInViewModel : BaseViewModel(){
         val signInRequest = SignInRequest("SignIn", option)
         val signInRequestModel = SignInRequestModel(signInRequest)
 
-        disposable.add(restClient.signIn(signInRequestModel)
+        compositeDisposable.add(restClient.signIn(signInRequestModel)
             .subscribe({result->
                 if(!result.success){
                     showErrorMsg.value = result.msg
