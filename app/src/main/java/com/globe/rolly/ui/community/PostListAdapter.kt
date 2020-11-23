@@ -29,11 +29,20 @@ class PostListAdapter : BaseSimpleAdapter<PostInfo, PostListAdapter.PostListView
 
             bindPostRegDate(post.postRegdate)
 
-            Glide.with(itemView.context).load("https://test.rollyglobe.com/post/pics/small/" + post.postPicInfo[0].pictureRegDate + "/" + post.postPicInfo[0].postPicName)
+            Glide.with(itemView.context)
+                .load("https://test.rollyglobe.com/post/pics/small/" + post.postPicInfo[0].pictureRegDate + "/" + post.postPicInfo[0].postPicName)
                 .into(itemView.postPictures)
 
-            itemView.postContent.text = post.postContent + "컨텐츠! 나중에 지울것!"
+            itemView.postContent.text = post.postContent + "임시 콘텐츠"
 
+            itemView.spotPosition.text = "${post.continent} - ${post.nation} - ${post.city}"
+
+            itemView.spotName.text = post.spotTitleKor
+
+            itemView.spotIntro.text = post.spotIntro
+
+            itemView.likeCnt.text = "좋아요 77개"
+            itemView.commentCnt.text = "댓글 32개"
         }
 
         private fun bindPostRegDate(regDate: String) {
