@@ -16,20 +16,21 @@ import timber.log.Timber
 class ImageListAdapter : BaseSimpleAdapter<String, ImageListAdapter.ImageListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageListViewHolder {
-        return ImageListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.image_list_item, parent, false))
-    }
+        val holder = ImageListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.image_list_item, parent, false))
 
-    override fun onBindViewHolder(holder: ImageListViewHolder, position: Int) {
         val metrics = DisplayMetrics()
         (holder.itemView.context as Activity).windowManager.defaultDisplay.getMetrics(metrics)
         val width = metrics.widthPixels
 
-        holder.itemView.layoutParams.width = width/3 - 4
+        holder.itemView.layoutParams.width = width/3 - 2
         holder.itemView.layoutParams.height = width/3 - 4
-
-        Timber.d("size " + width)
-
         holder.itemView.requestLayout()
+
+        return holder
+    }
+
+    override fun onBindViewHolder(holder: ImageListViewHolder, position: Int) {
+
         holder.bind(items[position])
     }
 
