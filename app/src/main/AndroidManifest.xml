@@ -7,32 +7,30 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.globe.rolly.RollyGlobeApplication"
+        android:name=".rolly.RollyGlobeApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.globe.rolly.ui.my_page.edit_info_activities.MyPageEditPasswordActivity"></activity>
-        <activity android:name="com.globe.rolly.ui.my_page.edit_info_activities.MyPageEditBirthdayActivity" />
-        <activity android:name="com.globe.rolly.ui.my_page.edit_info_activities.MyPageEditGenderActivity" />
-        <activity android:name="com.globe.rolly.ui.my_page.edit_info_activities.MyPageEditEmailActivity" />
-        <activity android:name="com.globe.rolly.ui.my_page.edit_info_activities.MyPageEditPhoneNumberActivity" />
-        <activity android:name="com.globe.rolly.ui.my_page.edit_info_activities.MyPageEditNameActivity" />
-        <activity android:name="com.globe.rolly.ui.my_page.ProfileEditActivity" />
+        <activity android:name=".rolly.ui.community.writepost.WritePostActivity"></activity>
+        <activity android:name=".rolly.ui.my_page.edit_info_activities.MyPageEditPasswordActivity" />
+        <activity android:name=".rolly.ui.my_page.edit_info_activities.MyPageEditBirthdayActivity" />
+        <activity android:name=".rolly.ui.my_page.edit_info_activities.MyPageEditGenderActivity" />
+        <activity android:name=".rolly.ui.my_page.edit_info_activities.MyPageEditEmailActivity" />
+        <activity android:name=".rolly.ui.my_page.edit_info_activities.MyPageEditPhoneNumberActivity" />
+        <activity android:name=".rolly.ui.my_page.edit_info_activities.MyPageEditNameActivity" />
+        <activity android:name=".rolly.ui.my_page.ProfileEditActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${googleMapApiKey}" />
 
-        <activity android:name="com.globe.rolly.ui.recommend.inner_contents.InnerContentsActivity" />
-        <activity android:name="com.globe.rolly.ui.signin.SignInActivity">
-
-
-        </activity>
-        <activity android:name="com.globe.rolly.ui.signup.SignUpActivity" />
-        <activity android:name="com.globe.rolly.ui.MainActivity">
+        <activity android:name=".rolly.ui.recommend.inner_contents.InnerContentsActivity" />
+        <activity android:name=".rolly.ui.signin.SignInActivity"></activity>
+        <activity android:name=".rolly.ui.signup.SignUpActivity" />
+        <activity android:name=".rolly.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
