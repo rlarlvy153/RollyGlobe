@@ -120,4 +120,10 @@ class RollyGlobeApiClient(private val rollyGlobeApiInterface: RollyGlobeApiInter
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun getPostList(param : GetPostListRequestModel): Observable<GetPostListResponseModel>{
+        return rollyGlobeApiInterface.getPostList(param)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 }

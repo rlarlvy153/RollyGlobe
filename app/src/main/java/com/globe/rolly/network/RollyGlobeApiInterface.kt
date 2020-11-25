@@ -77,4 +77,6 @@ interface RollyGlobeApiInterface {
     @POST("ajax/comment.php")
     fun loadCommentList(@Body param: LoadCommentListRequestModel): Single<List<LoadCommentListResponseModel>>
 
+    @POST("ajax/post.php")
+    fun getPostList(@Body param : GetPostListRequestModel): Observable<GetPostListResponseModel>
 }

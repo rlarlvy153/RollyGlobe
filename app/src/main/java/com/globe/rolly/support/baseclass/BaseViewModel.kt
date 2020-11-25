@@ -1,17 +1,17 @@
-package com.globe.rolly.support.basemodel
+package com.globe.rolly.support.baseclass
 
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import org.koin.core.KoinComponent
 
 open class BaseViewModel: ViewModel() , KoinComponent{
-    val disposable = CompositeDisposable()
+    val compositeDisposable = CompositeDisposable()
 
     override fun onCleared() {
         super.onCleared()
 
-        if(!disposable.isDisposed){
-            disposable.dispose()
+        if(!compositeDisposable.isDisposed){
+            compositeDisposable.dispose()
         }
     }
 }
