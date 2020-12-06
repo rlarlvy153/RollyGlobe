@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".rolly.ui.community.writepost.WritePostActivity"></activity>
+        <activity android:name=".rolly.ui.community.writepost.WritePostActivity" />
         <activity android:name=".rolly.ui.my_page.edit_info_activities.MyPageEditPasswordActivity" />
         <activity android:name=".rolly.ui.my_page.edit_info_activities.MyPageEditBirthdayActivity" />
         <activity android:name=".rolly.ui.my_page.edit_info_activities.MyPageEditGenderActivity" />
@@ -28,15 +28,17 @@
             android:value="${googleMapApiKey}" />
 
         <activity android:name=".rolly.ui.recommend.inner_contents.InnerContentsActivity" />
-        <activity android:name=".rolly.ui.signin.SignInActivity"></activity>
-        <activity android:name=".rolly.ui.signup.SignUpActivity" />
-        <activity android:name=".rolly.ui.MainActivity">
+        <activity android:name=".rolly.ui.signin.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".rolly.ui.signup.SignUpActivity" />
+        <activity android:name=".rolly.ui.MainActivity">
+
         </activity>
     </application>
 
