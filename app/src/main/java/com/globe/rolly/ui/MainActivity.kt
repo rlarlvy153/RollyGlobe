@@ -15,6 +15,7 @@ import com.globe.rolly.extensions.visible
 import com.globe.rolly.support.ScreenUtils
 import com.globe.rolly.support.Utils
 import com.globe.rolly.ui.community.CommunityFragment
+import com.globe.rolly.ui.community.writepost.WritePostActivity
 import com.globe.rolly.ui.goods.GoodsFragment
 import com.globe.rolly.ui.home.HomeFragment
 import com.globe.rolly.ui.my_page.MyPageFragment
@@ -127,6 +128,12 @@ class MainActivity : AppCompatActivity() {
             imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_fullletter))
             titleText.text = ""
         }
+
+
+        communityWriteMenu.setOnClickListener {
+            val intent = Intent(this@MainActivity, WritePostActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun setActionbarPosition(tab : TabLayout.Tab){
@@ -163,6 +170,9 @@ class MainActivity : AppCompatActivity() {
                 titleText.text = AppComponents.applicationContext.getString(tabRes.title)
             }
         }
+
+
+
     }
 
     private fun setTabRes() {

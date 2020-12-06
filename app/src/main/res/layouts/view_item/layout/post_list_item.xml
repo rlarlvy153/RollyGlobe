@@ -189,7 +189,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="18dp"
-                    android:background="#123123"/>
+                    android:src="@drawable/likeicon_community"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -212,7 +212,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="18dp"
-                    android:background="#123123" />
+                    android:src="@drawable/commenticon_community" />
 
                 <TextView
                     android:layout_width="wrap_content"
