@@ -13,6 +13,7 @@ import com.globe.rolly.AppComponents
 import com.globe.R
 import com.globe.rolly.support.Utils
 import com.globe.rolly.ui.community.CommunityFragment
+import com.globe.rolly.ui.community.writepost.WritePostActivity
 import com.globe.rolly.ui.goods.GoodsFragment
 import com.globe.rolly.ui.home.HomeFragment
 import com.globe.rolly.ui.my_page.MyPageFragment
@@ -26,9 +27,10 @@ import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
-    companion object{
+    companion object {
         val IS_SIGN_IN_KEY = "isSignIn"
     }
+
     private var actionMenu: Menu? = null
 
     private val mainViewModel: MainViewModel by viewModel()
@@ -40,14 +42,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mainViewModel.logouted.observe(this, Observer { logouted ->
-            if(logouted){
+            if (logouted) {
                 val intent = Intent(this@MainActivity, SignInActivity::class.java)
                 startActivity(intent)
                 finish()
             }
         })
-        mainViewModel.showErrorMsg.observe(this,Observer{
-            if(it.isNotEmpty() && it.isNotBlank()){
+        mainViewModel.showErrorMsg.observe(this, Observer {
+            if (it.isNotEmpty() && it.isNotBlank()) {
                 Utils.showToast(it)
 
                 val intent = Intent(this@MainActivity, SignInActivity::class.java)
@@ -69,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
         isSignIn = intent.extras?.getBoolean(IS_SIGN_IN_KEY, false) ?: false
 
-        if(isSignIn){
+        if (isSignIn) {
             actionMenu?.findItem(R.id.action_login)?.isVisible = false
         }
     }
@@ -117,7 +119,7 @@ class MainActivity : AppCompatActivity() {
             override fun onTabSelected(p0: TabLayout.Tab?) {
                 if (p0 == null) return
 
-                if(p0.position == 4 && !isSignIn){
+                if (p0.position == 4 && !isSignIn) {
                     val intent = Intent(this@MainActivity, SignInActivity::class.java)
                     Utils.showToast(getString(R.string.signin_require_login))
                     startActivity(intent)
@@ -130,6 +132,8 @@ class MainActivity : AppCompatActivity() {
                 shadowToggle(p0)
 
                 changeTitle(p0)
+
+                invalidateOptionsMenu()
             }
         })
     }
@@ -149,6 +153,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun selectTab(position: Int) {
+
         val selectedTab = mainTab.getTabAt(position) as TabLayout.Tab
         selectTab(selectedTab)
     }
@@ -203,16 +208,22 @@ class MainActivity : AppCompatActivity() {
         transaction.commitNow()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        Timber.d("kgp onCreateOptionMenu")
-        if(isSignIn){
-            return super.onCreateOptionsMenu(menu)
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        Timber.d("kgp pre")
+        menu?.clear()
 
+        if (isSignIn) {
+            return super.onCreateOptionsMenu(menu)
         }
-        menuInflater.inflate(R.menu.actionbar_actions, menu)
+
+        if (mainTab.selectedTabPosition == 2) {
+            menuInflater.inflate(R.menu.actionbar_actions_community, menu)
+        } else {
+            menuInflater.inflate(R.menu.actionbar_actions, menu)
+        }
         actionMenu = menu
 
-        return super.onCreateOptionsMenu(menu)
+        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -224,9 +235,17 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(intent)
         }
+        else if(item?.itemId == R.id.action_search_post){
+            Utils.showToast("clicked search")
+        }
+        else if(item?.itemId == R.id.action_write_post){
+            val intent = Intent(this, WritePostActivity::class.java)
+            startActivity(intent)
+        }
 
         return super.onOptionsItemSelected(item)
     }
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         setIntent(intent)
