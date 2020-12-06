@@ -10,9 +10,7 @@ import com.globe.rolly.network.model.edit_user_info.gender.EditUserGenderRequest
 import com.globe.R
 import com.globe.rolly.network.RollyGlobeApiClient
 import com.globe.rolly.ui.my_page.ProfileEditActivity
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_my_page_edit_gender.*
 import org.koin.android.ext.android.inject
 
@@ -53,8 +51,6 @@ class MyPageEditGenderActivity : AppCompatActivity() {
 //        Timber.d("${edit_gender_spinner.selectedItem.toString().toLowerCase()}")
 
         disposable.add(restClient.editUserGender(requestModel)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result->
                 if(result.success){
                     val intent = Intent()

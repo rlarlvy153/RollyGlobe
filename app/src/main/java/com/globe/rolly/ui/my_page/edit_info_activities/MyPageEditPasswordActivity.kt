@@ -9,7 +9,7 @@ import com.globe.R
 import com.globe.rolly.network.RollyGlobeApiClient
 import com.globe.rolly.network.model.edit_user_info.password.EditUserPasswordRequestModel
 import com.globe.rolly.ui.my_page.ProfileEditActivity
-import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_my_page_edit_password.*
 import org.koin.android.ext.android.inject
 import timber.log.Timber

@@ -8,7 +8,7 @@ import com.globe.rolly.network.model.SpotModel
 import com.globe.rolly.network.model.spot.geocode.*
 import com.globe.rolly.network.model.request_model.*
 import com.globe.rolly.network.model.response_model.ReservationModel
-import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
