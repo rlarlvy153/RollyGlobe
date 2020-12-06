@@ -1,17 +1,17 @@
 package com.globe.rolly.ui.my_page.edit_info_activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
-import com.globe.rolly.network.model.edit_user_info.gender.EditUserGenderRequestModel
+import androidx.appcompat.app.AppCompatActivity
 import com.globe.R
+import com.globe.databinding.ActivityMyPageEditGenderBinding
 import com.globe.rolly.network.RollyGlobeApiClient
+import com.globe.rolly.network.model.edit_user_info.gender.EditUserGenderRequestModel
 import com.globe.rolly.ui.my_page.ProfileEditActivity
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.activity_my_page_edit_gender.*
 import org.koin.android.ext.android.inject
 
 class MyPageEditGenderActivity : AppCompatActivity() {
@@ -20,9 +20,12 @@ class MyPageEditGenderActivity : AppCompatActivity() {
 
     val genderList = ArrayList<String>()
 
+    private lateinit var binding: ActivityMyPageEditGenderBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_page_edit_gender)
+        binding = ActivityMyPageEditGenderBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.backwardarrow_ccolor)
@@ -32,43 +35,43 @@ class MyPageEditGenderActivity : AppCompatActivity() {
         genderList.add("Male")
 
 
-
         val genderSpinnerAdapter =
             ArrayAdapter(this@MyPageEditGenderActivity, android.R.layout.simple_spinner_item, genderList)
         genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        edit_gender_spinner.adapter = genderSpinnerAdapter
+        binding.editGenderSpinner.adapter = genderSpinnerAdapter
 
         val userGender = intent.getStringExtra(ProfileEditActivity.EDIT_GENDER)
-        if(userGender.equals("male")){
-            edit_gender_spinner.setSelection(1)
+        if (userGender.equals("male")) {
+            binding.editGenderSpinner.setSelection(1)
         }
 
     }
-    fun onClickApplyBtn(v : View){
+
+    fun onClickApplyBtn(v: View) {
         val requestModel = EditUserGenderRequestModel(
-            edit_gender_spinner.selectedItem.toString().toLowerCase()
+            binding.editGenderSpinner.selectedItem.toString().toLowerCase()
         )
 //        Timber.d("${edit_gender_spinner.selectedItem.toString().toLowerCase()}")
 
-        disposable.add(restClient.editUserGender(requestModel)
-            .subscribe({result->
-                if(result.success){
-                    val intent = Intent()
-                    intent.putExtra(ProfileEditActivity.EDIT_GENDER, edit_gender_spinner.selectedItem.toString().toLowerCase())
-                    setResult(ProfileEditActivity.RESULT_CODE_GENDER, intent)
-                    finish()
-                }
-                else{
-                    val intent = Intent()
+        disposable.add(
+            restClient.editUserGender(requestModel)
+                .subscribe({ result ->
+                    if (result.success) {
+                        val intent = Intent()
+                        intent.putExtra(ProfileEditActivity.EDIT_GENDER, binding.editGenderSpinner.selectedItem.toString().toLowerCase())
+                        setResult(ProfileEditActivity.RESULT_CODE_GENDER, intent)
+                        finish()
+                    } else {
+                        val intent = Intent()
 //                    intent.putExtra(ProfileEditActivity.EDIT_NAME, newName)
-                    setResult(ProfileEditActivity.RESULT_CODE_FAIL, intent)
-                    finish()
-                }
+                        setResult(ProfileEditActivity.RESULT_CODE_FAIL, intent)
+                        finish()
+                    }
 
 
-            },{
+                }, {
 
-            })
+                })
         )
 
     }

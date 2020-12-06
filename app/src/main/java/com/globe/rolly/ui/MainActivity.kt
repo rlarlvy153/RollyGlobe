@@ -2,14 +2,13 @@ package com.globe.rolly.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
-import com.google.android.material.tabs.TabLayout
-import com.globe.rolly.AppComponents
 import com.globe.R
+import com.globe.databinding.ActivityMainBinding
+import com.globe.databinding.MainEachTabBinding
+import com.globe.rolly.AppComponents
 import com.globe.rolly.extensions.gone
 import com.globe.rolly.extensions.visible
 import com.globe.rolly.support.ScreenUtils
@@ -21,29 +20,30 @@ import com.globe.rolly.ui.home.HomeFragment
 import com.globe.rolly.ui.my_page.MyPageFragment
 import com.globe.rolly.ui.recommend.RecommendFragment
 import com.globe.rolly.ui.signin.SignInActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.main_each_tab.view.*
+import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity() {
 
-    private var actionMenu: Menu? = null
-
     private val mainViewModel: MainViewModel by viewModel()
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        mainViewModel.logouted.observe(this, Observer { logouted ->
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        mainViewModel.logouted.observe(this, { logouted ->
             if (logouted) {
                 val intent = Intent(this@MainActivity, SignInActivity::class.java)
                 startActivity(intent)
                 finish()
             }
         })
-        mainViewModel.showErrorMsg.observe(this, Observer {
+        mainViewModel.showErrorMsg.observe(this, {
             if (it.isNotEmpty() && it.isNotBlank()) {
                 Utils.showToast(it)
 
@@ -61,14 +61,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initTabListener() {
-        mainTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        binding.mainTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
             fun shadowToggle(tab: TabLayout.Tab) {
                 val position: Int = tab.position
                 if (position == 4) {
-                    headerShadow.visibility = View.GONE
+                    binding.headerShadow.visibility = View.GONE
                 } else {
-                    headerShadow.visibility = View.VISIBLE
+                    binding.headerShadow.visibility = View.VISIBLE
                 }
             }
 
@@ -98,26 +98,32 @@ class MainActivity : AppCompatActivity() {
 
     fun unselectTab(tab: TabLayout.Tab) {
         val tabRes = tab.tag as MainTabIconEnum
-        tab.customView?.icon?.setBackgroundResource(tabRes.unselected)
-        tab.customView?.title?.setTextColor(ContextCompat.getColor(this@MainActivity, R.color.tab_unselected))
+        val customTab = tab.customView!!
+        val customTabBinding = MainEachTabBinding.bind(customTab)
+
+        customTabBinding.icon.setBackgroundResource(tabRes.unselected)
+        customTabBinding.title.setTextColor(ContextCompat.getColor(this@MainActivity, R.color.tab_unselected))
     }
 
     fun selectTab(tab: TabLayout.Tab) {
         val tabRes = tab.tag as MainTabIconEnum
-        tab.customView?.icon?.setBackgroundResource(tabRes.selected)
-        tab.customView?.title?.setTextColor(ContextCompat.getColor(this@MainActivity, R.color.tab_selected))
+        val customTab = tab.customView!!
+        val customTabBinding = MainEachTabBinding.bind(customTab)
+
+        customTabBinding.icon.setBackgroundResource(tabRes.selected)
+        customTabBinding.title.setTextColor(ContextCompat.getColor(this@MainActivity, R.color.tab_selected))
 
         callFragment(tab.position)
     }
 
     private fun selectTab(position: Int) {
 
-        val selectedTab = mainTab.getTabAt(position) as TabLayout.Tab
+        val selectedTab = binding.mainTab.getTabAt(position) as TabLayout.Tab
         selectTab(selectedTab)
     }
 
     private fun initActionBar() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
 
         supportActionBar?.run {
 //            setIcon(R.drawable.logo_fullletter)
@@ -125,23 +131,22 @@ class MainActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
             title = ""
             elevation = 0f
-            imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_fullletter))
-            titleText.text = ""
+            binding.imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_fullletter))
+            binding.titleText.text = ""
         }
 
 
-        communityWriteMenu.setOnClickListener {
+        binding.communityWriteMenu.setOnClickListener {
             val intent = Intent(this@MainActivity, WritePostActivity::class.java)
             startActivity(intent)
         }
     }
 
-    fun setActionbarPosition(tab : TabLayout.Tab){
-        if(tab.position == 2){
-            communityMenuContainer.visible()
-        }
-        else{
-            communityMenuContainer.gone()
+    fun setActionbarPosition(tab: TabLayout.Tab) {
+        if (tab.position == 2) {
+            binding.communityMenuContainer.visible()
+        } else {
+            binding.communityMenuContainer.gone()
         }
 
         val tabRes = tab.tag as MainTabIconEnum
@@ -149,28 +154,27 @@ class MainActivity : AppCompatActivity() {
 
         if (position == 0) {
             supportActionBar?.let {
-                imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_fullletter))
+                binding.imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_fullletter))
                 val pix = ScreenUtils.dpToPixel(this@MainActivity, 140f)
-                val param = imgLogo.layoutParams
+                val param = binding.imgLogo.layoutParams
                 param.width = pix.toInt()
-                imgLogo.layoutParams = param
-                titleText.text = ""
+                binding.imgLogo.layoutParams = param
+                binding.titleText.text = ""
             }
             supportActionBar?.title = ""
 
 
         } else {
             supportActionBar?.let {
-                imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_icon))
+                binding.imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_icon))
                 val pix = ScreenUtils.dpToPixel(this@MainActivity, 43f)
-                val param = imgLogo.layoutParams
+                val param = binding.imgLogo.layoutParams
                 param.width = pix.toInt()
-                imgLogo.layoutParams = param
+                binding.imgLogo.layoutParams = param
 
-                titleText.text = AppComponents.applicationContext.getString(tabRes.title)
+                binding.titleText.text = AppComponents.applicationContext.getString(tabRes.title)
             }
         }
-
 
 
     }
@@ -179,13 +183,14 @@ class MainActivity : AppCompatActivity() {
         for (tab in MainTabIconEnum.values()) {
             val icon = tab.unselected
             val title = tab.title
-            val v = layoutInflater.inflate(R.layout.main_each_tab, null)
+            val v = MainEachTabBinding.inflate(layoutInflater)
+//            val v = layoutInflater.inflate(R.layout.main_each_tab, null)
             v.icon.setBackgroundResource(icon)
             v.title.setText(title)
-            val newTab = mainTab.newTab()
-            newTab.customView = v
+            val newTab = binding.mainTab.newTab()
+            newTab.customView = v.root
             newTab.tag = tab
-            mainTab.addTab(newTab)
+            binding.mainTab.addTab(newTab)
         }
     }
 

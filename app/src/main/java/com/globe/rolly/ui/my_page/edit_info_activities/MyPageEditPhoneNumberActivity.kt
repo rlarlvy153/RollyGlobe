@@ -7,11 +7,11 @@ import android.view.View
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.globe.R
+import com.globe.databinding.ActivityMyPageEditPhoneNumberBinding
 import com.globe.rolly.network.RollyGlobeApiClient
 import com.globe.rolly.network.model.edit_user_info.phonenumber.EditUserPhoneNumberRequestModel
 import com.globe.rolly.ui.my_page.ProfileEditActivity
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.activity_my_page_edit_phone_number.*
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
@@ -25,9 +25,12 @@ class MyPageEditPhoneNumberActivity : AppCompatActivity() {
     val restClient: RollyGlobeApiClient by inject()
     private val disposable = CompositeDisposable()
 
+    private lateinit var binding: ActivityMyPageEditPhoneNumberBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_page_edit_phone_number)
+        binding = ActivityMyPageEditPhoneNumberBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.backwardarrow_ccolor)
@@ -36,7 +39,7 @@ class MyPageEditPhoneNumberActivity : AppCompatActivity() {
         userPhoneNumber = intent.getStringExtra(ProfileEditActivity.EDIT_PHONENUMBER)
         userNationCode = intent.getIntExtra(ProfileEditActivity.EDIT_NATIONCODE, -1)
         Timber.d("nationcode $userNationCode")
-        edit_text_phone_number.setText(userPhoneNumber)
+        binding.editTextPhoneNumber.setText(userPhoneNumber)
 
         disposable.add(restClient.getNationCodeInfoList()
             .subscribe({ result ->
@@ -58,8 +61,8 @@ class MyPageEditPhoneNumberActivity : AppCompatActivity() {
     }
 
     fun onClickApplyBtn(v: View) {
-        val newPhoneNumber = edit_text_phone_number.text.toString()
-        val temp_nation = mypage_nation_code_spinner.selectedItem.toString()
+        val newPhoneNumber = binding.editTextPhoneNumber.text.toString()
+        val temp_nation = binding.mypageNationCodeSpinner.selectedItem.toString()
         val temp_trim_nation = temp_nation.substring(1, temp_nation.indexOf('(')).toInt()
 
         val requestModel =
@@ -92,8 +95,8 @@ class MyPageEditPhoneNumberActivity : AppCompatActivity() {
             nationCodeStringList
         )
         nationCodeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        mypage_nation_code_spinner.adapter = nationCodeSpinnerAdapter
-        mypage_nation_code_spinner.setSelection(userNationCodeIndex)
+        binding.mypageNationCodeSpinner.adapter = nationCodeSpinnerAdapter
+        binding.mypageNationCodeSpinner.setSelection(userNationCodeIndex)
 
 
     }

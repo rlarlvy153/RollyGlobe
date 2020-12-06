@@ -18,7 +18,7 @@
 
 
     <include
-        android:id="@+id/bannerImage"
+        android:id="@+id/signupBannerImage"
         layout="@layout/rollyglobe_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bannerImage">
+        app:layout_constraintTop_toBottomOf="@id/signupBannerImage">
 
         <EditText
             android:id="@+id/signUpEmailEdit"

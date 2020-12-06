@@ -6,20 +6,23 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.globe.R
+import com.globe.databinding.ActivityMyPageEditPasswordBinding
 import com.globe.rolly.network.RollyGlobeApiClient
 import com.globe.rolly.network.model.edit_user_info.password.EditUserPasswordRequestModel
 import com.globe.rolly.ui.my_page.ProfileEditActivity
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.activity_my_page_edit_password.*
 import org.koin.android.ext.android.inject
-import timber.log.Timber
 
 class MyPageEditPasswordActivity : AppCompatActivity() {
     val restClient: RollyGlobeApiClient by inject()
     private val disposable = CompositeDisposable()
+
+    private lateinit var binding: ActivityMyPageEditPasswordBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_page_edit_password)
+        binding = ActivityMyPageEditPasswordBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.backwardarrow_ccolor)
@@ -27,13 +30,10 @@ class MyPageEditPasswordActivity : AppCompatActivity() {
     }
 
     fun onClickApplyBtn(v: View) {
-        Timber.d("current ${edit_text_previous_password.text.toString()}")
-        Timber.d("new ${edit_text_new_password.text.toString()}")
-        Timber.d("new 2 ${edit_text_new_password_again.text.toString()}")
 
         val requestModel = EditUserPasswordRequestModel(
-            edit_text_previous_password.text.toString(),
-            edit_text_new_password.text.toString()
+            binding.editTextPreviousPassword.text.toString(),
+            binding.editTextNewPassword.text.toString()
         )
         disposable.add(
             restClient.editUserPassword(requestModel)

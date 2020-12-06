@@ -19,8 +19,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import com.globe.R
+import com.globe.databinding.ActivitySignupBinding
 import com.globe.rolly.support.Utils
-import kotlinx.android.synthetic.main.activity_signup.*
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 import java.util.*
@@ -39,49 +39,55 @@ class SignUpActivity : AppCompatActivity() {
     val signUpViewModel: SignUpViewModel by inject()
 
     val focusListesner = object : View.OnFocusChangeListener {
-        fun getNewColor(hasFocus:Boolean) : Int{
-            if(hasFocus){
+        fun getNewColor(hasFocus: Boolean): Int {
+            if (hasFocus) {
                 return ContextCompat.getColor(
                     this@SignUpActivity,
                     R.color.rg_blue
                 )
-            }
-            else{
+            } else {
                 return ContextCompat.getColor(
                     this@SignUpActivity,
                     R.color.rg_gray
                 )
             }
         }
+
         override fun onFocusChange(v: View?, hasFocus: Boolean) {
 
             val newColor = getNewColor(hasFocus)
 
             when (v?.id) {
-                signUpEmailEdit.id -> {
-                    signUpEmailEditUnderline.setBackgroundColor(newColor)
+                binding.signUpEmailEdit.id -> {
+                    binding.signUpEmailEditUnderline.setBackgroundColor(newColor)
                 }
-                signUpNicknameEdit.id -> {
-                    signUpNicknameEditUnderline.setBackgroundColor(newColor)
+                binding.signUpNicknameEdit.id -> {
+                    binding.signUpNicknameEditUnderline.setBackgroundColor(newColor)
                 }
-                signup_password.id -> {
-                    signup_password_edit_underline.setBackgroundColor(newColor)
+                binding.signupPassword.id -> {
+                    binding.signupPasswordEditUnderline.setBackgroundColor(newColor)
                 }
-                signup_password_again.id -> {
-                    signup_password_again_edit_underline.setBackgroundColor(newColor)
+                binding.signupPasswordAgain.id -> {
+                    binding.signupPasswordAgainEditUnderline.setBackgroundColor(newColor)
                 }
-                signUpPhoneNumberEdit.id->{
-                    signUpPhoneNumberEditUnderline.setBackgroundColor(newColor)
+                binding.signUpPhoneNumberEdit.id -> {
+                    binding.signUpPhoneNumberEditUnderline.setBackgroundColor(newColor)
                 }
             }
         }
     }
 
+    private lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
+        binding = ActivitySignupBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.hide()
+
+        binding.backIcon.backIconImageView.setOnClickListener {
+            finish()
+        }
 
         addUnderlineFocusListener()
 
@@ -89,7 +95,7 @@ class SignUpActivity : AppCompatActivity() {
 
         genderSelectListener()
 
-        signup_date_text.text = getString(
+        binding.signupDateText.text = getString(
             R.string.signup_date_text_string,
             selectedYear,
             selectedMonth,
@@ -117,7 +123,7 @@ class SignUpActivity : AppCompatActivity() {
         })
 
         signUpViewModel.signUpResult.observe(this, Observer {
-            if(it){
+            if (it) {
                 Utils.showToast(Utils.getString(R.string.signup_success_signup))
 
                 finish()
@@ -126,7 +132,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun genderSelectListener() {
-        gender_birth_container.setOnClickListener {
+        binding.genderBirthContainer.setOnClickListener {
 
             val dialog = DatePickerDialog(
                 this,
@@ -139,7 +145,7 @@ class SignUpActivity : AppCompatActivity() {
                     selectedYear = year
                     selectedMonth = month + 1
                     selectedDay = date
-                    signup_date_text.text = getString(
+                    binding.signupDateText.text = getString(
                         R.string.signup_date_text_string,
                         selectedYear,
                         selectedMonth,
@@ -157,11 +163,11 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun addUnderlineFocusListener() {
-        signUpEmailEdit.onFocusChangeListener = focusListesner
-        signUpNicknameEdit.onFocusChangeListener = focusListesner
-        signup_password.onFocusChangeListener = focusListesner
-        signup_password_again.onFocusChangeListener = focusListesner
-        signUpPhoneNumberEdit.onFocusChangeListener = focusListesner
+        binding.signUpEmailEdit.onFocusChangeListener = focusListesner
+        binding.signUpNicknameEdit.onFocusChangeListener = focusListesner
+        binding.signupPassword.onFocusChangeListener = focusListesner
+        binding.signupPasswordAgain.onFocusChangeListener = focusListesner
+        binding.signUpPhoneNumberEdit.onFocusChangeListener = focusListesner
     }
 
     private fun initTermText() {
@@ -215,9 +221,9 @@ class SignUpActivity : AppCompatActivity() {
         )
 
         val result = TextUtils.concat(term2, term3, commaSpan, term4, term5)
-        signup_terms2.setText(result)
-        signup_terms2.movementMethod = LinkMovementMethod.getInstance()
-        signup_terms2.highlightColor = Color.TRANSPARENT
+        binding.signupTerms2.text = result
+        binding.signupTerms2.movementMethod = LinkMovementMethod.getInstance()
+        binding.signupTerms2.highlightColor = Color.TRANSPARENT
     }
 
     private fun initNationCodeSpinner() {
@@ -229,7 +235,7 @@ class SignUpActivity : AppCompatActivity() {
             nationCodeStringList
         )
         nationCodeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        nation_code_spinner.adapter = nationCodeSpinnerAdapter
+        binding.nationCodeSpinner.adapter = nationCodeSpinnerAdapter
     }
 
     fun onClickGenderButton(v: View) {
@@ -244,8 +250,8 @@ class SignUpActivity : AppCompatActivity() {
                 )
                 (v as Button).setTextColor(Color.WHITE)
 
-                gender_female_button.setTextColor(Color.BLACK)
-                gender_female_button.setBackground(resources.getDrawable(R.drawable.button_background))
+                binding.genderFemaleButton.setTextColor(Color.BLACK)
+                binding.genderFemaleButton.setBackground(resources.getDrawable(R.drawable.button_background))
             }
             R.id.gender_female_button -> {
                 genderIndex = 2
@@ -257,25 +263,25 @@ class SignUpActivity : AppCompatActivity() {
                 )
                 (v as Button).setTextColor(Color.WHITE)
 
-                gender_male_button.setTextColor(Color.BLACK)
-                gender_male_button.setBackground(resources.getDrawable(R.drawable.button_background))
+                binding.genderMaleButton.setTextColor(Color.BLACK)
+                binding.genderMaleButton.setBackground(resources.getDrawable(R.drawable.button_background))
 
             }
         }
     }
 
     fun onClicksignup(v: View) {
-        val email = signUpEmailEdit.text.toString()
-        val nickname = signUpNicknameEdit.text.toString()
-        val password = signup_password.text.toString()
-        val passwordAgain = signup_password_again.text.toString()
+        val email = binding.signUpEmailEdit.text.toString()
+        val nickname = binding.signUpNicknameEdit.text.toString()
+        val password = binding.signupPassword.text.toString()
+        val passwordAgain = binding.signupPasswordAgain.text.toString()
         val gender = if (genderIndex == 1) "male" else " female"
         val y = selectedYear.toString()
         val m = selectedMonth.toString()
         val d = selectedDay.toString()
-        val nation = nation_code_spinner.selectedItem.toString()
+        val nation = binding.nationCodeSpinner.selectedItem.toString()
         val trimmedNation = nation.substring(1, nation.indexOf('('))
-        val contact = signUpPhoneNumberEdit.text.toString()
+        val contact = binding.signUpPhoneNumberEdit.text.toString()
 
         if (email.isBlank() || email.isEmpty()) {
             Utils.showToast(Utils.getString(R.string.signup_empty_email))
@@ -294,7 +300,7 @@ class SignUpActivity : AppCompatActivity() {
             Utils.showToast(Utils.getString(R.string.signup_different_password))
             return
         }
-        if(contact.isBlank() || contact.isEmpty()){
+        if (contact.isBlank() || contact.isEmpty()) {
             Utils.showToast(Utils.getString(R.string.signup_empty_contact))
             return
         }

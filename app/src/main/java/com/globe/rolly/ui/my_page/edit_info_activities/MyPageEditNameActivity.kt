@@ -7,10 +7,10 @@ import android.view.MenuItem
 import android.view.View
 import com.globe.rolly.network.model.edit_user_info.name.EditUserNameRequestModel
 import com.globe.R
+import com.globe.databinding.ActivityMyPageEditNameBinding
 import com.globe.rolly.network.RollyGlobeApiClient
 import com.globe.rolly.ui.my_page.ProfileEditActivity
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.activity_my_page_edit_name.*
 import org.koin.android.ext.android.inject
 
 class MyPageEditNameActivity : AppCompatActivity() {
@@ -19,19 +19,21 @@ class MyPageEditNameActivity : AppCompatActivity() {
     val restClient: RollyGlobeApiClient by inject()
     private val disposable = CompositeDisposable()
 
+    private lateinit var binding : ActivityMyPageEditNameBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_my_page_edit_name)
+        binding = ActivityMyPageEditNameBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.backwardarrow_ccolor)
         supportActionBar?.setTitle(R.string.title_edit_name)
         userName = intent.getStringExtra(ProfileEditActivity.EDIT_NAME)
-        edit_text_name.setText(userName)
+        binding.editTextName.setText(userName)
     }
 
     fun onClickApplyBtn(v : View){
-        val newName = edit_text_name.text.toString()
+        val newName = binding.editTextName.text.toString()
         val requestModel = EditUserNameRequestModel(newName)
         disposable.add(restClient.editUserName(requestModel)
             .subscribe({result->

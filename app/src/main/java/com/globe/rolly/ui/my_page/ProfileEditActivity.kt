@@ -1,16 +1,14 @@
 package com.globe.rolly.ui.my_page
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.globe.R
+import com.globe.databinding.ActivityProfileEditBinding
 import com.globe.rolly.ui.my_page.edit_info_activities.*
-import kotlinx.android.synthetic.main.activity_profile_edit.*
-import timber.log.Timber
 
 class ProfileEditActivity : AppCompatActivity() {
 
@@ -35,11 +33,14 @@ class ProfileEditActivity : AppCompatActivity() {
     lateinit var name: String
     lateinit var viewModel: ProfileEditViewModel
 
+    private lateinit var binding: ActivityProfileEditBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile_edit)
+        binding = ActivityProfileEditBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        supportActionBar?.run{
+        supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.backwardarrow_ccolor)
             setTitle(R.string.profile_edit)
@@ -52,7 +53,7 @@ class ProfileEditActivity : AppCompatActivity() {
         observeEvents()
     }
 
-    private fun setUserData(){
+    private fun setUserData() {
         viewModel.setName(intent.getStringExtra(EDIT_NAME))
         viewModel.setPhoneNumber(intent.getStringExtra(EDIT_PHONENUMBER))
         viewModel.setEmail(intent.getStringExtra(EDIT_EMAIL))
@@ -61,22 +62,22 @@ class ProfileEditActivity : AppCompatActivity() {
         viewModel.userNationCode = intent.getIntExtra(EDIT_NATIONCODE, -1)
     }
 
-    private fun observeEvents(){
-        viewModel.userName.observe(this, Observer { name ->
-            user_name.text = name
+    private fun observeEvents() {
+        viewModel.userName.observe(this, { name ->
+            binding.userName.text = name
         })
-        viewModel.userPhoneNumber.observe(this, Observer { phoneNumber ->
-            user_phone_number.text = phoneNumber
+        viewModel.userPhoneNumber.observe(this, { phoneNumber ->
+            binding.userPhoneNumber.text = phoneNumber
         })
-        viewModel.userEmail.observe(this, Observer { email ->
-            user_email.text = email
+        viewModel.userEmail.observe(this, { email ->
+            binding.userEmail.text = email
 
         })
-        viewModel.userBirthday.observe(this, Observer { birthday ->
-            user_birthday.text = birthday
+        viewModel.userBirthday.observe(this, { birthday ->
+            binding.userBirthday.text = birthday
         })
-        viewModel.userGender.observe(this, Observer { gender ->
-            user_gender.text = gender
+        viewModel.userGender.observe(this, { gender ->
+            binding.userGender.text = gender
         })
     }
 
@@ -87,9 +88,9 @@ class ProfileEditActivity : AppCompatActivity() {
                 intent = Intent(this, MyPageEditNameActivity::class.java)
                 intent.putExtra(EDIT_NAME, viewModel.userName.value)
             }
-            R.id.change_phone_number ->{
+            R.id.change_phone_number -> {
                 intent = Intent(this, MyPageEditPhoneNumberActivity::class.java)
-                intent.putExtra(EDIT_NATIONCODE,viewModel.userNationCode)
+                intent.putExtra(EDIT_NATIONCODE, viewModel.userNationCode)
                 intent.putExtra(EDIT_PHONENUMBER, viewModel.userPhoneNumber.value)
             }
             R.id.change_email -> {
@@ -102,11 +103,11 @@ class ProfileEditActivity : AppCompatActivity() {
             }
             R.id.change_birthday -> {
                 intent = Intent(this, MyPageEditBirthdayActivity::class.java)
-                intent.putExtra(EDIT_BIRTHDAY,viewModel.userBirthday.value)
+                intent.putExtra(EDIT_BIRTHDAY, viewModel.userBirthday.value)
             }
             R.id.change_gender -> {
                 intent = Intent(this, MyPageEditGenderActivity::class.java)
-                intent.putExtra(EDIT_GENDER,viewModel.userGender.value)
+                intent.putExtra(EDIT_GENDER, viewModel.userGender.value)
 
             }
         }
@@ -119,33 +120,33 @@ class ProfileEditActivity : AppCompatActivity() {
             when (resultCode) {
                 RESULT_CODE_NAME -> {
                     val resultName = data?.getStringExtra(EDIT_NAME)
-                    resultName?.let{
+                    resultName?.let {
                         viewModel.setName(resultName)
 
                     }
                 }
-                RESULT_CODE_PHONENUMBER ->{
+                RESULT_CODE_PHONENUMBER -> {
                     val resultPhoneNumber = data?.getStringExtra(EDIT_PHONENUMBER)
-                    resultPhoneNumber?.let{
+                    resultPhoneNumber?.let {
                         viewModel.setPhoneNumber(resultPhoneNumber)
                     }
                 }
                 RESULT_CODE_EMAIL -> {
                     val resultEmail = data?.getStringExtra(EDIT_EMAIL)
-                    resultEmail?.let{
+                    resultEmail?.let {
                         viewModel.setEmail(resultEmail)
                     }
                 }
                 RESULT_CODE_PASSWARD -> null
                 RESULT_CODE_BIRTHDAY -> {
                     val resultBirthday = data?.getStringExtra(EDIT_BIRTHDAY)
-                    resultBirthday?.let{
+                    resultBirthday?.let {
                         viewModel.setBirthday(resultBirthday)
                     }
                 }
                 RESULT_CODE_GENDER -> {
                     val resultGender = data?.getStringExtra(EDIT_GENDER)
-                    resultGender?.let{
+                    resultGender?.let {
                         viewModel.setGender(resultGender)
                     }
                 }
@@ -153,7 +154,6 @@ class ProfileEditActivity : AppCompatActivity() {
             }
         }
     }
-
 
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

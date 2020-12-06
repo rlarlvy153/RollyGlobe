@@ -2,10 +2,8 @@ package com.globe.rolly.ui.community.writepost
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.globe.R
-import kotlinx.android.synthetic.main.activity_write_post.*
+import com.globe.databinding.ActivityWritePostBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WritePostActivity : AppCompatActivity() {
@@ -14,17 +12,20 @@ class WritePostActivity : AppCompatActivity() {
 
     private val writePostViewModel: WritePostViewModel by viewModel()
 
+    private lateinit var binding: ActivityWritePostBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_write_post)
+        binding = ActivityWritePostBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        imageRecyclerView.run {
+        binding.imageRecyclerView.run {
             addItemDecoration((GridSpacingItemDecoration(3, 1, true)))
             layoutManager = GridLayoutManager(context, 3)
             adapter = imageListAdpater
         }
 
-        writePostViewModel.imageHashMapLiveData.observe(this, Observer { uris ->
+        writePostViewModel.imageHashMapLiveData.observe(this, { uris ->
 
             imageListAdpater.items = uris
         })
