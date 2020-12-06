@@ -174,8 +174,8 @@
             android:layout_height="48dp"
             android:layout_marginStart="40.5dp"
             android:orientation="horizontal"
-            android:weightSum="100"
-            android:paddingTop="15dp">
+            android:paddingTop="15dp"
+            android:weightSum="100">
 
             <LinearLayout
                 android:id="@+id/likeContainer"
@@ -189,13 +189,13 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="18dp"
-                    android:background="#110101" />
+                    android:src="@drawable/likeicon_community" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="16dp"
                     android:layout_marginStart="10dp"
-                    android:text="좋아요"
+                    android:text="@string/community_like_btn"
                     android:textSize="14dp" />
 
             </LinearLayout>
@@ -212,13 +212,13 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="18dp"
-                    android:background="#110101" />
+                    android:src="@drawable/commenticon_community" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="16dp"
                     android:layout_marginStart="10dp"
-                    android:text="댓글 달기"
+                    android:text="@string/community_comment_btn"
                     android:textSize="14dp" />
 
             </LinearLayout>
