@@ -10,10 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.globe.R
+import com.globe.databinding.RecommendFragmentBinding
 import com.globe.rolly.network.model.SpotModel
 import com.globe.rolly.ui.MainViewModel
 import com.globe.rolly.ui.recommend.inner_contents.InnerContentsActivity
-import kotlinx.android.synthetic.main.recommend_fragment.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class RecommendFragment : Fragment() {
@@ -23,8 +23,12 @@ class RecommendFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by sharedViewModel()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.recommend_fragment, container, false)
+    private var _binding : RecommendFragmentBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = RecommendFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,7 +43,7 @@ class RecommendFragment : Fragment() {
 
     private fun observeEvents() {
         mainViewModel.spotListLiveData.observe(viewLifecycleOwner, Observer {
-            (recommendSpotList.adapter as RecommendationAdapter).run {
+            (binding.recommendSpotList.adapter as RecommendationAdapter).run {
                 spotList = it
             }
         })
@@ -54,7 +58,7 @@ class RecommendFragment : Fragment() {
             }
         }
 
-        recommendSpotList.run {
+        binding.recommendSpotList.run {
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             layoutManager = LinearLayoutManager(context)
             adapter = RecommendationAdapter(listener)

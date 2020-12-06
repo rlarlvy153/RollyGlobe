@@ -1,13 +1,11 @@
 package com.globe.rolly.ui.recommend
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.globe.R
+import com.globe.databinding.RecommendationItemBinding
 import com.globe.rolly.network.model.SpotModel
-import kotlinx.android.synthetic.main.recommendation_item.view.*
 import timber.log.Timber
 
 class RecommendationAdapter(val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<RecommendationAdapter.ViewHolder>() {
@@ -20,7 +18,8 @@ class RecommendationAdapter(val itemClickListener: OnItemClickListener) : Recycl
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.recommendation_item, parent, false))
+        val binding = RecommendationItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount() = spotList.size
@@ -34,7 +33,7 @@ class RecommendationAdapter(val itemClickListener: OnItemClickListener) : Recycl
         fun onItemClick(spot: SpotModel)
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(private val itemBinding: RecommendationItemBinding) : RecyclerView.ViewHolder(itemBinding.root) {
 
         init {
             itemView.setOnClickListener {
@@ -44,15 +43,15 @@ class RecommendationAdapter(val itemClickListener: OnItemClickListener) : Recycl
         }
 
         fun bind(spot: SpotModel) {
-            itemView.spot_title.text = spot.spotTitleKor
-            itemView.spot_intro.text = spot.spotIntro
+            itemBinding.spotTitle.text = spot.spotTitleKor
+            itemBinding.spotIntro.text = spot.spotIntro
 //            spotPlace.text = "${spot.spotNationName} - ${spot.spotCityName}"
 
 //            if(spot.spotThumbnailType !="null"){
 //                val spotThumbnailPath = "$spotThumbnailHeader${spot.spotThumbnailNum}.${spot.spotThumbnailType}"
 
             Timber.d(spot.spotThumbnailPath)
-            Glide.with(itemView.context).load("https://m.rollyglobe.com/post/pics/small/" + spot.spotThumbnailPath).into(itemView.spot_thumbnail)
+            Glide.with(itemView.context).load("https://m.rollyglobe.com/post/pics/small/" + spot.spotThumbnailPath).into(itemBinding.spotThumbnail)
 //            }
         }
     }

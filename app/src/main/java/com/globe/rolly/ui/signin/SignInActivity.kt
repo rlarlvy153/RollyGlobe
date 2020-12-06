@@ -1,16 +1,17 @@
 package com.globe.rolly.ui.signin
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.globe.R
-import com.globe.rolly.ui.signup.SignUpActivity
+import com.globe.databinding.ActivitySigninBinding
+import com.globe.databinding.BackArrowBinding
 import com.globe.rolly.support.Utils
 import com.globe.rolly.ui.MainActivity
-import kotlinx.android.synthetic.main.activity_signin.*
+import com.globe.rolly.ui.signup.SignUpActivity
 import org.koin.android.ext.android.inject
 
 class SignInActivity : AppCompatActivity() {
@@ -20,14 +21,14 @@ class SignInActivity : AppCompatActivity() {
     val focusListesner = View.OnFocusChangeListener { v, hasFocus ->
 
         when (v.id) {
-            signinEmailEdit.id -> {
-                signinEmailEditUnderline.setBackgroundColor(
+            binding.signinEmailEdit.id -> {
+                binding.signinEmailEditUnderline.setBackgroundColor(
                     ContextCompat.getColor(
                         this,
                         R.color.rg_blue
                     )
                 )
-                signinPasswordEditUnderline.setBackgroundColor(
+                binding.signinPasswordEditUnderline.setBackgroundColor(
                     ContextCompat.getColor(
                         this,
                         R.color.rg_gray
@@ -35,14 +36,14 @@ class SignInActivity : AppCompatActivity() {
                 )
 
             }
-            signinPasswordEdit.id -> {
-                signinPasswordEditUnderline.setBackgroundColor(
+            binding.signinPasswordEdit.id -> {
+                binding.signinPasswordEditUnderline.setBackgroundColor(
                     ContextCompat.getColor(
                         this,
                         R.color.rg_blue
                     )
                 )
-                signinEmailEditUnderline.setBackgroundColor(
+                binding.signinEmailEditUnderline.setBackgroundColor(
                     ContextCompat.getColor(
                         this,
                         R.color.rg_gray
@@ -52,17 +53,22 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+    private lateinit var binding: ActivitySigninBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signin)
+        binding = ActivitySigninBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
         supportActionBar?.hide()
 
-        signinEmailEdit.onFocusChangeListener = focusListesner
-        signinPasswordEdit.onFocusChangeListener = focusListesner
+        binding.signinEmailEdit.onFocusChangeListener = focusListesner
+        binding.signinPasswordEdit.onFocusChangeListener = focusListesner
 
-        backIcon.setOnClickListener {
-            finish()
-         }
+//        binding.backIcon.root.setOnClickListener {
+//            finish()
+//        }
 
         observeEvents()
 
@@ -70,15 +76,15 @@ class SignInActivity : AppCompatActivity() {
 
     private fun observeEvents() {
         signInViewModel.successSignIn.observe(this, Observer {
-            if(it){
+            if (it) {
                 val intent = Intent(this@SignInActivity, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }
         })
 
-        signInViewModel.showErrorMsg.observe(this, Observer{msg ->
-            if(msg.isNotEmpty() && msg.isNotBlank()){
+        signInViewModel.showErrorMsg.observe(this, Observer { msg ->
+            if (msg.isNotEmpty() && msg.isNotBlank()) {
                 Utils.showToast(msg)
             }
         })
@@ -86,9 +92,9 @@ class SignInActivity : AppCompatActivity() {
     }
 
     fun onClickSignIn(v: View) {
-        val emailAddress = signinEmailEdit.text.toString()
-        val pw = signinPasswordEdit.text.toString()
-        val auto = keepLoginCheckbox.isChecked
+        val emailAddress = binding.signinEmailEdit.text.toString()
+        val pw = binding.signinPasswordEdit.text.toString()
+        val auto = binding.keepLoginCheckbox.isChecked
 
         signInViewModel.signIn(emailAddress, pw, auto)
     }

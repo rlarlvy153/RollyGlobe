@@ -5,7 +5,6 @@ import android.net.Uri
 import android.provider.MediaStore
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import io.reactivex.Observable
 
 class WritePostViewModel(val app: Application) : AndroidViewModel(app) {
 
@@ -21,7 +20,7 @@ class WritePostViewModel(val app: Application) : AndroidViewModel(app) {
             MediaStore.Images.ImageColumns.DATA, MediaStore.Images.Media.DISPLAY_NAME,
             MediaStore.Images.Media.BUCKET_DISPLAY_NAME, MediaStore.Images.Media.BUCKET_ID
         )
-        val cursor = app.contentResolver.query(allImagesuri, projection, null, null, null)
+        val cursor = app.contentResolver.query(allImagesuri, projection, null, null, null)!!
 
         try {
             cursor?.moveToFirst()
@@ -53,7 +52,7 @@ class WritePostViewModel(val app: Application) : AndroidViewModel(app) {
             MediaStore.Images.ImageColumns.DATA, MediaStore.Images.Media.DISPLAY_NAME,
             MediaStore.Images.Media.BUCKET_DISPLAY_NAME, MediaStore.Images.Media.BUCKET_ID
         )
-        val cursor = app.contentResolver.query(allImagesuri, projection, null, null, null)
+        val cursor = app.contentResolver.query(allImagesuri, projection, null, null, null)!!
 
         try {
             cursor?.moveToFirst()

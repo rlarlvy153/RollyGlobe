@@ -6,16 +6,16 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import com.globe.R
+import com.globe.databinding.ActivityInnerContentsBinding
+import com.globe.databinding.SpotProductItemBinding
+import com.globe.rolly.network.model.SpotInnerContentsModel
+import com.globe.rolly.network.model.SpotModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.globe.R
-import com.globe.rolly.network.model.SpotInnerContentsModel
-import com.globe.rolly.network.model.SpotModel
-import kotlinx.android.synthetic.main.activity_inner_contents.*
-import kotlinx.android.synthetic.main.spot_product_item.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -26,9 +26,11 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var googleMap: GoogleMap
 
+    private lateinit var binding: ActivityInnerContentsBinding
+
     override fun onMapReady(map: GoogleMap) {
 
-        googleMap = map.apply{
+        googleMap = map.apply {
             uiSettings.isZoomControlsEnabled = true
         }
 
@@ -47,14 +49,15 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         mapFragment.setListener(object : WorkaroundMapFragment.OnTouchListener {
             override fun onTouch() {
-                inner_contents_scroll_view.requestDisallowInterceptTouchEvent(true)
+                binding.innerContentsScrollView.requestDisallowInterceptTouchEvent(true)
             }
         })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_inner_contents)
+        binding = ActivityInnerContentsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         supportActionBar?.hide()
 
@@ -80,49 +83,50 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setSpotProduct(spot: SpotInnerContentsModel) {
-        val container = spotProductContainer
+        val container = binding.spotProductContainer
 
         for (obj in spot.spotProductJSONArrayList) {
-            val view = layoutInflater.inflate(R.layout.spot_product_item, container, false)
+            val viewBinding = SpotProductItemBinding.inflate(layoutInflater, container, false)
+            val view = viewBinding.root
 
             val imageURL = "m.rollyglobe.com/post/pic/${obj.productThumbnailNum}.${obj.productThumbType}"
 
-            Glide.with(this).load(imageURL).placeholder(ColorDrawable(Color.RED)).into(view.image)
+            Glide.with(this).load(imageURL).placeholder(ColorDrawable(Color.RED)).into(viewBinding.image)
 
-            view.title.text = obj.productName
+            viewBinding.title.text = obj.productName
 
-            view.intro.text = obj.productIntro
+            viewBinding.intro.text = obj.productIntro
 
-            view.cost.text = obj.productCost
+            viewBinding.cost.text = obj.productCost
 
             container.addView(view)
         }
     }
 
-    private fun setSpotInfo(spot : SpotInnerContentsModel){
+    private fun setSpotInfo(spot: SpotInnerContentsModel) {
         //TODO 이미지 viewpager
         if (spot.spotPicList.size > 0) {
             Glide.with(this).load("https://m.rollyglobe.com/post/pics/small/" + spot.spotPicList[0])
-                .into(spotImage)
+                .into(binding.spotImage)
         }
 
-        spotName.text = spot.spotTitleKor
-        spotNameEng.text = spot.spotTitleEng
+        binding.spotName.text = spot.spotTitleKor
+        binding.spotNameEng.text = spot.spotTitleEng
         val concat = "${spot.spotContinent} - ${spot.spotNation} - ${spot.spotCity}"
-        spotPosition.text = concat
-        spotDetail.text = spot.spotDetail
-        spotTime.text = spot.spotTime
-        spotCost.text = spot.spotCost
-        spotAddress.text = spot.spotAddress
-        spotRoute.text = spot.spotTraffic
-        spotContact.text = spot.spotContact
-        spotWeb.text = spot.spotWeb
-        majorTag.text = "#${spot.spotMajorTag}"
+        binding.spotPosition.text = concat
+        binding.spotDetail.text = spot.spotDetail
+        binding.spotTime.text = spot.spotTime
+        binding.spotCost.text = spot.spotCost
+        binding.spotAddress.text = spot.spotAddress
+        binding.spotRoute.text = spot.spotTraffic
+        binding.spotContact.text = spot.spotContact
+        binding.spotWeb.text = spot.spotWeb
+        binding.majorTag.text = "#${spot.spotMajorTag}"
         val tagListBuilder = StringBuilder()
         for (tag in spot.tagList) {
             tagListBuilder.append("  #$tag")
         }
-        tagList.text = tagListBuilder.toString()
+        binding.tagList.text = tagListBuilder.toString()
     }
 
     private fun initView(spot: SpotInnerContentsModel) {

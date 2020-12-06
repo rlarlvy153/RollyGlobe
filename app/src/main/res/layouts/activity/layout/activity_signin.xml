@@ -6,18 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".rolly.ui.signin.SignInActivity">
 
-    <include
-        android:id="@+id/backIcon"
-        layout="@layout/back_arrow"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="18dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <include-->
+<!--        layout="@layout/back_arrow"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:layout_marginStart="15dp"-->
+<!--        android:layout_marginTop="18dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <include
-        android:id="@+id/bannerImage"
+        android:id="@+id/signinBannerImage"
         layout="@layout/rollyglobe_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,7 +32,7 @@
         android:layout_marginTop="32dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bannerImage">
+        app:layout_constraintTop_toBottomOf="@id/signinBannerImage">
 
         <EditText
             android:id="@+id/signinEmailEdit"

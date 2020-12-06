@@ -10,18 +10,19 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.globe.R
+import com.globe.databinding.ActivityMyPageEditBirthdayBinding
 import com.globe.rolly.network.RollyGlobeApiClient
 import com.globe.rolly.network.model.edit_user_info.birthday.EditUserBirthdayRequestModel
 import com.globe.rolly.ui.my_page.ProfileEditActivity
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_my_page_edit_birthday.*
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import org.koin.android.ext.android.inject
 
 
 class MyPageEditBirthdayActivity : AppCompatActivity() {
-    val days = MutableList(28, { i -> i + 1 })
+
+    private lateinit var binding: ActivityMyPageEditBirthdayBinding
+
+    val days = MutableList(28) { i -> i + 1 }
     val restClient: RollyGlobeApiClient by inject()
 
     private val disposable = CompositeDisposable()
@@ -32,7 +33,10 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
     var userBirthDay = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_page_edit_birthday)
+
+        binding = ActivityMyPageEditBirthdayBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.backwardarrow_ccolor)
         supportActionBar?.setTitle(R.string.title_edit_birthday)
@@ -55,8 +59,9 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
                 yearList
             )
         yearSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        edit_year_spinner.adapter = yearSpinnerAdapter
-        edit_year_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+        binding.editYearSpinner.adapter = yearSpinnerAdapter
+        binding.editMonthSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 praent: AdapterView<*>?,
                 v: View?,
@@ -78,7 +83,7 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
             days
         )
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        edit_day_spinner.adapter = dayAdapter
+        binding.editDaySpinner.adapter = dayAdapter
 
         //month spinner
         val monthList = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
@@ -89,9 +94,9 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
                 monthList
             )
         monthSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        edit_month_spinner.adapter = monthSpinnerAdapter
+        binding.editMonthSpinner.adapter = monthSpinnerAdapter
 
-        edit_month_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.editMonthSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 praent: AdapterView<*>?,
                 v: View?,
@@ -112,16 +117,16 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
         userBirthMonth = userBirthdayString.substring(4, 6).toInt()
         userBirthDay = userBirthdayString.substring(6, 8).toInt()
 
-        edit_year_spinner.setSelection(yearList.indexOf(userBirthYear))
-        edit_month_spinner.setSelection(monthList.indexOf(userBirthMonth))
-        edit_day_spinner.setSelection(monthList.indexOf(userBirthDay))
+        binding.editYearSpinner.setSelection(yearList.indexOf(userBirthYear))
+        binding.editMonthSpinner.setSelection(monthList.indexOf(userBirthMonth))
+        binding.editDaySpinner.setSelection(monthList.indexOf(userBirthDay))
 
     }
 
     fun updateLastDay() {
 
-        val year = edit_year_spinner.selectedItem as Int
-        val month = edit_month_spinner.selectedItem as Int
+        val year = binding.editYearSpinner.selectedItem as Int
+        val month = binding.editMonthSpinner.selectedItem as Int
 
         val lastDay = when (month) {
             1 -> 31
@@ -151,11 +156,11 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
     }
 
     fun onClickApplyBtn(v: View) {
-        val y = edit_year_spinner.selectedItem.toString()
-        var m = edit_month_spinner.selectedItem.toString()
+        val y = binding.editYearSpinner.selectedItem.toString()
+        var m = binding.editMonthSpinner.selectedItem.toString()
         if (m.length == 1)
             m = "0$m"
-        var d = edit_day_spinner.selectedItem.toString()
+        var d = binding.editDaySpinner.selectedItem.toString()
         if (d.length == 1) {
             d = "0$d"
         }
@@ -164,8 +169,6 @@ class MyPageEditBirthdayActivity : AppCompatActivity() {
 
         disposable.add(
             restClient.editUserBirthday(requestModel)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
                     if (result.success) {
                         val intent = Intent()
