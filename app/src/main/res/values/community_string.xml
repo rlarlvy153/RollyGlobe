@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="community_like_btn">좋아요</string>
+    <string name="community_comment_btn">댓글 달기</string>
+
+</resources>
