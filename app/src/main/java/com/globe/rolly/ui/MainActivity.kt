@@ -3,7 +3,6 @@ package com.globe.rolly.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -11,9 +10,11 @@ import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayout
 import com.globe.rolly.AppComponents
 import com.globe.R
+import com.globe.rolly.extensions.gone
+import com.globe.rolly.extensions.visible
+import com.globe.rolly.support.ScreenUtils
 import com.globe.rolly.support.Utils
 import com.globe.rolly.ui.community.CommunityFragment
-import com.globe.rolly.ui.community.writepost.WritePostActivity
 import com.globe.rolly.ui.goods.GoodsFragment
 import com.globe.rolly.ui.home.HomeFragment
 import com.globe.rolly.ui.my_page.MyPageFragment
@@ -22,20 +23,13 @@ import com.globe.rolly.ui.signin.SignInActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_each_tab.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        val IS_SIGN_IN_KEY = "isSignIn"
-    }
-
     private var actionMenu: Menu? = null
 
     private val mainViewModel: MainViewModel by viewModel()
-
-    private var isSignIn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,23 +51,12 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        setSupportActionBar(toolbar)
 
         initActionBar()
 
         initTab()
 
         selectTab(0)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        isSignIn = intent.extras?.getBoolean(IS_SIGN_IN_KEY, false) ?: false
-
-        if (isSignIn) {
-            actionMenu?.findItem(R.id.action_login)?.isVisible = false
-        }
     }
 
     private fun initTabListener() {
@@ -85,24 +68,6 @@ class MainActivity : AppCompatActivity() {
                     headerShadow.visibility = View.GONE
                 } else {
                     headerShadow.visibility = View.VISIBLE
-                }
-            }
-
-            fun changeTitle(tab: TabLayout.Tab) {
-                val tabRes = tab.tag as MainTabIconEnum
-                val position: Int = tab.position
-
-                if (position == 0) {
-                    supportActionBar?.let {
-                        imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_fullletter))
-                        titleText.text = ""
-                    }
-                    supportActionBar?.title = ""
-                } else {
-                    supportActionBar?.let {
-                        imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_icon))
-                        titleText.text = AppComponents.applicationContext.getString(tabRes.title)
-                    }
                 }
             }
 
@@ -119,19 +84,11 @@ class MainActivity : AppCompatActivity() {
             override fun onTabSelected(p0: TabLayout.Tab?) {
                 if (p0 == null) return
 
-                if (p0.position == 4 && !isSignIn) {
-                    val intent = Intent(this@MainActivity, SignInActivity::class.java)
-                    Utils.showToast(getString(R.string.signin_require_login))
-                    startActivity(intent)
-                    mainTab.getTabAt(0)!!.select()
-                    return
-                }
-
                 selectTab(p0)
 
                 shadowToggle(p0)
 
-                changeTitle(p0)
+                setActionbarPosition(p0)
 
                 invalidateOptionsMenu()
             }
@@ -159,6 +116,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initActionBar() {
+        setSupportActionBar(toolbar)
+
         supportActionBar?.run {
 //            setIcon(R.drawable.logo_fullletter)
             setDisplayUseLogoEnabled(true)
@@ -167,6 +126,42 @@ class MainActivity : AppCompatActivity() {
             elevation = 0f
             imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_fullletter))
             titleText.text = ""
+        }
+    }
+
+    fun setActionbarPosition(tab : TabLayout.Tab){
+        if(tab.position == 2){
+            communityMenuContainer.visible()
+        }
+        else{
+            communityMenuContainer.gone()
+        }
+
+        val tabRes = tab.tag as MainTabIconEnum
+        val position: Int = tab.position
+
+        if (position == 0) {
+            supportActionBar?.let {
+                imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_fullletter))
+                val pix = ScreenUtils.dpToPixel(this@MainActivity, 140f)
+                val param = imgLogo.layoutParams
+                param.width = pix.toInt()
+                imgLogo.layoutParams = param
+                titleText.text = ""
+            }
+            supportActionBar?.title = ""
+
+
+        } else {
+            supportActionBar?.let {
+                imgLogo.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.logo_icon))
+                val pix = ScreenUtils.dpToPixel(this@MainActivity, 43f)
+                val param = imgLogo.layoutParams
+                param.width = pix.toInt()
+                imgLogo.layoutParams = param
+
+                titleText.text = AppComponents.applicationContext.getString(tabRes.title)
+            }
         }
     }
 
@@ -208,47 +203,29 @@ class MainActivity : AppCompatActivity() {
         transaction.commitNow()
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        Timber.d("kgp pre")
-        menu?.clear()
-
-        if (isSignIn) {
-            return super.onCreateOptionsMenu(menu)
-        }
-
-        if (mainTab.selectedTabPosition == 2) {
-            menuInflater.inflate(R.menu.actionbar_actions_community, menu)
-        } else {
-            menuInflater.inflate(R.menu.actionbar_actions, menu)
-        }
-        actionMenu = menu
-
-        return super.onPrepareOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        Timber.d("${item?.itemId}")
-        Timber.d("${R.id.action_login}")
-
-        if (item?.itemId == R.id.action_login) {
-            val intent = Intent(this, SignInActivity::class.java)
-
-            startActivity(intent)
-        }
-        else if(item?.itemId == R.id.action_search_post){
-            Utils.showToast("clicked search")
-        }
-        else if(item?.itemId == R.id.action_write_post){
-            val intent = Intent(this, WritePostActivity::class.java)
-            startActivity(intent)
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        setIntent(intent)
-
-    }
+//    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+//        Timber.d("kgp pre")
+//        menu?.clear()
+//
+//        if (mainTab.selectedTabPosition == 2) {
+//            menuInflater.inflate(R.menu.actionbar_actions_community, menu)
+//        }
+//        actionMenu = menu
+//
+//        return super.onPrepareOptionsMenu(menu)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+//        Timber.d("${item?.itemId}")
+//
+//        if(item?.itemId == R.id.action_search_post){
+//            Utils.showToast("clicked search")
+//        }
+//        else if(item?.itemId == R.id.action_write_post){
+//            val intent = Intent(this, WritePostActivity::class.java)
+//            startActivity(intent)
+//        }
+//
+//        return super.onOptionsItemSelected(item)
+//    }
 }

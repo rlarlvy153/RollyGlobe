@@ -3,14 +3,16 @@
 
     <item
         android:id="@+id/action_search_post"
-        android:icon="@drawable/searchicon"
+        android:icon="@drawable/search_community"
         android:title="search"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         app:showAsAction="always"/>
 
 <!-- TODO write post icon change   -->
     <item
         android:id="@+id/action_write_post"
-        android:icon="@android:color/black"
+        android:icon="@drawable/plusbutton"
         android:title="write"
         app:showAsAction="always"/>
 
