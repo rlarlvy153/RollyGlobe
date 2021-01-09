@@ -13,12 +13,7 @@ import com.globe.rolly.extensions.gone
 import com.globe.rolly.extensions.visible
 import com.globe.rolly.support.ScreenUtils
 import com.globe.rolly.support.Utils
-import com.globe.rolly.ui.community.CommunityFragment
 import com.globe.rolly.ui.community.writepost.WritePostActivity
-import com.globe.rolly.ui.goods.GoodsFragment
-import com.globe.rolly.ui.home.HomeFragment
-import com.globe.rolly.ui.my_page.MyPageFragment
-import com.globe.rolly.ui.recommend.RecommendFragment
 import com.globe.rolly.ui.signin.SignInActivity
 import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -146,8 +141,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initMainViewPager(){
-        binding.mainViewPager.run{
+    private fun initMainViewPager() {
+        binding.mainViewPager.run {
             isUserInputEnabled = false
             adapter = mainViewPagerAdapter
         }
@@ -192,13 +187,16 @@ class MainActivity : AppCompatActivity() {
         for (tab in MainTabIconEnum.values()) {
             val icon = tab.unselected
             val title = tab.title
-            val v = MainEachTabBinding.inflate(layoutInflater)
-//            val v = layoutInflater.inflate(R.layout.main_each_tab, null)
-            v.icon.setBackgroundResource(icon)
-            v.title.setText(title)
-            val newTab = binding.mainTab.newTab()
-            newTab.customView = v.root
-            newTab.tag = tab
+            val v = MainEachTabBinding.inflate(layoutInflater).apply {
+                this.icon.setBackgroundResource(icon)
+                this.title.setText(title)
+            }
+
+            val newTab = binding.mainTab.newTab().apply {
+                customView = v.root
+                tag = tab
+            }
+
             binding.mainTab.addTab(newTab)
         }
     }

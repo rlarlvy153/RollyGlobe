@@ -1,7 +1,6 @@
 package com.globe.rolly.ui.signup
 
 import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
 import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableString
@@ -17,7 +16,6 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.Observer
 import com.globe.R
 import com.globe.databinding.ActivitySignupBinding
 import com.globe.rolly.support.Utils
@@ -29,24 +27,24 @@ import kotlin.collections.ArrayList
 
 class SignUpActivity : AppCompatActivity() {
 
-    var nationCodeStringList = ArrayList<String>()
+    private var nationCodeStringList = ArrayList<String>()
 
-    var genderIndex = 1
-    var selectedYear = 1997
-    var selectedMonth = 11
-    var selectedDay = 27
+    private var genderIndex = 1
+    private var selectedYear = 1997
+    private var selectedMonth = 11
+    private var selectedDay = 27
 
-    val signUpViewModel: SignUpViewModel by inject()
+    private val signUpViewModel: SignUpViewModel by inject()
 
-    val focusListesner = object : View.OnFocusChangeListener {
+    private val focusListener = object : View.OnFocusChangeListener {
         fun getNewColor(hasFocus: Boolean): Int {
-            if (hasFocus) {
-                return ContextCompat.getColor(
+            return if (hasFocus) {
+                ContextCompat.getColor(
                     this@SignUpActivity,
                     R.color.rg_blue
                 )
             } else {
-                return ContextCompat.getColor(
+                ContextCompat.getColor(
                     this@SignUpActivity,
                     R.color.rg_gray
                 )
@@ -110,19 +108,19 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun observeEvents() {
 
-        signUpViewModel.nationCodeString.observe(this, Observer {
+        signUpViewModel.nationCodeString.observe(this, {
             nationCodeStringList = it
 
             initNationCodeSpinner()
         })
 
-        signUpViewModel.signUpErrorMsg.observe(this, Observer {
+        signUpViewModel.signUpErrorMsg.observe(this, {
             if (it.isNotBlank() && it.isNotEmpty()) {
                 Utils.showToast(it)
             }
         })
 
-        signUpViewModel.signUpResult.observe(this, Observer {
+        signUpViewModel.signUpResult.observe(this, {
             if (it) {
                 Utils.showToast(Utils.getString(R.string.signup_success_signup))
 
@@ -136,7 +134,7 @@ class SignUpActivity : AppCompatActivity() {
 
             val dialog = DatePickerDialog(
                 this,
-                OnDateSetListener { datePicker, year, month, date ->
+                { _, year, month, date ->
                     val msg =
                         String.format("%d 년 %d 월 %d 일", year, month + 1, date)
                     Timber.d(msg)
@@ -157,17 +155,17 @@ class SignUpActivity : AppCompatActivity() {
                 selectedDay
             )
 
-            dialog.datePicker.maxDate = Date().getTime() //입력한 날짜 이후로 클릭 안되게 옵션
+            dialog.datePicker.maxDate = Date().time //입력한 날짜 이후로 클릭 안되게 옵션
             dialog.show()
         }
     }
 
     private fun addUnderlineFocusListener() {
-        binding.signUpEmailEdit.onFocusChangeListener = focusListesner
-        binding.signUpNicknameEdit.onFocusChangeListener = focusListesner
-        binding.signupPassword.onFocusChangeListener = focusListesner
-        binding.signupPasswordAgain.onFocusChangeListener = focusListesner
-        binding.signUpPhoneNumberEdit.onFocusChangeListener = focusListesner
+        binding.signUpEmailEdit.onFocusChangeListener = focusListener
+        binding.signUpNicknameEdit.onFocusChangeListener = focusListener
+        binding.signupPassword.onFocusChangeListener = focusListener
+        binding.signupPasswordAgain.onFocusChangeListener = focusListener
+        binding.signUpPhoneNumberEdit.onFocusChangeListener = focusListener
     }
 
     private fun initTermText() {
@@ -186,10 +184,6 @@ class SignUpActivity : AppCompatActivity() {
         val blue = ContextCompat.getColor(
             this@SignUpActivity,
             R.color.rg_blue
-        )
-        val gray = ContextCompat.getColor(
-            this@SignUpActivity,
-            R.color.rg_gray
         )
 
         val clickableSpan3 = object : ClickableSpan() {
@@ -214,7 +208,7 @@ class SignUpActivity : AppCompatActivity() {
         term4.setSpan(clickableSpan4, 0, term4.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         term4.setSpan(ForegroundColorSpan(blue), 0, term4.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         term4.setSpan(
-            StyleSpan(boldFont!!.style),
+            StyleSpan(boldFont.style),
             0,
             term4.length,
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -251,7 +245,7 @@ class SignUpActivity : AppCompatActivity() {
                 (v as Button).setTextColor(Color.WHITE)
 
                 binding.genderFemaleButton.setTextColor(Color.BLACK)
-                binding.genderFemaleButton.setBackground(resources.getDrawable(R.drawable.button_background))
+                binding.genderFemaleButton.background = ContextCompat.getDrawable(this, R.drawable.button_background)
             }
             R.id.gender_female_button -> {
                 genderIndex = 2
@@ -264,7 +258,7 @@ class SignUpActivity : AppCompatActivity() {
                 (v as Button).setTextColor(Color.WHITE)
 
                 binding.genderMaleButton.setTextColor(Color.BLACK)
-                binding.genderMaleButton.setBackground(resources.getDrawable(R.drawable.button_background))
+                binding.genderMaleButton.background = ContextCompat.getDrawable(this, R.drawable.button_background)
 
             }
         }
