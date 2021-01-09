@@ -2,7 +2,15 @@ package com.globe.rolly.network.model.response_model
 
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
-import timber.log.Timber
+
+
+class UserInfo(
+    @SerializedName("user_num")
+    val userNum: Int,
+
+    @SerializedName("user_nickname")
+    val userNickname: String
+)
 
 class SpotInfo(
     @SerializedName("spot_continent")
@@ -15,10 +23,10 @@ class SpotInfo(
     val spotCity: Int,
 
     @SerializedName("city_list23")
-    val cityList: String
+    val cityList: String,
 
 
-)
+    )
 
 class PostInfoPicture(
     @SerializedName("post_pic_name")
@@ -33,20 +41,31 @@ class PostInfo(
     @SerializedName("post_num")
     val postNum: Int,
 
-    @SerializedName("user_nickname")
-    val userNickName: String,
-
     @SerializedName("post_regdate")
-    val postRegdate: String,
+    val postRegdate: String = "",
 
     @SerializedName("post_content")
-    val postContent: String,
+    val postContent: String
 
-    @SerializedName("post_pic_info")
-    val postPicInfo: List<PostInfoPicture>,
+//    @SerializedName("post_pic_info")
+//    val postPicInfo: List<PostInfoPicture>,
+)
+
+class Post(
+    @SerializedName("user_info")
+    val userInfo:UserInfo,
+
+    @SerializedName("post_info")
+    val postInfo: PostInfo,
+
+//    @SerializedName("spot_info")
+//    val spotInfo : SpotInfo,
 
     @SerializedName("spot_info")
-    val spotInfo: JsonObject
+    val spotInfo: JsonObject,
+
+    @SerializedName("post_pic_info")
+    val postPicInfo: List<PostInfoPicture>
 
 ) {
     var continent = ""
@@ -72,7 +91,7 @@ class PostInfo(
 
 class PostInfoResult(
     @SerializedName("post_list")
-    val postInfo: List<PostInfo>,
+    val infos: List<Post>,
 
     @SerializedName("post_list_total_cnt")
     val postListTotalCnt: Int
