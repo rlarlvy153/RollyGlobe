@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 class InnerContentsOption(
 
-    @SerializedName("spotNum")
+    @SerializedName("spot_num")
     var spotNum : Int
 
 )
