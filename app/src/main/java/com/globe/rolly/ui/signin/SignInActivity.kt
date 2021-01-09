@@ -12,6 +12,8 @@ import com.globe.databinding.BackArrowBinding
 import com.globe.rolly.support.Utils
 import com.globe.rolly.ui.MainActivity
 import com.globe.rolly.ui.signup.SignUpActivity
+import com.jakewharton.rxbinding4.view.clicks
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import org.koin.android.ext.android.inject
 
 class SignInActivity : AppCompatActivity() {
@@ -70,12 +72,32 @@ class SignInActivity : AppCompatActivity() {
 //            finish()
 //        }
 
+        addListener()
+
         observeEvents()
 
     }
 
+    private fun addListener() {
+        binding.signinButton.clicks()
+            .subscribe {
+                val emailAddress = binding.signinEmailEdit.text.toString()
+                val pw = binding.signinPasswordEdit.text.toString()
+                val auto = binding.keepLoginCheckbox.isChecked
+
+                signInViewModel.signIn(emailAddress, pw, auto)
+            }
+
+        binding.signUpText.clicks()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                val intent = Intent(this, SignUpActivity::class.java)
+                startActivity(intent)
+             }
+    }
+
     private fun observeEvents() {
-        signInViewModel.successSignIn.observe(this, Observer {
+        signInViewModel.successSignIn.observe(this, {
             if (it) {
                 val intent = Intent(this@SignInActivity, MainActivity::class.java)
                 startActivity(intent)
@@ -83,25 +105,12 @@ class SignInActivity : AppCompatActivity() {
             }
         })
 
-        signInViewModel.showErrorMsg.observe(this, Observer { msg ->
+        signInViewModel.showErrorMsg.observe(this, { msg ->
             if (msg.isNotEmpty() && msg.isNotBlank()) {
                 Utils.showToast(msg)
             }
         })
 
-    }
-
-    fun onClickSignIn(v: View) {
-        val emailAddress = binding.signinEmailEdit.text.toString()
-        val pw = binding.signinPasswordEdit.text.toString()
-        val auto = binding.keepLoginCheckbox.isChecked
-
-        signInViewModel.signIn(emailAddress, pw, auto)
-    }
-
-    fun onClickSignUpText(v: View) {
-        val intent = Intent(this, SignUpActivity::class.java)
-        startActivity(intent)
     }
 
 }

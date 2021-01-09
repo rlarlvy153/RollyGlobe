@@ -91,8 +91,18 @@
 
     <!--        >-->
 
-    <LinearLayout
-        android:id="@+id/mainContentsContainer"
+<!--    <LinearLayout-->
+<!--        android:id="@+id/mainContentsContainer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/mainTab"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/toolbar">-->
+
+<!--    </LinearLayout>-->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/mainViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -100,7 +110,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-    </LinearLayout>
+    </androidx.viewpager2.widget.ViewPager2>
 
     <View
         android:id="@+id/headerShadow"

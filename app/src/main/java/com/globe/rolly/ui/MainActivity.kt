@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private val mainViewPagerAdapter = MainViewPagerAdapter(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -56,6 +58,8 @@ class MainActivity : AppCompatActivity() {
         initActionBar()
 
         initTab()
+
+        initMainViewPager()
 
         selectTab(0)
     }
@@ -142,6 +146,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initMainViewPager(){
+        binding.mainViewPager.run{
+            isUserInputEnabled = false
+            adapter = mainViewPagerAdapter
+        }
+    }
+
     fun setActionbarPosition(tab: TabLayout.Tab) {
         if (tab.position == 2) {
             binding.communityMenuContainer.visible()
@@ -175,8 +186,6 @@ class MainActivity : AppCompatActivity() {
                 binding.titleText.text = AppComponents.applicationContext.getString(tabRes.title)
             }
         }
-
-
     }
 
     private fun setTabRes() {
@@ -200,47 +209,8 @@ class MainActivity : AppCompatActivity() {
         initTabListener()
     }
 
-    private fun callFragment(position: Int?) {
-        val transaction = supportFragmentManager.beginTransaction()
-        if (position == null) return
-
-        when (position) {
-            0 -> transaction.replace(R.id.mainContentsContainer, HomeFragment.instance)
-
-            1 -> transaction.replace(R.id.mainContentsContainer, RecommendFragment.instance)
-
-            2 -> transaction.replace(R.id.mainContentsContainer, CommunityFragment.instance)
-
-            3 -> transaction.replace(R.id.mainContentsContainer, GoodsFragment.instance)
-
-            4 -> transaction.replace(R.id.mainContentsContainer, MyPageFragment.instance)
-        }
-        transaction.commitNow()
+    private fun callFragment(position: Int) {
+        binding.mainViewPager.setCurrentItem(position, false)
     }
 
-//    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-//        Timber.d("kgp pre")
-//        menu?.clear()
-//
-//        if (mainTab.selectedTabPosition == 2) {
-//            menuInflater.inflate(R.menu.actionbar_actions_community, menu)
-//        }
-//        actionMenu = menu
-//
-//        return super.onPrepareOptionsMenu(menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-//        Timber.d("${item?.itemId}")
-//
-//        if(item?.itemId == R.id.action_search_post){
-//            Utils.showToast("clicked search")
-//        }
-//        else if(item?.itemId == R.id.action_write_post){
-//            val intent = Intent(this, WritePostActivity::class.java)
-//            startActivity(intent)
-//        }
-//
-//        return super.onOptionsItemSelected(item)
-//    }
 }

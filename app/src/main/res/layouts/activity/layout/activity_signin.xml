@@ -99,7 +99,6 @@
             android:layout_height="40dp"
             android:layout_marginTop="18dp"
             android:fontFamily="@font/nanum_square_b"
-            android:onClick="onClickSignIn"
             android:text="@string/signin_button"
             android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -140,13 +139,13 @@
                 android:textSize="11dp" />
 
             <TextView
+                android:id="@+id/signUpText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/nanum_square_b"
-                android:onClick="onClickSignUpText"
                 android:text="@string/move_to_signup"
                 android:textAppearance="@style/Widget.AppCompat.Spinner.Underlined"
                 android:textColor="#42ADE2"
