@@ -25,10 +25,6 @@ class CommunityViewModel :BaseViewModel(){
         rollyGlobeApiClient.getPostList(requestModel)
             .subscribe {
 
-                for(info in it.postList.infos){
-                    info.parseJson()
-                }
-
                 postList.value = it.postList.infos
 
             }.addTo(compositeDisposable)

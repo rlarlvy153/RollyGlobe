@@ -1,6 +1,7 @@
 package com.globe.rolly.network
 
 import com.globe.rolly.network.model.RecommendListResponseModel
+import com.globe.rolly.network.model.SpotInnerContentsResponseModel
 import com.globe.rolly.network.model.request_model.*
 import com.globe.rolly.network.model.spot.geocode.GeocodeByGpsRequestModel
 import com.globe.rolly.network.model.spot.geocode.GeocodeByGpsResponseModel
@@ -44,7 +45,7 @@ interface RollyGlobeApiInterface {
     fun getRecommendList(@Body param: RecommendRequestModel): Observable<RecommendListResponseModel>
 
     @POST("/ajax/spot.php")
-    fun getSpotInnerContents(@Body param: InnerContentsRequestModel): Observable<ResponseBody>
+    fun getSpotInnerContents(@Body param: InnerContentsRequestModel): Observable<SpotInnerContentsResponseModel>
 
     @POST("/ajax/spot.php")
     fun getGeocodeByGps(@Body param: GeocodeByGpsRequestModel): Observable<GeocodeByGpsResponseModel>

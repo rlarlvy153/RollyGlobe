@@ -1,21 +1,18 @@
 package com.globe.rolly.ui.recommend.inner_contents
 
 import androidx.lifecycle.MutableLiveData
-import com.globe.rolly.AppComponents
-import com.globe.R
 import com.globe.rolly.network.RollyGlobeApiClient
-import com.globe.rolly.network.model.SpotInnerContentsModel
+import com.globe.rolly.network.model.SpotInnerContentsResult
 import com.globe.rolly.network.model.request_model.*
 import com.globe.rolly.network.model.response_model.LoadCommentListResponseModel
 import com.globe.rolly.support.baseclass.BaseViewModel
-import org.json.JSONObject
 import org.koin.core.inject
 
 class InnerContentsViewModel : BaseViewModel() {
 
     val restClient: RollyGlobeApiClient by inject()
 
-    var spotDetail = MutableLiveData<SpotInnerContentsModel>()
+    var spotDetail = MutableLiveData<SpotInnerContentsResult>()
 
     var spotComments = MutableLiveData<List<LoadCommentListResponseModel>>()
 
@@ -26,13 +23,8 @@ class InnerContentsViewModel : BaseViewModel() {
         val requestModel = InnerContentsRequestModel(request)
 
         compositeDisposable.add(restClient.getSpotInnerContents(requestModel).subscribe { result ->
-            val str = result.string()
-            val resultJson = JSONObject(str)
 
-            spotDetail.value = SpotInnerContentsModel(
-                resultJson,
-                AppComponents.applicationContext.getString(R.string.lets_be_contributor)
-            )
+            spotDetail.value = result.result
         })
     }
 

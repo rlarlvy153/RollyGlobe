@@ -1,124 +1,129 @@
 package com.globe.rolly.network.model
 
-import com.google.gson.Gson
-import org.json.JSONArray
-import org.json.JSONObject
-import timber.log.Timber
+import com.google.gson.annotations.SerializedName
 
-data class SpotProduct(
-    val productNum : Int,
-    val productName : String,
-    val productThumbnailNum : Int,
-    val productThumbType : String,
-    val productCost : String,
-    val productIntro : String
+data class GeocodeInfo(
+    @SerializedName("geocode_type_name_en")
+    val geocodeTypeNameEng: String?,
 
+    @SerializedName("geocode_type_name_en_short")
+    val geocodeTypeNameEngShort: String,
+
+    @SerializedName("geocode_type_name_ko")
+    val geocodeTypeNameKo: String?,
 )
 
-class SpotInnerContentsModel(resultJson: JSONObject, defaultString:String) {
-    val gson : Gson = Gson()
-    var spotNum : Int
-    var spotTitleKor : String
-    var spotTitleEng : String
-    var spotTitleNative : String
-    var spotContinent : String
-    var spotNation : String
-    var spotCity : String
-    var spotIntro : String
-    var spotDetail : String
-    var spotTime : String
-    var spotCost : String
-    var spotAddress : String
-    var spotTraffic : String
-    var spotContact : String
-    var spotWeb : String
-    var spotLat : Double
-    var spotLong : Double
-    var spotTagCount : Int
-    var spotMajorTagNumber : Int
-    var spotMajorTag : String
+data class GeotypeInfo(
 
-    var tagList = ArrayList<String>()
-    var spotProductJSONArrayList = ArrayList<SpotProduct>()
-    var spotPicList = ArrayList<String>()
+    @SerializedName("country")
+    val country: GeocodeInfo,
 
+    @SerializedName("administrative_area_level_1")
+    val adminLevelGeocode1: GeocodeInfo,
 
-    init{
-        spotNum = resultJson.getInt("spot_num")
-        spotTitleKor = resultJson.getString("spot_title_kor")
-        spotTitleEng = resultJson.getString("spot_title_eng")
-        spotTitleNative = resultJson.getString("spot_title_native")
-        spotContinent = resultJson.getString("city_list${resultJson.getInt("spot_continent")}")
-        spotNation = resultJson.getString("city_list${resultJson.getInt("spot_nation")}")
-        spotCity = resultJson.getString("city_list${resultJson.getInt("spot_city")}")
-        spotIntro = resultJson.getString("spot_intro")
-        spotDetail = resultJson.getString("spot_detail").let{
-            if(it.isBlank())
-                defaultString
-            else it
-        }
-        spotTime = resultJson.getString("spot_time").let{
-            if(it.isBlank())
-                defaultString
-            else it
-        }
-        spotCost = resultJson.getString("spot_cost").let{
-            if(it.isBlank())
-                defaultString
-            else it
-        }
-        spotAddress = resultJson.getString("spot_address").let{
-            if(it.isBlank())
-                defaultString
-            else it
-        }
-        spotTraffic = resultJson.getString("spot_traffic").let{
-            if(it.isBlank())
-                defaultString
-            else it
-        }
-        spotContact = resultJson.getString("spot_contact").let{
-            if(it.isBlank())
-                defaultString
-            else it
-        }
-        spotWeb = resultJson.getString("spot_web").let{
-            if(it.isBlank())
-                defaultString
-            else it
-        }
-        spotLat = resultJson.getDouble("spot_lat")
-        spotLong = resultJson.getDouble("spot_long")
-        spotTagCount = resultJson.getInt("spot_tag_cnt")
-        spotMajorTagNumber = resultJson.getInt("spot_major_tag")
-        spotMajorTag = resultJson.getString("spot_tag_name$spotMajorTagNumber")
-        Timber.d(spotMajorTag)
+    @SerializedName("administrative_area_level_2")
+    val adminLevelGeocode2: GeocodeInfo,
 
-        for(i in 0 until spotTagCount){
-            val tag = resultJson.getString("spot_tag_name${resultJson.getInt("spot_tag$i")}")
-            tagList.add(tag)
-            Timber.d(tag)
-        }
+    @SerializedName("locality")
+    val locality: GeocodeInfo
+)
 
-        val spotProductJSONArray = JSONArray(resultJson.getString("spotProductJSON"))
-//        Timber.d(spotProductJSONArray.toString())
-        for( i in 0 until spotProductJSONArray.length()){
-            val each  = spotProductJSONArray.getJSONObject(i)
-            val obj = SpotProduct(each.getInt("productNum"), each.getString("productName"),
-                                each.getInt("productThumbnailNum"), each.getString("productThumbnailType"),
-                                each.getString("productCost"), each.getString("productIntro"))
-            spotProductJSONArrayList.add(obj)
+data class ThumbnailInfo(
+    @SerializedName("post_pic_name")
+    val picName: String,
 
-        }
+    @SerializedName("post_pic_type")
+    val picType: String,
 
-        val spotPicListJSONArray = resultJson.getJSONArray("spot_pic_list")
+    @SerializedName("post_pic_regdate")
+    val regdate: String,
+)
 
-        for( i in 0 until spotPicListJSONArray.length()){
-            Timber.d(spotPicListJSONArray.getString(i))
-            spotPicList.add(spotPicListJSONArray.getString(i))
-        }
+data class SpotInnerContentsResult(
+    @SerializedName("spot_num")
+    val spotNum: Int,
 
+    @SerializedName("spot_title_kor")
+    val spotTitleKor: String,
 
+    @SerializedName("spot_title_eng")
+    val spotTitleEng: String,
 
-    }
-}
+    @SerializedName("spot_title_native")
+    val spotTitleNative: String,
+
+    @SerializedName("spot_geocode")
+    val spotGeocode: String,
+
+    @SerializedName("spot_country")
+    val spotCountry: Int,
+
+    @SerializedName("spot_administrative_area_level_1")
+    val spotAdministrativeAreaLevel1: Int,
+
+    @SerializedName("spot_administrative_area_level_2")
+    val spotAdministrativeAreaLevel2: Int,
+
+    @SerializedName("spot_locality")
+    val spotLocality: Int,
+
+    @SerializedName("spot_major_tag")
+    val spotMagorTag: Int,
+
+    @SerializedName("spot_intro")
+    val spotIntro: String,
+
+    @SerializedName("spot_detail")
+    val spotDetail: String,
+
+    @SerializedName("spot_time")
+    val spotTime: String,
+
+    @SerializedName("spot_cost")
+    val spotCost: String,
+
+    @SerializedName("spot_contact")
+    val spotContact: String,
+
+    @SerializedName("spot_address")
+    val spotAddress: String,
+
+    @SerializedName("spot_traffic")
+    val spotTraffic: String,
+
+    @SerializedName("spot_web")
+    val spotWeb: String,
+
+    @SerializedName("spot_lat")
+    val spotLat: Double,
+
+    @SerializedName("spot_long")
+    val spotLng: Double,
+
+    @SerializedName("spot_user")
+    val spotUser: Int,
+
+    @SerializedName("spot_regdate")
+    val spotRegdate: String,
+
+    @SerializedName("spot_score")
+    val spotSCore: Int,
+
+    @SerializedName("geocode_type_info")
+    val geoTypeInfo: GeotypeInfo,
+
+    @SerializedName("spot_thumbnail_info")
+    val thumbnailInfo: ThumbnailInfo
+)
+
+data class SpotInnerContentsResponseModel(
+    @SerializedName("success")
+    val success: Boolean,
+
+    @SerializedName("result")
+    val result: SpotInnerContentsResult,
+
+    @SerializedName("message")
+    val message: String
+
+)

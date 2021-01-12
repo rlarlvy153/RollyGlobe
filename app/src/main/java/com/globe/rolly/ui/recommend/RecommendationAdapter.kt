@@ -45,7 +45,7 @@ class RecommendationAdapter(val itemClickListener: OnItemClickListener) : Recycl
         fun bind(spot: SpotModel) {
             itemBinding.spotTitle.text = spot.spotTitleKor
             itemBinding.spotIntro.text = spot.spotIntro
-//            spotPlace.text = "${spot.spotNationName} - ${spot.spotCityName}"
+            itemBinding.spotPlace.text = "${spot.spotContinent} - ${spot.spotNation} - ${spot.spotCity}"
 
 //            if(spot.spotThumbnailType !="null"){
 //                val spotThumbnailPath = "$spotThumbnailHeader${spot.spotThumbnailNum}.${spot.spotThumbnailType}"

@@ -1,15 +1,12 @@
 package com.globe.rolly.ui.recommend.inner_contents
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.globe.R
 import com.globe.databinding.ActivityInnerContentsBinding
-import com.globe.databinding.SpotProductItemBinding
-import com.globe.rolly.network.model.SpotInnerContentsModel
+import com.globe.rolly.network.model.SpotInnerContentsResult
 import com.globe.rolly.network.model.SpotModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -17,6 +14,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -82,37 +80,40 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
         )
     }
 
-    private fun setSpotProduct(spot: SpotInnerContentsModel) {
+    private fun setSpotProduct(spot: SpotInnerContentsResult) {
         val container = binding.spotProductContainer
 
-        for (obj in spot.spotProductJSONArrayList) {
-            val viewBinding = SpotProductItemBinding.inflate(layoutInflater, container, false)
-            val view = viewBinding.root
-
-            val imageURL = "m.rollyglobe.com/post/pic/${obj.productThumbnailNum}.${obj.productThumbType}"
-
-            Glide.with(this).load(imageURL).placeholder(ColorDrawable(Color.RED)).into(viewBinding.image)
-
-            viewBinding.title.text = obj.productName
-
-            viewBinding.intro.text = obj.productIntro
-
-            viewBinding.cost.text = obj.productCost
-
-            container.addView(view)
-        }
+//        for (obj in spot.spotProductJSONArrayList) {
+//            val viewBinding = SpotProductItemBinding.inflate(layoutInflater, container, false)
+//            val view = viewBinding.root
+//
+//            val imageURL = "m.rollyglobe.com/post/pic/${obj.productThumbnailNum}.${obj.productThumbType}"
+//
+//            Glide.with(this).load(imageURL).placeholder(ColorDrawable(Color.RED)).into(viewBinding.image)
+//
+//            viewBinding.title.text = obj.productName
+//
+//            viewBinding.intro.text = obj.productIntro
+//
+//            viewBinding.cost.text = obj.productCost
+//
+//            container.addView(view)
+//        }
     }
 
-    private fun setSpotInfo(spot: SpotInnerContentsModel) {
+    private fun setSpotInfo(spot: SpotInnerContentsResult) {
         //TODO 이미지 viewpager
-        if (spot.spotPicList.size > 0) {
-            Glide.with(this).load("https://m.rollyglobe.com/post/pics/small/" + spot.spotPicList[0])
-                .into(binding.spotImage)
-        }
-
+//        if (spot.spotPicList.size > 0) {0
+//
+//        }
+        Glide.with(this).load("https://m.rollyglobe.com/post/pics/small/" +"${spot.thumbnailInfo.regdate}/" + spot.thumbnailInfo.picName)
+            .into(binding.spotImage)
         binding.spotName.text = spot.spotTitleKor
         binding.spotNameEng.text = spot.spotTitleEng
-        val concat = "${spot.spotContinent} - ${spot.spotNation} - ${spot.spotCity}"
+
+        val concat =
+            "${spot.geoTypeInfo.country.geocodeTypeNameEngShort ?: ""} - ${spot.geoTypeInfo.adminLevelGeocode1.geocodeTypeNameEngShort ?: ""} - " +
+             "${spot.geoTypeInfo.adminLevelGeocode2.geocodeTypeNameEngShort ?: ""} - ${spot.geoTypeInfo.locality.geocodeTypeNameEngShort ?: ""}"
         binding.spotPosition.text = concat
         binding.spotDetail.text = spot.spotDetail
         binding.spotTime.text = spot.spotTime
@@ -121,21 +122,21 @@ class InnerContentsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.spotRoute.text = spot.spotTraffic
         binding.spotContact.text = spot.spotContact
         binding.spotWeb.text = spot.spotWeb
-        binding.majorTag.text = "#${spot.spotMajorTag}"
+        binding.majorTag.text = "#${spot.spotMagorTag}"
         val tagListBuilder = StringBuilder()
-        for (tag in spot.tagList) {
-            tagListBuilder.append("  #$tag")
-        }
+//        for (tag in spot.tagList) {
+//            tagListBuilder.append("  #$tag")
+//        }
         binding.tagList.text = tagListBuilder.toString()
     }
 
-    private fun initView(spot: SpotInnerContentsModel) {
+    private fun initView(spot: SpotInnerContentsResult) {
 
         setSpotInfo(spot)
 
         setSpotProduct(spot)
 
-        moveMapCamera(LatLng(spot.spotLat, spot.spotLong))
+        moveMapCamera(LatLng(spot.spotLat, spot.spotLng))
 
     }
 }

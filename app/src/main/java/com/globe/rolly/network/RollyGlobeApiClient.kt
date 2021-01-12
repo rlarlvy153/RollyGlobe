@@ -1,6 +1,7 @@
 package com.globe.rolly.network
 
 import com.globe.rolly.network.model.RecommendListResponseModel
+import com.globe.rolly.network.model.SpotInnerContentsResponseModel
 import com.globe.rolly.network.model.edit_user_info.birthday.EditUserBirthdayRequestModel
 import com.globe.rolly.network.model.edit_user_info.birthday.EditUserBirthdayResponseModel
 import com.globe.rolly.network.model.edit_user_info.email.EditUserEmailRequestModel
@@ -29,6 +30,7 @@ import com.globe.rolly.network.model.user.signup.SignUpResponseModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import okhttp3.Response
 import okhttp3.ResponseBody
 
 class RollyGlobeApiClient(private val rollyGlobeApiInterface: RollyGlobeApiInterface) {
@@ -69,7 +71,7 @@ class RollyGlobeApiClient(private val rollyGlobeApiInterface: RollyGlobeApiInter
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getSpotInnerContents(param: InnerContentsRequestModel): Observable<ResponseBody> {
+    fun getSpotInnerContents(param: InnerContentsRequestModel): Observable<SpotInnerContentsResponseModel> {
         return rollyGlobeApiInterface.getSpotInnerContents(param)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

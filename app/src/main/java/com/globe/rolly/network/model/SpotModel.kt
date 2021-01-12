@@ -11,13 +11,13 @@ class SpotModel (
     val spotTitleKor:String,
 
     @SerializedName("spot_continent")
-    val spotContinent:Int,
+    val spotContinent:String,
 
     @SerializedName("spot_nation")
-    val spotNation : Int,
+    val spotNation : String,
 
     @SerializedName("spot_city")
-    val spotCity:Int,
+    val spotCity:String,
 
     @SerializedName("spot_intro")
     val spotIntro : String,

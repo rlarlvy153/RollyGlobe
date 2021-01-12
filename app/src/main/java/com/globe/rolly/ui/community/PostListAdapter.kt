@@ -35,11 +35,11 @@ class PostListAdapter : BaseSimpleAdapter<Post, PostListAdapter.PostListViewHold
 
             itemBinding.postContent.text = post.postInfo.postContent + "임시 콘텐츠"
 
-            itemBinding.spotPosition.text = "${post.continent} - ${post.nation} - ${post.city}"
-
-            itemBinding.spotName.text = post.spotTitleKor
-
-            itemBinding.spotIntro.text = post.spotIntro
+//            itemBinding.spotPosition.text = "${post.continent} - ${post.nation} - ${post.city}"
+//
+//            itemBinding.spotName.text = post.spotTitleKor
+//
+//            itemBinding.spotIntro.text = post.spotIntro
 
             itemBinding.likeCnt.text = "좋아요 77개"
             itemBinding.commentCnt.text = "댓글 32개"
